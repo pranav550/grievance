@@ -1,0 +1,504 @@
+<!-- Admin Dashboard Wrapper Starts -->
+<app-header></app-header>
+<section class="dashboard-wrapper admin-dashboard-wrapper">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Tile Main Wrapper Starts -->
+                <div class="tile-main-wrapper">
+                    <div class="tile-row">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-light-blue">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Grievance registered'| translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="isAllGrievanceDataExists">
+                                        <p class="tile-count"><i
+                                                class="fa fa-list-ul tile-icon"></i>{{allGreviancesData}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows total grievances registered on this platform.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!isAllGrievanceDataExists">
+                                        <p class="tile-count"><i class="fa fa-list-ul tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows total grievances registered on this platform.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-orange">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Grievance pending' | translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="isAllGrievanceDataExists">
+                                        <p class="tile-count"><i
+                                                class="fa fa-clock-o tile-icon"></i>{{pendingGreviancesData}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that is currently being redressed.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!isAllGrievanceDataExists">
+                                        <p class="tile-count"><i class="fa fa-clock-o tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that is been currently being redressed.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-green">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Grievance closed' | translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="isAllGrievanceDataExists">
+                                        <p class="tile-count"><i
+                                                class="fa fa-check-circle-o tile-icon"></i>{{closedGrevianceData}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that has been closed successfully.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!isAllGrievanceDataExists">
+                                        <p class="tile-count"><i class="fa fa-check-circle-o tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that has been closed successfully.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-blue">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Filters'| translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper">
+                                        <ul class="list-group custom-list-group">
+                                            <li class="list-group-item white"
+                                                [ngClass]="{'active':tabActive === 'withInSevenDays'}"
+                                                (click)="getColorFilterData('withInSevenDays')"><i
+                                                    class="fa fa-square custom-icon"></i>{{'New' | translate}} </li>
+                                            <li class="list-group-item yellow"
+                                                [ngClass]="{'active':tabActive === 'processing' }"
+                                                (click)="getColorFilterData('processing')"><i
+                                                    class="fa fa-square custom-icon"></i>{{'Processing' | translate}}
+                                            </li>
+                                            <li class="list-group-item red"
+                                                [ngClass]="{'active':tabActive === 'notRedressed'}"
+                                                (click)="getColorFilterData('notRedressed')"><i
+                                                    class="fa fa-square custom-icon"></i>{{'Not Redressed' | translate}}
+                                            </li>
+                                            <li class="list-group-item green"
+                                                [ngClass]="{'active':tabActive === 'redressed'}"
+                                                (click)="getColorFilterData('redressed')"><i
+                                                    class="fa fa-square custom-icon"></i>{{'Redressed' | translate}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tile Main Wrapper Ends -->
+
+            </div>
+        </div>
+
+        <!--  Custom Table Caption Starts  -->
+        <div class="custom-table-caption">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="page-title">{{ 'dashboard' | translate }}</h3>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-wrapper basic">
+                        <form [formGroup]="adminDashBoardForm" class="custom-form">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group clearfix">
+
+
+                                        <label for="districtName" class="control-label">
+                                            {{'Grievance Id' | translate}}
+                                        </label>
+                                        <input type="text" id="grievanceId" class="form-control custom-input"
+                                            placeholder="{{'Grievance Id' | translate}}" tabindex="2" />
+
+                                        <label for="stateName" class="control-label">
+                                            {{'Select District' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="districtsData" bindLabel="name"
+                                            placeholder="{{'Select District' | translate}}" name="selectedState"
+                                            formControlName="selectedDistrict" tabindex="1" autofocus="true"
+                                            [(ngModel)]="multipleDistrict" (change)="changeDistrict(multipleDistrict)"
+                                            [tabindex]="-1">
+                                        </ng-select>
+
+                                        <label for="block" class="control-label">{{'Block' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="true" multiple="true" [(ngModel)]="multipleTalukas"
+                                            [items]="talukasData" bindLabel="name"
+                                            placeholder="{{'Select Block' | translate}}" [selectableGroup]="true"
+                                            [selectableGroupAsModel]="false" formControlName="addUserBlockLocation"
+                                            tabindex="29" [tabindex]="-1" name="selectedBlockLocation"
+                                            [closeOnSelect]="false" groupBy="gender"
+                                            (change)="changeTalukas(multipleTalukas)" tabindex="22">
+                                            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$"
+                                                let-index="index">
+
+                                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                                    [ngModelOptions]="{standalone: true}" />{{item.gender | uppercase}}{{item.name| uppercase}}
+                                            </ng-template>
+                                            <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                let-index="index">
+                                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                                    [ngModelOptions]="{standalone: true}" /> {{item.name}}
+                                            </ng-template>
+
+                                        </ng-select>
+
+                                        <!-- <label for="districtName" class="control-label">
+                                            {{'Grievance Id' | translate}}
+                                        </label>
+                                        <input type="text" id="grievanceId" class="form-control custom-input"
+                                            placeholder="{{'Grievance Id' | translate}}" tabindex="2" /> -->
+
+                                        <label for="districtName" class="control-label">
+                                            {{'Grievance Type' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="categoryData" bindLabel="name"
+                                            (change)="onAddCategoryChange($event,'default')"
+                                            placeholder="{{'Grievance Type' | translate}}"
+                                            formControlName="selectedGrievanceType" tabindex="3" [tabindex]="-1">
+                                        </ng-select>
+
+                                        <label class="control-label">{{'Grievance Nature' | translate}}</label>
+                                        <ng-select [clearable]="false" [items]="categoriesNature1"
+                                            (change)="onNatureChange(selectedNature)" [(ngModel)]="selectedNature"
+                                            bindLabel="name" placeholder="{{'Grievance Nature' | translate}}"
+                                            formControlName="filterGrievanceNature" tabindex="13" [tabindex]="-1"
+                                            name="selectedNature">
+                                        </ng-select>
+
+                                        <label for="districtName" class="control-label">
+                                            {{'Status' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="beneficaryStatusDetails"
+                                            bindLabel="dpname" placeholder="{{'Status' | translate}}"
+                                            formControlName="selectedStatus" tabindex="4" [tabindex]="-1">
+                                        </ng-select>
+                                        <label for="talukaName"
+                                            class="control-label">{{'Start Date & Time' | translate}}<sup
+                                                class="custom-required">*</sup></label>
+                                        <div class="custom-date-picker">
+                                            <input class="form-control"
+                                                placeholder="{{'Start Date & Time' | translate}}"
+                                                formControlName="startDateTime" [(ngModel)]="startDateTime"
+                                                (click)="onTogglePicker('startDT')" tabindex="5" />
+                                            <i class="fa fa-calendar-times-o form-control-feedback"
+                                                aria-hidden="true"></i>
+                                            <datetime-popup class="custom-datetime-popup" [value]="startDateTime"
+                                                [maxDate]="maxDate" (valueChange)="onValueChange($event,'startDT')"
+                                                [(showPopup)]="showPickerStart" [showDate]="showDateStart"
+                                                [showTime]="showTimeStart" [closeButton]="closeButtonStart">
+                                            </datetime-popup>
+                                        </div>
+                                        <label for="talukaName"
+                                            class="control-label">{{'End Date & Time' | translate}}<sup
+                                                class="custom-required">*</sup></label>
+                                        <div class="custom-date-picker">
+                                            <input class="form-control" placeholder="{{'End Date & Time' | translate}}"
+                                                formControlName="endDateTime" [(ngModel)]="endDateTime"
+                                                (click)="onTogglePicker('endDT')" tabindex="6" />
+                                            <i class="fa fa-calendar-times-o form-control-feedback"
+                                                aria-hidden="true"></i>
+                                            <datetime-popup class="custom-datetime-popup" [value]="endDateTime"
+                                                [maxDate]="maxDate" (valueChange)="onValueChange($event,'endDT')"
+                                                [(showPopup)]="showPickerEnd" [showDate]="showDateEnd"
+                                                [showTime]="showTimeEnd" [closeButton]="closeButtonEnd">
+                                            </datetime-popup>
+                                            <div class="error-message" *ngIf="submitted">
+                                                {{'End Date should always be greater than Start Date' | translate}}
+                                            </div>
+                                        </div>
+                                        <label for="levelName" class="control-label">{{'Level' | translate}}</label>
+                                        <ng-select [clearable]="false" [items]="levelsData" bindLabel="name"
+                                            placeholder="{{'Level Type' | translate}}"
+                                            formControlName="selectedLevelType" tabindex="7" [tabindex]="-1">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="submit" (click)="submitReport()" class="btn btn-blue">
+                                        {{'Submit' | translate}}
+                                    </button>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <!-- <button type="reset" (submit)="adminDashBoardForm.reset()" class="btn btn-red">
+                                        {{'Reset' | translate}}
+                                    </button> -->
+
+                                    <button type="reset" (click)="reset()" class="btn btn-red">
+                                        {{'Reset' | translate}}
+                                    </button> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Custom Table Caption Ends  -->
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- States List Wrapper Starts -->
+                <div class="states-list-wrapper">
+                    <div class="custom-datatable-wrapper">
+                        <table id="dataTable1"
+                            class="table table-condensed table-bordered custom-col-five-action row-border hover">
+                            <thead>
+                                <tr>
+                                    <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                                    <th class="custom-header-col date-col">{{'Grievance Date' | translate}}</th>
+                                    <th class="custom-header-col score-col">{{'FeedbackScore' | translate}}</th>
+                                    <th class="custom-header-col description-col">{{'Brief' | translate}}</th>
+                                    <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+                                    <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let beneficiaryGrievances of registerGrievancesData">
+                                    <td class="custom-body-col id-col">
+                                        <a (click)="grievanceDetailsModal(beneficiaryGrievances.id)">
+                                            {{ beneficiaryGrievances.grievance_id }}
+                                        </a>
+                                    </td>
+                                    <!-- <td class="custom-body-col">{{ beneficiaryGrievances.grievance_id }}</td> -->
+                                    <td class="custom-body-col date-col">
+                                        {{ beneficiaryGrievances.created_at | date:'MM/dd/yyyy hh:mm a'}}
+                                    </td>
+
+                                    <td class="custom-body-col score-col">
+                                        {{ beneficiaryGrievances.avg_feedback | feedbackRating }}
+                                    </td>
+
+
+                                    <td class="custom-body-col description-col">
+                                        <p class="description-text">
+                                            {{ beneficiaryGrievances.description }}
+                                        </p>
+                                    </td>
+                                    <td class="custom-body-col status-col">
+                                        <span class="badge badge-red"
+                                            *ngIf="beneficiaryGrievances.status == 'rejected'">{{
+                      beneficiaryGrievances.status  | translate}}</span>
+                                        <span class="badge badge-active"
+                                            *ngIf="beneficiaryGrievances.status == 'accepted'">{{
+                      beneficiaryGrievances.status  | translate }}</span>
+                                        <span class="badge badge-orange"
+                                            *ngIf="beneficiaryGrievances.status == 'pending'">{{
+                      beneficiaryGrievances.status  | translate}}</span>
+                                        <span class="badge badge-active"
+                                            *ngIf="beneficiaryGrievances.status == 'closed'">{{
+                      beneficiaryGrievances.status  | translate}}</span>
+                                        <span class="badge badge-reopen"
+                                            *ngIf="beneficiaryGrievances.status == 'reopened'">{{
+                      beneficiaryGrievances.status  | translate}}
+                                        </span>
+                                    </td>
+                                    <td class="custom-body-col action-col">
+                                        <a href="javascript:void(0);"
+                                            (click)="viewTimeLineGrievance(beneficiaryGrievances.id)"
+                                            href="javascript:void(0);" class="btn btn-view">
+                                            <i class="fa fa-eye custom-icon"></i> {{'View' | translate}}
+                                        </a>
+                                        <a href="javascript:void(0);"
+                                            *ngIf="beneficiaryGrievances.status == 'pending' || beneficiaryGrievances.status == 'accepted'"
+                                            (click)="forwardGrievanceModal(forwardGrievanceModalpopup,beneficiaryGrievances.id,beneficiaryGrievances.grievance_id)"
+                                            class="btn btn-light-blue">
+                                            <i class="fa fa-forward custom-icon"></i> {{'Forward' | translate}}
+                                        </a>
+                                        <a *ngIf="beneficiaryGrievances.status == 'closed' && beneficiaryGrievances.isFeedbackSubmitted == false "
+                                            href="javascript:void(0);"
+                                            (click)="grievanceUserFeedBackModal(feedbackModal,beneficiaryGrievances.id)"
+                                            class="btn btn-edit">
+                                            <i class="fa fa-pencil-square-o custom-icon"></i> {{'FeedBack' | translate}}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--  States List Wrapper Ends  -->
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Admin Dashboard Wrapper Ends -->
+
+<!--  Forward Grievance Modal Starts   -->
+<ng-template #forwardGrievanceModalpopup class="custom-modal">
+    <div class="form-row">
+        <div class="form-wrapper">
+
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ 'Forward Grievance' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form" [formGroup]="forwardGrievanceActionForm">
+                    <div class="form-group clearfix">
+                        <label for="stateName" class="control-label">
+                            {{'Level' | translate}}<sup class="custom-required">*</sup>
+                        </label>
+                        <ng-select [clearable]="false" [items]="levelsData" formControlName="level" name="selectedLevel"
+                            [(ngModel)]="selectedLevel" bindLabel="name" placeholder="{{'Select Level' | translate}}"
+                            autofocus="true" tabindex="1" [tabindex]="-1">
+                        </ng-select>
+                    </div>
+                    <div class="form-group clearfix mar-b0">
+                        <label class="control-label" for="detailsOfGrievance">
+                            <strong>{{'Comment' | translate}}</strong>
+                            <sup class="custom-required">*</sup>
+                        </label>
+                        <div class="has-feedback">
+                            <textarea class="form-control" formControlName="levelfeedback" rows="4" tabindex="17"
+                                placeholder="{{'Write your comment here' | translate}}"
+                                (keyup)="emptyDisable($event)"></textarea>
+                            <!-- <i class="fa fa-file-text-o form-control-feedback"></i> -->
+                        </div>
+                        <div *ngIf="errorCheck" class="error-message">
+                            {{'Maximum 250 characters allow' | translate}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red"
+                        [disabled]="errorCheck || (forwardGrievanceActionForm.value.levelfeedback == null || forwardGrievanceActionForm.value.levelfeedback == '') "
+                        (click)="forwardCnfGrievanceModal(CnfForwardGrievanceModalpopup)">
+                        {{'Forward' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal"
+                        (click)="modalRef.hide()">
+                        {{'Cancel' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- Forward Grievance Modal Ends -->
+
+<!-- User Description Modal Starts -->
+<ng-template #feedbackModal class="modal custom-modal" id="myModal" role="dialog">
+    <!-- Create States Form Starts -->
+    <div class="form-wrapper">
+        <form class="custom-form" [formGroup]="forwardGrievanceActionForm">
+            <!-- Modal content Starts Here-->
+            <div class="modal-content grievance-supervisor-modal-wrapper">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left"> {{ 'Grievance FeedBack' | translate}}</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="stateName" class="control-label">{{'Feedback' | translate}}<sup
+                                class="custom-required">*</sup></label>
+                        <label class="radio-inline custom-radio">
+                            <input formControlName='feedbackStatus' class="radio-text" selected type="radio"
+                                [value]="true" tabindex="1">
+                            <span class="radio-text">{{'Satisfied' | translate}}</span>
+                        </label>
+                        <label class="radio-inline custom-radio">
+                            <input formControlName='feedbackStatus' class="radio-text" type="radio" [value]="false"
+                                tabindex="2">
+                            <span class="radio-text">{{'Unsatisfied' | translate}}</span>
+                        </label>
+                    </div>
+                    <div class="form-group  mar-b0">
+                        <label for="feedbackComment" class="control-label">{{'Comment' | translate}}</label>
+                        <textarea rows="3" class="form-control" formControlName="feedbackComment"
+                            placeholder="{{'Comment' | translate}}" tabindex="3"
+                            (keyup)="emptyDisable($event)"></textarea>
+                        <div *ngIf="errorCheck" class="error-message">
+                            {{'Maximum 250 characters allow' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center btn-confirm-wrapper">
+                        <button type="button" [disabled]="errorCheck" class="btn btn-default btn-submit" tabindex="3"
+                            (click)="submitUserFeedback()">
+                            {{'Submit' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-blue" data-dismiss="modal" (click)="modalRef.hide()"
+                            tabindex="4">
+                            {{'Cancel' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Modal content Starts Here-->
+</ng-template>
+<!-- User Description Modal Ends -->
+
+<!--  Confirm Forward Grievance Modal Starts   -->
+<ng-template #CnfForwardGrievanceModalpopup class="custom-modal">
+    <div class="form-wrapper">
+        <form class="custom-form">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ 'Forward Grievance' | translate}} ({{ gLId }})</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{ 'Are you sure you want to forward the grievance to next level ?' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red" (click)="forwardGrivance()">
+                        {{'Yes' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal"
+                        (click)="modalRef.hide();">
+                        {{'No' | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<!-- Confirm Forward Grievance Modal Ends -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Starts  -->
+<div *ngIf="modalBool">
+    <app-grievance-details-popup [grieveanceDetailsData]="grieveanceDetailsData" [actionTakenData]="actionTakenData">
+    </app-grievance-details-popup>
+</div>
+
+<!-- Modal View Pop-->
+<div *ngIf="modalView">
+    <app-grievance-time-line-details [grievanceHistoryData]="grievanceHistoryData"></app-grievance-time-line-details>
+</div>

@@ -1,0 +1,1040 @@
+/*
+================================================================================
+**********************  Common Styles For The Site  ****************************
+================================================================================
+*/
+
+/*--  Common Styles  --*/
+*{
+    outline: none !important;
+    text-decoration: none !important;
+    &:focus{
+        outline: none !important;
+        text-decoration: none !important;
+    }
+}
+
+/*--  Custom Scrollbar Width  --*/
+::-webkit-scrollbar {
+  width: $scrollbar-width;
+}
+
+/*--  Custom Scrollbar Track  --*/
+::-webkit-scrollbar-track {
+  @include box-shadow($scrollbar-track-shadow);
+  background: $scrollbar-track-bg;  
+}
+ 
+/*--  Custom Scrollbar Handle  --*/
+::-webkit-scrollbar-thumb {
+  background: $scrollbar-thumb-bg; 
+}
+
+/*--  Custom Scrollbar Handle On Hover  --*/
+::-webkit-scrollbar-thumb:hover {
+  background: $scrollbar-thumb-bg-hover; 
+}
+
+html{
+    height: 100%;
+}
+body{
+    @include padding(0 0 54px);
+    background-color: $body-color;
+    background-color: #fbfbfb;
+    color: $hoki1;
+    font-family: $roboto-regular;
+    font-size: $font-size-small;
+    line-height: ($line-height-computed * .7);
+    letter-spacing: 0.5px;
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    position: relative;
+    // content: "ส่ง";
+    &.modal-open{
+        overflow: hidden;
+        .modal{
+            overflow: hidden;
+            .modal-body{
+                overflow-y: auto;
+                max-height: calc(100vh - 200px);
+                line-height: 20px;
+            }
+        }
+    }
+}
+
+/*--  Angular Element Hidden Styles  --*/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak{
+    display: none !important;
+}
+
+/*--  Width Styles  --*/
+.width-10{
+    width: ($base-width-percent * .5) !important;
+}
+.width-15{
+    width: ($base-width-percent * .75) !important;
+}
+.width-20{
+    width: $base-width-percent !important;
+}
+.width-25{
+    width: ($base-width-percent * 1.25) !important;
+}
+.width-30{
+    width: ($base-width-percent * 1.5) !important;
+}
+.width-35{
+    width: ($base-width-percent * 1.75) !important;
+}
+.width-40{
+    width: ($base-width-percent * 2) !important;
+}
+.width-45{
+    width: ($base-width-percent * 2.25) !important;
+}
+.width-50{
+    width: ($base-width-percent * 2.5) !important;
+}
+.width-55{
+    width: ($base-width-percent * 2.75) !important;
+}
+.width-60{
+    width: ($base-width-percent * 2) !important;
+}
+.width-65{
+    width: ($base-width-percent * 3.25) !important;
+}
+.width-70{
+    width: ($base-width-percent * 3.5) !important;
+}
+.width-75{
+    width: ($base-width-percent * 3.75) !important;
+}
+.width-80{
+    width: ($base-width-percent * 4) !important;
+}
+.width-85{
+    width: ($base-width-percent * 4.25) !important;
+}
+.width-90{
+    width: ($base-width-percent * 4.5) !important;
+}
+.width-95{
+    width: ($base-width-percent * 4.75) !important;
+}
+.width-100{
+    width: ($base-width-percent * 5) !important;
+}
+
+/*--  Height Styles  --*/
+.height-10{
+    height: ($base-height-percent * .5) !important;
+}
+.height-15{
+    height: ($base-height-percent * .75) !important;
+}
+.height-20{
+    height: $base-height-percent !important;
+}
+.height-25{
+    height: ($base-height-percent * 1.25) !important;
+}
+.height-30{
+    height: ($base-height-percent * 1.5) !important;
+}
+.height-35{
+    height: ($base-height-percent * 1.75) !important;
+}
+.height-40{
+    height: ($base-height-percent * 2) !important;
+}
+.height-45{
+    height: ($base-height-percent * 2.25) !important;
+}
+.height-50{
+    height: ($base-height-percent * 2.5) !important;
+}
+.height-55{
+    height: ($base-height-percent * 2.75) !important;
+}
+.height-60{
+    height: ($base-height-percent * 2) !important;
+}
+.height-65{
+    height: ($base-height-percent * 3.25) !important;
+}
+.height-70{
+    width: ($base-height-percent * 3.5) !important;
+}
+.height-75{
+    width: ($base-height-percent * 3.75) !important;
+}
+.height-80{
+    height: ($base-height-percent * 4) !important;
+}
+.height-85{
+    height: ($base-height-percent * 4.25) !important;
+}
+.height-90{
+    height: ($base-height-percent * 4.5) !important;
+}
+.height-95{
+    height: ($base-height-percent * 4.75) !important;
+}
+.height-100{
+    height: ($base-height-percent * 5) !important;
+}
+
+/*--  Font Styles  --*/
+.f-10{
+    font-size: 10px !important;
+}
+.f-11{
+    font-size: 11px !important;
+}
+.f-12{
+    font-size: 12px !important;
+}
+.f-13{
+    font-size: 13px !important;
+}
+.f-14{
+    font-size: 14px !important;
+}
+.f-70{
+    font-size: 70px !important;
+}
+/*--  Padding Styles  --*/
+.pad-0{
+    padding: 0 !important;
+}
+.pad-0{
+    padding: 0 !important;
+}
+.pad-t0{
+    padding-top: 0 !important;
+}
+.pad-r0{
+    padding-right: 0 !important;
+}
+.pad-b0{
+    padding-bottom: 0 !important;
+}
+.pad-l0{
+    padding-left: 0 !important;
+}
+.pad-lr0{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.pad-tb0{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/*--  Padding 5  --*/
+.pad-t5{
+    padding-top: 5px !important;
+}
+.pad-r5{
+    padding-right: 5px !important;
+}
+.pad-b5{
+    padding-bottom: 5px !important;
+}
+.pad-l5{
+    padding-left: 5px !important;
+}
+.pad-lr5{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+.pad-tb5{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+/*--  Padding 10  --*/
+.pad-t10{
+    padding-top: 10px !important;
+}
+.pad-r10{
+    padding-right: 10px !important;
+}
+.pad-b10{
+    padding-bottom: 10px !important;
+}
+.pad-l10{
+    padding-left: 10px !important;
+}
+.pad-lr10{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+.pad-tb10{
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+/*--  Padding 15  --*/
+.pad-t15{
+    padding-top: 15px !important;
+}
+.pad-r15{
+    padding-right: 15px !important;
+}
+.pad-b15{
+    padding-bottom: 15px !important;
+}
+.pad-l15{
+    padding-left: 15px !important;
+}
+.pad-lr15{
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+.pad-tb15{
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+/*--  Margin Styles  --*/
+.mar-0{
+    margin: 0 !important;
+}
+.mar-t0{
+    margin-top: 0 !important;
+}
+.mar-r0{
+    margin-right: 0 !important;
+}
+.mar-b0{
+    margin-bottom: 0 !important;
+}
+.mar-l0{
+    margin-left: 0 !important;
+}
+.mar-lr0{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.mar-tb0{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+/*--  Margin 5  --*/
+.mar-t5{
+    margin-top: 5px !important;
+}
+.mar-r5{
+    margin-right: 5px !important;
+}
+.mar-b5{
+    margin-bottom: 5px !important;
+}
+.mar-l5{
+    margin-left: 5px !important;
+}
+.mar-lr5{
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+}
+.mar-tb5{
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+/*--  Margin 10  --*/
+.mar-t10{
+    margin-top: 10px !important;
+}
+.mar-r10{
+    margin-right: 10px !important;
+}
+.mar-b10{
+    margin-bottom: 10px !important;
+}
+.mar-l10{
+    margin-left: 10px !important;
+}
+.mar-lr10{
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+.mar-tb10{
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+/*--  Margin 15  --*/
+.mar-t15{
+    margin-top: 15px !important;
+}
+.mar-r15{
+    margin-right: 15px !important;
+}
+.mar-b15{
+    margin-bottom: 15px !important;
+}
+.mar-l15{
+    margin-left: 15px !important;
+}
+.mar-lr15{
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+}
+.mar-tb15{
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+/*--  Border Styles  --*/
+.border-0{
+    border: 0 !important;
+}
+.border-gray{
+    border: 3px solid $atomic8;
+}
+.border-pink{
+    border: 3px solid $hopbush;
+}
+.border-pink1{
+    border: 3px solid $fuchsia;
+}
+.border-pink2{
+    border: 3px solid $kobi;
+}
+
+/*--  Text Styles  --*/
+.text-red{
+    color: $base-red !important;
+}
+.text-red1{
+    color: $ruby !important;
+}
+.text-light-red{
+    color: $light-red2 !important;
+}
+.text-green{
+    color: $base-green !important;
+}
+.text-dark-green{
+    color: $persian-green5 !important;
+}
+.text-light-green{
+    color: $light-green1 !important;
+}
+.text-light-black{
+    color: $light-black1 !important;
+}
+.text-blue{
+    color: $base-blue !important;
+}
+.text-blue-ta{
+    color: $san-marino2 !important;
+}
+.text-gray-ta{
+    color: $hoki2 !important;
+}
+.text-light-grey{
+    color: $light-grey8 !important;
+}
+.text-orange{
+    color: $carrot-orange1 !important;
+}
+.text-yellow{
+    color: $bird-flower !important;
+}
+.text-light-yellow{
+    color: $light-yellow !important;
+}
+.text-pink{
+    color: $strikemaster !important;
+}
+.text-pink-ta{
+    color: $royal-heath !important;
+}
+
+/*--  Bg Styles  --*/
+.bg-red{
+    background-color: $base-red !important;
+}
+.bg-light-red{
+    background-color: $light-red2 !important;
+}
+.bg-light-yellow{
+    background-color: $light-yellow !important;
+}
+.bg-light-grey{
+    background-color: $light-grey8 !important;
+}
+.bg-light-black{
+    background-color: $light-black1 !important;
+}
+.bg-green{
+  background-color: $base-green !important;
+}
+.bg-blue{
+  background-color: $base-blue !important;
+}
+
+.page-title{
+    @include margin(0 0 15px);
+    color: $base-blue;
+    font-family: $roboto-bold;
+    font-size: ($font-size-base * 1.5);
+    line-height: ($line-height-computed * 1.05);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.page-header{
+    @include margin(0 0 15px);
+    @include padding(15px);
+    border: 1px solid $dark-grey4;
+    background-color: $white;
+    .breadcrumb {
+        padding: 0;
+        margin-bottom: 0;
+        list-style: none;
+        background-color: transparent;
+        border-radius: 0;
+    }
+}
+.custom-table-caption{
+    @include margin(0 0 15px);
+    @include padding(15px 15px 0);
+    border: 1px solid $dark-grey4;
+    background-color: $white;
+    .page-title{
+        margin: 0 0 15px;
+        border-bottom: 1px solid #ddd;
+        padding: 0 0 15px;
+        &.state-page-title,
+        &.user-page-title,
+        &.dashboard-page-title,
+        &.user-dashboard-page-title{
+            @include margin(8px 0 0);
+            @include padding(0);
+            border: 0;
+        }
+        &.dashboard-page-title{
+            // @include margin(0);
+            // @include padding(0);
+            // border: 0;
+        }        
+        &.grievance-dashboard-page-title{
+            @include margin(0 0 15px);
+            @include padding(0);
+            border: 0;
+        }
+    }
+    .form-wrapper{
+        .custom-form{
+            .form-group{
+                @include margin(0 -15px);
+                .control-label{                    
+                    @include margin(0 0 15px);
+                    @include padding(11px 15px);
+                    float: left;
+                    min-height: 40px;
+                    &.time-label{                                            
+                        @include margin(0 0 15px);
+                        @include padding(11px 15px);
+                        min-height: 40px;
+                    }
+                }
+                .ng-select,
+                .custom-select,
+                .custom-input{
+                    @include margin(0 0 15px);
+                    float: left;
+                    width: 170px;
+                    min-height: 40px;
+                }
+                .custom-date-picker{
+                    @include margin(0 0 15px);
+                    float: left;
+                    width: 170px;
+                    min-height: 40px;
+                    position: relative;
+                    .form-control-feedback {
+                        color: $base-red;
+                        font-size: $font-size-large;
+                        line-height: 40px;
+                        top: 0;
+                        right: 0;
+                        &.custom-feedback-success{
+                          color:  $base-green;
+                        }
+                    }
+                }
+                .custom-timepicker{
+                    @include margin(0 0 15px);
+                    float: left;
+                    min-height: 40px;
+                    .btn-link{
+                        color: $base-red;
+                    }
+                    .btn-default{
+                        background-color: $base-blue;
+                        color: $white;
+                        border: 1px solid $base-blue;
+                        &:hover{
+                            background-color: $white;
+                            color: $base-blue;
+                            border: 1px solid $base-blue;
+                        }
+                        &:focus{
+                            background-color: $base-blue;
+                            color: $white;
+                            border: 1px solid $base-blue;
+                        }
+                        &[disabled]{
+                            &:hover,&:focus{
+                                background-color: $base-blue;
+                                color: $white;
+                                border: 1px solid $base-blue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .btn-edit,
+    .btn-blue{
+        @include margin(0 0 15px);
+    }
+}
+.help-description{
+    color: $light-black;
+    font-size: $font-size-base;
+    background: #f5f5f5;
+    padding: 10px;
+    strong{
+        @include margin(0 0 5px);
+        display: block;
+        font-size: 15px;
+    }
+}
+a,.btn{
+    display: inline-block;
+    cursor: pointer;
+    outline: none !important;
+    text-decoration: none !important;
+    &:hover,&:focus{
+        outline: none !important;
+        text-decoration: none !important;
+    }
+}
+span,strong,i{
+    display: inline-block;
+}
+
+/*--  Custom Spinner Styles  --*/
+.custom-spinner{
+    @extend .text-center;
+    @include center-position();
+    color: $light-green3;
+    z-index: 10001;
+    &.case-dairy-spinner{
+        @include translate(0,0);
+        background-color: rgba(0,0,0,0.4);
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        z-index: 999;
+        i{
+            @include center-position();
+        }
+    }
+    &.full-page-spinner{
+        @include square(100%);
+        i{
+            @include center-position();
+            z-index: 9999999999;
+        }
+        &:before{
+            @include square(100%);
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            content: "";
+            top: 0;
+            left: 0;
+            display: block;
+            z-index: 99999999;
+        }
+    }
+}
+
+/*--  Custom Radio Styles  --*/
+.custom-radio{
+    @include margin(0 0 5px);
+    @include padding(0);
+    line-height: 1.5;
+    input[type="radio"]{
+        display: none;
+        &:checked{
+             + .radio-text{
+                 &::before{
+                    @include padding(3px);
+                    @include transition(all 0.3s ease-in-out);
+                    background-color: $white;
+                    border: 1px solid $base-red;
+                 }
+                &:after{
+                    opacity: 1;
+                }
+            }
+        }
+        + .radio-text{
+            @include padding(0 0 0 25px);
+            line-height: 1.5;
+            cursor: pointer;
+            vertical-align: middle;
+            display: inline-block;
+            position: relative;
+            &:before{
+            @extend .text-center;
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            @include square(18px);
+            @include margin(-1px 10px 0 0);
+            @include padding(3px);
+            @include margin(0 10px 0 0);
+            @include border-radius(50%);
+            @include transition(all 0.3s ease-in-out);
+            background-color: $white;
+            border: 1px solid $silver2;
+            }
+            &:after{
+                @include square(10px);
+                @include margin(0);
+                @include transition(all 0.3s ease-in-out);
+                @include border-radius(50%);
+                position: absolute;
+                content: "";
+                top: 4.3px;
+                left: 4px;
+                background-color: $base-red;
+                display: block;
+                opacity: 0;
+            }
+            _:-ms-lang(x),  &:after { top: 4px; }
+            &.hindi{
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+/*--  Custom Checkbox Styles  --*/
+.custom-checkbox{
+     @include margin(0 0 5px);
+    @include padding(0);
+    input[type="checkbox"]{
+        display: none;
+        &:checked{
+             + .checkbox-text{
+                 &::before{
+                    @include padding(3px);
+                    @include transition(all 0.3s ease-in-out);
+                    background-color: $white;
+                    border: 1px solid $base-red;
+                 }
+                &:after{
+                    opacity: 1;
+                }
+            }
+        }
+        + .checkbox-text{
+            @include padding(0 0 0 25px);
+            line-height: ($line-height-computed);
+            cursor: pointer;
+            vertical-align: middle;
+            display: inline-block;
+            position: relative;
+            &:before{
+            @extend .text-center;
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            @include square(18px);
+            @include margin(-1px 10px 0 0);
+            @include padding(3px);
+            @include margin(0 10px 0 0);
+            @include border-radius(0);
+            @include transition(all 0.3s ease-in-out);
+            background-color: $white;
+            border: 1px solid $silver2;
+            }
+            &:after{
+                @include size(10px,100%);
+                @include margin(0);
+                @include transition(all 0.3s ease-in-out);
+                @include border-radius(0);
+                position: absolute;
+                content: "\2714";
+                top: 0;
+                left: 4px;
+                background-color: transparent;
+                color: $base-red;
+                display: block;
+                opacity: 0;
+            }
+            _:-ms-lang(x), &:after { 
+                top: 0;
+             }
+            &.hindi{
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+/*--  Custom File Upload Styles  --*/
+.custom-file-upload{
+    cursor: pointer;
+    input[type="file"]{
+        display: none;
+    }
+    label{
+        cursor: pointer;
+        &.file-inline{
+            @include margin(0);
+            span{
+                display: block;
+            }
+        }
+    }
+    .checkbox-inline{
+        @include padding(0);
+    }
+}
+
+/*--  Custom Dropdown  --*/
+.custom-dropdown{
+        .dropdown-toggle{
+           @include padding(15px);
+            @include transition(all 0.3s ease-in-out);
+            background-color: $nav-link-bg;
+            color: $nav-link;
+            font-family: $roboto-regular;
+            font-size: $font-size-small;
+            line-height: ($line-height-computed * .25);
+            letter-spacing: 0.5px;
+            text-transform: capitalize;
+            color: $nav-link;
+            &:hover,&:focus{
+                background-color: $nav-link-bg-hover;
+                color: $nav-link;
+            }
+        }
+        &.open{
+                a{
+                background-color: $nav-link-bg-hover;
+                color: $nav-link;
+                &:hover,&:focus{
+                    background-color: $nav-link-bg-hover;
+                    color: $nav-link;
+                }
+            }
+        }
+     .custom-dropdown-menu{
+        @include margin(-1px 0 0);
+        @include padding(0);
+        @include border-radius(0);
+        background-color: $dropdown-menu-bg;
+        background-clip: border-box;
+        border: 2px solid $dropdown-menu-border-color;
+        border-top: 0;
+        max-height: 260px;
+        overflow: auto;
+        right: 0;
+        li{
+            a{
+                @include padding(10px 15px);
+                background-color: $nav-link-bg;
+                color: $dropdown-menu-link;
+                font-size: $font-size-small;
+                display: block;
+                text-align: left;
+                line-height: 14px;
+                .nav-dropdown-icon{
+                    @include square(25px);
+                    @include margin(0 5px 0 0);
+                    @include border-radius(50%);
+                    color: $nav-link-icon;
+                    font-size: ($font-size-base * 1.5);
+                    display: inline-block;
+                    text-align: center;
+                    vertical-align: middle;
+                    line-height: 25px;
+                }
+                &:hover,&:focus{
+                    background-color: $nav-link-bg-hover;
+                    color: $dropdown-menu-link-hover;
+                }
+            }
+             .form-wrapper{
+                    @include padding(0 15px 15px);
+                    .custom-form{
+                            .form-group{
+                            @include margin(0);
+                            .control-label{
+                                @include margin(12.5px 15px 12.5px 0);   
+                                color: $white;                            
+                                float: none;
+                                width: 100%;
+                                &.time-label{
+                                    @include margin(40px 15px 40px 0);
+                                }
+                            }
+                            .ng-select{
+                                @include margin(0 15px 0 0);
+                                float: none;
+                                width: 100%;
+                            }
+                            .custom-select{
+                                @include margin(0 15px 0 0);
+                                float: none;
+                                width: 100%;
+                            }
+                            .custom-input{
+                                @include margin(0 15px 0 0);                               
+                                float: none;
+                                width: 100%;
+                            }
+                            .custom-date-picker{
+                                @include margin(0 15px 0 0);
+                                float: none;
+                                width: 100%;
+                            }
+                            .custom-timepicker{
+                                @include margin(0 15px 0 0);
+                                float: none;
+                                width: 100%;
+                                .btn-link{
+                                    color: $base-red;
+                                }
+                                .btn-default{
+                                    background-color: $base-blue;
+                                    color: $white;
+                                    border: 1px solid $base-blue;
+                                    &:hover{
+                                        background-color: $white;
+                                        color: $base-blue;
+                                        border: 1px solid $base-blue;
+                                    }
+                                    &:focus{
+                                        background-color: $base-blue;
+                                        color: $white;
+                                        border: 1px solid $base-blue;
+                                    }
+                                    &[disabled]{
+                                        &:hover,&:focus{
+                                            background-color: $base-blue;
+                                            color: $white;
+                                            border: 1px solid $base-blue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .custom-table-caption{
+        .form-wrapper{
+            .custom-form{
+                .form-group{                    
+                    .ng-select {
+                        width: 150px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+.custom-table-caption{
+        .form-wrapper{
+            .custom-form{
+                .form-group {
+                    @include margin(0);
+                    .control-label{
+                        @include padding(11px 0);
+                        width: 30%;
+                        min-height: 40px;
+                        &.time-label{
+                            width: 30%;
+                        }
+                    }
+                    .ng-select,
+                    .custom-select,
+                    .custom-input,
+                    .custom-date-picker,
+                    .custom-timepicker{
+                        width: 70%;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+    .xxs-block{
+        display: block !important;
+        width: 100% !important;
+    }
+     .custom-table-caption{
+         .form-wrapper{
+             .custom-form{
+                 .form-group {
+                     @include margin(0);
+                    .control-label{
+                        @include margin(0 0 5px);
+                        @include padding(0);
+                        width: 100%;
+                        min-height: 100%;
+                        &.time-label{
+                            @include margin(0 0 5px);
+                            width: 100%;
+                            min-height: 100%;
+                        }
+                    }
+                    .ng-select,
+                    .custom-select,
+                    .custom-input,
+                    .custom-date-picker,
+                    .custom-timepicker{
+                        @include margin(0 0 15px);
+                        width: 100%;
+                    }
+                }
+             }
+         }
+    }
+}
+

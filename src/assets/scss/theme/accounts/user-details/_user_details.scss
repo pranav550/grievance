@@ -1,0 +1,46 @@
+/*==============================================================================
+*******************  User Details Wrapper Styles For The Site    ***************
+==============================================================================*/
+.user-details-wrapper{
+ .user-details-header{
+    color: $light-black;
+    font-family: $roboto-bold;
+    font-size: $font-size-large;
+}
+ .user-details-body{
+     @include padding(0 15px 15px);
+     .user-logo-wrapper{
+        @include size(150px,150px);
+        border: 1px solid #ddd;
+        @include margin(0 0 15px);
+        @include padding(15px);
+        .user-logo{
+            width: 100%;
+            max-height: 120px;
+        }
+        .custom-icon{
+             color: $light-black;
+             @include margin(20px 0 0);
+        }
+     }
+ }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

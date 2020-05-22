@@ -1,0 +1,101 @@
+/*  
+================================================================================
+*****************     Sidebar Wrapper Styles For The Site      *****************
+================================================================================
+*/
+.sidebar-wrapper{
+    background-color: $color-white;
+    position: absolute;
+    left:0;
+    top: 0;
+    width: 260px;   
+    min-height: 100%;
+    height: auto;
+    z-index: 999;
+    &::after{
+        position: absolute;
+        height: 100%;
+        width: calc(100vw - 277px);
+        content: "";
+        top: 0;
+        right: 0;
+        left: 260px;
+        bottom: 0;
+        background: rgba(0,0,0,.9);
+    }
+    .sidebar-header{
+        @include padding(15px 30px);
+        background-color: $color-red;
+        .sidebar-logo{
+            display: inline-block;
+        }
+        .sidebar-close-link{
+            display: inline-block;
+            color: $color-white;
+            font-size: 25px;
+            float: right;
+            vertical-align: middle;
+            line-height: 23px;
+        }
+    }
+    .sidebar-body{
+        .sidebar-list{
+            @include margin(0);
+            .sidebar-list-item{
+                .sidebar-list-title{
+                    @include margin(30px);
+                    font-family:  $font-family-work-sans-semi-bold;
+                    color: $color-light-black;
+                    font-size: 16px;  
+                }
+                .sidebar-list-link{                    
+                    @include padding(10px 30px);                
+                    font-family:  $roboto-regular;
+                    color: $color-light-black;
+                    font-size: 16px;
+                    position: relative;
+                    display: block;
+                    .sidebar-list-text{
+                        display: inline-block;
+                    }
+                    .sidebar-icon{
+                        color: $color-light-blue;
+                        display: inline-block;
+                        @include center-position();
+                        left: auto;
+                        right: 20px;
+                        cursor: pointer;
+                    }
+                }
+                ul{
+                    li{
+                        h3{
+                            color: red;
+                        }
+                    }
+                }
+                &.open{
+                    .sidebar-list-link{
+                        background-color: #e5e5e5;
+                        .sidebar-icon{
+                            color: $color-light-black; 
+                        }
+                    }
+                    .sidebar-dropdown-menu{
+                        min-width: 70vw;
+                        left: 260px;
+                        border-radius: 0 10px 10px 0;
+                        padding: 10px;              
+                        top: 0;
+                        border: 0;     
+                        .sidebar-dropdown-menu-title{
+                            color: $color-light-black;
+                            font-size: 14px;
+                            font-family:  $roboto-bold;
+                        }                 
+                    }
+                }
+            }
+        }
+    }
+}

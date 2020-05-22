@@ -1,0 +1,75 @@
+/*==============================================================================
+*****************        Villages Wrapper Styles For The Site    ***************
+==============================================================================*/
+.villages-wrapper{
+  .custom-datatable-wrapper{
+         .table{
+             thead{
+                 tr{
+                     .custom-header-col{
+                        width: 20% !important;                     
+                        &.id-col{
+                          width: 7% !important;  
+                        }
+                        &.status-col,
+                        &.delete-col{
+                            width: 5% !important;
+                        }
+                        &.action-col{
+                             width: 25% !important;
+                        }
+                     }
+                 }
+             }
+         }
+    }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+    .custom-table-caption {
+        .form-wrapper {
+            .custom-form {
+                .form-group {
+                    .ng-select {
+                        width: 156px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .custom-table-caption {
+        .form-wrapper {
+            .custom-form {
+                .form-group {
+                    .ng-select {
+                        width: 110px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .custom-table-caption {
+        .form-wrapper {
+            .custom-form {
+                .form-group {
+                    .ng-select {
+                      @include margin(0 5px 15px 0);
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

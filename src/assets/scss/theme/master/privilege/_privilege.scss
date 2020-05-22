@@ -1,0 +1,233 @@
+/*==============================================================================
+*****************      Privilege Wrapper Styles For The Site    ****************
+==============================================================================*/
+.privilege-wrapper{
+    .custom-datatable-wrapper{
+         .table{
+             &.custom-col-five-action{
+                thead{
+                    tr{
+                        .custom-header-col {
+                            width: 85% !important;  
+                            &.assign-col {
+                                width: 6% !important;
+                            }
+                            .action-col{
+                                width: 25% !important;
+                            }
+                       
+                        }
+                        .custom-header-privilege-col{
+                            @include padding(8px 10px);
+                            position: relative;
+                            background-color: #344354;
+                            color: #ffffff;
+                            font-family: "Roboto Bold", sans-serif;
+                            font-size: 14px;
+                            font-weight: bold;
+                            vertical-align: middle;
+                            text-transform: capitalize;
+                            text-align: left;
+                            white-space: normal;
+                            word-break: break-all;
+                            border: 0;
+                            border-bottom: 1px solid #dddddd;
+                            border-right: 1px solid rgba(255, 255, 255, 0.5);
+                            width: 15% !important; 
+                             .custom-checkbox{
+                                 @include margin(0);
+                                .checkbox-text{
+                                    &:before{
+                                        top: -10px;
+                                        left: 20px;
+                                    }
+                                    &:after{
+                                        top: -10px;
+                                        left: 23px;                                   
+                                    }
+                                }
+                             }
+                        }
+                    }
+                }
+             }
+         }
+    }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .privilege-wrapper{
+        .custom-datatable-wrapper{
+            .table{
+                &.custom-col-five-action{
+                   thead{
+                       tr{
+                           .custom-header-privilege-col{
+                               font-size: ($font-size-base - 2);
+                           }
+                       }
+                   }
+                }
+            }
+       }
+        .custom-table-caption{
+                .form-wrapper{
+                    .custom-form{
+                        .form-group {                           
+                            @include margin(0);
+                            .control-label{
+                                @include padding(11px 0);
+                                width: 30%;
+                                &.time-label{
+                                    width: 30%;
+                                }
+                            }
+                            .ng-select,
+                            .custom-select,
+                            .custom-input,
+                            .custom-date-picker,
+                            .custom-timepicker{
+                                @include margin(0 0 15px);
+                                width: 70%;
+                            }
+                        }
+                    }
+                }
+            }
+    
+}
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .privilege-wrapper{
+        .custom-datatable-wrapper{
+            .table{
+                &.custom-col-five-action{
+                   thead{
+                       tr{
+                           .custom-header-col {
+                               width: 60% !important;  
+                           }
+                           .custom-header-privilege-col{
+                               width: 40% !important; 
+                               font-size: ($font-size-base - 3);
+                           }
+                       }
+                   }
+                }
+            }
+       }
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group {                           
+                        @include margin(0);
+                        .control-label{
+                            @include padding(11px 0);
+                            width: 30%;
+                            &.time-label{
+                                width: 30%;
+                            }
+                        }
+                        .ng-select,
+                        .custom-select,
+                        .custom-input,
+                        .custom-date-picker,
+                        .custom-timepicker{
+                            @include margin(0 0 15px);
+                            width: 70%;
+                        }
+                    }
+                }
+            }
+        }
+        .custom-datatable-wrapper{
+            .table {
+                min-width: 650px !important;
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .privilege-wrapper{
+        .custom-datatable-wrapper{
+            .table{
+                &.custom-col-five-action{
+                   thead{
+                       tr{
+                           .custom-header-col {
+                               width: 70% !important;  
+                           }
+                           .custom-header-privilege-col{
+                               width: 30% !important; 
+                               font-size: ($font-size-base - 2);
+                           }
+                       }
+                   }
+                }
+            }
+       }
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group {                           
+                        @include margin(0);
+                        .control-label{
+                            @include padding(11px 0);
+                            width: 30%;
+                            &.time-label{
+                                width: 30%;
+                            }
+                        }
+                        .ng-select,
+                        .custom-select,
+                        .custom-input,
+                        .custom-date-picker,
+                        .custom-timepicker{
+                            @include margin(0 0 15px);
+                            width: 70%;
+                        }
+                    }
+                }
+            }
+        }
+        .custom-datatable-wrapper{
+            .table {
+                min-width: 650px !important;
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+.privilege-wrapper{
+    .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group {
+                            @include margin(0);
+                                .control-label{
+                                    @include padding(0);
+                                    width: 100%;
+                                    min-height: 100%;
+                                    &.time-label{
+                                    width: 100%;
+                                    }
+                            }
+                            .ng-select,
+                            .custom-select,
+                            .custom-input,
+                            .custom-date-picker,
+                            .custom-timepicker{
+                                width: 100%;
+                            }
+                    }
+                }
+            }
+        }
+    }
+}

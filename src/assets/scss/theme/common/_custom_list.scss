@@ -1,0 +1,47 @@
+
+/*==============================================================================
+***********************  Custom List Styles For The Site  **********************
+==============================================================================*/
+.custom-list{
+    list-style-type: disc;
+    margin: 0 0 15px;
+    padding: 0 0 0 15px;
+    li{   
+        color: $light-black;
+        font-family: $roboto-regular;
+        font-size: $font-size-base; 
+        line-height: ($line-height-computed * 1.05);
+        position: relative;
+        a{
+            @extend .text-center;
+            color: $light-black;
+            font-family: $roboto-regular;
+            font-size: $font-size-base; 
+            line-height: ($line-height-computed * 1.05);
+            position: relative;
+            img{
+                display: inline-block;
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}
+

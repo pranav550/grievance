@@ -1,0 +1,76 @@
+/*==============================================================================
+***************  Grievance Details Wrapper Styles For The Site    ***********
+==============================================================================*/
+.grievance-details-wrapper{
+    @include padding(50px 0);
+     .custom-details-panel{
+         border-radius: 0;
+         border: none;
+          .panel-heading{
+            @include padding(17px);
+            background: #344354;
+            border-radius: 0;
+              h3{
+                  color: #fff;
+                  font-family: $roboto-regular;
+                  font-size: $font-size-large;
+              }
+          }
+          .panel-body{
+            .details-wrapper{
+                ul{
+                    li{
+                        @include margin(0 0 20px 0);
+                        font-size: 15px;
+                        font-family: $roboto-regular;
+                        strong{
+                            font-size: 15px;
+                            font-family: $roboto-regular;
+                        }
+                    }
+                }
+                .form-row{
+                    .form-wrapper{
+                        .custom-form{
+                            .form-group{
+                             
+                                .control-label{
+                                    font-size: 15px;
+                                    color: #657f8b;
+                                    font-family: $roboto-regular;
+                                }
+                                .radio-inline{
+                                    height: 30px;
+                                    width: 100px;
+                                }
+                             
+                        
+                              
+                            }
+                        }
+                    }
+                }
+            }
+          }
+     }
+}
+
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

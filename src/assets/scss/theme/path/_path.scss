@@ -1,0 +1,139 @@
+/*
+================================================================================
+**************  Theme Name: Piramal Swasthya (Bootstrap 3.3.7)  ****************
+================================================================================
+    1. Vendor Styles
+    2. Common Styles
+    3. Common Bootstrap Styles
+    4. Common Plugin Styles
+    5. Common Section Styles
+    6. Common Modal Styles
+    7. Authentication Styles
+    8. Master Styles
+    9. Grievance Web Portal Styles
+    10. Account Styles
+
+================================================================================
+================================================================================
+*/
+
+/*
+================================================================================
+*****************  Import Other SCSS Files For The Site  ***********************
+================================================================================
+*/
+
+/*--  Vendor Styles  --*/
+@import "../../vendor/bootstrap/_bootstrap.scss";
+@import "../../vendor/fontawesome/font-awesome.scss";
+
+/*--  Common Styles  --*/
+@import "../common/_variable.scss";
+@import "../common/_mixin.scss";
+@import "../common/_custom_fonts.scss";
+@import "../common/_custom_animation.scss";
+@import "../common/_common.scss";
+
+/*--  Common Bootstrap Styles  --*/
+@import "../common/_custom_alerts.scss";
+@import "../common/_typgraphy.scss";
+@import "../common/_custom_btn.scss";
+@import "../common/_custom_badge.scss";
+@import "../common/_custom_list.scss";
+@import "../common/_custom_tab.scss";
+@import "../common/_custom_table.scss";
+@import "../common/_custom_panel.scss";
+@import "../common/_custom_pagination.scss";
+@import "../common/_custom_media.scss";
+@import "../common/_custom_modal.scss";
+@import "../common/_custom_collapse.scss";
+@import "../common/_custom_list_group.scss";
+@import "../common/_custom_input_group.scss";
+@import "../common/_custom_modal.scss";
+@import "../common/_custom_timeline.scss";
+@import "../common/_custom_tooltip.scss";
+@import "../common/_custom_form.scss";
+@import "../common/_custom_widgets.scss";
+
+
+/*--  Common Plugin Styles  --*/
+@import "../common/_custom_select_box.scss";
+@import "../common/_custom_breadcrumb.scss";
+@import "../common/_custom_datepicker.scss";
+@import "../common/_custom_dropzone.scss";
+@import "../common/_custom_scroll.scss";
+@import "../common/_custom_greedly.scss";
+@import "../common/_custom_notify.scss";
+@import "../common/_custom_circle_chart.scss";
+@import "../common/_common_bootstrap_wizard.scss";
+
+/*--  Common Section Styles  --*/
+@import "../common/_header.scss";
+@import "../common/_footer.scss";
+@import "../common/_main_contents.scss";
+@import "../common/_landing.scss";
+@import "../common/_custom_dashboard.scss";
+@import "../common/_custom_right_sidebar.scss";
+@import "../common/_custom_tiles.scss";
+@import "../common/_custom_submenu.scss";
+@import "../common/_custom_chart.scss";
+  
+/*--  Authentiction Styles  --*/
+@import "../authentication/_forgot_password.scss";
+@import "../authentication/_forgot_username.scss";
+@import "../authentication/_login.scss";
+@import "../authentication/_register.scss";
+@import "../authentication/_reset_password.scss";
+@import "../authentication/_verify_account.scss";
+
+/*--  Master Styles  --*/  
+@import "../master/category/_category.scss";
+@import "../master/designation/_designation.scss";
+@import "../master/districts/_districts.scss";
+@import "../master/escalation-matrix/_escalation_matrix.scss";
+@import "../master/grievance-nature/_grievance_nature.scss";
+@import "../master/grievance-redressal/_grievance_redressal.scss";
+@import "../master/hospital/_hospital.scss";
+@import "../master/institution/_institution.scss";
+@import "../master/level/_level.scss";
+@import "../master/privilege/_privilege.scss";
+@import "../master/role/_role.scss";
+@import "../master/states/_states.scss";
+@import "../master/talukas/_talukas.scss";
+@import "../master/user/_user.scss";
+@import "../master/villages/_villages.scss";
+
+/*--  Grievance Web Portal Styles  --*/
+@import "../grievance-web-portal/grievance-dashboard/_grievance_dashboard.scss";
+@import "../grievance-web-portal/grievance-details/_grievance_details.scss";
+@import "../grievance-web-portal/grievance-feedback/_grievance_feedback.scss";
+@import "../grievance-web-portal/grievance-redressal/_grievance_redressal.scss";
+@import "../grievance-web-portal/register/_grievance_register.scss";
+
+/*--  Accounts Styles  --*/
+@import "../accounts/user/_user.scss";
+@import "../accounts/add-user/_add_user.scss";
+@import "../accounts/edit-user/_edit_user.scss";
+@import "../accounts/user-details/_user_details.scss";
+
+/*--  Reports Styles  --*/
+@import "../reports/_reports.scss";
+@import "../reports/block-wise-reports/_block_wise_reports.scss";
+@import "../reports/complaint-type-reports/_complaint_type_reports.scss";
+@import "../reports/complaints-summary-reports/_complaints_summary_reports.scss";
+@import "../reports/district-wise-reports/_district_wise_reports.scss";
+@import "../reports/month-wise-reports/_month_wise_reports.scss";
+@import "../reports/nature-complaint-reports/_nature_complaint_reports.scss";
+
+/*--  Feedback Styles  --*/
+@import "../feedback/_feedback.scss";
+@import "../feedback/ipd-feedback/_ipd_feedback.scss";
+@import "../feedback/opd-feedback/_opd_feedback.scss";   
+
+/*--  Transactions Styles  --*/
+@import "../transactions/_transactions.scss";
+@import "../transactions/daily-transactions/_daily_transactions.scss";
+
+/*--  Page Not Found Styles  --*/
+@import "../page-not-found/_page_not_found.scss";
+    

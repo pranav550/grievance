@@ -1,0 +1,79 @@
+
+/*==============================================================================
+****************  Custom List Group Styles For The Site  ***********************
+==============================================================================*/
+.custom-list-group{
+    @include margin(0);
+    .list-group-item{
+        @include margin(0 0 5px);
+        @include padding(5px 15px);
+        @include box-shadow(none);
+        @include border-radius(0);
+        @include transition(all 0.3s ease-in-out);
+        background-color: transparent;
+        color: $white;
+        font-size: ($font-size-base);
+        font-family: $roboto-regular;  
+        border: 1px solid $white;
+        cursor: pointer;
+        text-transform: capitalize;
+        .custom-icon{
+            @include margin(0 5px 0 0);
+        }
+        &:hover,&:focus,&.active,&.active:hover,&.active:focus{
+            color: $white;
+            background-color: transparent;
+            border: 1px solid $base-red;
+        }
+
+        &.white{
+            .custom-icon{
+                color: $white;
+            }
+        }
+        &.red{
+            .custom-icon{
+                color: $base-red;
+            }
+        }
+        &.orange{
+            .custom-icon{
+                color: $light-red;
+            }
+        }
+        &.green{
+            .custom-icon{
+                color: $base-green;
+            }
+        }
+        &.yellow{
+            .custom-icon{
+                color: $light-yellow;
+            }
+        }
+        &.active{
+            color: $white;
+            background-color: transparent;
+            border: 1px solid $base-red;
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

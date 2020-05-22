@@ -1,0 +1,199 @@
+
+/*==============================================================================
+********************  Tiles Wrapper Styles For The Site  ***********************
+==============================================================================*/
+.tile-main-wrapper{
+    .tile-row{
+        @include margin(0 0 15px);
+        .tile-wrapper{
+            @include border-radius(0);
+            @include box-shadow(0 2px 5px 0 rgba(0,0,0,.26));
+            @include padding(0);
+            background-color: $white;
+            position: relative;
+            overflow: hidden;
+            .tile-header-wrapper{
+                @include padding(5px 15px);
+                .tile-title{
+                    @extend .text-left;
+                    @include margin(0);
+                    @include padding(0);
+                    color: $white;
+                    font-family: $roboto-bold;
+                    font-size: $font-size-large;
+                    line-height: ($line-height-computed * 1.5);
+                    font-weight: bold;
+                    position: relative;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+            .tile-content-wrapper{
+              @include padding(15px);
+              min-height: 200px;
+                .tile-count{
+                    @include margin(0 0 15px);
+                    @include padding(0 0 0 50px);
+                    font-family: $roboto-bold;
+                    color: $white;
+                    font-size: ($font-size-base * 1.5);
+                    line-height: ($line-height-computed * 2.5);
+                    position: relative;
+                    min-height: 40px;
+                    .tile-icon{
+                      position: absolute;
+                      top: 8px;
+                      left: 0;
+                      font-size: 35px;
+                      color: $white;
+                    }
+                }
+                .tile-text{
+                    @include margin(0);
+                    font-family: $roboto-light;
+                    color: $white;
+                    font-size: $font-size-base;
+                    line-height: 1.5;
+                }
+            }
+            .tile-footer-wrapper{
+                @include margin(15px 0);
+                font-family: $roboto-light;
+                color: $light-black;
+                font-size: $font-size-base;
+                line-height: ($line-height-computed * .9);
+            }
+            &.tile-red{
+              .tile-header-wrapper{
+                background-color: #dd4b39;
+              }
+              .tile-content-wrapper{
+                background-color: rgba(#dd4b39,0.8);
+              }
+            }
+            &.tile-orange{
+              .tile-header-wrapper{
+                background-color: $base-orange;
+              }
+              .tile-content-wrapper{
+                background-color: rgba($base-orange,0.8);
+              }
+            }
+            &.tile-green{
+              .tile-header-wrapper{
+                background-color: $base-green;
+              }
+              .tile-content-wrapper{
+                background-color: rgba($base-green,0.8);
+              }
+            }
+            &.tile-blue{
+              .tile-header-wrapper{
+                background-color: $base-blue;
+              }
+              .tile-content-wrapper{
+                background-color: rgba($base-blue,0.9);
+              }
+            }
+            &.tile-light-blue{
+              .tile-header-wrapper{
+                background-color: $light-blue;
+              }
+              .tile-content-wrapper{
+                background-color: rgba($light-blue,0.7);
+              }
+            }
+            &.tile-light-blue1{
+              .tile-header-wrapper{
+                background-color: $light-blue1;
+              }
+              .tile-content-wrapper{
+                background-color: rgba($light-blue1,0.8);
+              }
+            }
+            &.tile-light-blue2{
+              .tile-header-wrapper{
+                background-color: $light-blue;
+              }
+              .tile-content-wrapper{
+                background-color: rgba($light-blue,0.5);
+              }
+            }
+            &.tile-light-blue3{
+              .tile-header-wrapper{
+                background-color: $light-blue;
+              }
+              .tile-content-wrapper{
+                background-color: rgba($light-blue,0.9);
+              }
+            }
+        }
+    }
+}
+
+
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+  .tile-main-wrapper{
+    .tile-row {
+      @include margin(0);
+      .tile-wrapper{
+        @include margin(0 0 15px);
+        .tile-header-wrapper{
+            .tile-title{
+              font-size: ($font-size-base - 1);
+            }
+        }
+        &.tile-red{
+          .tile-content-wrapper{
+            @include padding(20px);
+          }
+        }
+        &.tile-orange{
+          .tile-content-wrapper{
+            @include padding(20px);
+          }
+        }
+        &.tile-green{
+          .tile-content-wrapper{
+            @include padding(20px);
+          }
+        }
+        &.tile-blue{
+          .tile-content-wrapper{
+            @include padding(20px);
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+  .tile-main-wrapper{
+    .tile-row {
+      @include margin(0);
+      .tile-wrapper{
+        @include margin(0 0 15px);
+        .tile-header-wrapper{
+            min-height: 100%;
+            .tile-title{
+              font-size: ($font-size-base + 2);
+            }
+        }
+      }
+    }
+  }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

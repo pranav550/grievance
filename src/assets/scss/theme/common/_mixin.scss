@@ -1,0 +1,60 @@
+/*
+================================================================================
+********************   Custom  Mixins For The Site      ************************
+================================================================================
+*/
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin center-position() {
+    @include translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;  
+}
+@mixin padding($padding) {
+    padding: $padding;
+}
+@mixin margin($margin) {
+    margin: $margin;
+}
+@mixin circle($circle) {
+    @include border-radius($circle);
+    width: $circle;
+    height: $circle;
+    line-height: $circle;
+    vertical-align: middle;
+    text-align: center;
+}
+@mixin translate($x,$y){
+    -webkit-transform: translate($x,$y);
+    -moz-transform: translate($x,$y);
+    -ms-transform: translate($x,$y);
+    -o-transform: translate($x,$y);
+    transform: translate($x,$y);
+}
+@mixin translateX($x){
+    -webkit-transform: translateX($x);
+    -moz-transform: translateX($x);
+    -ms-transform: translateX($x);
+    -o-transform: translateX($x);
+    transform: translateX($x);
+}
+@mixin translateY($y){
+    -webkit-transform: translateY($y);
+    -moz-transform: translateY($y);
+    -ms-transform: translateY($y);
+    -o-transform: translateY($y);
+    transform: translateY($y);
+}
+@mixin box-shadow($shadow){
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    -ms-box-shadow: $shadow;
+    -o-box-shadow: $shadow;
+    box-shadow: $shadow;
+}

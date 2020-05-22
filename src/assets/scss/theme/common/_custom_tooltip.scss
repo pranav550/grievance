@@ -1,0 +1,251 @@
+
+/*==============================================================================
+********************  Custom Tool-tip Styles For The Site  *********************
+==============================================================================*/
+
+/*--  Custom Tool-tip Styles  --*/
+.custom-tooltip{
+    .tooltip-inner{
+        @include padding(7px 10px);
+        @include border-radius(5px);
+        background-color: $tooltip-inner;
+        color: $tooltip-color;
+        font-family: $roboto-regular;
+        font-size: $font-size-small;
+        letter-spacing: .2px;
+        max-width: 250px;
+        border: 1px solid $tooltip-border-color;
+    }
+    .tooltip-arrow{
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        bottom: 1px;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px 5px 0;
+        border-top-color: #2A3843;
+    }
+    &.top{
+        padding: 5px 0;
+        margin-top: -3px;
+    }
+    &.right{
+        padding: 0 5px;
+        margin-left: 3px;
+    }
+    &.bottom{
+        padding: 5px 0;
+        margin-top: 3px;
+    }
+    &.left{
+        padding: 0 5px;
+        margin-left: -3px;
+    }
+    .tooltip.top{
+        .tooltip-arrow{
+            bottom: 0;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px 5px 0;
+            border-top-color: #2A3843;
+        }
+    }
+    &.top-left{
+        .tooltip-arrow{
+            right: 5px;
+            bottom: 0;
+            margin-bottom: -5px;
+            border-width: 5px 5px 0;
+            border-top-color: #2A3843;
+        }
+    }
+    &.top-right{
+        .tooltip-arrow{
+            bottom: 0;
+            left: 5px;
+            margin-bottom: -5px;
+            border-width: 5px 5px 0;
+            border-top-color: #2A3843;
+        }
+    }
+    &.right{
+        .tooltip-arrow{  
+            top: 50%;
+            left: 7px;
+            margin-top: -9px;
+            border-width: 8px 8px 8px 0;
+            border-right-color: #2A3843;
+        }
+    }
+    &.left{
+        .tooltip-arrow{
+            top: 50%;
+            right: 0;
+            margin-top: -5px;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #2A3843;
+        }
+    }
+    &.bottom{
+        .tooltip-arrow{
+            top: 0;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 0 5px 5px;
+            border-bottom-color: #2A3843;
+        }
+    }
+    &.bottom-left{
+        .tooltip-arrow{
+            top: 0;
+            right: 5px;
+            margin-top: -5px;
+            border-width: 0 5px 5px;
+            border-bottom-color: #2A3843;
+        }
+    }
+    &.bottom-right{
+        .tooltip-arrow{
+            top: 0;
+            left: 5px;
+            margin-top: -5px;
+            border-width: 0 5px 5px;
+            border-bottom-color: #2A3843;
+        }
+    }
+}
+
+.chart-tooltip{	
+    @include border-radius(5px);
+    background-color: $tooltip-inner !important;;
+    color: $bali-hai !important;
+    font-family: $roboto-regular;
+    font-size: $font-size-small !important;
+    letter-spacing: .2px !important;
+    pointer-events: none;
+    visibility: hidden;
+    max-width: 250px;
+    padding: 5px !important;
+    border: 1px solid $tooltip-inner !important;
+    position: absolute; 
+    overflow: visible;
+    z-index: 9;
+    &:before{
+        @include translateY(-50%);
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;  
+        top: 50%;
+        right: auto;
+        left: -8px;
+        border-top: 5px solid transparent;
+        border-right: 8px solid $tooltip-inner;
+        border-bottom: 5px solid transparent;
+        z-index: 9;  
+    }
+}
+
+/*--  Time-line Tool-tip Styles  --*/
+.timeline-tooltip{
+    @extend .chart-tooltip;
+    h3{
+        @extend .text-uppercase;
+        @include margin(0 0 10px);
+        @include padding(0 0 10px 20px);
+        color: $tooltip-heading-color;
+        font-size: $font-size-base;
+        font-weight: bold;
+        border-bottom: 1px solid $tooltip-heading-border-color;
+        position: relative;
+        .icon{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 15px;
+        }
+    }
+    .icon{
+        @include margin(0 10px 0 0);
+        font-size: $font-size-small;
+        color: $tooltip-icon-color;
+    }  
+    .progress-text{  
+        i,img{    
+            @include margin(0 10px 0 0);
+            display: inline-block;
+        }
+        span{  
+            @include margin(0 10px 0 0);
+            display: inline-block;
+        }
+    }
+}
+
+.Cluster_Chart_tooltip,
+.TimeScale_Bubble_Chart_tooltip,
+.bubblehierarchy_tooltip,
+.TimeScale_Bubble_Chart_tooltip,
+.Bubble_Chart_tooltip,
+.grouped_bar_tooltip{
+    @extend .chart-tooltip;
+    span{
+        color: $tooltip-color !important;
+    }
+} 
+.Bubble_Chart_tooltip,
+.Bubble_Chart_tooltip *{
+    z-index: 99;
+}
+.line_chart_tooltip, .world_map_tooltip1{
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+/*--  Leaflet Popup Styles  --*/
+.leaflet-fade-anim{
+    .leaflet-map-pane{
+        .leaflet-popup{
+            .leaflet-popup-content-wrapper, .leaflet-popup-tip{
+                background: $tooltip-inner;
+                color: $tooltip-color;
+                .leaflet-popup-content{
+                    a{
+                        color: $tooltip-color;
+                        &.leaflet-popup-close-button{
+                            margin: 0;
+                            color: #b3cfe5;
+                            font-size: 18px;
+                            font-weight: 400;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }  			
+        }
+    }
+}
+
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}
+

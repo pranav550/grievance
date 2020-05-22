@@ -1,0 +1,49 @@
+<div class="modal fade custom-modal" tabindex="-1" id="myModal" role="dialog">
+  <div class="modal-dialog modal-sm grievance-modal-wrapper">
+  <!-- Modal content Starts Here-->
+  <div class="modal-content grievance-supervisor-modal-wrapper">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left"> {{ 'Grievance Details' | translate}} </h4>
+      <button type="button" class="close pull-right" aria-label="Close" data-dismiss="modal">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="grievanceHistoryData!==undefined">
+        <div class="custom-table-caption">
+            <div class="row">
+              <div class="col-sm-6" *ngIf="grievanceHistoryData">
+                <h3 class="page-title grievance-dashboard-page-title">{{'Grievance Timeline'| translate}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="timeline" *ngFor="let data of grievanceHistoryData ; even as e">
+                <div *ngIf="e" class="timeline-container left">
+                  <div class="content">
+                    <h2> {{ data.date | date:
+                      'EEE, MMM d, yyyy hh:mm a' }}</h2>
+                    <p> {{ data.comment }} </p>
+                  </div>
+                </div>
+        
+                <div *ngIf="!e" class="timeline-container right">
+                  <div class="content">
+                    <h2> {{ data.date | date:
+                      'EEE, MMM d, yyyy hh:mm a' }}</h2>
+                    <p> {{ data.comment }} </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      <div>
+      
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal content Starts Here-->
+</div>

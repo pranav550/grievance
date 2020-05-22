@@ -1,0 +1,86 @@
+<!--  Nature Complaint Reports Wrapper Starts  -->
+<app-header></app-header>
+<div class="reports-wrapper nature-complaint-reports-wrapper">
+
+  <!--  Nature Complaint Reports List Wrapper Starts  -->
+  <div class="container nature-complaint-reports-list-wrapper">
+    <div class="custom-table-caption">
+      <h3 class="page-title">{{'Grievance Nature Report' | translate}}</h3>
+      <div class="form-wrapper basic">
+        <form class="custom-form" [formGroup]="filterForm">
+          <div class="row">
+            <div class="col-sm-10">
+              <div class="form-group clearfix">
+                <label for="talukaName" class="control-label">{{'Start Date & Time' | translate}}<sup class="custom-required">*</sup></label>
+                <div class="custom-date-picker">
+                  <input class="form-control" placeholder="{{'Start Date & Time' | translate}}" [(ngModel)]="startDateTime"
+                    formControlName="startDateTime" (click)="onTogglePicker('startDT')" autofocus="true" tabindex="1" />
+                  <i class="fa fa-calendar-times-o form-control-feedback" aria-hidden="true"></i>
+                  <datetime-popup class="custom-datetime-popup" [value]="startDateTime" [maxDate]="maxDate"
+                    (valueChange)="onValueChange($event,'startDT')" [(showPopup)]="showPickerStart" [showDate]="showDateStart"
+                    [showTime]="showTimeStart" [closeButton]="closeButtonStart"></datetime-popup>
+                </div>
+                <label for="talukaName" class="control-label">{{'End Date & Time' | translate}}<sup class="custom-required">*</sup></label>
+                <div class="custom-date-picker">
+                  <input class="form-control" placeholder="{{'End Date & Time' | translate}}" [(ngModel)]="endDateTime"
+                    formControlName="endDateTime" (click)="onTogglePicker('endDT')" tabindex="2" />
+                  <i class="fa fa-calendar-times-o form-control-feedback" aria-hidden="true"></i>
+                  <datetime-popup class="custom-datetime-popup" [value]="endDateTime" [maxDate]="maxDate" (valueChange)="onValueChange($event,'endDT')"
+                    [(showPopup)]="showPickerEnd" [showDate]="showDateEnd" [showTime]="showTimeEnd" [closeButton]="closeButtonEnd"></datetime-popup>
+                  <div class="error-message" *ngIf="submitted">
+                    {{'End Date should always be greater than Start Date' | translate}}
+                  </div>
+                  <!-- <div class="error-message" *ngIf="submitted">
+                    {{'End Date should always be greater than Start Date' | translate}}
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 text-right">
+              <button type="submit" (click)="submitReport()" [disabled]= "endDateTime == null || startDateTime == null || endDateTime == '' || startDateTime == '' " class="btn btn-blue" tabindex="4">
+                {{'Submit' | translate}}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="emptyDataCheck">
+      <div class="custom-datatable-wrapper">
+        <div class="form-wrapper">
+          <form class="custom-form grid-form" [formGroup]="filterForm">
+            <div class="form-group">
+              <button type="button" (click)="downloadExcel()" class="btn btn-blue mar-r15">
+                {{'Download Excel' | translate}}
+              </button>
+              <button type="button" (click)="downloadPdf()" class="btn btn-blue">
+                {{'Download Pdf' | translate}}
+              </button>
+            </div>
+          </form>
+        </div>
+        <table id="dataTable1" class="table table-condensed table-bordered custom-col-auto row-border hover">
+          <thead>
+            <tr>
+              <th class="custom-header-col" *ngFor="let column of columns">
+                {{column}} 
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of reportsNatureComplainData">
+              <td class="custom-body-col" *ngFor='let column of columns ; let i = index'>{{ data[i] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--  Nature Complaint Reports List Wrapper Starts  -->
+
+</div>
+<!--  Nature Complaint Reports Wrapper Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

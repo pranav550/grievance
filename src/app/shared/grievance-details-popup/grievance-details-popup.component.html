@@ -1,0 +1,146 @@
+<div class="modal fade custom-modal" tabindex="-1" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg grievance-modal-wrapper">
+        <!-- Modal content Starts Here-->
+        <div class="modal-content grievance-supervisor-modal-wrapper">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left"> {{ 'Grievance Details' | translate}} </h4>
+                <button type="button" class="close pull-right" aria-label="Close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="grieveanceDetailsData!==undefined">
+                    <div class="panel panel-default custom-details-panel">
+                        <div class="panel-body">
+                            <div class="details-wrapper">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul class="list-unstyled description-list">
+                                            <li>
+                                                <strong>{{ 'Grievance Id' | translate }} </strong>
+                                                <span>{{ grieveanceDetailsData.grievanceId }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Grievance Reg. Date' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.createdAt | date: 'MM/dd/yyyy hh:mm a'}}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Grievance Type' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.grievanceTypeName }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'District' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.grievanceDistrictName }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Block' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.grievanceTalukaName }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Village' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.grievanceVillageName }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{'Nature of Grievance' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.grievanceNatureName }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Against Institution' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.grievanceInstitutionName }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Designation' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.defendantDesignationName }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Grievance Against Whom' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.against }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Subject Of Grievance' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.description }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Grievance Summary' | translate }}</strong>
+                                                <span>{{ grieveanceDetailsData.details }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{{ 'Grievance Registered From' | translate }}</strong>
+                                                <span>{{grieveanceDetailsData.isGrWp == 1?"Web Portal":"104"}}</span>
+                                            </li>
+                                            <li *ngIf="actionTakenData.length > 0">
+                                                <strong>{{ 'Actions' | translate }}</strong>
+
+                                                <!-- Modal Wrapper Table Starts -->
+                                                <div class="custom-datatable-wrapper">
+                                                    <table id="dataTable1" class="table table-condensed table-bordered custom-col-seven-action row-border hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="custom-header-col id-col">{{'S.No' | translate}}</th>
+                                                                <th class="custom-header-col date-col">{{'Action Date' | translate}}</th>
+                                                                <th class="custom-header-col description-col">{{'Action Taken' | translate}}</th>
+                                                                <th class="custom-header-col status-col">{{'Officer ID' | translate}}</th>
+                                                                <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+                                                                <th class="custom-header-col status-col">{{'Redressed' | translate}}</th>
+                                                                <th class="custom-header-col action-col">{{'File' | translate}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let actionData of actionTakenData let i = index">
+                                                                <td class="custom-body-col sno-col">
+                                                                    <p clas="sno-col">
+                                                                        {{i + 1}}
+                                                                    </p>
+                                                                </td>
+                                                                <td class="custom-body-col date-col">
+                                                                    <p>{{actionData.actionTakenDate| date: 'MM/dd/yyyy hh:mm a'}}</p>
+                                                                    <!-- <span>09:05:05</span> -->
+                                                                </td>
+                                                                <td class="custom-body-col action-col">
+                                                                    <p class="action-text">
+                                                                        {{actionData.redressedComment}}
+                                                                        <!-- {{actionData.comment}} -->
+                                                                    </p>
+                                                                </td>
+                                                                <td class="custom-body-col id-col">
+                                                                    <p class="officer-id-text">
+                                                                        {{actionData.name}}({{actionData.roleName}})
+                                                                    </p>
+                                                                </td>
+                                                                <td class="custom-body-col status-col">
+                                                                    <p class="status-text">
+                                                                        {{actionData.redressedStatus}}
+                                                                    </p>
+                                                                </td>
+                                                                <td class="custom-body-col redressed-col">
+                                                                    <p class="redressed-text">
+                                                                        {{actionData.isGrievanceRedressedVal}}
+                                                                    </p>
+                                                                </td>
+                                                                <td class="custom-body-col file-col">
+                                                                    <p *ngIf="actionData.fileName != null" class="file-section">
+                                                                        <img src="{{actionData.fileName}}" alt="file">
+                                                                    </p>
+                                                                    <p *ngIf="actionData.fileName == null" class="file-section">
+                                                                        -
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- Modal Wrapper Table Ends -->
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal content Starts Here-->
+</div>

@@ -1,0 +1,72 @@
+/*==============================================================================
+*****************        Districts Wrapper Styles For The Site    **************
+==============================================================================*/
+.level-wrapper{
+    .custom-datatable-wrapper{
+         .table{
+             &.custom-col-five-action{
+                thead{
+                    tr{
+                        .custom-header-col {
+                            width: 16% !important;  
+                            &.status-col {
+                                width: 5% !important;
+                            }
+                            &.action-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+             }
+         }
+    }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .level-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 180px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .level-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 170px;
+                        }
+                    }
+                }
+            }
+        }
+        .custom-datatable-wrapper{
+            .table {
+                min-width: 930px !important;
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+  
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

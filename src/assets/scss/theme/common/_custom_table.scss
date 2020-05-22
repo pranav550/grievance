@@ -1,0 +1,2305 @@
+
+/*==============================================================================
+*************************  Table Styles For The Site  **************************
+==============================================================================*/
+
+/*--  Custom Datattable Styles  --*/
+.custom-datatable-wrapper{
+    @include margin(0 0 15px);
+    @include padding(15px);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    position: relative;
+    overflow: auto;
+    .form-wrapper{
+        position: absolute;
+        top: 16px;
+        right: 15px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+        z-index: 9;
+        .custom-form{
+            .form-group{
+                .btn{
+                    width: auto;
+                }
+            }
+        }
+    }
+    .custom-table-caption{
+        @include margin(0);
+        border-bottom: 1px solid #dddddd;
+        text-align: right;
+    }
+    .table{
+        @include margin(0);
+        width: 100% !important;       
+        border: 1px solid $dark-grey4;
+        border-bottom: 0;
+        thead{
+            tr{
+                .custom-header-col{
+                    position: relative;
+                    @include padding(8px 10px);
+                    background-color: $base-blue;
+                    color: $white;
+                    font-family : $roboto-bold;
+                    font-size: $font-size-base;
+                    font-weight: bold;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    text-transform: capitalize;
+                    text-align: left;
+                    white-space: normal;
+                    word-break: break-all;
+                    border: 0;
+                    border-bottom: 1px solid #dddddd;
+                    border-right: 1px solid rgba(255,255,255,0.5);
+                    &.assign-col,
+                    &.status-col,
+                    &.action-col,
+                    &.delete-col{
+                        text-align: center;
+                        pointer-events: none;
+                        background-image: none;
+                    }
+                    &:last-of-type{
+                        border-right: 0;
+                    }
+                }
+            }
+        }
+        tbody{
+            tr{
+                @include transition(all 0.3s ease-in-out);
+                td{
+                    &.dataTables_empty {
+                        font-family : $roboto-regular;
+                        font-size: $font-size-small;
+                        color: $base-red;
+                        text-align: center;
+                        border-left: 0;
+                        border-right: 0;
+                    }
+                }
+                .custom-body-col{ 
+                    position: relative; 
+                    @include padding(8px 10px);
+                    color: $light-black;
+                    font-family : $roboto-regular;
+                    font-size: $font-size-base;
+                    font-weight: normal;
+                    vertical-align: middle;
+                    text-transform: capitalize;
+                    text-align: left;
+                    white-space: normal;
+                    word-break: break-all;
+                    border: 0;
+                    border-bottom: 1px solid #dddddd;
+                    .custom-checkbox{
+                        @include square(20px);
+                        @include margin(0);
+                        input[type="checkbox"] + .checkbox-text{
+                            position: absolute;
+                        }
+                    }
+                    .description-text{
+                        @include margin(0);
+                        @include center-position();
+                        overflow: hidden;
+                        color: $light-black;
+                        line-height: 1.45;     
+                        white-space: nowrap;
+                        position: absolute; 
+                        width: 100%;
+                        text-overflow: ellipsis;                       
+                    }
+                    p{
+                        @include margin(0);
+                    }
+                    .active-col-link{
+                        color: $base-blue;
+                    }
+                    .inactive-col-link{
+                        color: #c3c3c3;
+                    }
+                    &.assign-col,
+                    &.status-col{
+                        text-align: center;
+                        .badge{
+                            font-size: $font-size-small;
+                            line-height: 1.3;
+                        }
+                    }
+                    &.action-col{
+                        text-align: center;
+                        .btn{
+                            @include margin(0);
+                            @include padding(3px 7px);
+                            font-size: $font-size-small;
+                            line-height: 1.3;
+                            text-align: left;
+                            .custom-icon{
+                                @include margin(0 5px 0 0);
+                            }
+                            &.btn-active,&.btn-inactive{
+                                min-width: 95px;
+                            }
+                            &.btn-edit{
+                                @include margin(0 5px 0 0);
+                            }
+                        }
+                    }
+                    &.delete-col{
+                         text-align: center;
+                        .btn{
+                            @include margin(0);
+                            @include padding(3px 7px);
+                            font-size: $font-size-small;
+                            line-height: 1.3;
+                            text-align: left;
+                            .custom-icon{
+                                @include margin(0 5px 0 0);
+                            }
+                        }
+                    }
+                }
+                .table-first-element{
+                    text-transform: none !important;
+                }
+                &:nth-child(odd){
+                    .custom-body-col{
+                        background-color: $white;
+                         a{
+                             &:hover{
+                                 transition: all 0.5s ease-in-out;
+                                 -webkit-transition: all 0.5s ease-in-out;
+                                 -moz-transition: all 0.5s ease-in-out;
+                             }
+                         }
+                    }
+                }
+                &:nth-child(even){
+                    .custom-body-col{
+                        background-color: $dark-grey15;
+                    }
+                }
+                &:hover{
+                    .custom-body-col{
+                        background-color: rgba(223,223,223,.7) !important;
+                    }
+                }
+                &.active,&.pending,&.closed{
+                    .custom-body-col{
+                        color: $white;
+                    }
+                }
+                &.active{
+                    .custom-body-col{
+                        background-color: rgba(#dd4b39,0.8);
+                    }
+                    &:hover{
+                        .custom-body-col{
+                            background-color: #dd4b39 !important;
+                        }
+                   }
+                }
+                &.pending{
+                    .custom-body-col{
+                        background-color: rgba(#ff851b,0.8);
+                    }
+                    &:hover{
+                        .custom-body-col{
+                            background-color: #ff851b !important;
+                        }
+                   }
+                }
+                &.closed{
+                    .custom-body-col{
+                        background-color: rgba(#00a65a,0.8);
+                    }
+                    &:hover{
+                        .custom-body-col{
+                            background-color: #00a65a !important;
+                        }
+                   }
+                }
+            }
+        }
+        &.dataTable{
+            &.no-footer{
+                border-bottom: 0;
+            }
+        }
+        
+        /*--  Custom Col Three  --*/
+        &.custom-col-auto{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        @include padding(8px 30px 8px 10px);
+                        width: auto !important;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+        /*--  Custom Col Three  --*/
+        &.custom-col-three{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 33.33% !important;
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Three Checkbox  --*/
+        &.custom-col-three-checkbox{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 46% !important;
+                        &.checkbox-col{
+                            width: 8% !important;
+                        }
+                    }
+                }
+            }
+        }
+        /*--  Custom Col Three Action  --*/
+        &.custom-col-three-action{
+                thead{
+                    tr{
+                    .custom-header-col{
+                       width: 65% !important;
+                        &.status-col{
+                            width: 7% !important;
+                        }
+                        &.action-col{
+                            width: 30% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Four Five  --*/
+        &.custom-col-four{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 25% !important;
+                        &.checkbox-col{
+                            width: 25% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Four Checkbox  --*/
+        &.custom-col-four-checkbox{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 8% !important;
+                        &.checkbox-col{
+                            width: 23% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Four Action  --*/
+        &.custom-col-four-action{
+                thead{
+                    tr{
+                    .custom-header-col{
+                       width: 35% !important;
+                        &.status-col{
+                            width: 7% !important;
+                        }
+                        &.action-col{
+                            width: 25% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Five  --*/
+        &.custom-col-five{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 20% !important;
+                        &.checkbox-col{
+                            width: 20% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Five Checkbox  --*/
+        &.custom-col-five-checkbox{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 2% !important;
+                        &.checkbox-col{
+                            width: 20% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Five Action  --*/
+        &.custom-col-five-action{
+                thead{
+                    tr{
+                    .custom-header-col{
+                       width: 24.33% !important;
+                        &.id-col{
+                            width: 7% !important;
+                        }
+                        &.address-col{
+                            width: 19% !important;
+                        }
+                        &.contact-number-col{
+                            width: 18% !important;
+                        }
+                        &.description-col{
+                            width: 19% !important;
+                        }
+                        &.can-close-grievance-col{
+                            width: 18% !important;
+                        }
+                        &.assign-col{
+                           width: 7% !important;
+                        }
+                        &.status-col{
+                            width: 7% !important;
+                        }
+                        &.action-col{
+                            width: 17% !important;
+                        }
+                        &.delete-col{
+                            width: 7% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Six  --*/
+        &.custom-col-six{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 16.66% !important;
+                        &.checkbox-col{
+                            width: 16.66% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Six Checkbox  --*/
+        &.custom-col-six-checkbox{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 18% !important;
+                        &.checkbox-col{
+                           width: 10% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Six Action  --*/
+        &.custom-col-six-action{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 17.66% !important;                          
+                        &.id-col{
+                            width: 7% !important;
+                        }                      
+                        &.status-col{
+                            width: 7% !important;
+                        }
+                        &.action-col{
+                            width: 20% !important;
+                        }
+                        &.delete-col{
+                            width: 7% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Seven  --*/
+        &.custom-col-seven{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 14.28% !important;
+                        &.checkbox-col{
+                            width: 14.28% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Seven Checkbox  --*/
+        &.custom-col-seven-checkbox{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 12% !important;
+                        &.checkbox-col{
+                            width: 28% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Seven Action  --*/
+        &.custom-col-seven-action{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 14.75% !important;
+                        &.id-col{
+                            width: 7% !important;
+                        }                       
+                        &.status-col{
+                           width: 7% !important;
+                        }
+                        &.action-col{
+                            width: 31% !important;
+                        }
+                        &.delete-col{
+                            width: 7% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Eight  --*/
+        &.custom-col-eight{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 12.5% !important;
+                        &.checkbox-col{
+                            width: 12.5% !important;
+                        }
+                        &.status-col{
+                           width: 7% !important;
+                        }
+                        &.action-col{
+                            width: 17% !important;
+                        }
+                        &.delete-col{
+                            width: 7% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Eight Checkbox  --*/
+        &.custom-col-eight-checkbox{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 13% !important;
+                        &.checkbox-col{
+                            width: 9% !important;
+                        }
+                        &.status-col{
+                           width: 7% !important;
+                        }
+                        &.action-col{
+                            width: 17% !important;
+                        }
+                        &.delete-col{
+                            width: 7% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        /*--  Custom Col Eight Action  --*/
+        &.custom-col-eight-action{
+                thead{
+                    tr{
+                    .custom-header-col{
+                        width: 10% !important;                           
+                        &.id-col{
+                            width: 7% !important;
+                        }                    
+                        &.status-col{
+                           width: 7% !important;
+                        }
+                        &.action-col{
+                            width: 17% !important;
+                        }
+                        &.delete-col{
+                            width: 7% !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .dataTables_wrapper{
+    /*--  Datattable Length Styles  --*/
+    .dataTables_length{
+        @include padding(0 0 15px);
+        color: $grey;
+        label{
+            @include margin(0);
+            color: $base-blue;
+            font-family: $roboto-medium;
+            font-size: $font-size-base;
+            line-height: ($line-height-computed *.75);
+            font-weight: normal;
+            select{
+                @include margin(0 5px);
+                @include border-radius(0);
+                color: $color-light-black;
+                font-family: $roboto-medium;
+                font-size: $font-size-base;
+                height: ($base-height * 2);
+                border: 1px solid $color-light-grey3;
+                &:focus{
+                    @include box-shadow(none);
+                    border: 1px solid $color-light-grey3;
+                }
+                &::-webkit-input-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-base;
+                    opacity: 0.4;
+                }
+                &:-moz-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-base;
+                    opacity: 0.4;
+                }
+                &::-moz-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-base;
+                    opacity: 0.4;
+                }
+                &::-ms-input-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-base;
+                    opacity: 0.4;
+                }
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover,
+                &:-webkit-autofill:focus{
+                    border: 1px solid $color-light-grey3;
+                    -webkit-text-fill-color: $light-black;
+                    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+                    -moz-box-shadow: 0 0 0px 1000px #fff inset;
+                    box-shadow: 0 0 0px 1000px #fff inset;
+                    transition: background-color 5000s ease-in-out 0s;
+                }
+            }
+        }
+    }
+
+    /*--  Datattable Filter Styles  --*/
+    .dataTables_filter{
+        @include padding(0 0 15px);
+        color: $grey;
+        label{
+            @include margin(0);
+            color: $base-blue;
+            font-family: $roboto-medium;
+            font-size: $font-size-base;
+            line-height: ($line-height-computed *.75);
+            font-weight: normal;
+            input{
+                @include margin(0 0 0 5px);
+                @include padding(5px 10px);
+                @include border-radius(0);
+                color: $color-light-black;
+                font-family: $roboto-medium;
+                font-size: $font-size-base;
+                height: ($base-height * 2);
+                border: 1px solid $color-light-grey3;
+                &:focus{
+                    @include box-shadow(none);
+                    border: 1px solid $color-light-grey3;
+                }
+                &::-webkit-input-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-base;
+                    opacity: 0.4;
+                }
+                &:-moz-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-base;
+                    opacity: 0.4;
+                }
+                &::-moz-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-base;
+                    opacity: 0.4;
+                }
+                &::-ms-input-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-base;
+                    opacity: 0.4;
+                }
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover,
+                &:-webkit-autofill:focus{
+                    border: 1px solid $color-light-grey3;
+                    -webkit-text-fill-color: $light-black;
+                    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+                    -moz-box-shadow: 0 0 0px 1000px #fff inset;
+                    box-shadow: 0 0 0px 1000px #fff inset;
+                    transition: background-color 5000s ease-in-out 0s;
+                }
+            }
+        }
+    }
+
+    /*--  Datattable Info Styles  --*/
+    .dataTables_info{
+        @include padding(22px 0 0);
+        color: $base-blue;
+        font-family: $roboto-medium;
+        font-size: $font-size-base;
+        line-height: ($line-height-computed *.75);
+        font-weight: normal;
+    }
+
+    /*--  Datattable Paginate Styles  --*/
+    .dataTables_paginate{
+        @include padding(15px 0 0);
+            .paginate_button{
+                @include square(30px);
+                @include margin(0 5px);
+                @include padding(5px 5px);
+                @include transition(all 0.3s ease-in-out);
+                @include border-radius(0);
+                font-family: $roboto-regular;
+                line-height: ($line-height-computed * .9);
+                text-transform: capitalize;
+                display: inline-block;
+                background: $white;
+                color: $base-blue !important;
+                border: 1px solid $base-blue;
+                &:hover,&:focus{
+                    background: $base-blue;
+                    color: $white !important;
+                    border: 1px solid $base-blue;
+                }
+                &.current{
+                    background: $base-blue;
+                    color: $white !important;
+                    border: 1px solid $base-blue;
+                    &:hover,&:focus{
+                        background: $white;
+                        color: $base-blue !important;
+                        border: 1px solid $base-blue;
+                    }
+                }
+                &.disabled{
+                    background: $base-blue;
+                    color: $white !important;
+                    border: 1px solid $base-blue;
+                    opacity: 0.8;
+                    cursor: no-drop;
+                    &:hover,&:focus{
+                        background: $base-blue;
+                        color: $white !important;
+                        border: 1px solid $base-blue;
+                        opacity: 0.8;
+                        cursor: no-drop;
+                    }
+                }
+                &.previous {
+                    width: 80px;
+                }
+                &.next{
+                    width: 60px;
+                    @include margin(0 0 0 5px);
+                }
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+    /*--  Custom Datattable Styles  --*/
+    .custom-datatable-wrapper{
+        @include margin(0 0 15px);
+        @include padding(15px);
+        .custom-table-caption{
+            @include margin(0);
+        }
+        .table{
+            @include margin(0);
+            thead{
+                tr{
+                    .custom-header-col{
+                        font-size: $font-size-small;
+                    }
+                }
+            }
+            tbody{
+                tr{                    
+                    .custom-body-col{
+                        font-size: $font-size-small;   
+                        .description-text{
+                            line-height: 1.7;
+                        }      
+                        &.status-col{
+                            .badge{
+                                @include padding(2px 5px);
+                                font-size: ($font-size-base - 3); 
+                            }
+                        }
+                        &.action-col,
+                        &.delete-col{
+                            .btn{
+                                @include padding(2px 5px);
+                                font-size: ($font-size-base - 3);
+                                .custom-icon{
+                                    @include margin(0 5px 0 0);
+                                    font-size: ($font-size-small - 2);
+                                }
+                            }   
+                        }                        
+                    }
+                }
+            }
+            
+            /*--  Custom Col Three  --*/
+            &.custom-col-three{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 33.33% !important;
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Three Checkbox  --*/
+            &.custom-col-three-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 46% !important;
+                            &.checkbox-col{
+                                width: 8% !important;
+                            }
+                        }
+                    }
+                }
+            }
+            /*--  Custom Col Three Action  --*/
+            &.custom-col-three-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 65% !important;
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Four Five  --*/
+            &.custom-col-four{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 25% !important;
+                            &.checkbox-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Four Checkbox  --*/
+            &.custom-col-four-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 8% !important;
+                            &.checkbox-col{
+                                width: 23% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Four Action  --*/
+            &.custom-col-four-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 35% !important;
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five  --*/
+            &.custom-col-five{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 20% !important;
+                            &.checkbox-col{
+                                width: 20% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five Checkbox  --*/
+            &.custom-col-five-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 2% !important;
+                            &.checkbox-col{
+                                width: 20% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five Action  --*/
+            &.custom-col-five-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 30% !important;
+                            &.id-col{
+                                width: 7% !important;
+                            }
+                            &.address-col{
+                                width: 19% !important;
+                            }
+                            &.contact-number-col{
+                                width: 18% !important;
+                            }
+                            &.description-col{
+                                width: 19% !important;
+                            }
+                            &.can-close-grievance-col{
+                                width: 18% !important;
+                            }
+                            &.assign-col{
+                               width: 7% !important;
+                            }
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 23% !important;
+                            }
+                            &.delete-col{
+                               width: 7% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six  --*/
+            &.custom-col-six{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 16.66% !important;
+                            &.checkbox-col{
+                                width: 16.66% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six Checkbox  --*/
+            &.custom-col-six-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 18% !important;
+                            &.checkbox-col{
+                            width: 10% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six Action  --*/
+            &.custom-col-six-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 17.5% !important;                        
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 25% !important;
+                            }
+                            &.delete-col{
+                               width: 7% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven  --*/
+            &.custom-col-seven{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 14.28% !important;
+                            &.checkbox-col{
+                                width: 14.28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven Checkbox  --*/
+            &.custom-col-seven-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12% !important;
+                            &.checkbox-col{
+                                width: 28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven Action  --*/
+            &.custom-col-seven-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12% !important;
+                            &.action-col{
+                                width: 28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight  --*/
+            &.custom-col-eight{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12.5% !important;
+                            &.checkbox-col{
+                                width: 12.5% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight Checkbox  --*/
+            &.custom-col-eight-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 13% !important;
+                            &.checkbox-col{
+                                width: 9% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight Action  --*/
+            &.custom-col-eight-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 10% !important;
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .dataTables_wrapper{
+        /*--  Datattable Length Styles  --*/
+        .dataTables_length{
+            label{
+                font-size: $font-size-base;
+                select{
+                    font-size: $font-size-base;
+                }
+            }
+        }
+
+        /*--  Datattable Filter Styles  --*/
+        .dataTables_filter{
+            label{               
+                font-size: $font-size-base;
+                input{
+                    @include margin(0 0 0 5px);
+                    @include padding(5px 10px);
+                    font-size: $font-size-base;                   
+                }
+            }
+        }
+
+        /*--  Datattable Info Styles  --*/
+        .dataTables_info{
+            @include padding(22px 0 0);
+            font-size: $font-size-base;
+        }
+
+        /*--  Datattable Paginate Styles  --*/
+        .dataTables_paginate{
+            @include padding(15px 0 0);
+                .paginate_button{
+                    @include square(30px);
+                    @include margin(0 5px);
+                    @include padding(5px 5px);
+                    font-family: $roboto-regular;
+                    line-height: ($line-height-computed * .9);                   
+                    &.previous {
+                        width: 80px;
+                    }
+                    &.next{
+                        width: 60px;
+                        @include margin(0 0 0 5px);
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    /*--  Custom Datattable Styles  --*/
+    .custom-datatable-wrapper{
+        @include margin(0 0 15px);
+        @include padding(15px);
+        overflow-x: auto;
+        .custom-table-caption{
+            @include margin(0);
+        }
+        .table{
+            min-width: 950px !important;
+            thead{
+                tr{
+                    .custom-header-col{
+                        font-size: ($font-size-base - 3);
+                    }
+                }
+            }
+            tbody{
+                tr{                    
+                    .custom-body-col{
+                        font-size: ($font-size-base - 2);    
+                        .description-text{
+                            line-height: 1.7;
+                        }     
+                          &.status-col{
+                            .badge{
+                                @include padding(2px 5px);
+                                font-size: ($font-size-base - 3); 
+                            }
+                        }
+                        &.action-col,
+                        &.delete-col{
+                            .btn{
+                                @include padding(2px 5px);
+                                font-size: ($font-size-base - 3);
+                                .custom-icon{
+                                    @include margin(0 5px 0 0);
+                                    font-size: ($font-size-small - 2);
+                                }
+                            }   
+                        }             
+                    }
+                }
+            }
+            
+            /*--  Custom Col Three  --*/
+            &.custom-col-three{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 33.33% !important;
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Three Checkbox  --*/
+            &.custom-col-three-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 46% !important;
+                            &.checkbox-col{
+                                width: 8% !important;
+                            }
+                        }
+                    }
+                }
+            }
+            /*--  Custom Col Three Action  --*/
+            &.custom-col-three-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 65% !important;
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Four Five  --*/
+            &.custom-col-four{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 25% !important;
+                            &.checkbox-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Four Checkbox  --*/
+            &.custom-col-four-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 8% !important;
+                            &.checkbox-col{
+                                width: 23% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Four Action  --*/
+            &.custom-col-four-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 35% !important;
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five  --*/
+            &.custom-col-five{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 20% !important;
+                            &.checkbox-col{
+                                width: 20% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five Checkbox  --*/
+            &.custom-col-five-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 2% !important;
+                            &.checkbox-col{
+                                width: 20% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five Action  --*/
+            &.custom-col-five-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 30% !important;
+                            &.id-col{
+                                width: 7% !important;
+                            }
+                            &.address-col{
+                                width: 19% !important;
+                            }
+                            &.contact-number-col{
+                                width: 18% !important;
+                            }
+                            &.description-col{
+                                width: 19% !important;
+                            }
+                            &.can-close-grievance-col{
+                                width: 18% !important;
+                            }
+                            &.assign-col{
+                               width: 7% !important;
+                            }
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 23% !important;
+                            }
+                            &.delete-col{
+                               width: 7% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six  --*/
+            &.custom-col-six{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 16.66% !important;
+                            &.checkbox-col{
+                                width: 16.66% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six Checkbox  --*/
+            &.custom-col-six-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 18% !important;
+                            &.checkbox-col{
+                            width: 10% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six Action  --*/
+            &.custom-col-six-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 16.6% !important;                        
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 40% !important;
+                            }
+                            &.delete-col{
+                               width: 7% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven  --*/
+            &.custom-col-seven{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 14.28% !important;
+                            &.checkbox-col{
+                                width: 14.28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven Checkbox  --*/
+            &.custom-col-seven-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12% !important;
+                            &.checkbox-col{
+                                width: 28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven Action  --*/
+            &.custom-col-seven-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12% !important;
+                            &.action-col{
+                                width: 28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight  --*/
+            &.custom-col-eight{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12.5% !important;
+                            &.checkbox-col{
+                                width: 12.5% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight Checkbox  --*/
+            &.custom-col-eight-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 13% !important;
+                            &.checkbox-col{
+                                width: 9% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight Action  --*/
+            &.custom-col-eight-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 10% !important;
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .dataTables_wrapper{
+        /*--  Datattable Length Styles  --*/
+        .dataTables_length{
+            label{
+                font-size: $font-size-base;
+                select{
+                    font-size: $font-size-base;
+                }
+            }
+        }
+
+        /*--  Datattable Filter Styles  --*/
+        .dataTables_filter{
+            label{               
+                font-size: $font-size-base;
+                input{
+                    @include margin(0 0 0 5px);
+                    @include padding(5px 10px);
+                    font-size: $font-size-base;                   
+                }
+            }
+        }
+
+        /*--  Datattable Info Styles  --*/
+        .dataTables_info{
+            @include padding(22px 0 0);
+            font-size: $font-size-base;
+        }
+
+        /*--  Datattable Paginate Styles  --*/
+        .dataTables_paginate{
+            @include padding(15px 0 0);
+                .paginate_button{
+                    @include square(30px);
+                    @include margin(0 5px);
+                    @include padding(5px 5px);
+                    font-family: $roboto-regular;
+                    line-height: ($line-height-computed * .9);                   
+                    &.previous {
+                        width: 80px;
+                    }
+                    &.next{
+                        width: 60px;
+                        @include margin(0 0 0 5px);
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    /*--  Custom Datattable Styles  --*/
+    .custom-datatable-wrapper{
+        @include margin(0 0 15px);
+        @include padding(15px);
+        overflow-x: auto;
+        .custom-table-caption{
+            @include margin(0);
+        }
+        .table{
+            @include margin(0);
+            min-width: 920px !important;
+            thead{
+                tr{
+                    .custom-header-col{
+                        font-size: ($font-size-base - 2); 
+                    }
+                }
+            }
+            tbody{
+                tr{                    
+                    .custom-body-col{
+                        font-size: ($font-size-base - 2);     
+                        .description-text{
+                            line-height: 1.7;
+                        }   
+                          &.status-col{
+                            .badge{
+                                @include padding(2px 5px);
+                                font-size: ($font-size-base - 3); 
+                            }
+                        }
+                        &.action-col,
+                        &.delete-col{
+                            .btn{
+                                @include padding(2px 5px);
+                                font-size: ($font-size-base - 3);
+                                .custom-icon{
+                                    @include margin(0 5px 0 0);
+                                    font-size: ($font-size-small - 2);
+                                }
+                            }   
+                        }                  
+                    }
+                }
+            }
+            
+            /*--  Custom Col Three  --*/
+            &.custom-col-three{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 33.33% !important;
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Three Checkbox  --*/
+            &.custom-col-three-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 46% !important;
+                            &.checkbox-col{
+                                width: 8% !important;
+                            }
+                        }
+                    }
+                }
+            }
+            /*--  Custom Col Three Action  --*/
+            &.custom-col-three-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 65% !important;
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Four Five  --*/
+            &.custom-col-four{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 25% !important;
+                            &.checkbox-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Four Checkbox  --*/
+            &.custom-col-four-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 8% !important;
+                            &.checkbox-col{
+                                width: 23% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Four Action  --*/
+            &.custom-col-four-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 35% !important;
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five  --*/
+            &.custom-col-five{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 20% !important;
+                            &.checkbox-col{
+                                width: 20% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five Checkbox  --*/
+            &.custom-col-five-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 2% !important;
+                            &.checkbox-col{
+                                width: 20% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five Action  --*/
+            &.custom-col-five-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 30% !important;
+                            &.id-col{
+                                width: 7% !important;
+                            }
+                            &.address-col{
+                                width: 19% !important;
+                            }
+                            &.contact-number-col{
+                                width: 18% !important;
+                            }
+                            &.description-col{
+                                width: 19% !important;
+                            }
+                            &.can-close-grievance-col{
+                                width: 18% !important;
+                            }
+                            &.assign-col{
+                               width: 7% !important;
+                            }
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 23% !important;
+                            }
+                            &.delete-col{
+                               width: 7% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six  --*/
+            &.custom-col-six{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 16.66% !important;
+                            &.checkbox-col{
+                                width: 16.66% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six Checkbox  --*/
+            &.custom-col-six-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 18% !important;
+                            &.checkbox-col{
+                            width: 10% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six Action  --*/
+            &.custom-col-six-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 17.5% !important;                        
+                            &.status-col{
+                               width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 20% !important;
+                            }
+                            &.delete-col{
+                               width: 7% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven  --*/
+            &.custom-col-seven{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 14.28% !important;
+                            &.checkbox-col{
+                                width: 14.28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven Checkbox  --*/
+            &.custom-col-seven-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12% !important;
+                            &.checkbox-col{
+                                width: 28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven Action  --*/
+            &.custom-col-seven-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12% !important;
+                            &.action-col{
+                                width: 28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight  --*/
+            &.custom-col-eight{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12.5% !important;
+                            &.checkbox-col{
+                                width: 12.5% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight Checkbox  --*/
+            &.custom-col-eight-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 13% !important;
+                            &.checkbox-col{
+                                width: 9% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight Action  --*/
+            &.custom-col-eight-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 10% !important;
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .dataTables_wrapper{
+        /*--  Datattable Length Styles  --*/
+        .dataTables_length{
+            @include margin(0);
+            float: left;
+            label{
+                font-size: $font-size-base;
+                select{
+                    font-size: $font-size-base;
+                }
+            }
+        }
+
+        /*--  Datattable Filter Styles  --*/
+        .dataTables_filter{
+            @include margin(0);
+            float: right;
+            label{               
+                font-size: $font-size-base;
+                input{
+                    @include margin(0 0 0 5px);
+                    @include padding(5px 10px);
+                    font-size: $font-size-base;                   
+                }
+            }
+        }
+
+        /*--  Datattable Info Styles  --*/
+        .dataTables_info{
+            @include padding(22px 0 0);
+            font-size: $font-size-base;
+            float: left;
+        }
+
+        /*--  Datattable Paginate Styles  --*/
+        .dataTables_paginate{
+            @include padding(15px 0 0);
+            float: right;
+                .paginate_button{
+                    @include square(30px);
+                    @include margin(0 5px);
+                    @include padding(5px 5px);
+                    font-family: $roboto-regular;
+                    line-height: ($line-height-computed * .9);                   
+                    &.previous {
+                        width: 80px;
+                    }
+                    &.next{
+                        width: 60px;
+                        @include margin(0 0 0 5px);
+                    }
+                }
+            }
+        }
+    }
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+ /*--  Custom Datattable Styles  --*/
+    .custom-datatable-wrapper{
+        @include margin(0 0 15px);
+        @include padding(15px);
+        overflow-x: auto;
+        .custom-table-caption{
+            @include margin(0);
+        }
+        .table{
+            @include margin(0);
+            min-width: 900px !important;
+            thead{
+                tr{
+                    .custom-header-col{
+                        font-size: ($font-size-base - 2); 
+                    }
+                }
+            }
+            tbody{
+                tr{                    
+                    .custom-body-col{
+                        font-size: ($font-size-base - 2);        
+                          &.status-col{
+                            .badge{
+                                @include padding(2px 5px);
+                                font-size: ($font-size-base - 3); 
+                            }
+                        }
+                        &.action-col,
+                        &.delete-col{
+                            .btn{
+                                @include padding(2px 5px);
+                                font-size: ($font-size-base - 3);
+                                .custom-icon{
+                                    @include margin(0 5px 0 0);
+                                    font-size: ($font-size-small - 2);
+                                }
+                            }   
+                        }                  
+                    }
+                }
+            }
+            
+            /*--  Custom Col Three  --*/
+            &.custom-col-three{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 33.33% !important;
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Three Checkbox  --*/
+            &.custom-col-three-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 46% !important;
+                            &.checkbox-col{
+                                width: 8% !important;
+                            }
+                        }
+                    }
+                }
+            }
+            /*--  Custom Col Three Action  --*/
+            &.custom-col-three-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 65% !important;
+                            &.status-col{
+                                width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Four Five  --*/
+            &.custom-col-four{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 25% !important;
+                            &.checkbox-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Four Checkbox  --*/
+            &.custom-col-four-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 8% !important;
+                            &.checkbox-col{
+                                width: 23% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Four Action  --*/
+            &.custom-col-four-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 35% !important;
+                            &.status-col{
+                                width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five  --*/
+            &.custom-col-five{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 20% !important;
+                            &.checkbox-col{
+                                width: 20% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five Checkbox  --*/
+            &.custom-col-five-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 2% !important;
+                            &.checkbox-col{
+                                width: 20% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Five Action  --*/
+            &.custom-col-five-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 30% !important;
+                            &.id-col{
+                                width: 7% !important;
+                            }
+                            &.address-col{
+                                width: 19% !important;
+                            }
+                            &.contact-number-col{
+                                width: 18% !important;
+                            }
+                            &.description-col{
+                                width: 19% !important;
+                            }
+                            &.can-close-grievance-col{
+                                width: 18% !important;
+                            }
+                            &.assign-col{
+                               width: 7% !important;
+                            }
+                            &.status-col{
+                                width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 23% !important;
+                            }
+                            &.delete-col{
+                               width: 7% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six  --*/
+            &.custom-col-six{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 16.66% !important;
+                            &.checkbox-col{
+                                width: 16.66% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six Checkbox  --*/
+            &.custom-col-six-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 18% !important;
+                            &.checkbox-col{
+                            width: 10% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Six Action  --*/
+            &.custom-col-six-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 17.5% !important;                        
+                            &.status-col{
+                                width: 7% !important;
+                            }
+                            &.action-col{
+                                width: 20% !important;
+                            }
+                            &.delete-col{
+                               width: 7% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven  --*/
+            &.custom-col-seven{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 14.28% !important;
+                            &.checkbox-col{
+                                width: 14.28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven Checkbox  --*/
+            &.custom-col-seven-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12% !important;
+                            &.checkbox-col{
+                                width: 28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Seven Action  --*/
+            &.custom-col-seven-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12% !important;
+                            &.action-col{
+                                width: 28% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight  --*/
+            &.custom-col-eight{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 12.5% !important;
+                            &.checkbox-col{
+                                width: 12.5% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight Checkbox  --*/
+            &.custom-col-eight-checkbox{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 13% !important;
+                            &.checkbox-col{
+                                width: 9% !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*--  Custom Col Eight Action  --*/
+            &.custom-col-eight-action{
+                    thead{
+                        tr{
+                        .custom-header-col{
+                            width: 10% !important;
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .dataTables_wrapper{
+        /*--  Datattable Length Styles  --*/
+        .dataTables_length{
+            @include margin(0);
+            float: none;
+            label{
+                font-size: $font-size-base;
+                select{
+                    font-size: $font-size-base;
+                }
+            }
+        }
+
+        /*--  Datattable Filter Styles  --*/
+        .dataTables_filter{
+            @include margin(0);
+            float: none;
+            label{               
+                font-size: $font-size-base;
+                input{
+                    @include margin(0 0 0 5px);
+                    @include padding(5px 10px);
+                    font-size: $font-size-base;                   
+                }
+            }
+        }
+
+        /*--  Datattable Info Styles  --*/
+        .dataTables_info{
+            @include padding(22px 0 0);
+            font-size: $font-size-base;
+            float: none;
+        }
+
+        /*--  Datattable Paginate Styles  --*/
+        .dataTables_paginate{
+            @include padding(15px 0 0);
+            float: none;
+                .paginate_button{
+                    @include square(30px);
+                    @include margin(0 5px);
+                    @include padding(5px 5px);
+                    font-family: $roboto-regular;
+                    line-height: ($line-height-computed * .9);                   
+                    &.previous {
+                        width: 80px;
+                    }
+                    &.next{
+                        width: 60px;
+                        @include margin(0 0 0 5px);
+                    }
+                }
+            }
+        }
+    }
+}

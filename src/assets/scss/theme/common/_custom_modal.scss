@@ -1,0 +1,664 @@
+
+/*==============================================================================
+*********************  Custom Modal Styles For The Site  ***********************
+==============================================================================*/
+/*--  Custom Modal Styles  --*/
+.custom-modal,.modal{
+    .modal-dialog{
+        @include margin(60px auto);
+         &.grievance-modal-wrapper{
+             width: auto;
+            max-width: 1150px;
+         }
+    }
+    .modal-content{
+        @include border-radius(0);
+        background-color: $white;    
+        background-clip: border-box;
+        border: 1px solid $dark-grey4;
+    }
+    .modal-content{
+        .modal-header, .modal-body, .modal-footer{
+            @include padding(15px);
+        }
+        .modal-header{
+            border-bottom: 1px solid $dark-grey4;
+        }
+        .modal-footer {
+            border-top: 1px solid $dark-grey4;
+        }
+    }
+    .modal-header .alert{
+        @include border-radius(0);
+        font-size: $font-size-small;
+        line-height: ($line-height-computed * .8);
+        font-weight: normal;
+        font-family: $roboto-regular;
+    }
+    .modal-content{        
+        .form-wrapper{
+            .custom-form{
+                .form-group{                        
+                    &:last-of-type(){
+                        @include margin(0);
+                    }
+                }
+            }
+        }
+        .modal-header{
+            .modal-title{
+                @extend .text-capitalize;
+                color: $base-blue;
+                font-family: $roboto-medium;
+                font-size: $font-size-large;
+                font-weight: normal;
+            }
+            .close{
+                @include margin(0);
+                color: $base-blue;
+                font-size: ($font-size-small * 2);
+                font-weight: normal;
+                opacity: 1;
+            }
+        }
+        .modal-body{
+            .modal-subtitle{
+                @extend .text-center;
+                @include margin(20px 0);
+                color: #cfcecc;
+                font-family: $roboto-medium;
+                font-size: ($font-size-large + 2);
+            }
+            .modal-text{
+                @extend .text-center;
+                @include margin(20px 0);
+                color: #cfcecc;
+                font-family: $roboto-medium;
+                font-size: ($font-size-base);
+                font-weight: normal;
+                .help-block{       
+                    @include margin(0);         
+                    color: #cfcecc;
+                    font-family: $roboto-medium;
+                    font-size: ($font-size-base);
+                    font-weight: normal;
+                }
+            }
+            .custom-fieldset{
+                @include margin(0 0 15px);
+                @include padding(15px 15px 0);
+                border: 1px solid $light-grey1;
+                .custom-legend{
+                    @include margin(0);
+                    @include padding(0 5px);
+                    text-transform: capitalize;
+                    width: auto;
+                    border: 0;
+                }                
+            } 
+            .help-description{
+                color: $light-black;
+                font-size: $font-size-base;
+                background: #fff;
+                padding: 0 0 0 50%;
+                margin: 0 0 5px;
+                position: relative;
+                min-height: 16px;
+                &.user-info{
+                   @include padding(0); 
+                }
+                strong{
+                    @include margin(0 5px 0 0);
+                    display: inline-block;
+                    font-size: 15px;
+                    width: 50%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            } 
+            .custom-details-panel{
+                @include margin(0);
+                @include border-radius(0);                
+                .details-wrapper{
+                    .description-list{
+                        li{
+                        @extend .clearfix;
+                        @include margin(0 0 15px 0);
+                        color: #000;
+                        font-size: $font-size-base;
+                        font-family: $roboto-medium;
+                        strong{
+                            color: #000;
+                            font-size: $font-size-base;
+                            font-family: $roboto-medium;
+                            float: left;
+                            width: 25%;
+                            white-space: normal;
+                            word-break: break-all;
+                        }
+                        .custom-datatable-wrapper{
+                            max-height: 300px;
+                            .table{
+                                min-width: 1050px !important;
+                                &.custom-col-seven-action{
+                                    thead{
+                                         tr{
+                                             .custom-header-col{                            
+                                                p{
+                                                    color: $light-black;
+                                                    text-align: left;
+                                                }
+                                                &.id-col{
+                                                    width: 7% !important;
+                                                }
+                                                &.officer-id-col{
+                                                    width: 15% !important;
+                                                }
+                                                &.status-col{
+                                                    width: 10% !important;
+                                                }
+                                                &.description-col{
+                                                    width: 15% !important;
+                                                }
+                                                &.date-col{
+                                                    width: 15% !important;
+                                                }
+                                                &.action-col{
+                                                    width: 10% !important;
+                                                }
+                                            }
+                                         }
+                                    }
+                                    tbody{
+                                        tr{
+                                            .custom-body-col{
+                                                &.acton-col{
+                                                    text-align: center;
+                                                }
+                                                &.description-col{
+                                                    .action-text{
+                                                        @include margin(0);
+                                                    }
+                                                }
+                                                &.officer-id-col{
+                                                    .officer-id-text{
+                                                        @include margin(0);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        span{
+                            float: left;
+                            width: 75%;
+                            white-space: normal;
+                            word-break: break-all;
+                          }
+                          .summary-text{
+                            overflow: auto;
+                            max-height: 55px;
+                          }
+                        }
+                    }
+                  .form-row{
+                    .form-wrapper{
+                        .custom-form{
+                            .form-group{
+                               .control-label{
+                                width: 25%;
+                                display: inline-block;
+                                vertical-align: top; 
+                                color: #000;
+                                font-size: 14px;
+                                font-family: "Roboto Medium", sans-serif;  
+                                white-space: normal;            
+                               }         
+                                .has-feedback{
+                                    width: 75%;
+                                    display: inline-block;
+                                }
+                                input[type="file"]{
+                                    display: inline-block;
+                                }
+                                .ng-select{
+                                    width: 75%;
+                                    display: inline-block;
+                                }
+                                .radio-redressed-form{
+                                    width: 75%;
+                                    display: inline-block;
+                                }
+                                .error-message{
+                                    position: relative;                                   
+                                }
+                                .custom-datatable-wrapper{
+                                    display: inline-block;
+                                    width: 75%;
+                                    max-height: 300px;
+                                    .table{
+                                        min-width: 1050px !important;
+                                        &.custom-col-seven-action{
+                                            thead{
+                                                tr{
+                                                    .custom-header-col{                            
+                                                        p{
+                                                            color: $light-black;
+                                                            text-align: left;
+                                                        }
+                                                        &.id-col{
+                                                            width: 7% !important;
+                                                        }
+                                                        &.officer-id-col{
+                                                            width: 15% !important;
+                                                        }
+                                                        &.status-col{
+                                                            width: 10% !important;
+                                                        }
+                                                        &.description-col{
+                                                            width: 15% !important;
+                                                        }
+                                                        &.date-col{
+                                                            width: 15% !important;
+                                                        }
+                                                        &.action-col{
+                                                            width: 10% !important;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            tbody{
+                                                tr{
+                                                    .custom-body-col{
+                                                        &.acton-col{
+                                                            text-align: center;
+                                                        }
+                                                        &.description-col{
+                                                            .action-text{
+                                                                @include margin(0);
+                                                            }
+                                                        }
+                                                        &.officer-id-col{
+                                                            .officer-id-text{
+                                                                @include margin(0);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                &:last-of-type(){
+                                    @include margin(0);
+                                }
+                            }
+                            .custom-preview-image-wrapper{
+                                width: 75%;
+                                float: right;
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+                  }   
+                }
+            } 
+        }
+        .modal-footer{
+            position: relative;
+            .btn-cancel, .btn-update {
+                @extend .text-uppercase;
+                @include border-radius(0);
+                min-width: 90px;
+                height: 30px;
+                font-family: $roboto-bold;
+                font-size: $font-size-small;
+                font-weight: normal;
+                line-height: ($line-height-computed * .6);
+                &:hover,&:focus{
+                    @include box-shadow(none);
+                }
+            }
+            .btn-cancel{
+                background-color: $cello1;
+                color: $bali-hai;
+                border-color: $cello1;
+                &:hover,&:focus{
+                    background-color: $cello1;
+                    color: $bali-hai;
+                    border-color: $cello1;
+                }
+            }
+            .btn-update{
+                background-color: $lochmara;
+                color: $link-water;
+                border-color: $lochmara;
+                &:hover,&:focus{
+                    background-color: $lochmara;
+                    color: $link-water;
+                    border-color: $lochmara;
+                }
+                .fa{
+                    @include margin(0 10px 0 0);
+                }
+            }
+        }
+        /*--  Form Styles  --*/
+        .form-wrapper {
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+            border-radius: 0;
+            max-width: 100%;
+            background-color: #ffffff;
+            border: 0;
+            .custom-form{
+                .btn-submit{
+                    @include margin(0 auto);
+                    display: inline-block;
+                }
+            }
+            .confirm-message{
+                strong{
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+    .divider{
+        @extend .text-center;
+        @include margin(0 0 15px);
+        width: 300px;
+    }
+    .switch{
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+        input{
+            display: none;
+        }
+        .slider{
+            @include transition(all 0.3s ease-in-out);
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $grey-chateau1;
+            &:before{
+                @include transition(all 0.3s ease-in-out);
+                position: absolute;
+                content: "";
+                height: 16px;
+                width: 16px;
+                left: 4px;
+                bottom: 2px;
+                background-color: $cello3;
+            }
+            input{
+                &:checked + .slider{
+                    background-color: $dodger-blue;
+                }
+                &:focus + .slider{
+                    box-shadow: 0 0 1px $dodger-blue;
+                }
+                &:checked + .slider:before{            
+                    @include translateX(16px);
+                }
+            }
+            .slider.round{
+                @include border-radius(34px);
+                &:before {
+                    @include border-radius(50%);
+                }
+            }
+            .switches span{
+                position: absolute;
+                margin-left: 5px;
+            }
+        }
+    }
+
+
+    /*--  Center Modal Styles  --*/
+    &.center{     
+        .modal-dialog{
+            @include margin(0);
+            @include translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+        }
+    }
+
+    /*--  Left Modal Styles  --*/
+    &.left{
+        .modal-dialog{
+            @include margin(0);
+            @include translate(0,0);
+            left: 50px;
+            top: 50px;
+        }
+    }
+    /*--  Full Window Modal Styles  --*/
+    &.full-window{
+        padding: 0 !important;
+        .modal-dialog{
+            @include margin(0);
+            @include padding(0);
+            width: 100%;
+            .modal-content{
+                @include padding(0);
+                height: 100%;
+                .modal-body{ 
+                    @include padding(0);                    
+                    .evaluation-wrapper{
+                        @include padding(0);
+                        .btn-wrapper{
+                            a{
+                                display: inline-block;
+                                cursor: pointer;
+                            }
+                            .link-toggle{
+                                @include circle(48px);
+                                background-color: $light-red;
+                                color: $white;
+                                line-height: 46px;
+                                font-size: ($font-size-base * 1.5);
+                                &.open{
+                                    i{
+                                        &:before{
+                                            @include transition(all 0.3s ease-in-out);
+                                            content: "ï� ";
+                                        }
+                                    }
+                                }
+                            }
+                            .link-cancel{
+                                @include circle(48px);
+                                background-color: $white;
+                                border: 2px solid $light-red;
+                                color: $light-red;
+                                display: inline-block;
+                                line-height: 42px;
+                                font-size: ($font-size-base * 1.5);
+                            }
+                        }
+                        .left-panel-wrapper{
+                            @include padding(15px 65px 30px);
+                            min-height: 100vh;
+                            background-color: $dark-grey;
+                            border-right: 1px solid $dark-grey12;
+                            .left-panel-body{
+                                @include transition(all 0.3s ease-in-out);
+                                position: relative;
+                                left: -500px;
+                                &.open{
+                                    left: 0;
+                                }
+                            }
+                        }
+                        .right-panel-wrapper{
+                            @include padding(15px 50px 30px 30px);
+                            .select-option-wrapper{
+                                @include margin(0 100px 0 0);
+                                .select-option-wrapper{
+                                    @include margin(0 0 15px);
+                                }
+                            }
+                        }
+                    }
+                }
+                &.leaderboard-subsidiary-wrapper{
+                    .evaluation-wrapper{
+                        .right-panel-wrapper{
+                            .select-option-wrapper{
+                                @include margin(0 0 30px 0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /*--  Left & Right Slide Modal  --*/
+    &.left-slide .modal-dialog, &.right-slide .modal-dialog{
+        @include margin(auto);
+        position: fixed;
+        height: 100%;
+        -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
+    }
+    &.left-slide .modal-content, &.right-slide .modal-content{
+        height: 100%;
+        overflow-y: auto;
+    }
+    &.left-slide .modal-body, &.right-slide .modal-body{
+        padding: 15px 15px 80px;
+    }
+    &.left-slide.fade{
+        .modal-dialog{
+            @include transition(opacity 0.3s linear, left 0.3s ease-out);
+            left: -320px;
+        }
+        &.in .modal-dialog{
+            left: 0;
+        }
+    }
+    &.right-slide.fade{
+        .modal-dialog{
+            @include transition(opacity 0.3s linear, right 0.3s ease-out);
+            right: -320px;
+        }
+        &.in .modal-dialog{
+            right: 0;
+        }
+    } 
+    &.grievance-modal-wrapper{
+        .modal-dialog{
+            width: $modal-lg;
+              .modal-content{
+                  .modal-body{
+                    .custom-details-panel{
+                        .panel-body{
+                            .details-wrapper{
+                                .form-row{
+                                    ul{
+                                        li{
+                                            .custom-datatable-wrapper{
+                                                table{
+                                                    thead{
+                                                        tr{
+                                                            th{
+                                                                width: 40% !important;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                  }
+              }
+        }
+    } 
+}
+
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+    // .custom-modal,.modal{
+    //     .modal-content{
+    //         .modal-body{     
+    //             .help-description{         
+    //                 strong{
+    //                     width: 40%;
+    //                 }
+    //             }        
+    //         }  
+    //     }
+    // }
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .custom-modal,.modal{
+        .modal-content{
+            .modal-body{
+                .custom-details-panel{
+                    .details-wrapper{
+                        .description-list{
+                            li{
+                                strong{
+                                    width: 35%;
+                                }
+                                span{
+                                    width: 65%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .custom-modal,.modal{
+        .modal-content{
+            .modal-body{
+                .custom-details-panel{
+                    .details-wrapper{
+                        .description-list{
+                            li{
+                                strong{
+                                    width: 35%;
+                                }
+                                span{
+                                    width: 65%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

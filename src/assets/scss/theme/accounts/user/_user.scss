@@ -1,0 +1,75 @@
+/*==============================================================================
+************************  User Wrapper Styles For The Site    ******************
+==============================================================================*/
+.users-wrapper{
+ 
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .users-wrapper{
+        .custom-datatable-wrapper{
+            .table {
+                min-width: 880px !important;
+                 /*--  Custom Col Six Action  --*/
+                &.custom-col-six-action{
+                        thead{
+                            tr{
+                            .custom-header-col{
+                                width: 17.33% !important;                        
+                                &.status-col{
+                                    width: 5% !important;
+                                }
+                                &.action-col{
+                                    width: 30% !important;
+                                }
+                                &.delete-col{
+                                    width: 5% !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+ .users-wrapper{
+        .custom-datatable-wrapper{
+            .table {
+                min-width: 1000px !important;
+                 /*--  Custom Col Six Action  --*/
+                &.custom-col-six-action{
+                        thead{
+                            tr{
+                            .custom-header-col{
+                                width: 17.33% !important;                        
+                                &.status-col{
+                                    width: 5% !important;
+                                }
+                                &.action-col{
+                                    width: 30% !important;
+                                }
+                                &.delete-col{
+                                    width: 5% !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

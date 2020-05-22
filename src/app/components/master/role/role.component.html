@@ -1,0 +1,268 @@
+<app-header></app-header>
+
+<!--  Role Nature Wrapper Starts -->
+<div class="container role-wrapper">
+  <div class="custom-table-caption">
+    <h3 class="page-title">{{'Role' | translate}}</h3>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-wrapper basic">
+          <form class="custom-form">
+            <div class="form-group clearfix">
+              <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+              <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event)" bindLabel="name"
+                placeholder="{{'Select State' | translate}}" name="selectedState" [(ngModel)]="selectedState" tabindex="1"
+                autofocus="true" [tabindex]="-1" [disabled]="true">
+              </ng-select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-4 text-right">
+        <a href="javascript:void(0);" class="btn btn-blue" (click)="addRoleModal(addRoleModalTemplate)">
+          {{'Create Role' | translate}}
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="custom-datatable-wrapper">
+    <table id="dataTable1" class="table table-condensed table-bordered custom-col-five-action row-border hover">
+      <thead>
+        <tr>
+          <th class="custom-header-col">{{'Name' | translate}}</th>
+          <th class="custom-header-col">{{'Description' | translate}}</th>
+          <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+          <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let roles of rolesData">
+          <td class="custom-body-col">{{ roles.roleName }}</td>
+          <td class="custom-body-col">{{ roles.description }}</td>
+          <td class="custom-body-col status-col">
+            <span *ngIf="roles.status === 'active'" class="badge badge-active">{{ roles.status }}</span>
+            <span *ngIf="roles.status === 'inactive'" class="badge badge-inactive">{{ roles.status }}</span>
+          </td>
+          <td class="custom-body-col action-col">
+            <a href="javascript:void(0);" (click)="openEditModal(roles,editRoleModalTemplate)" class="btn btn-edit">
+              <i class="fa fa-pencil custom-icon"></i>
+              {{'Edit' | translate}}
+            </a>
+            <a href="javascript:void(0);" *ngIf="roles.status === 'active'" (click)="rolesStatus(roles)" class="btn btn-inactive">
+              <i class="fa fa-ban custom-icon"></i>
+              {{'Inactivate' | translate}}
+            </a>
+            <a href="javascript:void(0);" *ngIf="roles.status === 'inactive'" (click)="rolesStatus(roles)" class="btn btn-active">
+              <i class="fa fa-check custom-icon"></i>
+              {{'Activate' | translate}}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--  Grievance Nature Wrapper Ends -->
+
+<!--  Create New State Modal Starts -->
+<ng-template #addRoleModalTemplate class="custom-modal">
+
+  <!-- Create States Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="addRoleForm" (ngSubmit)='addRoles()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Add Role' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="dob" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup>
+          </label>
+          <ng-select [clearable]="false" [items]="statesData" bindLabel="name" name="selectedState" placeholder="{{'Select State' | translate}}"
+            formControlName="addRoleState" autofocus="true" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted && addRoleF.addRoleState.errors" class="error-message">
+            <div *ngIf="addRoleF.addRoleState.errors.required">
+              {{'State is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="grievanceType" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" id="roleName" formControlName="addRoleName" class="form-control" name="roleName"
+            placeholder="{{'Name' | translate}}" required="required">
+          <div *ngIf="submitted && addRoleF.addRoleName.errors" class="error-message">
+            <div *ngIf="addRoleF.addRoleName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="addRoleF.addRoleName.errors.maxlength">
+              {{'Name should not exceed 150 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="levelDescription" class="control-label">{{'Description' | translate}}</label>
+          <textarea placeholder="{{'Description' | translate}}" type="text" formControlName="addRoleDescription" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && addRoleF.addRoleDescription.errors }"></textarea>
+          <div *ngIf="submitted && addRoleF.addRoleDescription.errors" class="error-message">
+              <div *ngIf="addRoleF.addRoleName.errors.maxlength">
+            {{'Description should not exceed 150 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="levelDescription" class="control-label">{{'Feature' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [items]="actionsData" [multiple]="true" bindLabel="name" [closeOnSelect]="false" bindValue="id"
+            placeholder="{{'Feature' | translate}}" groupBy="gender" [selectableGroup]="true" [selectableGroupAsModel]="false"
+            formControlName="addRoleActions" [tabindex]="-1">
+            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+              <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{ standalone : true }" />
+              {{item.gender | uppercase}}
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+              <input id="item-{{index}}" type="checkbox" [(ngModel)]="item$.selected" [ngModelOptions]="{ standalone : true }" />{{item.name}}
+            </ng-template>
+          </ng-select>
+          <div *ngIf="submitted && addRoleF.addRoleActions.errors" class="error-message">
+            <div *ngIf="addRoleF.addRoleActions.errors.required">
+              {{'Feature is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='addRoleStatus' class="radio-text" type="radio" [value]="true">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='addRoleStatus' class="radio-text" type="radio" [value]="false">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-submit">{{'Add Role' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Create Role Form Ends -->
+
+</ng-template>
+<!--  Create New Role Modal Ends -->
+
+<!--  Edit New Role Modal Starts -->
+<ng-template #editRoleModalTemplate class="custom-modal">
+
+  <!-- Edit States Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="editRoleForm" (ngSubmit)='editRoles()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Edit Role' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup>
+          </label>
+          <ng-select [clearable]="false" formControlName="editRoleState" [items]="statesData" bindLabel="name"
+            placeholder="{{'Select State' | translate}}" autofocus="true" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label for="levelName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup>
+          </label>
+          <input placeholder="{{'Name' | translate}}" type="text" formControlName="editRoleName" class="form-control" />
+          <div *ngIf="submitted && editRoleF.editRoleName.errors" class="error-message">
+            <div *ngIf="editRoleF.editRoleName.errors.required"> 
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="editRoleF.editRoleName.errors.maxlength">
+              {{'Name should not exceed 150 characters.' | translate}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="roleDescription" class="control-label">{{'Description' | translate}}</label>
+          <textarea rows="3" id="roleDescription" formControlName="editRoleDescription" class="form-control" name="roleDescription"
+            placeholder="{{'Description' | translate}}"></textarea>
+          <div *ngIf="submitted && editRoleF.editRoleDescription.errors" class="error-message">
+          <div *ngIf="editRoleF.editRoleDescription.errors.maxlength">
+            {{'Description should not exceed 150 characters.' | translate}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="actions" class="control-label">{{'Feature' | translate}}<sup class="custom-required">*</sup></label>
+        <ng-select [items]="actionsData" [multiple]="true" formControlName="editRoleActions" bindLabel="name"
+          [closeOnSelect]="false" placeholder="{{'Feature' | translate}}" [tabindex]="-1" groupBy="gender" [selectableGroup]="true" [selectableGroupAsModel]="false">
+          <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{ standalone : true }"/> {{item.gender | uppercase}} {{item.name | uppercase}}
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [(ngModel)]="item$.selected" [ngModelOptions]="{ standalone : true }" />{{item.name}}
+          </ng-template>
+        </ng-select>
+        <div *ngIf="submitted && editRoleF.editRoleActions.errors" class="error-message">
+          <div *ngIf="editRoleF.editRoleActions.errors.required">
+            {{'Feature is required.' | translate}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="radio-inline custom-radio">
+          <input formControlName='editRoleStatus' class="radio-text" type="radio" [value]="true">
+          <span class="radio-text">{{'Active' | translate}}</span>
+        </label>
+        <label class="radio-inline custom-radio">
+          <input formControlName='editRoleStatus' class="radio-text" type="radio" [value]="false">
+          <span class="radio-text">{{'Inactive' | translate}}</span>
+        </label>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="loading" class="btn btn-block btn-default btn-submit">{{'Update Role' | translate}}</button>
+  </div>
+  </form>
+  </div>
+  <!--  Edit Role Form Ends -->
+
+</ng-template>
+<!-- Edit New Role Modal Ends -->
+
+<!--  Delete Role Modal Starts -->
+<ng-template #deleteRoleModalTemplate class="custom-modal">
+
+  <!--  Delete Role Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" #editstateform="ngForm">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Delete Role' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center btn-confirm-wrapper">
+          <div class="confirm-message">
+            {{'Are you sure you want to delete the role?' | translate}}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center btn-confirm-wrapper">
+          <button type="button" class="btn btn-sm btn-red">{{'Yes' | translate}}</button>
+          <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal">{{'No' |
+            translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--  Delete Role Form Ends -->
+
+</ng-template>
+<!--  Delete Role Modal Ends -->
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>

@@ -1,0 +1,121 @@
+/*==============================================================================
+*****************      Designation Wrapper Styles For The Site    **************
+==============================================================================*/
+.designation-wrapper{
+    .custom-datatable-wrapper{
+        .table{
+                &.custom-col-three-action{
+                    thead{
+                        tr{
+                            .custom-header-col {
+                                width: 40% !important;
+                                &.status-col {
+                                    width: 7% !important;
+                                }
+                                &.action-col{
+                                    width: 22% !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+.designation-wrapper{
+    .custom-table-caption{
+        .form-wrapper{
+            .custom-form{
+                .form-group{
+                    .ng-select {
+                        width: 170px;
+                    }
+                }
+            }
+        }
+    } 
+    .custom-datatable-wrapper{
+        .table{
+                &.custom-col-three-action{
+                    thead{
+                        tr{
+                            .custom-header-col {
+                                width: 40% !important;
+                                &.status-col {
+                                    width: 10% !important;
+                                }
+                                &.action-col{
+                                    width: 25% !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .designation-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 160px;
+                        }
+                    }
+                }
+            }
+        } 
+        .custom-datatable-wrapper{
+            .table{
+                min-width: 680px !important;
+                    &.custom-col-three-action{
+                        thead{
+                            tr{
+                                .custom-header-col {
+                                    width: 40% !important;
+                                    &.status-col {
+                                        width: 10% !important;
+                                    }
+                                    &.action-col{
+                                        width: 35% !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+.designation-wrapper{
+    .custom-datatable-wrapper{
+        .table {
+            min-width: 540px !important;
+            &.custom-col-three-action{
+                thead{
+                    tr{
+                        .custom-header-col {
+                            width: 20% !important;
+                        }
+                    }
+                }
+            }
+          }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

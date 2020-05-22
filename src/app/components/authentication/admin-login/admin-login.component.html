@@ -1,0 +1,85 @@
+<app-nav-bar></app-nav-bar>
+<div class="form-wrapper login-wrapper admin-login-wrapper">
+    <form class="custom-form" [formGroup]="userLoginForm" (ngSubmit)="login()">
+        <h3 class="form-title">
+            {{'Log In to Your Account' | translate}}
+            <span class="help-custom-text">({{'For Ministries/Departments/Organisations' | translate}})</span>
+        </h3>
+        <div class="form-group">
+            <label for="email" class="control-label">{{'Username' | translate}}<sup
+                    class="custom-required">*</sup></label>
+            <div class="has-feedback">
+                <input type="email" class="form-control" placeholder="{{'Username' | translate}}"
+                    formControlName="emailAddress" tabindex="1" autofocus="true" />
+                <i class="fa fa-user-o form-control-feedback"></i>
+            </div>
+            <div *ngIf="submitted && loginF.emailAddress.errors" class="error-message">
+                <div *ngIf="loginF.emailAddress.errors.required">{{'Username is required.' | translate}}</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="control-label">{{'Password' | translate}}<sup
+                    class="custom-required">*</sup></label>
+            <div class="has-feedback">
+                <input type="password" class="form-control" placeholder="{{'Password' | translate}}"
+                    formControlName="password" placeholder="Password" tabindex="2" />
+                <i class="fa fa-lock  form-control-feedback"></i>
+            </div>
+            <div *ngIf="submitted && loginF.password.errors" class="error-message">
+                <div *ngIf="loginF.password.errors.required">
+                    {{'Password is required.' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="form-group clearfix">
+            <!-- <a href="javascript:void(0);" routerLink="/forgot-username" class="forgot-password-link pull-left"
+                tabindex="3">
+                {{'Forgot Username?' | translate}}
+            </a> -->
+            <a href="javascript:void(0);" routerLink="/admin-forgot-password" class="forgot-password-link pull-right"
+                tabindex="4">
+                {{'Forgot Password?' | translate}}
+            </a>
+        </div>
+        <div class="form-group">
+            <!-- <recaptcha formControlName="myRecaptcha" tabindex="3"></recaptcha>
+      <div *ngIf="submitted" class="error-message">
+        <div *ngIf="!userLoginForm.value.myRecaptcha">
+          {{'Security Code is required.' | translate}}
+        </div>
+      </div> -->
+            <div id="captcha"></div>
+            <div (click)="createCaptcha()" class="pointer">
+                <i class="glyphicon glyphicon-refresh"></i> {{'Generate a new captcha'| translate }}</div>
+        </div>
+        <div class="form-group">
+            <label for="myRecaptcha" class="control-label">{{'Captcha' | translate}}<sup
+                    class="custom-required">*</sup></label>
+            <div class="has-feedback">
+                <input type="text" class="form-control" placeholder="{{'Captcha' | translate}}"
+                    formControlName="myRecaptcha" placeholder="Captcha" tabindex="3" id="cpatchaTextBox"
+                    autocomplete="off" />
+            </div>
+            <div *ngIf="submitted && loginF.myRecaptcha.errors" class="error-message">
+                <div *ngIf="loginF.myRecaptcha.errors.required">
+                    {{'Captcha is required.' | translate}}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-block btn-default btn-submit mar-0"
+            tabindex="4">{{'Login' | translate}}</button>
+
+        <p class="help-block my-2">
+            <a href="javascript:void(0);" routerLink="/level-instruction" class="forgot-password-link pull-right mar10"
+                tabindex="8">
+                {{'How it works for Employee?' | translate}}
+            </a>
+        </p>
+
+    </form>
+</div>
+<!--  Landing Wrapper Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

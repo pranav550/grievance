@@ -1,0 +1,215 @@
+
+/*==============================================================================
+***********************  Date Picker Styles For The Site  **********************
+==============================================================================*/
+.bs-datepicker{
+    .bs-datepicker-container {
+        padding: 0;
+    }
+    .bs-datepicker-head{
+        @include border-radius(0);
+        background-color: $base-red !important;
+        button.next, 
+        button.current,
+        button.previous{
+            @include border-radius(0);
+        }
+    }
+    .bs-datepicker-body table td.week span{
+        color: $base-red !important; 
+    }
+    .bs-datepicker-body table th{
+        color: $light-black !important;
+    }
+    .bs-datepicker-body table td span.selected, 
+    .bs-datepicker-body table td.selected span,
+    .bs-datepicker-body table td span[class*="select-"]:after,
+    .bs-datepicker-body table td[class*="select-"] span:after{
+        background-color: $base-red !important;
+    }
+    .bs-datepicker-body table td{
+        color: $light-black !important;
+        &.form-group{
+            width: auto;
+        }
+    }
+    .bs-datepicker-body table td span{
+        @include border-radius(0 !important);
+    }
+}
+.custom-datetime-popup{
+    .dropdown-menu{
+        @include padding(0);
+        @include border-radius(0);
+        min-width: 280px;
+        top: 100%;
+        bottom: auto;
+        // left: auto;
+        // right: 0;
+        border: 1px solid #ddd;
+        li{
+              .btn-link{
+                    color: $base-red;
+                    padding: 3px 0;
+                }
+                .btn-info,
+                .btn-secondary,
+                .btn-primary{
+                    background-color: $base-red;
+                    color: $white;
+                    border: 1px solid $base-red;
+                    &:hover{
+                        background-color: $white;
+                        color: $base-red;
+                        border: 1px solid $base-red;
+                    }
+                    &:focus{
+                        background-color: $base-red;
+                        color: $white;
+                        border: 1px solid $base-red;
+                    }
+                    &[disabled]{
+                        &:hover,&:focus{
+                            background-color: $base-red;
+                            color: $white;
+                            border: 1px solid $base-red;
+                        }
+                    }
+                    .text-info,
+                    .text-muted{
+                        color: $white !important;
+                    }
+                }
+                .well{
+                        min-height: 20px;
+                        margin-bottom: 15px;
+                        background-color: transparent;
+                        border: 1px solid #e3e3e3;
+                        box-shadow: none;
+                        color: $light-black;
+                        table{
+                            tr{
+                                th{
+                                    @include padding(3px 0);
+                                    .btn{
+                                        font-size: $font-size-base;
+                                    }
+                                }
+                                
+                                &[_nghost-c7] .btn-info[_ngcontent-c7] .text-muted[_ngcontent-c7] {
+                                    color: $white !important;
+                                }
+                                td{
+                                    .btn-default:active, 
+                                    .btn-default.active, 
+                                    .open > .btn-default.dropdown-toggle,
+                                    .btn-info,
+                                    .btn-secondary,
+                                    .btn-primary{
+                                        background-color: $base-red;
+                                        color: $white;
+                                        border: 1px solid $base-red;
+                                        &:hover{
+                                            background-color: $white;
+                                            color: $base-red;
+                                            border: 1px solid $base-red;
+                                        }
+                                        &:focus{
+                                            background-color: $base-red;
+                                            color: $white;
+                                            border: 1px solid $base-red;
+                                        }
+                                        &[disabled]{
+                                            &:hover,&:focus{
+                                                background-color: $base-red;
+                                                color: $white;
+                                                border: 1px solid $base-red;
+                                            }
+                                        }
+                                        .text-info,
+                                        .text-muted{
+                                            color: $white !important;
+                                        }
+                                    }
+                                    &.form-group{
+                                        width: auto;
+                                    }
+                                }
+                            }
+                            thead{
+                                tr{
+                                    th{
+                                        .btn{
+                                            @include padding(3px 10px);
+                                        }
+                                    }
+                                }
+                            }
+                            tbody{
+                                tr{
+                                    td{
+                                        .btn{
+                                            @include padding(0 10px);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        &.well-sm{
+                            padding: 5px 15px 15px;
+                            border-radius: 0;
+                            margin: 0;
+                        }
+                }
+                .btn-group{
+                    @include padding(0 15px 15px);
+                    .btn{
+                        @include padding(3px 10px);
+                    }
+                    &.pull-left{
+                        .btn:first-child{
+                            margin-right: 15px;
+                        }
+                    }
+                }
+                timepicker{
+                    padding: 0 15px;
+                    display: block;
+                    width: 100%;
+                    table{
+                        tbody{
+                            tr{
+                                td{
+                                    .form-control{
+                                        height: 30px !important;
+                                    }
+                                    &.form-group{
+                                        width: auto;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+        }
+    }
+}
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}
+

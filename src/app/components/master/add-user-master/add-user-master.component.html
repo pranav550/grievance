@@ -1,0 +1,859 @@
+<app-header></app-header>
+
+<!--  Add Users Form Starts  -->
+<div class="container">
+    <div class="form-wrapper add-user-form-wrapper">
+        <form [formGroup]="addUserForm" class="custom-form" (ngSubmit)='createUser()' autocomplete="off">
+            <h3 class="form-title">{{submitName | translate}}</h3>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Personal Information' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="title" class="control-label">{{'Title' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <ng-select autofocus [clearable]="false" [searchable]="false" bindLabel="name"
+                                [items]="userTitleData" formControlName="addUserTitle"
+                                placeholder="{{'Select Title' | translate}}" tabindex="1" autofocus="true"
+                                [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="addUserForm.value.addUserTitle == ''">
+                                    {{'Title is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="firstName" class="control-label">{{'First Name' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" name="firstName"
+                                    placeholder="{{'First Name' | translate}}" formControlName="addUserFirstName"
+                                    tabindex="2" autocomplete="new-password" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserFirstName.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserFirstName.errors.required">
+                                    {{'First Name is required.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserFirstName.errors.maxlength">
+                                    {{'Name should not exceed 150 characters.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserFirstName.errors?.pattern">
+                                    {{'Name should not contain special characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="middleName" class="control-label">{{'Middle Name' | translate}}</label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" name="middleName"
+                                    placeholder="{{'Middle Name' | translate}}" formControlName="addUserMiddleName"
+                                    tabindex="3" autocomplete="new-password" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserMiddleName.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserMiddleName.errors.maxlength">
+                                    {{'Name should not exceed 150 characters.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserMiddleName.errors?.pattern">
+                                    {{'Name should not contain special characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="lastName" class="control-label">{{'Last Name' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" name="lastName"
+                                    placeholder="{{'Last Name' | translate}}" formControlName="addUserLastName"
+                                    tabindex="4" autocomplete="new-password" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserLastName.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserLastName.errors.required">
+                                    {{'Last Name is required.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserLastName.errors.maxlength">
+                                    {{'Name should not exceed 150 characters.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserLastName.errors?.pattern">
+                                    {{'Name should not contain special characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="gender" class="control-label">{{'Gender' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <ng-select [clearable]="false" formControlName="addUserGender" [items]="selectedgender"
+                                bindLabel="name" placeholder="{{'Select Gender' | translate}}" tabindex="5"
+                                [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="addUserForm.value.addUserGender == ''">
+                                    {{'Gender is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="datetimepicker" class="form-group">
+                            <label for="dob" class="control-label">{{'Date of Birth' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input class="form-control" [maxDate]="maxDate" #dpYMD="bsDatepicker"
+                                    formControlName="addUserDOB" (change)="dateValidFun($event)"
+                                    placeholder="{{'Select Date' | translate}}" bsDatepicker
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" tabindex="6"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-calendar-times-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserDOB.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserDOB.errors.required">
+                                    {{'Date of Birth is required.' | translate}}
+                                </div>
+                                <div *ngIf="dateValid">
+                                    Please enter a valid date
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="fatherName"
+                                class="control-label">{{"Father/Husband's Name" | translate}}</label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" formControlName="addUserFather"
+                                    name="fatherName" placeholder="{{'FatherName' | translate}}" tabindex="7"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserFather.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserFather.errors.maxlength">
+                                    {{'Name should not exceed 150 characters.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserFather.errors?.pattern">
+                                    {{'Name should not contain special characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="motherName" class="control-label">{{"Mother's Name" | translate}}</label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" formControlName="addUserMother"
+                                    name="motherName" placeholder="{{'MotherName' | translate}}" tabindex="8"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserMother.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserMother.errors.maxlength">
+                                    {{'Name should not exceed 150 characters.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserMother.errors?.pattern">
+                                    {{'Name should not contain special characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="maritalStatus" class="control-label">{{'Marital Status' | translate}}</label>
+                            <ng-select [clearable]="false" [items]="maritalStatusData" bindLabel="name"
+                                placeholder="{{'Select Marital Status' | translate}}"
+                                formControlName="addUserMaritalStatus" tabindex="9" [tabindex]="-1">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="community" class="control-label">{{'Community' | translate}}</label>
+                            <ng-select [clearable]="false" formControlName="addUserCommunity" [items]="communityData"
+                                bindLabel="name" placeholder="{{'Select Community' | translate}}" tabindex="10"
+                                [tabindex]="-1">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="religion" class="control-label">{{'Religion' | translate}} </label>
+                            <ng-select [clearable]="false" formControlName="addUserReligion" [items]="religionData"
+                                bindLabel="name" placeholder="{{'Select Religion' | translate}}" tabindex="11"
+                                [tabindex]="-1">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="aadhaarNo" class="control-label">{{'Aadhaar No' | translate}}</label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" formControlName="addUserAdharNo"
+                                    name="aadhaarNo" placeholder="{{'Aadhaar No' | translate}}" tabindex="12"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-id-card-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserAdharNo.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserAdharNo.errors?.pattern">
+                                    {{'Aadhaar No is not valid.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="panNo" class="control-label">{{'Pan No' | translate}}</label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" MaxLength="10" formControlName="addUserPanNo"
+                                    name="panNo" placeholder="{{'Pan No' | translate}}" tabindex="13"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-id-card-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserPanNo.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserPanNo.errors?.pattern">
+                                    {{'Pan No. is not valid.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Contact Information' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="emailId" class="control-label">{{'Email Id' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" formControlName="addUserEmail" name="emailId"
+                                    placeholder="{{'Email Id' | translate}}" tabindex="14"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-envelope-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserEmail.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserEmail.errors.required">
+                                    {{'Email Id is required.' | translate}}
+                                </div>
+                                <!-- <div *ngIf="addUserF.addUserEmail.errors.email">
+                                    {{'Email must be a valid email address.' | translate}}
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="contactNumber" class="control-label">{{'Contact Number' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" formControlName="addContactNo"
+                                    name="contactNumber" placeholder="{{'10 Digit Mobile Number' | translate}}"
+                                    tabindex="15" autocomplete="new-password" />
+                                <i class="fa fa-mobile form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addContactNo.errors" class="error-message">
+                                <div *ngIf="addUserF.addContactNo.errors.required">
+                                    {{'Contact Number is required.' | translate}}
+                                </div>
+                                <!-- <div *ngIf="addUserF.addContactNo.errors?.pattern">
+                                    {{'Please provide a valid contact number.' | translate}}
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="emergencyContactNumber" class="control-label">
+                                {{'Emergency Contact Number' | translate}}
+                                <sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" numberOnly class="form-control" maxlength="10"
+                                    formControlName="addEmergencyContactNo" name="emergencyContactNumber"
+                                    placeholder="{{'10 Digit Mobile Number' | translate}}" tabindex="16"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-mobile form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addEmergencyContactNo.errors" class="error-message">
+                                <div *ngIf="addUserF.addEmergencyContactNo.errors.required">
+                                    {{'Emergency Contact Number is required.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addEmergencyContactNo.errors?.pattern">
+                                    {{'Please provide a valid contact number.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Account Information' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="username" class="control-label">{{'Username' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" formControlName="addUserName" name="username"
+                                    placeholder="{{'Username' | translate}}" tabindex="17"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserName.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserName.errors.required">
+                                    {{'Username is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" *ngIf="addUser">
+                        <div class="form-group">
+                            <label for="password" class="control-label">{{'Password' | translate}}<sup
+                                    class="custom-required">*</sup>
+                                <a href="javascript:void(0);" class="custom-tooltip text-blue"
+                                    tooltip="{{'Password should be minimum 8 digits with 1 Uppercase, 1 Lowercase, 1 Special Character and 1 numeric character.' | translate}}"
+                                    tabindex="-1">
+                                    <i class="fa fa-question-circle"></i>
+                                </a>
+                            </label>
+                            <div class="input-group">
+                                <input type="{{showPassword}}" class="form-control"
+                                    placeholder="{{'Password' | translate}}" formControlName="addUserPassword"
+                                    tabindex="18" autocomplete="new-password" />
+                                <span class="input-group-addon">
+                                    <div *ngIf="showPassword ==='password'" class="fa fa-eye-slash"
+                                        (click)="passwordShow('show')"></div>
+                                    <div *ngIf="showPassword ==='text'" class="fa fa-eye"
+                                        (click)="passwordShow('hide')"></div>
+                                </span>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserPassword.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserPassword.errors.required">
+                                    {{'Password is required.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserPassword.errors?.pattern">
+                                    {{'Password should be minimum 8 digits with 1 Uppercase, 1 Lowercase, 1 Special Character and 1 numeric character.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="doj" class="control-label">{{'Date of Joining' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <div class="has-feedback">
+                                <input class="form-control" [maxDate]="maxDateJoin" #dpYMD="bsDatepicker"
+                                    formControlName="addUserDOJ" (change)="dateValidFunDoj($event)"
+                                    placeholder="{{'Select Date' | translate}}" bsDatepicker
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" tabindex="19"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-calendar-times-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserDOJ.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserDOJ.errors.required">
+                                    {{'Date of Joining is required.' | translate}}
+                                </div>
+                                <div *ngIf="dateValidDoj">
+                                    Please enter a valid date
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </div>
+                <div class="row"> -->
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="role" class="control-label">{{'Role' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <ng-select [clearable]="false" [items]="rolesData" bindLabel="roleName"
+                                placeholder="{{'Select Role' | translate}}" formControlName="addUserRoles" tabindex="21"
+                                [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted && addUserF.addUserRoles.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserRoles.errors.required">
+                                    {{'Role is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="designation" class="control-label">{{'Designation' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="designationsData" bindLabel="name"
+                                placeholder="{{'Select Designation' | translate}}" formControlName="addUserDesignations"
+                                tabindex="22" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted && addUserF.addUserDesignations.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserDesignations.errors.required">
+                                    {{'Designation is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">
+                                {{'Grievance Type' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="categories" bindLabel="name"
+                                (change)="onAddCategoryChange(addGrievance)"
+                                placeholder="{{'Select Grievance Type' | translate}}" tabindex="6" [tabindex]="-1"
+                                [(ngModel)]="addGrievance" multiple="true" formControlName="addSelectCategory"
+                                name="selectedCategory">
+                                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                                    {{item.name | uppercase}}
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                                </ng-template>
+                            </ng-select>
+                            <div *ngIf="submitted && addUserF.addSelectCategory.errors" class="error-message">
+                                <div *ngIf="addUserF.addSelectCategory.errors.required">
+                                    {{'Grievance Type is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4" *ngIf="this.categoriesNature.length>0 || this.grievanceArrayId.length>0">
+                        <div class="form-group">
+                            <label class="control-label">{{'Select Nature' | translate}}</label>
+
+
+                            <ng-select [clearable]="false" [items]="categoriesNature" bindLabel="name" multiple="true"
+                                placeholder="{{'Nature of Grievance' | translate}}"
+                                formControlName="filterGrievanceNature" [selectableGroup]="true" [closeOnSelect]="false"
+                                groupBy="gender" [(ngModel)]="addNature" [selectableGroupAsModel]="false"
+                                (change)="onNatureChange(addNature)" tabindex="13" [tabindex]="-1"
+                                name="selectedNature">
+                                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                                    {{item.name | uppercase}}
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                                </ng-template>
+                            </ng-select>
+                            <!-- <div *ngIf="submitted && addUserF.filterGrievanceNature.errors" class="error-message">
+                                <div *ngIf="addUserF.filterGrievanceNature.errors.required">
+                                    {{'Nature is required.' | translate}}
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="level" class="control-label">{{'Level' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <ng-select [clearable]="false" [items]="levelData" bindLabel="name"
+                                placeholder="{{'Select Level' | translate}}" formControlName="addUserLevels"
+                                tabindex="23" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted && addUserF.addUserLevels.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserLevels.errors.required">
+                                    {{'Level is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="status" class="control-label">{{'Status' | translate}}</label>
+                            <label class="radio-inline custom-radio">
+                                <input formControlName='addUserStatus' class="radio-text" type="radio" [value]="true"
+                                    tabindex="24" />
+                                <span class="radio-text">{{'Active' | translate}}</span>
+                            </label>
+                            <label class="radio-inline custom-radio">
+                                <input formControlName='addUserStatus' class="radio-text" type="radio" [value]="false"
+                                    tabindex="25" />
+                                <span class="radio-text">{{'Inactive' | translate}}
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+
+
+
+
+
+
+
+
+
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Grievance Mapping Information' | translate}}</legend>
+                <div class="row">
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="gender" class="control-label">{{'Grievance access level' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <ng-select [clearable]="false" (change)="changeLocation($event)"
+                                formControlName="addUserLocation" [items]="selectedLevel" bindLabel="name"
+                                name="userLocation" placeholder="{{'Select UserType' | translate}}" tabindex="5"
+                                [tabindex]="-1">
+                            </ng-select>
+                            <!-- <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="addUserForm.value.addUserLocation == ''">
+                                    {{'Gender is required.' | translate}}
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group" *ngIf="isDislayState">
+                            <label for="state" class="control-label">{{'State' | translate}}
+                            </label>
+                            <ng-select [clearable]="false" [items]="statesData" bindLabel="name" name="selectedState"
+                                placeholder="{{'Select State' | translate}}" formControlName="addUserLocationState"
+                                tabindex="28" [tabindex]="-1" [(ngModel)]="defaultStateValue">
+                            </ng-select>
+                            <!-- <div *ngIf="submitted && addUserF.addUserCurrentState.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserCurrentState.errors.required">
+                                    {{'State is required.' | translate}}
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group" *ngIf="isDislayDistrict">
+                            <label for="district" class="control-label">{{'District' | translate}}
+                            </label>
+                            <ng-select [clearable]="false" multiple="true" [(ngModel)]="multipleDistrict"
+                                (change)="changeDistrict(multipleDistrict)" [selectableGroup]="true"
+                                [selectableGroupAsModel]="false" [items]="districtsDataCurrent" bindLabel="name"
+                                placeholder="{{'Select District' | translate}}" name="selectedDistrictLocation"
+                                [closeOnSelect]="false" groupBy="gender" formControlName="addUserDistrictLocation"
+                                tabindex="29" [tabindex]="-1">
+
+                                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        (ngModelChange)="clearFilter(item$.selected)"
+                                        [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                                    {{item.name | uppercase}}
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        (ngModelChange)="clearFilter(item$.selected)"
+                                        [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                                </ng-template>
+                            </ng-select>
+                            <!-- <div *ngIf="submitted && addUserF.addUserCurrentDistrict.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserCurrentDistrict.errors.required">
+                                    {{'District is required.' | translate}}
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group" *ngIf="isDislayBlock">
+                            <label for="block" class="control-label">{{'Block' | translate}}
+                            </label>
+                            <ng-select [clearable]="true" multiple="true" [(ngModel)]="multipleTalukas"
+                                [items]="talukasData" bindLabel="name" placeholder="{{'Select Block' | translate}}"
+                                [selectableGroup]="true" [selectableGroupAsModel]="false"
+                                formControlName="addUserBlockLocation" tabindex="29" [tabindex]="-1"
+                                name="selectedBlockLocation" [closeOnSelect]="false" groupBy="gender"
+                                (change)="changeTalukas(multipleTalukas)">
+                                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        [ngModelOptions]="{standalone: true}" />{{item.gender | uppercase}}{{item.name| uppercase}}
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        [ngModelOptions]="{standalone: true}" /> {{item.name}}
+                                </ng-template>
+
+                            </ng-select>
+                            <!-- <div *ngIf="submitted && addUserF.addUserCurrentDistrict.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserCurrentDistrict.errors.required">
+                                    {{'District is required.' | translate}}
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+            </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Current Address' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="currentAddressOne" class="control-label">
+                                {{'Current Address Line 1' | translate}}
+                                <sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <textarea rows="3" class="form-control" formControlName="addUserCurrentAddressLine1"
+                                    name="address" placeholder="{{'Address' | translate}}" tabindex="26"
+                                    autocomplete="nope"></textarea>
+                                <i class="fa fa-map-marker form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserCurrentAddressLine1.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserCurrentAddressLine1.errors.required">
+                                    {{'Address is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="currentAddressTwo" class="control-label">
+                                {{'Current Address Line 2' | translate}}
+                            </label>
+                            <div class="has-feedback">
+                                <textarea rows="3" class="form-control" formControlName="addUserCurrentAddressLine2"
+                                    name="address" placeholder="{{'Address' | translate}}" tabindex="27"
+                                    autocomplete="nope"></textarea>
+                                <i class="fa fa-map-marker form-control-feedback"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="state" class="control-label">{{'State' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false"
+                                (change)="onStateChange($event, 'addChange','currentAddress')" [items]="statesData"
+                                bindLabel="name" name="selectedState" placeholder="{{'Select State' | translate}}"
+                                formControlName="addUserCurrentState" tabindex="28" [tabindex]="-1"
+                                [(ngModel)]="defaultStateValue">
+                            </ng-select>
+                            <div *ngIf="submitted && addUserF.addUserCurrentState.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserCurrentState.errors.required">
+                                    {{'State is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="district" class="control-label">{{'District' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="districtsDataCurrent" bindLabel="name"
+                                placeholder="{{'Select District' | translate}}" name="selectedDistrict"
+                                formControlName="addUserCurrentDistrict" tabindex="29" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted && addUserF.addUserCurrentDistrict.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserCurrentDistrict.errors.required">
+                                    {{'District is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="pincode" class="control-label">{{'Pincode' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" formControlName="addUserCurrentPinCode"
+                                    placeholder="{{'Pincode' | translate}}" maxlength="6" tabindex="30" />
+                                <i class="fa fa-map-pin form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserCurrentPinCode.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserCurrentPinCode.errors.required">
+                                    {{'Pincode is required.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserCurrentPinCode.errors?.pattern">
+                                    {{'Pincode is not valid.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="checkbox-1" class="control-label custom-checkbox checkbox-inline">
+                                <input type="checkbox" id="checkbox-1" value="value-1"
+                                    (change)="checkSameAddress($event,'addChange')"
+                                    formControlName="addUserSameAsCurrent" tabindex="31" />
+                                <span class="checkbox-text">{{'Check if current address is same as permanent address' |
+                                    translate}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="custom-fieldset" *ngIf="sameAddress">
+                <legend class="custom-legend">{{'Permanent Address' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="permanentAddressOne" class="control-label">
+                                {{'Permanent Address Line 1' | translate}}
+                            </label>
+                            <div class="has-feedback">
+                                <textarea rows="3" class="form-control" formControlName="addUserAddressLine1"
+                                    name="address" placeholder="{{'Address' | translate}}" tabindex="32"
+                                    autocomplete="nope"></textarea>
+                                <i class="fa fa-map-marker form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserAddressLine1.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserAddressLine1.errors.required">
+                                    {{'Address is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="permanentAddressTwo" class="control-label">
+                                {{'Permanent Address Line 2' | translate}}
+                            </label>
+                            <div class="has-feedback">
+                                <textarea rows="3" class="form-control" formControlName="addUserAddressLine2"
+                                    name="address" placeholder="{{'Address' | translate}}" tabindex="33"
+                                    autocomplete="nope"></textarea>
+                                <i class="fa fa-map-marker form-control-feedback"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="state" class="control-label">{{'State' | translate}}</label>
+                            <ng-select [clearable]="true"
+                                (change)="onStateChange($event, 'addChange','permanentAddress')" [items]="statesData"
+                                bindLabel="name" name="selectedState" placeholder="{{'Select State' | translate}}"
+                                formControlName="addUserAddressState" tabindex="34" [tabindex]="-1"
+                                [(ngModel)]="defaultStateValue">
+                            </ng-select>
+                            <div *ngIf="submitted && addUserF.addUserAddressState.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserAddressState.errors.required">
+                                    {{'State is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="district" class="control-label">{{'District' | translate}}</label>
+                            <ng-select [clearable]="true" [items]="districtsDataPermanent" bindLabel="name"
+                                placeholder="{{'Select District' | translate}}" name="selectedDistrict"
+                                formControlName="addUserAddressDistrict" tabindex="35" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted && addUserF.addUserAddressDistrict.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserAddressDistrict.errors.required">
+                                    {{'District is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="pincode" class="control-label">{{'Pincode' | translate}}</label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" formControlName="addUserAddressPincode"
+                                    placeholder="{{'Pincode' | translate}}" maxlength="6" tabindex="36"
+                                    autocomplete="new-password" />
+                                <i class="fa fa-map-pin form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && addUserF.addUserAddressPincode.errors" class="error-message">
+                                <div *ngIf="addUserF.addUserAddressPincode.errors.required">
+                                    {{'Pincode is required.' | translate}}
+                                </div>
+                                <div *ngIf="addUserF.addUserAddressPincode.errors?.pattern">
+                                    {{'Pincode is not valid.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="clearfix">
+                <a routerLink="/users" class="btn btn-red pull-left" tabindex="37">
+                    {{'back' | translate}}
+                </a>
+                <button type="submit" class="btn pull-right btn-submit" tabindex="38">
+                    {{submitName | translate}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--  Create Users Form Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

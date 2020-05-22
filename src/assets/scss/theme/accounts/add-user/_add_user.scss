@@ -1,0 +1,31 @@
+/*==============================================================================
+***************  Add User Form Wrapper Styles For The Site    ******************
+==============================================================================*/
+.add-user-form-wrapper{
+  max-width: 100%;
+  .custom-form{
+     .btn-submit{
+        @include margin(0 auto);
+        width: auto;
+      }
+  }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

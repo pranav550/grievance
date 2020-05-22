@@ -1,0 +1,152 @@
+
+/*==============================================================================
+******************  Custom Panel Wrapper Styles For The Site  ******************
+==============================================================================*/
+
+.custom-panel-wrapper{
+    @include margin(0 0 27px);
+    @include box-shadow(none);
+    @include border-radius(0);
+    border: 1px solid $dark-grey3;
+    .panel-heading{
+        background-color: $light-black1;
+        color: $white;
+        .panel-title{
+            @include padding(0);
+            position: relative;
+            i{
+                font-size: $font-size-large;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+        .link-red{
+            float: right;
+            font-size: ($font-size-large - 5);
+            line-height: ($line-height-computed * 1.05);
+        }
+        .link-black,.link-red,.link-white,.link-yellow{
+            i{
+                top: 3px;
+                font-size: ($font-size-large - 2);
+            }
+        }
+    }
+    .panel-body{
+        @include padding(30px 60px 60px);
+        .row{
+            + .row{
+                @include margin(15px -15px 0);
+            }
+        }
+        .description{
+            @include margin(0 -15px 0);
+            color: $dark-grey8;
+            font-size: $font-size-base; 
+            line-height: ($line-height-computed * 1.05);
+            font-family: $roboto-regular;
+            strong{
+                color: $dark-grey9;
+            }
+        }
+        .custom-list{
+            li{   
+                a{
+                    @extend .text-center;
+                    color: $dark-grey8;
+                    font-size: $font-size-base; 
+                    line-height: ($line-height-computed * 1.05);
+                    img{
+                        min-height: 50px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.panel-info{
+        .panel-body{
+            p{
+                color: $dark-grey8;
+                font-size: $font-size-base; 
+                line-height: ($line-height-computed * 1.05);
+                &.description{
+                    @include margin(0 0 15px);
+                    @include padding(0 0 15px);   
+                    border-bottom: 1px solid $dark-grey3;
+                }
+            }
+            .breadcrumb{
+                @include padding(0);
+                background-color: transparent;
+                li{
+                    a{
+                        color: $dark-grey8;
+                        font-size: $font-size-base; 
+                        line-height: ($line-height-computed * 1.05);
+                    }
+                }
+            }
+        }
+        .panel-footer{
+            background-color: $light-blue;
+            h3{
+                @include margin(0);
+                @include padding(0 0 0 30px);
+                color: $white;
+                font-size: $font-size-large;
+                position: relative;
+                i{
+                    font-size: ($font-size-large * 1.5);
+                    position: absolute;
+                    top: -3px;
+                    left: 0;
+                }
+                small{                    
+                    color: $white;
+                    position: relative;
+                    top: -2.5px;
+                }
+            }
+            a{
+                color: $white;
+                font-size: $font-size-large;
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .custom-panel-wrapper{
+        .panel-heading{
+            .panel-title{
+                @include padding(0 0 0 20px);  
+                font-size: $font-size-base;
+                i {
+                    font-size: ($font-size-base + 2);
+                    top: 2px;
+                    left: -5px;
+                }
+            }
+            .link-red{
+                font-size: $font-size-base;
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

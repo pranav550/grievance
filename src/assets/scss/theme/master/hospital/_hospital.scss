@@ -1,0 +1,62 @@
+/*==============================================================================
+*******************      Hospital Wrapper Styles For The Site    ***************
+==============================================================================*/
+.hospital-wrapper{
+
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .hospital-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 170px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .hospital-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .control-label {
+                        }
+                        .ng-select {
+                            width: 180px;
+                        }
+                    }
+                }
+            }
+        }
+        .custom-datatable-wrapper{
+            .table.custom-col-six-action{
+                thead{
+                    tr{
+                        .custom-header-col.action-col {
+                            width: 20% !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+   
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

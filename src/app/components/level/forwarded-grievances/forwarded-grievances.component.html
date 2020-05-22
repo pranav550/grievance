@@ -1,0 +1,162 @@
+<app-header></app-header>
+<section class="dashboard-wrapper daily-transactions-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- States List Wrapper Starts -->
+        <div class="states-list-wrapper">
+          <div class="custom-datatable-wrapper">
+            <table id="dataTable1" class="table table-condensed table-bordered custom-col-four-action row-border hover">
+              <thead>
+                <tr>
+                  <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                  <th class="custom-header-col date-col">{{'Grievance Date' | translate}}</th>
+                  <th class="custom-header-col description-col">{{'Brief' | translate}}</th>
+                  <!-- <th class="custom-header-col status-col">{{'Status' | translate}}</th> -->
+                  <th class="custom-header-col status-col">{{'Action' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dtData of dailyTransactionData">
+                  <td class="custom-body-col id-col">
+                    <a class="table-link" (click)="grievanceDetailsModal(userDescription,dtData.id)"
+                      href="javascript:void(0);">
+                      {{ dtData.grievance_id }}
+                    </a></td>
+                  <td class="custom-body-col date-col">
+                    {{ dtData.created_at | date:
+                    'EEE, MMM d, yyyy'
+                    }}
+                  </td>
+                  <td class="custom-body-col description-col">
+                    <p class="description-text">
+                      {{ dtData.description }}
+                    </p>
+                  </td>
+                  <!-- <td class="custom-body-col status-col">
+                    <span class="badge badge-red" *ngIf="dtData.status == 'rejected'">{{
+                      dtData.status }}
+                    </span>
+                    <span class="badge badge-active" *ngIf="dtData.status == 'accepted'">{{
+                      dtData.status }}
+                    </span>
+                    <span class="badge badge-orange" *ngIf="dtData.status == 'pending'">{{
+                      dtData.status }}
+                    </span>
+                    <span class="badge badge-active" *ngIf="dtData.status == 'closed'">{{
+                      dtData.status }}
+                    </span>
+                  </td> -->
+                  <td class="custom-body-col action-col">
+                    <a href="javascript:void(0);" (click)="viewTimeLineGrievance(dtData.id)" class="btn btn-view">
+                      <i class="fa fa-eye custom-icon"></i>
+                      {{'View' | translate}}
+                    </a>
+                    <!-- <span *ngIf="dtData.status == 'closed'">
+                      <a href="javascript:void(0);" (click)="grievanceUserFeedBackModal(feedbackModal,dtData.id)"
+                        class="btn btn-edit">
+                        <i class="fa fa-pencil-square-o custom-icon"></i>
+                        {{'FeedBack' | translate}}
+                      </a>
+                    </span> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- States List Wrapper Ends -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- User Description Modal Starts -->
+<ng-template #userDescription class="modal custom-modal" id="myModal" role="dialog">
+  <!-- Modal content Starts Here-->
+  <div class="modal-content grievance-supervisor-modal-wrapper">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left"> {{ 'Grievance Details' | translate}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="panel panel-default custom-details-panel">
+        <div class="panel-body">
+          <div class="details-wrapper">
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="list-unstyled description-list">
+                  <li>
+                    <strong>{{ 'Grievance Id' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.grievanceId }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Grievance Reg. Date' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.createdAt | date:
+                      'EEE, MMM d, yyyy' }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Grievance Type' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.grievanceTypeName }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'District' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.grievanceDistrictName }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Block' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.grievanceTalukaName }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Village' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.grievanceVillageName }}</span>
+                  </li>
+                  <li>
+                    <strong>{{'Nature of Grievance' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.grievanceNatureName }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Against Institution' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.grievanceInstitutionName }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Designation' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.complainantDesignationName }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Grievance Against Whom' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.against }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Subject Of Grievance' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.description }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Grievance Summary' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.details }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Action Taken By' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.actionTakenBy }}</span>
+                  </li>
+                  <li>
+                    <strong>{{ 'Action Remarks' | translate }}</strong>
+                    <span>{{ grieveanceDetailsData.actionRemark }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal content Starts Here-->
+</ng-template>
+<!-- User Description Modal Ends -->
+<!--  Spinner Starts -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends -->
+

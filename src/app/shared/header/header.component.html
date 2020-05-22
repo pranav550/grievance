@@ -1,0 +1,84 @@
+<!--  Admin Header Wrapper Starts  -->
+<header class="header-wrapper">
+    <div class="container top-header">
+        <a class="brand-img" href="javascript:void(0);">
+            <!-- <img class="img-responsive logo" src="./assets/images/swasthya-logo.png" alt="Piramal Swasthya Logo" /> -->
+            <img class="img-responsive logo" src="./assets/images/104 Call Centre logo.jpg"
+                alt="Piramal Swasthya Logo" />
+        </a>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!--  Brand and toggle get grouped for better mobile display  -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="main-navbar" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="main-navbar" [collapse]="isCollapsed">
+                <!-- <ul class="nav navbar-nav"> -->
+                <ul class="nav navbar-nav">
+                    <li class="dropdown" dropdown *ngFor="let route of adminMenu">
+                        <a *ngIf="route.name === 'Home' || route.name === 'Daily Transactions' || route.name === 'Real Time Dashboard' || route.name === 'Rereported Grievances' || route.name === 'Forwarded Grievances' "
+                            [routerLink]="'/'+route.slug" class="dropdown-toggle" (click)="false"
+                            aria-controls="dropdown-menu-master">
+                            <span class="sr-only">(current)</span>
+                            <div class="{{route.menu_class}}"></div>{{route.name|translate}}
+                        </a>
+                        <a *ngIf="route.name !== 'Home' && route.name !== 'Daily Transactions' && route.name !== 'Real Time Dashboard' &&  route.name !== 'Rereported Grievances' && route.name !== 'Forwarded Grievances'"
+                            dropdownToggle class="dropdown-toggle" (click)="false" aria-controls="dropdown-menu-master">
+                            <span class="sr-only">(current)</span>
+                            <div class="{{route.menu_class}}"></div>{{route.name|translate}}<i
+                                class="fa fa-angle-down nav-dropdown-icon"></i>
+                        </a>
+                        <ul id="dropdown-menu-master" class="dropdown-menu custom-dropdown-menu" *dropdownMenu>
+                            <li *ngFor="let sMenu of route.sub_menu">
+                                <a *ngIf="disableMenuItems(sMenu.slug)" href="javascript:void(0);"
+                                    [routerLink]="'/'+sMenu.slug">{{sMenu.name| translate}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- </ul> -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li [formGroup]="headerForm" class="select-list-item">
+                        <ng-select [clearable]="false" formControlName="languageName" (change)="languageChange($event)"
+                            [searchable]="false" bindLabel="name" [items]="languagesData"
+                            placeholder="{{'Select Language' | translate}}" tabindex="-1">
+                        </ng-select>
+                    </li>
+                    <li class="dropdown" dropdown>
+                        <a href="javascript:void(0);" dropdownToggle class="dropdown-toggle" (click)="false"
+                            aria-controls="dropdown-menu-user">
+                            <i class="fa fa-user-o nav-icon mar-0"></i>
+                            <span class="dropdown-text">{{userName}}</span>
+                            <i class="fa fa-angle-down nav-dropdown-icon"></i>
+                        </a>
+                        <ul id="dropdown-menu-user" class="dropdown-menu custom-dropdown-menu" *dropdownMenu>
+                            <li *ngIf="this.resetPassword">
+                                <a href="javascript:void(0);" routerLink="/reset-password">
+                                    <div class="resetIcon d-flex align-items-center">
+                                        <img src="../../../assets/images/password.svg" class="img-fluid">
+                                        <span>{{'Reset Password' | translate}}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" (click)="logout()">
+                                    <i class="fa fa-power-off nav-dropdown-icon"></i> {{'Logout' | translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--  Collect the nav links, forms, and other content for toggling  -->
+        </div>
+    </nav>
+</header>
+<!--  Admin Header Wrapper Ends  -->

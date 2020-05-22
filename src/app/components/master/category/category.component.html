@@ -1,0 +1,235 @@
+<!--  Category Nature Wrapper Starts  -->
+<app-header></app-header>
+
+<div class="container grievance-category-wrapper">
+  <div class="custom-table-caption">
+    <h3 class="page-title">{{'Grievance Categories' | translate}}</h3>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-wrapper basic">
+          <form class="custom-form">
+            <div class="form-group clearfix">
+              <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+              <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event)" bindLabel="name" placeholder="{{'Select State' | translate}}"
+                name="selectedState" [(ngModel)]="selectedState" tabindex="1" autofocus="true" [tabindex]="-1">
+              </ng-select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-4 text-right">
+        <button href="javascript:void(0);" [disabled]="!isStateExists" class="btn btn-blue" (click)="addCategoryModal(addCategoryModalTemplate)">
+          {{'Create Grievance Category' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="custom-datatable-wrapper">
+    <table id="dataTable1" class="table table-condensed table-bordered custom-col-four-action row-border hover">
+      <thead>
+        <tr>
+          <th class="custom-header-col hidden">{{'Grievance Id' | translate}}</th>
+          <th class="custom-header-col">{{'Grievance Type' | translate}}</th>
+          <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+          <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+          <th class="custom-header-col delete-col">{{'Delete' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td class="custom-body-col hidden">{{category.grievanceTypeId}}</td>
+          <td class="custom-body-col">{{category.name}}</td>
+          <td class="custom-body-col status-col">
+            <span *ngIf="category.status === 'active'" class="badge badge-active">{{category.status | translate}}</span>
+            <span *ngIf="category.status === 'inactive'" class="badge badge-inactive">{{category.status | translate}}</span>
+          </td>
+          <td class="custom-body-col action-col">
+            <a href="javascript:void(0);" (click)="editCategoryModal(category,editCategoryModalTemplate)" class="btn btn-edit">
+              <i class="fa fa-pencil custom-icon"></i>
+              {{'Edit' | translate}}
+            </a>
+            <a href="javascript:void(0);" *ngIf="category.status === 'active'" (click)="categoryStatusValue(category)" class="btn btn-inactive">
+              <i class="fa fa-ban custom-icon"></i>
+                {{'Inactivate' | translate}}
+              </a>
+            <a href="javascript:void(0);" *ngIf="category.status === 'inactive'" (click)="categoryStatusValue(category)" class="btn btn-active">
+              <i class="fa fa-check custom-icon"></i>
+                {{'Activate' | translate}}
+              </a>
+          </td>
+          <td class="custom-body-col delete-col">
+            <a href="javascript:void(0);" (click)="deleteCategoryModal(category,deleteCategoryModalTemplate);" class="btn btn-delete">
+              <i class="fa fa-trash-o custom-icon"></i>
+              {{'Delete' | translate}}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--  Grievance Category Wrapper Ends  -->
+
+<!--  Create New Grievance Category Modal Starts  -->
+<ng-template #addCategoryModalTemplate class="custom-modal">
+
+  <!--  Create Grievance Category Form Starts  -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="addCategoryForm" (ngSubmit)='addCategory()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Create Grievance Category' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" formControlName="addCategorySelectState" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="2" autofocus="true" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted && addCategoryF.addCategorySelectState.errors" class="error-message">
+            <div *ngIf="addCategoryF.addCategorySelectState.errors.required">
+              {{'State is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalId" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" placeholder="{{'Name' | translate}}" formControlName="addCategoryName" tabindex="3">
+          <div *ngIf="submitted && addCategoryF.addCategoryName.errors" class="error-message">
+            <div *ngIf="addCategoryF.addCategoryName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="addCategoryF.addCategoryName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalDescription" class="control-label">{{'Description' | translate}}</label>
+          <textarea rows="3" class="form-control" formControlName="addCategoryDescription" placeholder="{{'Description' | translate}}" tabindex="4"></textarea>
+          <div *ngIf="submitted && addCategoryF.addCategoryDescription.errors" class="error-message">
+            <div *ngIf="addCategoryF.addCategoryDescription.errors.maxlength">
+              {{'Description should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='addCategoryStatus' class="radio-text" type="radio" [value]="true" tabindex="5">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='addCategoryStatus' class="radio-text" type="radio" [value]="false" tabindex="6">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-submit" tabindex="7">{{'Create Grievance Category' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Create Grievance Category Form Ends -->
+
+</ng-template>
+<!-- Create New State Modal Ends -->
+
+<!-- Edit New Grievance Category Modal Starts -->
+<ng-template #editCategoryModalTemplate class="custom-modal">
+
+  <!-- Edit Grievance Category Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="editCategoryForm" (ngSubmit)='updateCategory()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Edit Grievance Category' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" formControlName="editCategorySelectState" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="8" autofocus="true" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted && editCategoryF.editCategorySelectState.errors" class="error-message">
+            <div *ngIf="editCategoryF.editCategorySelectState.errors.required">
+              {{'State is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="categoryName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" placeholder="{{'Name' | translate}}" formControlName="editCategoryName" tabindex="9">
+          <div *ngIf="submitted && editCategoryF.editCategoryName.errors" class="error-message">
+            <div *ngIf="editCategoryF.editCategoryName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="editCategoryF.editCategoryName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalDescription" class="control-label">{{'Description' | translate}}</label>
+          <textarea rows="3" class="form-control" formControlName="editCategoryDescription" placeholder="{{'Description' | translate}}" tabindex="10"></textarea>
+          <div *ngIf="submitted && editCategoryF.editCategoryDescription.errors" class="error-message">
+            <div *ngIf="editCategoryF.editCategoryDescription.errors.maxlength">
+              {{'Description should not exceed 150 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='editCategoryStatus' class="radio-text" type="radio" [value]="true" tabindex="11">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='editCategoryStatus' class="radio-text" type="radio" [value]="false" tabindex="12">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-submit" tabindex="13">{{'Update Grievance Category' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Edit Grievance Category Form Ends -->
+
+</ng-template>
+<!-- Edit New Grievance Category Modal Ends -->
+
+<!--  Delete Grievance Nature Modal Starts -->
+<ng-template #deleteCategoryModalTemplate class="custom-modal">
+
+  <!--  Delete Grievance Category Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Delete Grievance Category' | translate}}(<strong>{{categoryFormNewData.name}}</strong>)</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center btn-confirm-wrapper">
+          <div class="confirm-message">
+            {{'Are you sure you want to delete the Grievance Category?' | translate}}             
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center btn-confirm-wrapper">
+          <button type="button" class="btn btn-sm btn-red" (click)="deleteCategory(true)">{{'Yes' | translate}}</button>
+          <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" (click)="deleteCategory(false)" data-dismiss="modal">{{'No' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--  Delete Grievance Category Form Ends -->
+</ng-template>
+<!--  Delete Grievance Nature Modal Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

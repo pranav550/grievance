@@ -1,0 +1,148 @@
+/*
+================================================================================
+*****************     Footer Styles For The Site      **************************
+================================================================================
+*/
+.footer-wrapper{
+    @include padding(20px 0);
+    background-color: $footer-bg;
+    &.sticky-footer{
+        @include size(100%,54px);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .footer-title{
+        @extend .text-uppercase;
+        @include margin(0 0 30px);
+        color: $footer-title;
+        font-family: $roboto-regular;
+        font-size: $font-size-base;
+    }
+    .footer-list{
+        @include margin(0);
+        .footer-list-item{
+            @include padding(0);
+            .footer-link{
+                @include margin(0);
+                font-family:  $roboto-regular;
+                font-size: $font-size-base;
+                color: $footer-link;
+                &:hover,&:focus{
+                    color: $footer-link-hover;
+                }
+                &.right-divider{
+                    @include margin(0 15px 0 0);
+                    @include padding(0 15px 0 0);
+                    border-right: 1px solid $footer-link;
+                }
+            }
+        }
+    }
+    .social-llst{
+        .social-llst-item{
+           @include padding(0);
+            .social-llst-link{
+                @include square(60px);
+                @include border-radius(50%);
+                background-color: $social-link-bg;
+                color: $social-link;
+                position: relative;
+                display: inline-block;
+                border: 1px solid $social-link-border;
+                .social-icon{
+                    @include center-position();
+                    font-size: ($font-size-large * 2);
+                    &.facebook{
+                        color: $social-link-facebook;
+                    }
+                    &.twitter{
+                        color: $social-link-twitter;
+                    }
+                    &.youtube{
+                        color: $social-link-youtube;
+                    }
+                }
+                &:hover,&:focus{
+                    background-color: $social-link-bg;
+                    color: $social-link;
+                    border: 1px solid $social-link-border;
+                }
+            }
+        }
+    }
+    .footer-text{
+        @include margin(0);
+        color: $footer-copyright-text;
+        font-family:  $roboto-regular;
+        font-size: $font-size-base;
+        .help-text-link{
+            color: $footer-copyright-text;
+            font-family:  $roboto-bold;
+            font-size: $font-size-base;
+            font-weight: bold;
+        }
+    }
+    .footer-form{
+        .form-control{
+            @include border-radius(25px);
+        }
+    }
+    .copyright-wrapper{
+        @include margin(50px 0 0);
+        @include padding(25px 15px);
+        background-color: $footer-copyright-bg;
+        .copyright-text{
+            @include margin(0);
+            color: $footer-copyright-text;
+            font-family:  $roboto-regular;
+            font-size: $font-size-large;
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+.footer-wrapper{
+        .footer-text{
+            font-size: $font-size-small;
+            .help-text-link{
+                font-size: $font-size-small;
+            }
+        }
+        .footer-list{
+            .footer-list-item{
+                .footer-link{
+                    font-size: $font-size-small;
+                    &.right-divider{
+                        margin: 0 5px 0 0;
+                        padding: 0 5px 0 0; 
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+    .footer-wrapper{
+        @include padding(11px 0);
+        .footer-text{
+            text-align: center;
+        }
+        .footer-list{
+            @include margin(5px 0 0);
+            text-align: center;
+        }
+    }
+}

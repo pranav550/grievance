@@ -1,0 +1,168 @@
+/*==============================================================================
+***************  Daily Transactions Wrapper Styles For The Site  ***************
+==============================================================================*/
+.daily-transactions-wrapper{
+   .custom-datatable-wrapper{                        
+      .table{
+         &.custom-col-four-action{
+            thead{
+               tr{
+                  .custom-header-col{
+                     width: 10% !important;
+                     &.description-col{
+                        width: 40% !important;
+                     }
+                     &.id-col{
+                        width: 15% !important;
+                     }
+                     &.date-col{
+                        width: 15% !important;
+                     }
+                     &.status-col{
+                        width: 5% !important;
+                     }
+                     &.action-col{
+                        width: 5% !important;
+                     }
+                     &.delete-col{
+                        width: 5% !important;
+                     }
+                     
+                  }                            
+               }
+            }   
+            tbody{
+               tr{
+                  .custom-body-col{
+                     &.action-col{
+                        text-align: center;
+                        .btn{
+                          @include margin(0 5px);
+                        }
+                     }
+                  }
+               }
+            }                            
+         }
+      }
+   }
+}
+
+  
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+   .daily-transactions-wrapper{
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-four-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 10% !important;
+                        &.description-col{
+                           width: 40% !important;
+                        }
+                        &.id-col{
+                           width: 15% !important;
+                        }
+                        &.date-col{
+                           width: 15% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 5% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }
+                        
+                     }                            
+                  }
+               }                               
+            }
+         }
+      }
+   }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+   .daily-transactions-wrapper{
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-four-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 10% !important;
+                        &.description-col{
+                           width: 40% !important;
+                        }
+                        &.id-col{
+                           width: 15% !important;
+                        }
+                        &.date-col{
+                           width: 15% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 5% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }
+                        
+                     }                            
+                  }
+               }                               
+            }
+         }
+      }
+   }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .daily-transactions-wrapper{
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-four-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 10% !important;
+                        &.description-col{
+                           width: 40% !important;
+                        }
+                        &.id-col{
+                           width: 15% !important;
+                        }                        
+                        &.date-col{
+                           width: 15% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 5% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }
+                        
+                     }                            
+                  }
+               }                               
+            }
+         }
+      }
+   }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

@@ -1,0 +1,128 @@
+
+/*==============================================================================
+***********************  Wrapper Styles For The Site  **************************
+==============================================================================*/
+
+.ehub-alert-success{
+    background-image: none;
+    background-color: $eucalyptus;
+    border-color: $eucalyptus;
+    color: $westar;
+}
+.ehub-alert-info{
+    background-image: none;
+    background-color: $curious-blue;
+    border-color: $curious-blue;
+    color: $westar;
+}    
+.ehub-alert-error{
+    background-image: none;  
+    background-color:$mandy;
+    border-color: $mandy;
+    color: $westar;
+}
+.ui-pnotify-text{
+	font-family: $roboto-regular;
+    font-size: $font-size-small !important;
+    color: $westar;
+}
+.main-flash-wrapper{
+	@extend .text-center;
+	@include translateX(-50%);
+	position: absolute;
+    width: 650px; 
+    top: 60px;
+    left: 50%; 
+    z-index: 9999;
+	.alert-container{
+   > .alert{
+        @include margin(0 auto 15px);
+        @include padding(15px);
+        @include border-radius(0);
+        display: inline-block;
+        width: 100%;
+        position: relative;
+       	&.alert-dismissible{
+       	   .close{
+       			opacity: 1;
+       			color: $grey-chateau;
+       			text-shadow: none;
+       			position: absolute;
+			    top: 0;
+			    right: 10px;  
+       			&:hover,&:focus{
+	       			opacity: 1;
+	       			color: $grey-chateau;
+       			}
+       		}
+       	}
+       	span{
+       		display: block;
+       	}
+        .alert{
+        	@include margin(0);  
+        	@include padding(0);	
+        	p{
+        		@extend .text-left;
+        		@include margin(0 0 5px);
+    			color: $white;
+        		font-family: $roboto-regular;
+    			font-size: $font-size-base;
+        	}
+        	strong{
+        		@extend .text-left;
+    			color: $westar;
+        		font-family: $roboto-regular;
+    			font-size: $font-size-small;
+        		display: block;
+        	}
+        }
+        &.ng-leave{
+		  @include transition(opacity 1.5s ease-out);
+		  opacity: 1;
+		}
+		&.ng-leave-active {
+		  opacity: 0;
+		}
+		&.alert-danger{
+			background-image: none;  
+		    background-color:$mandy;
+		    border-color: $mandy;
+		    color: $westar;
+		}
+		&.alert-info{
+			background-image: none;
+		    background-color: $curious-blue;
+		    border-color: $curious-blue;
+		    color: $westar;
+		}
+		&.alert-success{
+			background-image: none;
+		    background-color: $eucalyptus;
+		    border-color: $eucalyptus;
+		    color: $westar;
+		}
+    }
+}  
+	
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}
+

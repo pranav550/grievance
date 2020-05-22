@@ -1,0 +1,428 @@
+<app-header></app-header>
+
+<!--  Level Wrapper Starts -->
+<div class="container level-wrapper">
+    <div class="custom-table-caption">
+        <h3 class="page-title">{{'Level' | translate}}</h3>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-wrapper basic">
+                    <form class="custom-form">
+                        <div class="form-group clearfix">
+                            <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                            <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event)"
+                                bindLabel="name" placeholder="{{'Select State' | translate}}" name="selectedState"
+                                [(ngModel)]="selectedState" tabindex="1" autofocus="true" [tabindex]="-1"
+                                [disabled]="true">
+                            </ng-select>
+
+                            <label for="stateName" class="control-label">{{'Select Grievance' | translate}}</label>
+
+                            <ng-select [clearable]="false" [items]="categories" multiple="true"
+                                [selectableGroupAsModel]="false" [closeOnSelect]="false" [selectableGroup]="true"
+                                (change)="onCategoryChange(selectedCategory)" bindLabel="name"
+                                placeholder="{{'Select Grievance' | translate}}" name="selectedCategory"
+                                [(ngModel)]="selectedCategory" tabindex="1" autofocus="true" [tabindex]="-1">
+
+                                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        (ngModelChange)="clearFilter(item$.selected)"
+                                        [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                                    {{item.name | uppercase}}
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        (ngModelChange)="clearFilter(item$.selected)"
+                                        [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                                </ng-template>
+                            </ng-select>
+
+                            <label for="natureOfGrievance" class="control-label" *ngIf="gId?.length>0">
+                                {{'Select Nature' | translate}}
+                            </label>
+                            <ng-select [clearable]="false" [items]="categoriesNature" *ngIf="gId?.length>0"
+                                (change)="onNatureChange(selectedNature)" [(ngModel)]="selectedNature" bindLabel="name"
+                                placeholder="{{'Select Nature' | translate}}" name="selectedNature" tabindex="13"
+                                multiple="true" [selectableGroupAsModel]="false" [closeOnSelect]="false"
+                                [selectableGroup]="true" [tabindex]="-1">
+                                <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        (ngModelChange)="clearFilter(item$.selected)"
+                                        [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                                    {{item.name | uppercase}}
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                        (ngModelChange)="clearFilter(item$.selected)"
+                                        [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                                </ng-template>
+                            </ng-select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- <div class="col-sm-3 text-right">
+                <button href="javascript:void(0);" class="btn btn-blue" [disabled]="!isStateExists || !permissions_add" (click)="addLevelModal(addLevelModalTemplate)">
+          {{'Create Level' | translate}}
+        </button>
+            </div> -->
+
+            <div class="col-sm-3 text-right">
+                <button href="javascript:void(0);" class="btn btn-blue" (click)="addLevelModal(addLevelModalTemplate)">
+                    {{'Create Level' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="custom-datatable-wrapper">
+        <table id="dataTable1" class="table table-condensed table-bordered custom-col-five-action row-border hover">
+            <thead>
+                <tr>
+                    <th class="custom-header-col">{{'Name' | translate}}</th>
+                    <th class="custom-header-col description-col">{{'Description' | translate}}</th>
+                    <th class="custom-header-col can-close-grievance-col">{{'Can Close Grievance' | translate}}</th>
+                    <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+                    <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                    <!-- <th class="custom-header-col delete-col">{{'Delete' | translate}}</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="permissions_view">
+                    <tr *ngFor="let levels of levelsData">
+                        <td class="custom-body-col">{{ levels.name }}</td>
+                        <td class="custom-body-col description-col">{{ levels.description }}</td>
+                        <td class="custom-body-col can-close-grievance-col">{{ levels.canCloseGrievance }}</td>
+                        <td class="custom-body-col status-col">
+                            <span *ngIf="levels.status === 'active'"
+                                class="badge badge-active">{{ levels.status }}</span>
+                            <span *ngIf="levels.status === 'inactive'"
+                                class="badge badge-inactive">{{ levels.status }}</span>
+                        </td>
+                        <td class="custom-body-col action-col">
+                            <button [disabled]="!permissions_edit" href="javascript:void(0);"
+                                (click)="openEditModal(levels,editLevelModalTemplate)" class="btn btn-edit">
+                                <i class="fa fa-pencil custom-icon"></i> {{'Edit' | translate}}
+                            </button>
+                            <button [disabled]="!permissions_edit" href="javascript:void(0);"
+                                *ngIf="levels.status === 'active'" (click)="levelStatus(levels)"
+                                class="btn btn-inactive">
+                                <i class="fa fa-ban custom-icon"></i> {{'Inactivate' | translate}}
+                            </button>
+                            <button [disabled]="!permissions_edit" href="javascript:void(0);"
+                                *ngIf="levels.status === 'inactive'" (click)="levelStatus(levels)"
+                                class="btn btn-active">
+                                <i class="fa fa-check custom-icon"></i> {{'Activate' | translate}}
+                            </button>
+                        </td>
+                        <!-- <td class="custom-body-col delete-col">
+            <a href="javascript:void(0);" (click)="levelDeleteModal(deleteLevelModalTemplate,levels)" class="btn btn-delete">
+              <i class="fa fa-trash-o custom-icon"></i>
+              {{'Delete' | translate}}
+            </a>
+          </td> -->
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Grievance Nature Wrapper Ends -->
+
+<!-- Create New Level Modal Starts -->
+<ng-template #addLevelModalTemplate class="custom-modal">
+
+    <!-- Create Level Form Starts -->
+    <div class="form-wrapper">
+        <form class="custom-form" [formGroup]="addLevelForm" (ngSubmit)='addLevels()'>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Add Level' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="dob" class="control-label">{{'Select State' | translate}}<sup
+                            class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" [items]="statesData" bindLabel="name" name="selectedState"
+                        placeholder="{{'Select State' | translate}}" formControlName="addLevelState" tabindex="2"
+                        autofocus="true" [tabindex]="-1">
+                    </ng-select>
+                    <div *ngIf="submitted && addLevelF.addLevelState.errors" class="error-message">
+                        <div *ngIf="addLevelF.addLevelState.errors.required">
+                            {{'State is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="levelName" class="control-label">{{'Name' | translate}}<sup
+                            class="custom-required">*</sup></label>
+                    <input type="text" id="levelName" formControlName="addLevelName" class="form-control"
+                        name="levelName" placeholder="{{'Name' | translate}}" required="required" tabindex="3">
+                    <div *ngIf="submitted && addLevelF.addLevelName.errors" class="error-message">
+                        <div *ngIf="addLevelF.addLevelName.errors.required">
+                            {{'Name is required.' | translate}}
+                        </div>
+                        <div *ngIf="addLevelF.addLevelName.errors.maxlength">
+                            {{'Name should not exceed 100 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="selectCategory" class="control-label">{{'Select Grievance' | translate}}</label>
+
+                    <ng-select [clearable]="true" (change)="onAddCategoryChange(addGrievance)" [items]="categories"
+                        [(ngModel)]="addGrievance" bindLabel="name" placeholder="{{'Select Grievance' | translate}}"
+                        name="selectedCategory" multiple="true" tabindex="1" [tabindex]="-1" [selectableGroup]="true"
+                        [closeOnSelect]="false" groupBy="gender" [selectableGroupAsModel]="false"
+                        formControlName="addLevelCategory">
+
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                            {{item.name | uppercase}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                        </ng-template>
+                    </ng-select>
+                    <div *ngIf="submitted && addLevelF.addLevelCategory.errors" class="error-message">
+                        <div *ngIf="addLevelF.addLevelCategory.errors.required">
+                            {{'Grievance is required.' | translate}}
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group" *ngIf="categoriesNature?.length>0">
+                    <label for="selectNature" class="control-label">
+                        {{'Select Nature' | translate}}
+                    </label>
+                    <ng-select [clearable]="false" (change)="onAddNatureChange(addNature)"
+                        formControlName="addLevelNature" [items]="categoriesNature" bindLabel="name"
+                        placeholder="{{'Select Nature' | translate}}" name="selectedNature" tabindex="13"
+                        [tabindex]="-1" multiple="true" [(ngModel)]="addNature" [selectableGroupAsModel]="false"
+                        [closeOnSelect]="false" [selectableGroup]="true" groupBy="gender">
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                            {{item.name | uppercase}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                        </ng-template>
+                    </ng-select>
+
+                    <!-- <div *ngIf="submitted && addLevelF.addLevelNature.errors" class="error-message">
+                        <div *ngIf="addLevelF.addLevelNature.errors.required">
+                            {{'Nature is required.' | translate}}
+                        </div>
+                    </div> -->
+
+                </div>
+
+                <div class="form-group">
+                    <label for="levelDescription" class="control-label">{{'Description' | translate}}</label>
+                    <textarea placeholder="{{'Description' | translate}}" type="text"
+                        formControlName="addLevelDescription" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && addLevelF.addLevelDescription.errors }"
+                        tabindex="4"></textarea>
+                    <div *ngIf="submitted && addLevelF.addLevelDescription.errors" class="error-message">
+                        <div *ngIf="addLevelF.addLevelDescription.errors.maxlength">
+                            {{'Description should not exceed 150 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="canCloseGrievance" class="control-label">{{'Can Close Grievance' | translate}}</label>
+                    <ng-select [clearable]="false" formControlName="addLevelCanCloseGrievance"
+                        [items]="CanCloseGrievance" bindLabel="name" placeholder="{{'Can Close Grievance' | translate}}"
+                        tabindex="5" [tabindex]="-1">
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='addLevelStatus' class="radio-text" type="radio" [value]="true"
+                            tabindex="6">
+                        <span class="radio-text">{{'Active' | translate}}</span>
+                    </label>
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='addLevelStatus' class="radio-text" type="radio" [value]="false"
+                            tabindex="7">
+                        <span class="radio-text">{{'Inactive' | translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="loading" class="btn btn-block btn-default btn-submit"
+                    tabindex="8">{{'Create Level' | translate}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- Create States Form Ends -->
+
+</ng-template>
+<!-- Create New State Modal Ends -->
+
+<!-- Edit New State Modal Starts -->
+<ng-template #editLevelModalTemplate class="custom-modal">
+
+    <!-- Edit States Form Starts -->
+    <div class="form-wrapper">
+        <form class="custom-form" [formGroup]="editLevelForm" (ngSubmit)='editLevels()'>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Edit Level' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="stateName" class="control-label">{{'Select State' | translate}}<sup
+                            class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" formControlName="editLevelSelect" [items]="statesData"
+                        bindLabel="name" placeholder="{{'Select State' | translate}}" autofocus="true" tabindex="9"
+                        [tabindex]="-1">
+                    </ng-select>
+                    <!-- <div *ngif="name.errors && (name.dirty || name.touched)" class="text-danger error-message"> <div *ngif="name.errors.required"> Enter Name. </div> </div> -->
+                </div>
+                <div class="form-group">
+                    <label for="levelName" class="control-label">{{'Name' | translate}}<sup
+                            class="custom-required">*</sup>
+                    </label>
+                    <input placeholder="{{'Name' | translate}}" type="text" formControlName="editLevelName"
+                        class="form-control" tabindex="10" />
+                    <div *ngIf="submitted && editLevelF.editLevelName.errors" class="error-message">
+                        <div *ngIf="editLevelF.editLevelName.errors.required">
+                            {{'Name is required.' | translate}}
+                        </div>
+                        <div *ngIf="editLevelF.editLevelName.errors.maxlength">
+                            {{'Name should not exceed 100 characters.' | translate}}
+                        </div>
+                        <!-- <div *ngif="name.errors && (name.dirty || name.touched)" class="text-danger error-message"> <div *ngif="name.errors.required"> Enter Name. </div> </div> -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="selectCategory" class="control-label">{{'Select Grievance' | translate}}</label>
+                    <ng-select [clearable]="true" (change)="onEditCategoryChange(editGrievance)" [items]="categories"
+                        bindLabel="name" placeholder="{{'Select Grievance' | translate}}" multiple="true" tabindex="1"
+                        [tabindex]="-1" formControlName="editLevelCategory" [(ngModel)]="editGrievance">
+
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                            {{item.name | uppercase}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+
+
+                <div class="form-group" *ngIf="categoriesNature?.length>0">
+                    <label for="selectNature" class="control-label">
+                        {{'Select Nature' | translate}}
+                    </label>
+                    <ng-select [clearable]="true" (change)="onEditNatureChange(editNature)" [items]="categoriesNature"
+                        bindLabel="name" placeholder="{{'Select Nature' | translate}}" name="selectedNature"
+                        multiple="true" [(ngModel)]="editNature" tabindex="13" [tabindex]="-1"
+                        formControlName="editLevelNature">
+
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                (ngModelChange)="clearFilter(item$.selected)"
+                                [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                            {{item.name | uppercase}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                (ngModelChange)="clearFilter(item$.selected)"
+                                [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                        </ng-template>
+                    </ng-select>
+
+                </div>
+                <div class="form-group">
+                    <label for="levelDescription" class="control-label">{{'Description' | translate}}</label>
+                    <textarea rows="3" id="levelDescription" formControlName="editLevelDescription" class="form-control"
+                        name="levelDescription" placeholder="{{'Description' | translate}}" tabindex="11"></textarea>
+                    <div *ngIf="submitted && editLevelF.editLevelDescription.errors" class="error-message">
+                        <div *ngIf="editLevelF.editLevelDescription.errors.maxlength">
+                            {{'Description should not exceed 100 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="canCloseGrievance" class="control-label">{{'Can Close Grievance' | translate}}</label>
+                    <ng-select [clearable]="false" (change)="canCloseGrievance($event, 'editChange')"
+                        formControlName="editLevelCanCloseGrievance" [items]="CanCloseGrievance" bindLabel="name"
+                        placeholder="{{'Can Close Grievance' | translate}}" tabindex="12" [tabindex]="-1">
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='editLevelStatus' class="radio-text" type="radio" [value]="true"
+                            tabindex="13">
+                        <span class="radio-text">{{'Active' | translate}}</span>
+                    </label>
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='editLevelStatus' class="radio-text" type="radio" [value]="false"
+                            tabindex="14">
+                        <span class="radio-text">{{'Inactive' | translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="loading" class="btn btn-block btn-default btn-submit"
+                    tabindex="15">{{'Update Level' | translate}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- Edit States Form Ends -->
+
+</ng-template>
+<!-- Edit New State Modal Ends -->
+
+<!--  Grievance Nature Edit Confirm Modal Starts -->
+<ng-template #deleteLevelModalTemplate class="custom-modal">
+
+    <!--  Grievance Nature Edit Confirm State Form Starts -->
+    <div class="form-wrapper" *ngIf="LevelFormNewData">
+        <form class="custom-form">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Delete Level' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{'Are you sure you want to delete the level?' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red">{{'Yes' | translate}}</button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2"
+                        data-dismiss="modal">{{'No' | translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--  Grievance Nature Edit Confirm State Form Ends -->
+
+</ng-template>
+<!--  Grievance Nature Edit Confirm Modal Ends -->

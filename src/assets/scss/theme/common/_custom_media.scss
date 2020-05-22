@@ -1,0 +1,117 @@
+
+/*==============================================================================
+*********************   Media Styles For The Site  *****************************
+==============================================================================*/
+.custom-media-list{
+    .dd-placeholder{
+        @include margin(0);
+        @include padding(0);
+        height: auto !important;
+        background: transparent;
+        border: 0;       
+    }
+    .media{
+        @include margin(15px 1px 0);
+        @include padding(0);
+        @include box-shadow(0 0 20px #f1f1f1);
+        overflow: visible;
+        border: 1px solid $lighter-grey5;
+        &:first-child{
+            margin-top: 15px;
+        }
+        .dd-handle,.dd-placeholder{
+            @include margin(0);
+            @include padding(5px);
+            height: auto;
+            background: transparent;
+            border: 0;
+        }
+        .media-left{
+            @include padding(10px 15px 10px 10px);
+            a{
+                @include circle(28px);
+                background-color: $dark-grey4;
+                display: inline-block;
+                img{
+                    display: inline-block;
+                }
+            }
+        }
+        .media-body{
+            position: relative;
+            overflow: visible; 
+            .media-heading{
+                @extend .text-left;
+                @include margin(0);
+                color: $light-grey3;
+                font-size: $font-size-base;
+                font-family: $roboto-regular;
+                font-weight: normal;
+            }
+            .link-more{
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: $dark-red;
+                a{
+                    color: $dark-red;
+                }
+                .dropdown-menu{
+                    @include padding(0);
+                    @include border-radius(0);
+                    @include box-shadow(0 0 10px rgba(0,0,0,0.6));
+                    left: auto;
+                    right: 0;
+                    border: 0;
+                    li{
+                        a{
+                            @include padding(10px 15px);
+                            font-family: $roboto-regular;
+                            font-weight: bold;
+                            display: block;
+                            font-size: $font-size-base;
+                            i{
+                                @include margin(0 10px 0 0);
+                            }
+                        }
+                    }
+                }
+            }
+            .status{
+                @include margin(0 0 5px);
+                font-size: ($font-size-base - 3);
+                color: $light-grey3;
+                display: block;
+            }
+            p{
+                @include margin(0);
+                font-size: ($font-size-base - 3);
+                &.description{
+                    width: 130px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

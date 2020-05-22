@@ -1,0 +1,462 @@
+/*==============================================================================
+*******************         Custom Form Styles For The Site    *****************
+==============================================================================*/
+.form-wrapper{
+    @include margin(50px auto 65px);
+    @include padding(15px 10px);
+    @include box-shadow(0 0 15px rgba(0,0,0,0.2));
+    @include border-radius(0);
+    max-width: 450px;
+    background-color: $white;
+    border: 1px solid $gains-boro1;
+    &.basic{
+        @include margin(0);
+        @include padding(0);
+        @include box-shadow(none);
+        @include border-radius(0);
+        max-width: 100%;
+        background-color: transparent;
+        border: 0;
+    }
+    .custom-form{
+        .form-title{
+            @extend .text-center;
+            @include margin(0 0 15px);
+            color: $light-black;
+            font-family: $roboto-bold;
+            font-size: ($font-size-base * 1.5);
+            line-height: ($line-height-computed *1.05);
+            font-weight: normal;
+            position: relative;
+            .help-text{
+                color: $light-green1;
+                font-family: $roboto-regular;
+                font-size: ($font-size-base - 3);
+                line-height: ($line-height-computed *1.05);
+                font-weight: normal;
+                position: absolute;
+                top: auto;
+                right: 0;
+                bottom: -20px;
+                text-transform: initial;
+                .required-icon{
+                    top: 0;
+                    color: $base-red;
+                    font-size: $font-size-small;
+                }
+            }
+            .help-custom-text{
+                color: $light-green1;
+                font-family: $roboto-regular;
+                font-size: ($font-size-base - 3);
+                line-height: ($line-height-computed *1.05);
+                font-weight: normal;
+                text-transform: initial;   
+                display: block; 
+            }
+        }
+        .form-group{
+            @include margin(0 0 15px);
+            position: relative;
+            .control-label,.checkbox-inline,.radio-inline{
+                @include margin(0 0 8px);
+                color: $base-blue;
+                font-family: $roboto-medium;
+                font-size: $font-size-small;
+                line-height: 1.33;
+                font-weight: normal;
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                .custom-required{
+                    color: $base-red;
+                }
+            }
+            .form-control{
+                @include margin(0);
+                @include border-radius(0);
+                color: $color-light-black;
+                font-family: $roboto-medium;
+                font-size: $font-size-small;
+                height: ($base-height * 2);
+                border: 1px solid $color-light-grey3;
+                box-shadow: none;
+                &:focus{
+                    @include box-shadow(none);
+                    border: 1px solid $base-red;
+                }
+                &::-webkit-input-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-small;
+                    opacity: 0.4;
+                }
+                &:-moz-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-small;
+                    opacity: 0.4;
+                }
+                &::-moz-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-small;
+                    opacity: 0.4;
+                }
+                &::-ms-input-placeholder{
+                    color: $light-black;
+                    font-family: $roboto-medium;
+                    font-size: $font-size-small;
+                    opacity: 0.4;
+                }
+            }
+            /*--  Change Autocomplete styles in Chrome  --*/
+            input:-webkit-autofill,
+                input:-webkit-autofill:hover,
+                input:-webkit-autofill:focus,
+                textarea:-webkit-autofill,
+                textarea:-webkit-autofill:hover,
+                textarea:-webkit-autofill:focus,
+                select:-webkit-autofill,
+                select:-webkit-autofill:hover,
+                select:-webkit-autofill:focus {
+                border: 1px solid $color-light-grey3;
+                -webkit-text-fill-color: $light-black;
+                -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+                -moz-box-shadow: 0 0 0px 1000px #fff inset;
+                box-shadow: 0 0 0px 1000px #fff inset;
+                transition: background-color 5000s ease-in-out 0s;
+            }
+            textarea{
+                &.form-control{
+                    resize: none;
+                    height: auto;
+                }
+            }
+            .radio,.checkbox{
+                .control-label{
+                    display: inline-block;
+                    line-height: $line-height-computed;
+                }
+            }
+            .checkbox-inline,.radio-inline{
+                @include margin(0 15px 0 0);
+                display: inline-block;
+                vertical-align: middle;
+                input{
+                    @include margin(2px 0 0 -20px);
+                }
+            }          
+            .angular-google-recaptcha-container{
+              > div{
+                width: 100%;
+              }
+            }
+            .error-message{
+                @include margin(0);
+                @include transition(all 0.3s ease-in-out);
+                color: $base-red;
+                font-family: $roboto-light;
+                font-size: ($font-size-small - 1);
+                line-height: 1.33;
+                font-weight: bolder;
+                text-decoration: none;
+                display: inline-block;
+                &.username-error-message{
+                    width: 170px;
+                }
+            }
+            .has-feedback{
+                .form-control-feedback {
+                    color: $base-red;
+                    font-size: $font-size-large;
+                    line-height: 40px;
+                    top: 0;
+                    right: 0;
+                    &.custom-feedback-success{
+                      color:  $base-green;
+                    }
+                }
+            }
+            .input-group{
+                .form-control{
+                    border-right: 0;
+                    &:focus + .input-group-addon{
+                        border-color: $base-red;
+                    }
+                }
+                /*--  Change Autocomplete styles in Chrome  --*/
+                input:-webkit-autofill,
+                    input:-webkit-autofill:hover,
+                    input:-webkit-autofill:focus,
+                    textarea:-webkit-autofill,
+                    textarea:-webkit-autofill:hover,
+                    textarea:-webkit-autofill:focus,
+                    select:-webkit-autofill,
+                    select:-webkit-autofill:hover,
+                    select:-webkit-autofill:focus {
+                    border: 1px solid $color-light-grey3;
+                    border-right: 0;
+                    -webkit-text-fill-color: $light-black;
+                    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+                    -moz-box-shadow: 0 0 0px 1000px #fff inset;
+                    box-shadow: 0 0 0px 1000px #fff inset;
+                    transition: background-color 5000s ease-in-out 0s;                 
+                }
+                  input:-webkit-autofill + .input-group-addon,
+                    input:-webkit-autofill:hover + .input-group-addon,
+                    input:-webkit-autofill:focus + .input-group-addon,
+                    textarea:-webkit-autofill + .input-group-addon,
+                    textarea:-webkit-autofill:hover + .input-group-addon,
+                    textarea:-webkit-autofill:focus + .input-group-addon,
+                    select:-webkit-autofill + .input-group-addon,
+                    select:-webkit-autofill:hover + .input-group-addon,
+                    select:-webkit-autofill:focus + .input-group-addon{
+                        border: 1px solid $color-light-grey3;
+                        border-left: 0;
+                    }
+                .input-group-addon{
+                    background-color: #fff;
+                    color: $base-red;
+                    font-size: $font-size-large;
+                    cursor: pointer;
+                    border-radius: 0;
+                    &.custom-feedback-success{
+                      color:  $base-green;
+                    }
+                    &.datepicker-addon{
+                        @include padding(0);
+                    }
+                }
+            }
+        }
+        .radio-redressed-form{
+            width: 70%;
+            display: inline-block;
+        }
+        .forgot-password-link{
+            @include transition(all 0.3s ease-in-out);
+            color: $base-blue;
+            font-family: $roboto-regular;
+            font-size: $font-size-base;
+            line-height: ($line-height-computed *.75);
+            font-weight: normal;
+            text-decoration: none;
+            display: inline-block;
+            &:hover,&:focus{
+                font-weight: bold;
+            }
+        }
+        .help-block{
+            @include margin(0);
+            color: $light-grey11;
+            font-family: $roboto-regular;
+            text-align: center;
+            font-size: ($font-size-base - 1);
+            .register-link{                
+                @include transition(all 0.3s ease-in-out);
+                @include margin(0 0 0 2px);
+                color: $base-blue;
+                font-family: $roboto-medium;
+                font-size: ($font-size-base - 2);
+                line-height: ($line-height-computed *.75);
+                font-weight: normal;
+                text-decoration: none;
+                display: inline-block;
+                &:hover,&:focus{
+                    font-weight: bold;
+                }
+            }
+            &.my-1{
+               @include padding(5px 0);
+            }
+            &.my-2{
+                @include padding(10px 0);
+             }
+        }
+        
+        .help-link{                
+            @include transition(all 0.3s ease-in-out);
+            @include margin(0);
+            color: $light-green1;
+            font-family: $roboto-medium;
+            font-size: $font-size-small;
+            line-height: ($line-height-computed *.75);
+            font-weight: normal;
+            text-decoration: none;
+            display: inline-block;
+            &:hover,&:focus{
+                text-decoration: underline !important;
+            }
+            a{
+               @include transition(all 0.3s ease-in-out);
+                @include margin(0);
+                color: $light-green1;
+                font-family: $roboto-medium;
+                font-size: $font-size-small;
+                line-height: ($line-height-computed *.75);
+                font-weight: normal;
+                text-decoration: none;
+                display: inline-block;
+                &:hover,&:focus{
+                    text-decoration: underline !important;
+                }  
+            }
+        }
+        .cancel-link{            
+            @include transition(all 0.3s ease-in-out);
+            color: $color-light-green;
+            font-family: $roboto-regular;
+            font-size: $font-size-base;
+            line-height: ($line-height-computed *.75);
+            font-weight: normal;
+            text-decoration: underline;
+            display: inline-block;
+            &:hover,&:focus{
+                font-weight: bold;
+            }
+        }
+        .privacy-link{
+            @extend .cancel-link;
+            color: $color-light-black;
+            &:hover,&:focus{
+                font-weight: bold;
+            }
+        }
+        .custom-fieldset{
+          @include margin(0 0 15px);
+          @include padding(15px 15px 0);
+          border: 1px solid $light-grey1;
+          .custom-legend{
+            @include margin(0);
+            @include padding(0 5px);
+            font-size: ($font-size-base * 1.5);
+            text-transform: capitalize;
+            width: auto;
+            border: 0;
+          }
+          &:first-of-type{                
+            .row{
+                margin-bottom: 15px;
+            }
+          }
+        }
+        .btn-submit{
+            @include margin(0 auto 15px);
+            @include padding(9px 15px);
+            @include transition(all 0.3s ease-in-out);
+            @include border-radius(0);
+            background-color: $base-red;
+            color: $color-white;
+            font-family: $roboto-medium;
+            font-size: ($font-size-base + 2);
+            line-height: 18px;
+            text-transform: capitalize;
+            display: block;
+            border: 1px solid $base-red;
+            &:hover{
+                background-color: $color-white;
+                color: $base-red;
+                border: 1px solid $base-red;
+            }
+            &:focus{                    
+                background-color: darken($base-red, 10%);
+                color: $color-white;
+                border: 1px solid darken($base-red, 10%);
+            }
+            &[disabled]{
+                &:hover{
+                    background-color: $base-red;
+                    color: $color-white;
+                    border: 1px solid $base-red;
+                }
+                &:focus{                    
+                    background-color: $base-red;
+                    color: $color-white;
+                    border: 1px solid $base-red;
+                }
+            }
+        }
+        .btn-confirm-wrapper{
+            .confirm-message{
+                @include margin(15px 0);
+                color: $grey;
+                font-family: $roboto-medium;
+                font-size: ($font-size-large - 2);
+                text-align: center;
+            }
+            .btn{
+                @include margin(0 7.5px);
+                min-width: 50px;
+                font-size: ($font-size-base + 2);
+            }
+        }
+        .btn-wrapper{
+          .btn{
+            @include margin(0 15px 0 0);
+          }
+        }
+    }
+}
+
+.custom-input{
+    .form-group{
+        .form-control{
+            &::-webkit-input-placeholder{
+                font-family: $roboto-regular;
+                color: $color-light-grey1;
+                font-size: 20px;
+                opacity: 1;
+            }
+            &:-moz-placeholder{
+                font-family: $roboto-regular;
+                color: $color-light-grey1;
+                font-size: 20px;
+                opacity: 1;
+            }
+            &::-moz-placeholder{
+                font-family: $roboto-regular;
+                color: $color-light-grey1;
+                font-size: 20px;
+                opacity: 1;
+            }
+            &::-ms-input-placeholder{
+                font-family: $roboto-regular;
+                color: $color-light-grey1;
+                font-size: 20px;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+   
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .form-wrapper{
+        &.admin-login-wrapper{
+            margin: 0 auto 15px;
+        }
+        .custom-form{
+            .custom-fieldset{
+                .custom-legend{
+                    font-size: ($font-size-base + 2);
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

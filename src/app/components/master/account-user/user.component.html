@@ -1,0 +1,343 @@
+<app-header></app-header>
+<!--  Users Wrapper Starts  -->
+<div class="users-wrapper">
+
+    <!--  Users List Wrapper Starts  -->
+    <div class="container users-list-wrapper">
+
+        <!--  Custom Table Caption Starts  -->
+        <div class="custom-table-caption">
+            
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3 class="page-title user-page-title">{{'Users' | translate}}</h3>
+                    <!-- <div class="form-wrapper basic">
+                        <form class="custom-form">
+                            <div class="form-group clearfix">
+                                <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                                <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event,'defaultFilter')"
+                                    bindLabel="name" placeholder="State" name="selectedState" [(ngModel)]="selectedState" tabindex="1"
+                                    autofocus="true" [tabindex]="-1">
+                                </ng-select>
+                            </div>
+                        </form>
+                    </div> -->
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a href="javascript:void(0);" class="btn btn-edit" (click)="addUserModal()">
+                        {{'Create User' | translate}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--  Custom Table Caption Ends  -->
+
+        <div class="custom-datatable-wrapper">
+            <table id="dataTable1" class="table table-condensed table-bordered custom-col-six-action row-border hover">
+                <thead>
+                    <tr>
+                        <th class="custom-header-col">{{'User ID' | translate}}</th>
+                        <th class="custom-header-col">{{'Name' | translate}}</th>
+                        <th class="custom-header-col">{{'Designation' | translate}}</th>
+                        <th class="custom-header-col">{{'Level' | translate}}</th>
+                        <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+                        <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                        <!-- <th class="custom-header-col delete-col">{{'Delete' | translate}}</th> -->
+                        <!-- <th class="custom-header-col delete-col">{{'User Details' | translate}}</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let User of userData">
+                        <td class="custom-body-col table-first-element">
+                            <a (click)="userDescriptionModal(userDescription,User)" href="javascript:void(0);">
+                               {{ User.userName }}
+                            </a> 
+                        </td>
+                        <td class="custom-body-col table-first-element">
+                            <a (click)="userDescriptionModal(userDescription,User)" href="javascript:void(0);">
+                                {{ User.firstName }} {{ User.middleName }} {{ User.lastName }}
+                            </a>
+                        </td>
+                        <td class="custom-body-col table-first-element">{{User.designations.name}}</td>
+                        <td class="custom-body-col table-first-element">{{ User.levels.name }}</td>
+                        <!-- <td class="custom-body-col">{{ User.title }}</td>
+                        <td class="custom-body-col">{{ User.firstName }}</td>
+                        <td class="custom-body-col">{{ User.middleName }}</td>
+                        <td class="custom-body-col">{{ User.lastName }}</td>
+                        <td class="custom-body-col">{{ User.gender }}</td>
+                        <td class="custom-body-col">{{ User.stateId }}</td>
+                        <td class="custom-body-col">{{ User.districtId }}</td>
+                        <td class="custom-body-col">{{ User.contactNumber }}</td>
+                        <td class="custom-body-col">{{ User.emergencyContactNo }}</td>
+                        <td class="custom-body-col">{{ User.dateOfBirth }}</td>
+                        <td class="custom-body-col">{{ User.maritalStatus }}</td>
+                        <td class="custom-body-col">{{ User.levelId }}</td> -->
+                        <!-- <td class="custom-body-col">{{ User.dateOfJoinning }}</td>
+                        <td class="custom-body-col">{{ User.adharNumber }}</td>
+                        <td class="custom-body-col">{{ User.panNumber }}</td>
+                        <td class="custom-body-col">{{ User.fathersName }}</td>
+                        <td class="custom-body-col">{{ User.mothersName }}</td>
+                        <td class="custom-body-col">{{ User.community }}</td>
+                        <td class="custom-body-col">{{ User.religion }}</td>
+                        <td class="custom-body-col">{{ User.addressLine1 }}</td>
+                        <td class="custom-body-col">{{ User.Pincode }}</td> -->
+                        <td class="custom-body-col status-col">
+                            <span *ngIf="User.status === 'active'" class="badge badge-active">{{ User.status }}</span>
+                            <span *ngIf="User.status === 'inactive'" class="badge badge-inactive">{{ User.status }}</span>
+                        </td>
+                        <td class="custom-body-col  table-first-element action-col">
+                            <a href="javascript:void(0);" (click)="editUserModal(User,editUser)" class="btn btn-edit">
+                                <i class="fa fa-pencil custom-icon"></i>{{'Edit' | translate}}
+                            </a>
+                            <a href="javascript:void(0);" *ngIf="User.status === 'active'" (click)="userStatus(User)"
+                                class="btn btn-inactive">
+                                <i class="fa fa-ban custom-icon"></i>{{'Inactivate' | translate}}
+                            </a>
+                            <a href="javascript:void(0);" *ngIf="User.status === 'inactive'" (click)="userStatus(User)"
+                                class="btn btn-active">
+                                <i class="fa fa-check custom-icon"></i>{{'Activate' | translate}}
+                            </a>
+                        </td>
+                        <!-- <td class="custom-body-col delete-col">
+                            <a href="javascript:void(0);" (click)="deleteUserModal(deleteUserModal,state)" class="btn btn-delete">
+                                <i class="fa fa-trash-o custom-icon"></i>Delete
+                            </a>
+                        </td> -->
+                        <!-- <td class="custom-body-col delete-col">
+                            <a href="javascript:void(0);" class="btn btn-edit" (click)="userDescriptionModal(userDescription,User)">
+                                {{'User Details' | translate}}
+                            </a>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--  Users List Wrapper Starts  -->
+</div>
+<!--  Users Wrapper Ends  -->
+
+<!--  User Description Modal Starts  -->
+<ng-template #userDescription class="custom-modal">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'User Details' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="user-details-wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="user-details-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="javascript:void(0);" class="user-logo-wrapper">
+                                            <div class="text-center">
+                                            <!-- Taking gender logo based on the Gender -->
+                                            <img *ngIf="detailUserForm.gender === 'male'" class="img-responsive user-logo" src="./assets/images/default-male.jpeg" alt="placeholder" />
+                                            <img  *ngIf="detailUserForm.gender === 'female'" class="img-responsive user-logo" src="./assets/images/default-female.jpeg" alt="placeholder" />
+                                             <i *ngIf="detailUserForm.gender === 'transgender'" class="fa fa-transgender f-70 custom-icon"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <p class="help-description text-capitalize">
+                                            <strong>{{ detailUserForm.firstName }} {{ detailUserForm.middleName }} {{ detailUserForm.lastName }}</strong>
+                                        </p>
+                                        <p class="help-description user-info">
+                                            {{detailUserForm.dateOfBirth | date : 'mediumDate'}}
+                                        </p>
+                                        <p class="help-description user-info">
+                                            <span>{{detailUserForm.designations.name}}</span>
+                                            <span *ngIf="detailUserForm.roles.name !== ''">{{ ' , '  }}{{detailUserForm.roles.name}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="user-details-header">
+                        <i class="fa fa-user custom-icon"></i>
+                        {{'Personal Information' | translate}}
+                    </h3>
+                    <div class="user-details-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="help-description">
+                                    <strong>{{'Aadhaar No' | translate}}:</strong>
+                                    {{detailUserForm.aadharNumber}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'PAN No' | translate}}:</strong>
+                                    {{detailUserForm.panNumber}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'Community' | translate}}:</strong>
+                                    {{detailUserForm.community}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'Religion' | translate}}:</strong>
+                                    {{detailUserForm.religion}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h3 class="user-details-header">
+                        <i class="fa fa-users custom-icon"></i>
+                        {{'Family Background' | translate}}
+                    </h3>
+                    <div class="user-details-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="help-description">
+                                    <strong>{{'Father’s Name' | translate}}:</strong>
+                                    {{detailUserForm.fathersName}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'Mother’s Name' | translate}}:</strong>
+                                    {{detailUserForm.mothersName}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="user-details-header">
+                        <i class="fa fa-phone custom-icon"></i>
+                        {{'Contact Information' | translate}}
+                    </h3>
+                    <div class="user-details-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="help-description">
+                                    <strong>{{'Email ID' | translate}}:</strong>
+                                    {{detailUserForm.email}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'Contact No' | translate}}:</strong>
+                                    {{detailUserForm.contactNumber}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'Emergency No' | translate}}:</strong>
+                                    {{detailUserForm.emergencyContactNumber}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h3 class="user-details-header">
+                        <i class="fa fa-user custom-icon"></i>
+                        {{'Account Information' | translate}}
+                    </h3>
+                    <div class="user-details-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="help-description">
+                                    <strong>{{'Date of Joining' | translate}}:</strong>{{detailUserForm.dateOfJoining | date : 'mediumDate'}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'User Type' | translate}}:</strong>{{detailUserForm.roles.name}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="user-details-header">
+                        <i class="fa fa-map-marker custom-icon"></i>
+                        {{'Permanent Address' | translate}}
+                    </h3>
+                    <div class="user-details-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="help-description">
+                                    <strong>{{'Permanent Address' | translate}}:</strong>{{addressLine1}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'State' | translate}}:</strong>{{addressStates?.name }}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'District' | translate}}:</strong>{{addressDistricts?.name  }}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'Pincode' | translate}}:</strong>{{addressPinCode}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h3 class="user-details-header">
+                        <i class="fa fa-map-marker custom-icon"></i>
+                        {{'Current Address' | translate}}
+                    </h3>
+                    <div class="user-details-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="help-description">
+                                    <strong>{{'Current Address' | translate}}:</strong>{{currentAddressLine1}}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'State' | translate}}:</strong>{{currentAddressStates?.name }}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'District' | translate}}:</strong>{{currentAddressDistricts?.name }}
+                                </p>
+                                <p class="help-description">
+                                    <strong>{{'Pincode' | translate}}:</strong>{{currentAddressPinCode}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!--  User Description Modal Ends  -->
+
+<!--  Password Modal Starts  -->
+<ng-template #deleteUserModal class="custom-modal">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Delete User' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <!--  Password User Form Starts  -->
+        <div class="form-wrapper">
+            <form class="custom-form" #editStateForm="ngForm">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">{{'Are you sure you want to delete the User?' | translate}}</div>
+                    <button type="button" class="btn btn-sm btn-red" (click)="deleteState(true)">
+                        {{'Yes' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal" (click)="deleteState(false)">
+                        {{'No' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!--  Password User Form Ends  -->
+
+    </div>
+</ng-template>
+<!--  Password Modal Ends  -->
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>

@@ -1,0 +1,61 @@
+<!--  Header Wrapper Starts  -->
+<header class="header-wrapper">
+  <div class="container top-header">
+    <div *ngIf="routeUrl !== '/admin-login'">
+      <a class="brand-img" href="javascript:void(0);" [routerLink]="'/dashboard'">
+        <img class="img-responsive logo" src="./assets/images/104 Call Centre logo.jpg" alt="Piramal Swasthya Logo" />
+      </a>
+    </div>
+    <div *ngIf="routeUrl ==='/admin-login'">
+      <a class="brand-img" href="javascript:void(0);" [routerLink]="'/admin-dashboard'">
+        <img class="img-responsive logo" src="./assets/images/104 Call Centre logo.jpg" alt="Piramal Swasthya Logo" />
+      </a>
+    </div>
+  </div>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <!--  Brand and toggle get grouped for better mobile display  -->
+      <div class="navbar-header" *ngIf="routeUrl === '/login'">
+        <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="main-navbar" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-header" *ngIf="routeUrl === '/register'">
+        <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="main-navbar" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-header" *ngIf="routeUrl === '/admin-login'">
+        <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="main-navbar" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <!--  Collect the nav links, forms, and other content for toggling  -->
+      <div class="collapse navbar-collapse" id="main-navbar" [collapse]="isCollapsed">
+        <ul class="nav navbar-nav navbar-right">
+          <li [formGroup]="headerForm" class="select-list-item">
+            <ng-select [clearable]="false" formControlName="languageName" (change)="languageChange($event)"
+              [searchable]="false" bindLabel="name" [items]="languagesData" placeholder="Select Language" tabindex="-1">
+            </ng-select>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<!--  Header Wrapper Ends  -->

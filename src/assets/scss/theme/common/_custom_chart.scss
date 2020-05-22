@@ -1,0 +1,52 @@
+
+/*==============================================================================
+***********************  Wrapper Styles For The Site  **************************
+==============================================================================*/
+.chart-wrapper{
+    height: 400px;
+    a[href="http://www.amcharts.com/javascript-charts/"]{
+        display: none !important;
+    }
+    .bar{
+        fill: $light-blue;
+    }
+    .bar:hover{
+        fill: $light-red;  
+    }
+    .axis {
+        color: $light-grey3;
+        font-family: $roboto-regular;  
+        font-weight: bold;  
+        font-size: ($font-size-base - 4);
+    }
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: $light-yellow;
+        shape-rendering: crispEdges;
+    }
+}
+.leaflet-bottom,
+ .leaflet-top{
+    z-index: 999;
+}
+
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

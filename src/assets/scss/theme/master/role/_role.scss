@@ -1,0 +1,31 @@
+/*==============================================================================
+*********************      Role Wrapper Styles For The Site    *****************
+==============================================================================*/
+.role-wrapper{
+
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .role-wrapper{
+        .custom-datatable-wrapper{
+            .table {
+                min-width: 880px !important;
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

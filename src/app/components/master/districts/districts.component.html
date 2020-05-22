@@ -1,0 +1,285 @@
+<app-header></app-header>
+
+<!-- Districts Wrapper Starts -->
+<div class="districts-wrapper">
+
+  <!-- Districts List Wrapper Starts -->
+  <div class="container districts-list-wrapper">
+
+    <!--  Custom Table Caption Starts  -->
+    <div class="custom-table-caption">
+      <h3 class="page-title">{{'Districts' | translate}}</h3>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="form-wrapper basic">
+            <form class="custom-form">
+              <div class="form-group clearfix">
+                <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event)" bindLabel="name"
+                  placeholder="{{'Select State' | translate}}" name="selectedState" [(ngModel)]="selectedState" tabindex="1" autofocus="true" [tabindex]="-1">
+                </ng-select>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-4 text-right">
+          <button href="javascript:void(0);" [disabled]="!isStateExists" class="btn btn-edit" (click)="openModal(addDistrict)">
+            {{'Create District' | translate}} 
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--  Custom Table Caption Ends  -->
+
+    <div class="custom-datatable-wrapper">
+      <table id="dataTable1" class="table table-condensed table-bordered custom-col-six-action row-border hover">
+        <thead>
+          <tr>
+            <th class="custom-header-col">{{'Name' | translate}}</th>
+            <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+            <th class="custom-header-col">{{'Display Name' | translate}}</th>
+            <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+            <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+            <th class="custom-header-col delete-col">{{'Delete' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let districts of districtsData">
+            <td class="custom-body-col">{{ districts.name }}</td>
+            <td class="custom-body-col id-col">{{ districts.code }}</td>
+            <td class="custom-body-col">{{ districts.displayName }}</td>
+            <td class="custom-body-col status-col">
+              <span *ngIf="districts.status === 'active'" class="badge badge-active">{{ districts.status }}</span>
+              <span *ngIf="districts.status === 'inactive'" class="badge badge-inactive">{{ districts.status }}</span>
+            </td>
+            <td class="custom-body-col action-col">
+              <a href="javascript:void(0);" (click)="openEditModal(districts,editDistrictModalPopup)" class="btn btn-edit">
+                <i class="fa fa-pencil custom-icon"></i>
+                {{'Edit' | translate}}
+              </a>
+              <a href="javascript:void(0);" *ngIf="districts.status === 'active'" (click)="districtStatus(districts)" class="btn btn-inactive">
+                <i class="fa fa-ban custom-icon"></i>
+                {{'Inactivate' | translate}}
+              </a>
+              <a href="javascript:void(0);" *ngIf="districts.status === 'inactive'" (click)="districtStatus(districts)" class="btn btn-active">
+                <i class="fa fa-check custom-icon"></i>
+                {{'Activate' | translate}}
+              </a>
+            </td>
+            <td class="custom-body-col delete-col">
+              <a href="javascript:void(0);" (click)="districtDeleteModal(districtEditConfirmModalpopup,districts)" class="btn btn-delete">
+                <i class="fa fa-trash-o custom-icon"></i>
+                {{'Delete' | translate}}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Districts List Wrapper Ends -->
+
+</div>
+<!-- Districts Wrapper Ends -->
+
+<!-- Add New Districts Modal Starts -->
+<ng-template #addDistrict class="custom-modal">
+
+  <!-- Add Districts Form Starts -->
+  <div class="form-wrapper">
+    <form [formGroup]="addDistrictForm" class="custom-form" (ngSubmit)='districtAdd()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Create District' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" formControlName="districtAddSelect" [items]="statesData" bindLabel="name"
+            placeholder="{{'Select State' | translate}}" tabindex="2" autofocus="true" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted && addDistrictF.districtAddSelect.errors" class="error-message">
+            <div *ngIf="addDistrictF.districtAddSelect.errors.required">{{'State is required.' | translate}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input placeholder="{{'Name' | translate}}" (ngModelChange)="districtEnter($event)" type="text" formControlName="districtAddName"
+            class="form-control" [ngClass]="{ 'is-invalid': submitted && addDistrictF.districtAddName.errors }" tabindex="3" />
+          <div *ngIf="submitted && addDistrictF.districtAddName.errors" class="error-message">
+            <div *ngIf="addDistrictF.districtAddName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="addDistrictF.districtAddName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'ID' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" placeholder="{{'ID' | translate}}" formControlName="districtAddId" class="form-control" [ngClass]="{ 'is-invalid': submitted && addDistrictF.districtAddId.errors }"  tabindex="4"/>
+          <div *ngIf="submitted && addDistrictF.districtAddId.errors" class="error-message">
+            <div *ngIf="addDistrictF.districtAddId.errors.required">
+              {{'Id is required.' | translate}}
+            </div>
+            <div *ngIf="addDistrictF.districtAddId.errors.minlength"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Display Name' | translate}}</label>
+          <input type="text" placeholder="{{'Display Name' | translate}}" formControlName="districtAddDisplayName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && addDistrictF.districtAddDisplayName.errors }"  tabindex="5"/>
+          <div *ngIf="submitted && addDistrictF.districtAddDisplayName.errors" class="error-message">
+            <div *ngIf="addDistrictF.districtAddDisplayName.errors.maxlength">
+              {{'Display Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Description' | translate}}</label>
+          <textarea placeholder="{{'Description' | translate}}" type="text" formControlName="districtAddDescription" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && addDistrictF.districtAddDescription.errors }" tabindex="6"></textarea>
+          <div *ngIf="submitted && addDistrictF.districtAddDescription.errors" class="error-message">
+            <div *ngIf="addDistrictF.districtAddDescription.errors.maxlength">
+              {{'Description should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='districtAddStatus' class="radio-text" type="radio" [value]="true"  tabindex="7">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='districtAddStatus' class="radio-text" type="radio" [value]="false"  tabindex="8">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="loading" class="btn btn-block btn-default btn-submit" tabindex="9">{{'Create District' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Add Districts Form Ends -->
+
+</ng-template>
+<!-- Add New Districts Modal Ends -->
+
+<!--Edit Districts Modal starts-->
+<ng-template #editDistrictModalPopup class="custom-modal">
+
+  <!-- Edit Districts Form Starts -->
+  <div class="form-wrapper">
+    <form [formGroup]="editDistrictForm" class="custom-form" (ngSubmit)='districtUpdate()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Edit District' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" formControlName="editDistrictSelect" [items]="statesData" bindLabel="name"
+            placeholder="{{'Select State' | translate}}" tabindex="10" autofocus="true" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input placeholder="{{'Name' | translate}}" (ngModelChange)="districtEditEnter($event)" type="text" formControlName="editDistrictName"
+            class="form-control" tabindex="11" />
+          <div *ngIf="submitted && editDistrictF.editDistrictName.errors" class="error-message">
+            <div *ngIf="editDistrictF.editDistrictName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="editDistrictF.editDistrictName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'ID' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" placeholder="{{'ID' | translate}}" formControlName="editDistrictId" class="form-control" [ngClass]="{ 'is-invalid': submitted && addDistrictF.districtAddId.errors }" tabindex="12" />
+          <div *ngIf="submitted && editDistrictF.editDistrictId.errors" class="error-message">
+            <div *ngIf="editDistrictF.editDistrictId.errors.required">
+              {{'Id is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Display Name' | translate}}</label>
+          <input type="text" placeholder="{{'Display Name' | translate}}" formControlName="editDistrictDisplayName" class="form-control" tabindex="13"/>
+          <div *ngIf="submitted && editDistrictF.editDistrictDisplayName.errors" class="error-message">
+            <div *ngIf="editDistrictF.editDistrictDisplayName.errors.maxlength">
+            {{'Display Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Description' | translate}}</label>
+          <textarea placeholder="{{'Description' | translate}}" type="text" formControlName="editDistrictDescription" class="form-control" tabindex="14"></textarea>
+          <div *ngIf="submitted && editDistrictF.editDistrictDescription.errors" class="error-message">
+            <div *ngIf="editDistrictF.editDistrictDescription.errors.maxlength">
+              {{'Description should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='editDistrictStatus' class="radio-text" type="radio" [value]="true" tabindex="15">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='editDistrictStatus' class="radio-text" type="radio" [value]="false" tabindex="16">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="loading" class="btn btn-block btn-default btn-submit" tabindex="17">{{'Update District' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Edit Districts Form Ends -->
+
+</ng-template>
+<!--  Edit Districts Modal Ends  -->
+
+<!--  Password Modal Starts   -->
+<ng-template #districtEditConfirmModalpopup class="custom-modal">
+
+  <!-- Password District Form Starts -->
+  <div class="form-wrapper" *ngIf="districtFormNewData">
+    <form class="custom-form">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Delete District' | translate}}(<strong>{{districtFormNewData.name}}</strong>)</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center btn-confirm-wrapper">
+          <div class="confirm-message">    
+            {{'Are you sure you want to delete the district?' | translate}}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center btn-confirm-wrapper">
+          <button type="button" class="btn btn-sm btn-red" (click)="districtDelete(true)">{{'Yes' | translate}}</button>
+          <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal" (click)="districtDelete(false)">{{'No' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Password District Form Ends -->
+
+</ng-template>
+<!--  Password Modal Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

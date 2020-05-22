@@ -1,0 +1,491 @@
+<app-header></app-header>
+<!--  Escalation Matrix Wrapper Starts  -->
+<div class="escalation-matrix-wrapper">
+    <!--  Escalation Matrix List Wrapper Starts  -->
+    <div class="container grievance-redressal-list-wrapper">
+        <div class="custom-table-caption">
+            <h3 class="page-title">{{'Escalation Matrix' | translate}}</h3>
+            <div class="row">
+                <div class="col-lg-10 col-md-12">
+                    <div class="form-wrapper basic">
+                        <form class="custom-form">
+                            <div class="form-group clearfix">
+                                <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                                <ng-select [clearable]="false" [items]="statesData"
+                                    (change)="onStateChange($event,'default')" bindLabel="name"
+                                    placeholder="{{'Select State' | translate}}" name="selectedState"
+                                    [(ngModel)]="selectedState" tabindex="1" autofocus [tabindex]="-1"
+                                    [disabled]="true">
+                                </ng-select>
+
+
+                                <label for="categoryName"
+                                    class="control-label">{{'Select Category' | translate}}</label>
+                                <ng-select [clearable]="false" (change)="onCategoryChange(selectedCategory)"
+                                    bindLabel="name" [items]="categories" multiple="true"
+                                    placeholder="{{'Select Grievance Category' | translate}}" name="selectedCategory"
+                                    tabindex="2" [tabindex]="-1" [(ngModel)]="selectedCategory">
+
+                                    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                            [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                                        {{item.name | uppercase}}
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                            [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                                    </ng-template>
+                                </ng-select>
+
+
+
+                                <label for="Select Nature" class="control-label" *ngIf="gId?.length>0">
+                                    {{'Select Nature' | translate}}
+                                </label>
+                                <!-- <ng-select [clearable]="false" [items]="categoriesNature"
+                                    *ngIf="categoriesNature?.length>0" (change)="onNatureChange(selectedNature)"
+                                    [(ngModel)]="selectedNature" bindLabel="name"
+                                    placeholder="{{'Nature of Grievance' | translate}}" name="selectedNature"
+                                    tabindex="13" [tabindex]="-1" multiple="true"> -->
+                                <ng-select [clearable]="false" [items]="categoriesNature" *ngIf="gId?.length>0"
+                                    (change)="onNatureChange(selectedNature)" [(ngModel)]="selectedNature"
+                                    bindLabel="name" placeholder="{{'Select Nature' | translate}}" name="selectedNature"
+                                    tabindex="13" multiple="true" [selectableGroupAsModel]="false"
+                                    [closeOnSelect]="false" [selectableGroup]="true" [tabindex]="-1">
+                                    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                            [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                                        {{item.name | uppercase}}
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                            [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                                    </ng-template>
+                                </ng-select>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- <div class="col-md-3 text-right">
+                    <button href="javascript:void(0);" class="btn btn-blue" [disabled]="!permissions_add" (click)="addGrievanceModal(addGrievanceRedressal)">
+            {{'Create Escalation Matrix' | translate}}
+          </button>
+                </div> -->
+
+                <div class="col-lg-2 col-md-12 text-right escalation-alignment">
+                    <button href="javascript:void(0);" class="btn btn-blue"
+                        (click)="addGrievanceModal(addGrievanceRedressal)">
+                        {{'Create Escalation Matrix' | translate}}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="custom-datatable-wrapper">
+            <table id="dataTable1" class="table table-condensed table-bordered custom-col-five row-border hover">
+                <thead>
+                    <tr>
+                        <th class="custom-header-col">{{'State' | translate}}</th>
+                        <th class="custom-header-col">{{'District' | translate}}</th>
+                        <th class="custom-header-col">{{'Level' | translate}}</th>
+                        <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+                        <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="permissions_view">
+                        <tr *ngFor="let data of matrixData">
+                            <td class="custom-body-col">{{data.state | translate}}</td>
+                            <td class="custom-body-col id-col">{{data.district | translate}}</td>
+                            <td class="custom-body-col">{{data.level | translate}}</td>
+                            <td class="custom-body-col status-col">
+                                <span *ngIf="data.escalationMatrixStatus === 'active'" class="badge badge-active">{{
+                data.escalationMatrixStatus }}</span>
+                                <span *ngIf="data.escalationMatrixStatus === 'inactive'" class="badge badge-inactive">{{
+                data.escalationMatrixStatus }}</span>
+                            </td>
+                            <td class="custom-body-col action-col">
+                                <button href="javascript:void(0);" [disabled]="!permissions_edit"
+                                    (click)="editGrievanceModal(data.id,editGrievanceRedressal)" class="btn btn-edit">
+                                    <i class="fa fa-pencil custom-icon"></i> {{'Edit' | translate}}
+                                </button>
+                                <button href="javascript:void(0);" [disabled]="!permissions_edit"
+                                    *ngIf="data.escalationMatrixStatus === 'active'" (click)="matrixStatus(data)"
+                                    class="btn btn-inactive">
+                                    <i class="fa fa-ban custom-icon"></i> {{'Inactivate' | translate}}
+                                </button>
+                                <button href="javascript:void(0);" [disabled]="!permissions_edit"
+                                    *ngIf="data.escalationMatrixStatus === 'inactive'" (click)="matrixStatus(data)"
+                                    class="btn btn-active">
+                                    <i class="fa fa-check custom-icon"></i> {{'Activate' | translate}}
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--  Escalation Matrix List Wrapper Starts  -->
+</div>
+<!--  Escalation Matrix Wrapper Ends  -->
+
+<!--  Create New Escalation Matrix Modal Starts  -->
+<ng-template #addGrievanceRedressal class="custom-modal">
+
+    <!-- Create Escalation Matrix Form Starts -->
+    <div class="form-wrapper">
+        <form [formGroup]="addMatrixForm" class="custom-form" (ngSubmit)="addMatrixData()">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Create Escalation Matrix' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select State' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" (change)="onStateChange($event, 'addChange')" [items]="statesData"
+                        bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="4" autofocus="true"
+                        [tabindex]="-1" formControlName="addSelectState">
+                    </ng-select>
+                    <div *ngIf="submitted && addMatrixF.addSelectState.errors" class="error-message">
+                        <div *ngIf="addMatrixF.addSelectState.errors.required">
+                            {{'State is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{'Select District' | translate}}</label>
+                    <ng-select [clearable]="false" [items]="districtsData" bindLabel="name"
+                        placeholder="{{'Select District' | translate}}" tabindex="5" [tabindex]="-1"
+                        formControlName="addSelectDistrict">
+                    </ng-select>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select Category' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" [items]="categories" bindLabel="name"
+                        (change)="onAddCategoryChange(addGrievance)" multiple="true" [(ngModel)]="addGrievance"
+                        placeholder="{{'Select Grievance' | translate}}" tabindex="6" [tabindex]="-1"
+                        [selectableGroup]="true" [closeOnSelect]="false" groupBy="gender"
+                        [selectableGroupAsModel]="false" formControlName="addSelectCategory" name="selectedGrievance">
+
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                            {{item.name | uppercase}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                        </ng-template>
+                    </ng-select>
+                    <div *ngIf="submitted && addMatrixF.addSelectCategory.errors" class="error-message">
+                        <div *ngIf="addMatrixF.addSelectCategory.errors.required">
+                            {{'Grievance Type/Category is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" *ngIf=" categoriesNature1?.length>0">
+                    <label class="control-label">{{'Select Nature' | translate}}</label>
+                    <ng-select [clearable]="false" [items]="categoriesNature1" bindLabel="name" multiple="true"
+                        placeholder="{{'Nature of Grievance' | translate}}" formControlName="filterGrievanceNature"
+                        [selectableGroup]="true" [closeOnSelect]="false" groupBy="gender" [(ngModel)]="addNature"
+                        [selectableGroupAsModel]="false" (change)="onAddNatureChange(addNature)" tabindex="13"
+                        [tabindex]="-1" name="selectedNature">
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                            {{item.name | uppercase}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                        </ng-template>
+                    </ng-select>
+                    <!-- <div *ngIf="submitted && addMatrixF.filterGrievanceNature.errors" class="error-message">
+                        <div *ngIf="addMatrixF.filterGrievanceNature.errors.required">
+                            {{'Nature is required.' | translate}}
+                        </div>
+                    </div> -->
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select Level' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" [items]="levelData" bindLabel="name"
+                        placeholder="{{'Select Level' | translate}}" tabindex="7" [tabindex]="-1"
+                        formControlName="addSelectCategory">
+                    </ng-select>
+                    <div *ngIf="submitted && addMatrixF.addSelectLevel.errors" class="error-message">
+                        <div *ngIf="addMatrixF.addSelectLevel.errors.required">
+                            {{'Level is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select Time Period' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="{{'Count' | translate}}" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && addMatrixF.addSelectTimePeriodCount.errors }"
+                                tabindex="8" formControlName="addSelectTimePeriodCount" />
+                        </div>
+                        <div class="col-sm-4">
+                            <ng-select [clearable]="false" [items]="timeUnit" bindLabel="name"
+                                placeholder="{{'Select Unit' | translate}}" tabindex="9" [tabindex]="-1"
+                                formControlName="addSelectTimePeriod">
+                            </ng-select>
+                            <div *ngIf="submitted && addMatrixF.addSelectTimePeriod.errors" class="error-message">
+                                <div *ngIf="addMatrixF.addSelectTimePeriod.errors.required">
+                                    {{'Time Period is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Reminder Frequency' | translate}}
+                    </label>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="{{'Count' | translate}}" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && addMatrixF.addSelectReminderFCount.errors }"
+                                tabindex="10" formControlName="addSelectReminderFCount" />
+                        </div>
+                        <div class="col-sm-4">
+                            <ng-select [clearable]="false" [items]="timeUnit" bindLabel="name"
+                                placeholder="{{'Select Unit' | translate}}" tabindex="11" [tabindex]="-1"
+                                formControlName="addSelectReminderF">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Reminder Type' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" [items]="reminderType" bindLabel="name"
+                        placeholder="{{'Select Reminder Type' | translate}}" tabindex="12" [tabindex]="-1"
+                        formControlName="addSelectReminderType">
+                    </ng-select>
+                    <div *ngIf="submitted && addMatrixF.addSelectReminderType.errors" class="error-message">
+                        <div *ngIf="addMatrixF.addSelectReminderType.errors.required">
+                            {{'Reminder type is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='addLevelStatus' class="radio-text" type="radio" [value]="true">
+                        <span class="radio-text">{{'Active' | translate}}</span>
+                    </label>
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='addLevelStatus' class="radio-text" type="radio" [value]="false">
+                        <span class="radio-text">{{'Inactive' | translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="loading" type="submit" class="btn btn-block btn-submit" tabindex="13">
+                    {{'Create Escalation Matrix' | translate}}
+                </button>
+            </div>
+        </form>
+    </div>
+    <!--  Create Escalation Matrix Form Ends  -->
+
+</ng-template>
+<!--  Create New Escalation Matrix Modal Ends  -->
+
+<!--  Edit Escalation Matrix Modal Starts  -->
+<ng-template #editGrievanceRedressal class="custom-modal">
+
+    <!--  Edit Escalation Matrix Form Starts  -->
+    <div class="form-wrapper">
+        <form [formGroup]="updateMatrixForm" class="custom-form" (ngSubmit)="updateMatrixData()">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Edit Escalation Matrix' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select State' | translate}}
+                    </label>
+                    <ng-select [clearable]="false" (change)="onStateChange($event, 'editChange')" [items]="statesData"
+                        bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="14" autofocus="true"
+                        [tabindex]="-1" formControlName="editSelectState">
+                    </ng-select>
+                    <!-- <div *ngIf="submitted && editMatrixF.editSelectState.errors" class="error-message">
+                        <div *ngIf="editMatrixF.editSelectState.errors.required">
+                            {{'State is required.' | translate}}
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select District' | translate}}
+                    </label>
+                    <ng-select [clearable]="false" [items]="districtsData" bindLabel="name"
+                        placeholder="{{'Select District' | translate}}" tabindex="15" [tabindex]="-1"
+                        formControlName="editSelectDistrict">
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select Category' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" [items]="categories" bindLabel="name" name="selectedCategory"
+                        placeholder="{{'Select Grievance ' | translate}}" tabindex="16"
+                        (change)="onEditCategoryChange(editGrievance)" [tabindex]="-1"
+                        formControlName="editSelectCategory" multiple="true" [(ngModel)]="editGrievance">
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                            {{item.name | uppercase}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                        </ng-template>
+                    </ng-select>
+                    <div *ngIf="submitted && editMatrixF.editSelectCategory.errors" class="error-message">
+                        <div *ngIf="editMatrixF.editSelectCategory.errors.required">
+                            {{'Grievance Type/Category is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" *ngIf="categoriesNature?.length>0">
+                    <label class="control-label">{{'Select Nature' | translate}}</label>
+                    <ng-select [clearable]="false" [items]="categoriesNature" bindLabel="name"
+                        placeholder="{{'Nature of Grievance' | translate}}" name="selectedNature" multiple="true"
+                        formControlName="editfilterGrievanceNature" tabindex="13" [tabindex]="-1"
+                        (change)="onEditNatureChange(editNature)" [(ngModel)]="editNature">
+
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" />{{item.gender | uppercase}}
+                            {{item.name | uppercase}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                [ngModelOptions]="{ standalone : true }" /> {{item.name}}
+                        </ng-template>
+                    </ng-select>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select Level' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" [items]="levelData" bindLabel="name"
+                        placeholder="{{'Select Level' | translate}}" tabindex="17" [tabindex]="-1"
+                        formControlName="editSelectLevel">
+                    </ng-select>
+                    <div *ngIf="submitted && editMatrixF.editSelectLevel.errors" class="error-message">
+                        <div *ngIf="editMatrixF.editSelectLevel.errors.required">
+                            {{'Level is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Select Time Period' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="{{'Count' | translate}}" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && editMatrixF.editSelectTimePeriodCount.errors }"
+                                tabindex="18" formControlName="editSelectTimePeriodCount" />
+                        </div>
+                        <div class="col-sm-4">
+                            <ng-select [clearable]="false" [items]="timeUnit" bindLabel="name"
+                                placeholder="{{'Select Unit' | translate}}" tabindex="19" [tabindex]="-1"
+                                formControlName="editSelectTimePeriod">
+                            </ng-select>
+                            <div *ngIf="submitted && editMatrixF.editSelectTimePeriod.errors" class="error-message">
+                                <div *ngIf="editMatrixF.editSelectTimePeriod.errors.required">
+                                    {{'Time Period is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Reminder Frequency' | translate}}
+                    </label>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="{{'Count' | translate}}" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && editMatrixF.editSelectReminderFCount.errors }"
+                                tabindex="4" formControlName="editSelectReminderFCount" />
+                        </div>
+                        <div class="col-sm-4">
+                            <ng-select [clearable]="false" [items]="timeUnit" bindLabel="name"
+                                placeholder="{{'Select Unit' | translate}}" tabindex="20" [tabindex]="-1"
+                                formControlName="editSelectReminderF">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        {{'Reminder Type' | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                    <ng-select [clearable]="false" [items]="reminderType" bindLabel="name"
+                        placeholder="{{'Select Reminder Type' | translate}}" tabindex="21" [tabindex]="-1"
+                        formControlName="editSelectReminderType">
+                    </ng-select>
+                    <div *ngIf="submitted && editMatrixF.editSelectReminderType.errors" class="error-message">
+                        <div *ngIf="editMatrixF.editSelectReminderType.errors.required">
+                            {{'Reminder type is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='editLevelStatus' class="radio-text" type="radio" [value]="true">
+                        <span class="radio-text">{{'Active' | translate}}</span>
+                    </label>
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='editLevelStatus' class="radio-text" type="radio" [value]="false">
+                        <span class="radio-text">{{'Inactive' | translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="loading" class="btn btn-block btn-default btn-submit" tabindex="22">
+                    {{'Update Escalation Matrix' | translate}}
+                </button>
+            </div>
+        </form>
+    </div>
+    <!--  Edit Escalation Matrix Form Ends  -->
+
+</ng-template>
+<!-- Edit Escalation Matrix Modal Ends -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

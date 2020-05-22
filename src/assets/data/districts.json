@@ -1,0 +1,22 @@
+[
+    {
+        "state": "sikkim",
+        "districtName": "East Sikkim",
+        "code": "ES"
+    },
+    {
+        "state": "sikkim",
+        "districtName": "North Sikkim",
+        "code": "NS"
+    },
+    {
+        "state": "sikkim",
+        "districtName": "South Sikkim",
+        "code": "SS"
+    },
+    {
+        "state": "sikkim",
+        "districtName": "West Sikkim",
+        "code": "WS"
+    }
+]

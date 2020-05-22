@@ -1,0 +1,488 @@
+<app-header></app-header>
+
+<!--  Grievance Register Wrapper Starts  -->
+<div class="container">
+    <div class="form-wrapper grievance-register-wrapper">
+        <form class="custom-form" [formGroup]="registerGrevianceForm" (ngSubmit)="createGrievance()">
+            <h3 class="form-title">{{ submitName | translate }}</h3>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Reference/Incident Date' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="dob" class="control-label">{{'Reference/Incident Date' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input class="form-control" [maxDate]="maxDate" #dpYMD="bsDatepicker"
+                                    formControlName="rgSelectDate" placeholder="{{'Select Date' | translate}}"
+                                    bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" tabindex="1"
+                                    autofocus="true" />
+                                <i class="fa fa-calendar-times-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && rgComplainantNamenF.rgSelectDate.errors" class="error-message">
+                                <div *ngIf="rgComplainantNamenF.rgSelectDate.errors.required">
+                                    {{'Reference/Incident Date is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="dob" class="control-label">{{'Current Date' | translate}}<sup
+                                    class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input class="form-control" id="disabledInput" type="text"
+                                    placeholder="{{maxDate | date: 'dd-MM-y'}}" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </fieldset>
+
+
+
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Personal Information' | translate}}</legend>
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="dob" class="control-label">
+                                {{'Date of Birth' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" placeholder="Date of Birth" bsDatepicker
+                                    placement="bottom" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                    formControlName="dob" tabindex="5" />
+                                <i class="fa fa-calendar-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.dob == ''">
+                                    {{'Date of Birth is required.' | translate}}
+                                </div>
+
+                            </div>
+                            <!-- <div *ngIf="submitted && registerF.registerDateOfBirth.errors" class="error-message">
+                  <div *ngIf="registerF.registerDateOfBirth.errors.required">
+                    {{'Date of Birth is required.' | translate}}
+                  </div>
+                  <div *ngIf="registerDateOfBirth.errors?.pattern">
+                    {{'Date of Birth is not valid.' | translate}}
+                  </div>
+                  <div *ngIf="registerDateOfBirth.errors.maxlength">
+                      {{'Date of Birth should not exceed 150 characters.' | translate}}
+                    </div>
+                </div> -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            </fieldset>
+
+
+
+
+
+
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Location' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="stateName" class="control-label">
+                                {{'Select State' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event)"
+                                bindLabel="name" placeholder="{{'Select State' | translate}}" name="selectedState"
+                                formControlName="filterStateName" tabindex="2" [tabindex]="-1" [disabled]="true"
+                                [(ngModel)]="selectedState">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.filterStateName == ''">
+                                    {{'State is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="districtName" class="control-label">
+                                {{'Select District' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="districtsData" (change)="onDistrictChange($event)"
+                                bindLabel="name" placeholder="{{'Select District' | translate}}" name="selectedDistrict"
+                                formControlName="filterDistrictName" tabindex="3" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.filterDistrictName == ''">
+                                    {{'District is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="talukaName" class="control-label">
+                                {{'Select Taluka' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="talukasData" (change)="onTalukaChange($event)"
+                                bindLabel="name" placeholder="{{'Select Taluka' | translate}}" name="selectedTaluka"
+                                formControlName="filterTalukaName" tabindex="4" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.filterTalukaName == ''">
+                                    {{'Taluka is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="talukaName" class="control-label">
+                                {{'Select Village' | translate}}<sup class="custom-required"></sup>
+                            </label>
+                            <ng-select [clearable]="false" formControlName="filterVillageName" [items]="villagesData"
+                                bindLabel="name" placeholder="{{'Select Village' | translate}}" name="selectedTaluka"
+                                tabindex="5" [tabindex]="-1">
+                            </ng-select>
+                            <!-- <div *ngIf="submitted" class="error-message">
+                <div *ngIf="registerGrevianceForm.value.filterVillageName == ''">
+                  {{'Village is required.' | translate}}
+                </div>
+              </div> -->
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="talukaName" class="control-label">
+                                {{'Rural/Urban' | translate}}<sup class="custom-required"></sup>
+                            </label>
+                            <ng-select [clearable]="false" formControlName="filterPlaceName" [items]="placeData"
+                                bindLabel="name" placeholder="{{'Rural/Urban' | translate}}" tabindex="6"
+                                [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.filterPlaceName == ''">
+                                    {{'Rural/Urban is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="pincode" class="control-label">
+                                {{'Pincode' | translate}}
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" numberOnly maxlength="6" class="form-control"
+                                    formControlName="pincode" placeholder="{{'Pincode' | translate}}" tabindex="14" />
+                                <i class="fa fa-map-pin form-control-feedback"></i>
+                            </div>
+                            <!-- <div *ngIf="submitted && registerF.registerFormPincode.errors" class="error-message">
+                          <div *ngIf="registerF.registerFormPincode.errors.required">
+                            {{'Pincode is required.' | translate}}
+                          </div>
+                          <div *ngIf="registerFormPincode.errors?.pattern">
+                            {{'Pincode is not valid.' | translate}}
+                          </div>
+                        </div> -->
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="address" class="control-label">
+                                {{'Address' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <textarea rows="3" class="form-control" formControlName="address"
+                                    placeholder="{{'Address' | translate}}" tabindex="10"></textarea>
+                                <i class="fa fa-map-marker form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.address == ''">
+                                    {{'Address is required' | translate}}
+                                </div>
+                            </div>
+                            <!-- <div *ngIf="submitted && registerF.registerFormAddress.errors" class="error-message">
+                          <div *ngIf="registerF.registerFormAddress.errors.required">
+                            {{'Address is required.' | translate}}
+                          </div>
+                        </div> -->
+                        </div>
+                    </div>
+
+
+                </div>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Complainant' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="ComplainantName" class="control-label">
+                                {{'Complainant Name' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" formControlName="rgComplainantName" id="ComplainantName"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && rgComplainantNamenF.rgComplainantName.errors }"
+                                    placeholder="{{'Complainant Name' | translate}}" tabindex="7" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && rgComplainantNamenF.rgComplainantName.errors"
+                                class="error-message">
+                                <div *ngIf="rgComplainantNamenF.rgComplainantName.errors.required">
+                                    {{'Complainant Name is required.' | translate}}
+                                </div>
+                                <div *ngIf="rgComplainantNamenF.rgComplainantName.errors.maxlength">
+                                    {{'Complainant Name should not exceed 150 characters.' | translate}}
+                                </div>
+                                <div *ngIf="rgComplainantNamenF.rgComplainantName.errors?.pattern">
+                                    {{'Name should not contain special characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="ComplainantName" class="control-label">
+                                {{'FatherName' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" formControlName="rgComplainantFatherName" id="ComplainantName"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && rgComplainantNamenF.rgComplainantFatherName.errors }"
+                                    placeholder="{{'FatherName' | translate}}" tabindex="8" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && rgComplainantNamenF.rgComplainantFatherName.errors"
+                                class="error-message">
+                                <div *ngIf="rgComplainantNamenF.rgComplainantFatherName.errors.required">
+                                    {{'Father Name is required.' | translate}}
+                                </div>
+                                <div *ngIf="rgComplainantNamenF.rgComplainantFatherName.errors.maxlength">
+                                    {{'Father Name should not exceed 150 characters.' | translate}}
+                                </div>
+                                <div *ngIf="rgComplainantNamenF.rgComplainantFatherName.errors?.pattern">
+                                    {{'Name should not contain special characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="ComplainantMobileNo" class="control-label">
+                                {{'Complainant Mobile No' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" maxlength="10" formControlName="rgComplainantMobileNum"
+                                    id="ComplainantMobileNo" class="form-control"
+                                    placeholder="{{'Complainant Mobile No' | translate}}" tabindex="9" />
+                                <i class="fa fa-mobile form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && rgComplainantNamenF.rgComplainantMobileNum.errors"
+                                class="error-message">
+                                <div *ngIf="rgComplainantNamenF.rgComplainantMobileNum.errors.required">
+                                    {{'Mobile Number is required.' | translate}}
+                                </div>
+                                <div *ngIf="rgComplainantNamenF.rgComplainantMobileNum.errors?.pattern">
+                                    {{'Mobile Number should be of 10 digits.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="complainantDesignation" class="control-label">
+                                {{'Complainant Designation' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="designationsData" bindLabel="name"
+                                placeholder="{{'Select Complainant Designation' | translate}}"
+                                formControlName="filterDesignationName" tabindex="11" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.filterDesignationName == ''">
+                                    {{'Complainant Designation is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Grievance' | translate}}</legend>
+                <!--greviance dropdown starts-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="complainantDesignation" class="control-label">
+                                {{'Defendant Designation' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="designationsData" bindLabel="name"
+                                placeholder="{{'Defendant Designation' | translate}}"
+                                formControlName="rfDefendantDesignation" tabindex="10" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.rfDefendantDesignation == ''">
+                                    {{'Defendant Designation is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="grievanceCategory" class="control-label">
+                                {{'Grievance Category' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="categories" bindLabel="name"
+                                (change)="onChangeOfCategory($event)" placeholder="{{'Grievance Category' | translate}}"
+                                name="selectedTaluka" formControlName="filterGrievanceCategory" tabindex="12"
+                                [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.filterGrievanceCategory == ''">
+                                    {{'Category is required.' |translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="natureOfGrievance" class="control-label">
+                                {{'Nature of Grievance' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="categoriesNature" bindLabel="name"
+                                placeholder="{{'Nature of Grievance' | translate}}" name="selectedTaluka"
+                                formControlName="filterGrievanceNature" tabindex="13" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.filterGrievanceNature == ''">
+                                    {{'Grievance Nature is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="grievanceAgainstInstitution" class="control-label">
+                                {{'Grievance against institution' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="institutionData" bindLabel="name"
+                                placeholder="{{'Grievance against institution'| translate}}" name="selectedTaluka"
+                                formControlName="filterGrievanceInstitution" tabindex="14" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerGrevianceForm.value.filterGrievanceInstitution == ''">
+                                    {{'Institution is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="ComplainantName" class="control-label">
+                                {{'Grievance against Whom?' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" formControlName="rgComplainantAgainst" id="ComplainantName"
+                                    class="form-control" placeholder="{{'Grievance against Whom?' | translate}}"
+                                    tabindex="15" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && rgComplainantNamenF.rgComplainantAgainst.errors"
+                                class="error-message">
+                                <div *ngIf="rgComplainantNamenF.rgComplainantAgainst.errors.required">
+                                    {{'Grievance against Whom is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="briefOfGrievance" class="control-label">
+                                {{'Brief of Grievance' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <textarea formControlName="rgBriefOfGrievance" rows="3" id="briefOfGrievance"
+                                    class="form-control" placeholder="{{'Brief of Grievance' | translate}}"
+                                    tabindex="16"></textarea>
+                                <i class="fa fa-file-text-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && rgComplainantNamenF.rgBriefOfGrievance.errors"
+                                class="error-message">
+                                <div *ngIf="rgComplainantNamenF.rgBriefOfGrievance.errors.required">
+                                    {{'Brief of Grievance is required.' | translate}}
+                                </div>
+                                <div *ngIf="rgComplainantNamenF.rgBriefOfGrievance.errors.maxlength">
+                                    {{'Brief of Grievance should not exceed 2500 characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="detailsOfGrievance" class="control-label">
+                                {{'Details of Grievance' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <textarea formControlName="rgDetailsOfGrievance" rows="3" class="form-control"
+                                    placeholder="{{'Details of Grievance' | translate}}" tabindex="17"></textarea>
+                                <i class="fa fa-file-text-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && rgComplainantNamenF.rgDetailsOfGrievance.errors"
+                                class="error-message">
+                                <div *ngIf="rgComplainantNamenF.rgDetailsOfGrievance.errors.required">
+                                    {{'Details of Grievance is required.' | translate}}
+                                </div>
+                                <div *ngIf="rgComplainantNamenF.rgDetailsOfGrievance.errors.maxlength">
+                                    {{'Details of Grievance should not exceed 2500 characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="severity" class="control-label">{{'Severity' | translate}}
+                            </label>
+                            <ng-select [clearable]="false" [items]="severityData" formControlName="rgSeverity"
+                                bindLabel="name" placeholder="{{'Severity' | translate}}" tabindex="18" [tabindex]="-1">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="clearfix">
+                <a [routerLink]="dashboard" class="btn btn-red pull-left" tabindex="19">{{'back' | translate}}</a>
+                <button type="submit" class="btn btn-block btn-submit pull-right" tabindex="20">{{submitName |
+          translate}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--  Grievance Register Wrapper Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Starts  -->
+
+
+<div>
+    <app-feedback-modal></app-feedback-modal>
+</div>

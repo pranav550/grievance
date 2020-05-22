@@ -1,0 +1,354 @@
+<app-header></app-header>
+
+
+<!--  Hospital Wrapper Starts  -->
+<div class="hospital-wrapper">
+
+    <!-- States List Wrapper Starts -->
+    <div class="container hospital-list-wrapper">
+        <div class="custom-table-caption">
+            <h3 class="page-title">{{'Hospitals' | translate}}</h3>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-wrapper basic">
+                        <form class="custom-form">
+                            <div class="form-group clearfix">
+                                <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                                <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event, 'selectChange')" bindLabel="name" placeholder="{{'Select State' | translate}}" name="selectedState" [(ngModel)]="selectedState" tabindex="1" autofocus="true" [tabindex]="-1"
+                                    [disabled]="true">
+                                </ng-select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-right">
+                    <button href="javascript:void(0);" [disabled]="!isStateExists || !isDistrictsExists || !isTalukaExists || !permissions_add" class="btn btn-blue" (click)="addHospitalModal(addHospitalModalTemplate)">
+            {{'Create Hospital' | translate}}
+          </button>
+                </div>
+            </div>
+        </div>
+        <div class="custom-datatable-wrapper">
+            <table id="dataTable1" class="table table-condensed table-bordered custom-col-six-action row-border hover">
+                <thead>
+                    <tr>
+                        <th class="custom-header-col hidden">{{'Hospital ID' | translate}}</th>
+                        <th class="custom-body-col hidden">{{'Talukas' | translate}}</th>
+                        <th class="custom-body-col hidden">{{'Districts' | translate}}</th>
+                        <th class="custom-header-col">{{'Name' | translate}}</th>
+                        <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                        <th class="custom-header-col">{{'Display Name' | translate}}</th>
+                        <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+                        <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                        <th class="custom-header-col delete-col">{{'Delete' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="permissions_view">
+                        <tr *ngFor="let hospital of hospitals">
+                            <td class="custom-body-col hidden">{{hospital.hospitalId}}</td>
+                            <td class="custom-body-col hidden">{{hospital.talukas}}</td>
+                            <td class="custom-body-col hidden">{{hospital.districts}}</td>
+                            <td class="custom-body-col">{{hospital.name}}</td>
+                            <td class="custom-body-col id-col">{{hospital.code}}</td>
+                            <td class="custom-body-col">{{hospital.displayName}}</td>
+                            <td class="custom-body-col status-col">
+                                <span *ngIf="hospital.status === 'active'" class="badge badge-active">{{hospital.status}}</span>
+                                <span *ngIf="hospital.status === 'inactive'" class="badge badge-inactive">{{hospital.status}}</span>
+                            </td>
+                            <td class="custom-body-col action-col">
+                                <button href="javascript:void(0);" [disabled]="!permissions_update" (click)="openEditHospitalModal(hospital,editHospitalModalTemplate)" class="btn btn-edit">
+                                    <i class="fa fa-pencil custom-icon"></i> {{'Edit' | translate}}
+                                </button>
+                                <button href="javascript:void(0);" [disabled]="!permissions_update" *ngIf="hospital.status === 'active'" (click)="hospitalStatusValue(hospital)" class="btn btn-inactive">
+                                    <i class="fa fa-ban custom-icon"></i> {{'Inactivate' | translate}}
+                                </button>
+                                <button href="javascript:void(0);" [disabled]="!permissions_update" *ngIf="hospital.status === 'inactive'" (click)="hospitalStatusValue(hospital)" class="btn btn-active">
+
+                                    <i class="fa fa-check custom-icon"></i> {{'Activate' | translate}}
+                                </button>
+                            </td>
+                            <td class="custom-body-col delete-col">
+                                <button href="javascript:void(0);" [disabled]="!permissions_delete" (click)="hospitalDeleteModal(deleteHospitalModalTemplate, hospital)" class="btn btn-delete">
+                                    <i class="fa fa-trash-o custom-icon"></i> {{'Delete' | translate}}
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- States List Wrapper Starts -->
+
+</div>
+<!--  Hospital Wrapper Ends  -->
+
+<!-- Create New State Modal Starts -->
+<ng-template #addHospitalModalTemplate class="custom-modal">
+
+    <!-- Create States Form Starts -->
+    <div class="form-wrapper">
+        <form class="custom-form" [formGroup]="hosiptalRegisterForm" (ngSubmit)='addHospital()'>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Create Hospital' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+                    <ng-select [clearable]="false" formControlName="addHospitalSelectState" (change)="onStateChange($event, 'addChange')" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="2" autofocus="true" [tabindex]="-1">
+                    </ng-select>
+                    <div *ngIf="submitted && addHospitalF.addHospitalSelectState.errors" class="error-message">
+                        <div *ngIf="addHospitalF.addHospitalSelectState.errors.required">
+                            {{'State is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="districtName" class="control-label">{{'Select District' | translate}}<sup class="custom-required">*</sup></label>
+                    <ng-select [clearable]="false" formControlName="addHospitalSelectDistrict" (change)="onDistrictChange($event, 'addChange')" [items]="districtsData" bindLabel="name" placeholder="{{'Select District' | translate}}" tabindex="3" [tabindex]="-1">
+                    </ng-select>
+                    <div *ngIf="submitted && addHospitalF.addHospitalSelectDistrict.errors" class="error-message">
+                        <div *ngIf="addHospitalF.addHospitalSelectDistrict.errors.required">
+                            {{'District is required.' | translate}}
+                        </div>
+                    </div>
+                    <div *ngIf="submitted" class="error-message">
+                        <div *ngIf="hosiptalRegisterForm.value.addHospitalSelectDistrict === ''">
+                            {{'No District found.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="talukaName" class="control-label">{{'Select Taluka' | translate}}<sup class="custom-required">*</sup></label>
+                    <ng-select [clearable]="false" formControlName="addHospitalSelectTaluka" [items]="talukasData" bindLabel="name" placeholder="{{'Select Taluka' | translate}}" tabindex="4" [tabindex]="-1">
+                    </ng-select>
+                    <div *ngIf="submitted && addHospitalF.addHospitalSelectTaluka.errors" class="error-message">
+                        <div *ngIf="addHospitalF.addHospitalSelectTaluka.errors.required">
+                            {{'Taluka is required.' | translate}}
+                        </div>
+                    </div>
+                    <div *ngIf="submitted" class="error-message">
+                        <div *ngIf="hosiptalRegisterForm.value.addHospitalSelectTaluka === ''">
+                            {{'No taluka found.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hospitalName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+                    <input type="text" class="form-control" (ngModelChange)="hospitalEnter($event)" formControlName="addHosptialName" placeholder="{{'Name' | translate}}" tabindex="5">
+                    <div *ngIf="submitted && addHospitalF.addHosptialName.errors" class="error-message">
+                        <div *ngIf="addHospitalF.addHosptialName.errors.required">
+                            {{'Name is required.' | translate}}
+                        </div>
+                        <div *ngIf="addHospitalF.addHosptialName.errors.maxlength">
+                            {{'Name should not exceed 250 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hospitalId" class="control-label">{{'ID' | translate}}<sup class="custom-required">*</sup></label>
+                    <input type="text" class="form-control" placeholder="{{'ID' | translate}}" formControlName="addHosptialId" tabindex="6">
+                    <div *ngIf="submitted && addHospitalF.addHosptialId.errors" class="error-message">
+                        <div *ngIf="addHospitalF.addHosptialId.errors.required">
+                            {{'Id is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="complaintNatureName" class="control-label">{{'Display Name' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="addHosptialDisplayName" placeholder="Display Name" tabindex="7">
+                    <div *ngIf="submitted && addHospitalF.addHosptialDisplayName.errors" class="error-message">
+                        <div *ngIf="addHospitalF.addHosptialDisplayName.errors.required">
+                            {{'Display Name is required.' | translate}}
+                        </div>
+                        <div *ngIf="addHospitalF.addHosptialDisplayName.errors.maxlength">
+                            {{'Display Name should not exceed 250 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hospitalDescription" class="control-label">{{'Description' | translate}}</label>
+                    <textarea rows="3" class="form-control" formControlName="addHospitalDescription" placeholder="{{'Description' | translate}}" tabindex="8"></textarea>
+                    <div *ngIf="submitted && addHospitalF.addHospitalDescription.errors" class="error-message">
+                        <div *ngIf="addHospitalF.addHospitalDescription.errors.required">
+                            {{'Description is required.' | translate}}
+                        </div>
+                        <div *ngIf="addHospitalF.addHospitalDescription.errors.maxlength">
+                            {{'Description should not exceed 250 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline custom-radio">
+            <input formControlName='addHospitalStatus' class="radio-text" type="radio" [value]="true" tabindex="9">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+                    <label class="radio-inline custom-radio">
+            <input formControlName='addHospitalStatus' class="radio-text" type="radio" [value]="false" tabindex="10">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-block btn-submit" tabindex="11">{{'Create Hospital' | translate}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- Create States Form Ends -->
+
+</ng-template>
+<!-- Create New State Modal Ends -->
+
+<!-- Edit New State Modal Starts -->
+<ng-template #editHospitalModalTemplate class="custom-modal">
+
+    <!-- Create States Form Starts -->
+    <div class="form-wrapper">
+        <form class="custom-form" [formGroup]="editHosiptalForm" (ngSubmit)='updateHospital()'>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Edit Hospital' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+                    <ng-select [clearable]="false" formControlName="editHospitalSelectState" (change)="onStateChange($event, 'editChange')" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="12" autofocus="true" [tabindex]="-1">
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <label for="districtName" class="control-label">{{'Select District' | translate}}<sup class="custom-required">*</sup></label>
+                    <ng-select [clearable]="false" formControlName="editHospitalSelectDistrict" (change)="onDistrictChange($event, 'editChange')" [items]="districtsData" bindLabel="name" placeholder="{{'Select District' | translate}}" tabindex="13" [tabindex]="-1">
+                    </ng-select>
+                    <div *ngIf="submitted && editHospitalF.editHospitalSelectDistrict.errors" class="error-message">
+                        <div *ngIf="editHospitalF.editHospitalSelectDistrict.errors.required">
+                            {{'District is required.' | translate}}
+                        </div>
+                    </div>
+                    <div *ngIf="submitted" class="error-message">
+                        <div *ngIf="editHosiptalForm.value.editHospitalSelectDistrict === ''">
+                            {{'No Districts found.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="talukaName" class="control-label">{{'Select Taluka' | translate}}<sup class="custom-required">*</sup></label>
+                    <ng-select [clearable]="false" formControlName="editHospitalSelectTaluka" [items]="talukasData" bindLabel="name" placeholder="{{'Select Taluka' | translate}}" tabindex="14" [tabindex]="-1">
+                    </ng-select>
+                    <div *ngIf="submitted && editHospitalF.editHospitalSelectTaluka.errors" class="error-message">
+                        <div *ngIf="editHospitalF.editHospitalSelectTaluka.errors.required">
+                            {{'Taluka is required.' | translate}}
+                        </div>
+                    </div>
+                    <div *ngIf="submitted" class="error-message">
+                        <div *ngIf="editHosiptalForm.value.editHospitalSelectTaluka === ''">
+                            {{'No Talukas found.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hospitalName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+                    <input type="text" class="form-control" formControlName="editHosptialName" placeholder="{{'Name' | translate}}" tabindex="15">
+                    <div *ngIf="submitted && editHospitalF.editHosptialName.errors" class="error-message">
+                        <div *ngIf="editHospitalF.editHosptialName.errors.required">
+                            {{'Name is required.' | translate}}
+                        </div>
+                        <div *ngIf="editHospitalF.editHosptialName.errors.maxlength">
+                            {{'Name should not exceed 250 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hospitalId" class="control-label">{{'ID' | translate}}<sup class="custom-required">*</sup></label>
+                    <input type="text" class="form-control" placeholder="{{'ID' | translate}}" formControlName="editHosptialId" tabindex="16">
+                    <div *ngIf="submitted && editHospitalF.editHosptialId.errors" class="error-message">
+                        <div *ngIf="editHospitalF.editHosptialId.errors.required">
+                            {{'Id is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="complaintNatureName" class="control-label">{{'Display Name' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="editHosptialDisplayName" placeholder="Display Name" tabindex="17">
+                    <div *ngIf="submitted && editHospitalF.editHosptialDisplayName.errors" class="error-message">
+                        <div *ngIf="editHospitalF.editHosptialDisplayName.errors.required">
+                            {{'Display Name is required.' | translate}}
+                        </div>
+                        <div *ngIf="editHospitalF.editHosptialDisplayName.errors.maxlength">
+                            {{'Display Name should not exceed 250 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hospitalDescription" class="control-label">{{'Description' | translate}}</label>
+                    <textarea rows="3" class="form-control" formControlName="editHospitalDescription" placeholder="{{'Description' | translate}}" tabindex="18"></textarea>
+                    <div *ngIf="submitted && editHospitalF.editHospitalDescription.errors" class="error-message">
+                        <div *ngIf="editHospitalF.editHospitalDescription.errors.required">
+                            {{'Description is required.' | translate}}
+                        </div>
+                        <div *ngIf="editHospitalF.editHospitalDescription.errors.maxlength">
+                            {{'Description should not exceed 250 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline custom-radio">
+            <input formControlName='editHospitalStatus' class="radio-text" type="radio" [value]="true" tabindex="19">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+                    <label class="radio-inline custom-radio">
+            <input formControlName='editHospitalStatus' class="radio-text" type="radio" [value]="false" tabindex="20">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-block btn-submit" tabindex="21">{{'Update Hospital' | translate}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- Create States Form Ends -->
+
+</ng-template>
+<!-- Edit New State Modal Ends -->
+
+<!--  Hospital Delete Confirm Modal Starts  -->
+<ng-template #deleteHospitalModalTemplate class="custom-modal">
+
+    <!-- Hospital Delete Confirm Form Starts -->
+    <div class="form-wrapper">
+        <form class="custom-form" #editStateForm="ngForm">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Delete Hospital' | translate}}(<strong>{{hospitalFormNewData.name}}</strong>)</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{'Are you sure you want to delete the hospital?' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red" (click)="deleteHospital(true)">{{'Yes' | translate}}</button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal" (click)="deleteHospital(false)">{{'No' | translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Hospital Delete Confirm Form Ends -->
+
+</ng-template>
+<!--  Hospital Edit Confirm Modal Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

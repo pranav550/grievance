@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Andhra Pradesh",
+        "displayName": "displayName",
+        "stateId": "123"
+    },
+    {
+        "name": "Arunachal Pradesh",
+        "displayName": "displayName",
+        "stateId": "123"
+    },
+    {
+        "name": "Assam",
+        "displayName": "displayName",
+        "stateId": "123"
+    },
+    {
+        "name": "Bihar",
+        "displayName": "displayName",
+        "stateId": "123"
+    },
+    {
+        "name": "Chhattisgarh",
+        "displayName": "displayName",
+        "stateId": "123"
+    },
+    {
+        "name": "Delhi",
+        "displayName": "displayName",
+        "stateId": "123"
+    }
+]

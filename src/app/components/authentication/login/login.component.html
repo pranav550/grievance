@@ -1,0 +1,294 @@
+<!--  Login Wrapper Starts  -->
+<app-nav-bar></app-nav-bar>
+<div class="landing-wrapper">
+  <div class="container landing-innner-wrapper">
+    <div class="row">
+      <div class="col-sm-12">
+        <!--  Login Wrapper Starts  -->
+        <div class="form-wrapper login-wrapper">
+          <div class="tabs-wrapper">
+            <tabset #staticTabs>
+
+              <!-- First Tab Content Starts -->
+              <tab heading="{{ 'Login' | translate }}">
+                <div class="states-list-wrapper new-grievance-wrapper">
+
+                  <form class="custom-form" [formGroup]="loginForm" (ngSubmit)="login()">
+
+                    <div class="form-group">
+                      <label for="email" class="control-label">
+                        {{'Username/Mobile No/Email' | translate}}<sup class="custom-required">*</sup>
+                        <a href="javascript:void(0);" class="custom-tooltip text-blue"
+                          tooltip="{{'Username/Mobile No/Email can be used.' | translate}}">
+                          <i class="fa fa-question-circle"></i>
+                        </a>
+                      </label>
+                      <div class="has-feedback">
+                        <input type="text" class="form-control" placeholder="{{'Username/Mobile No/Email' | translate}}"
+                          formControlName="userName" tabindex="1" autofocus="true" />
+                        <i class="fa fa-user-o form-control-feedback"></i>
+                      </div>
+                      <div *ngIf="submitted && loginF.userName.errors" class="error-message">
+                        <div *ngIf="loginF.userName.errors.required">
+                          {{'Username/Mobile No/Email is required.' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="control-label">{{'Password' | translate}}<sup
+                          class="custom-required">*</sup></label>
+                      <div class="has-feedback">
+                        <input type="password" class="form-control" placeholder="{{'Password' | translate}}"
+                          formControlName="password" placeholder="Password" tabindex="2" />
+                        <i class="fa fa-lock  form-control-feedback"></i>
+                      </div>
+                      <div *ngIf="submitted && loginF.password.errors" class="error-message">
+                        <div *ngIf="loginF.password.errors.required">
+                          {{'Password is required.' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <a href="javascript:void(0);" routerLink="/forgot-username" class="forgot-password-link pull-left"
+                        tabindex="3">
+                        {{'Forgot Username?' | translate}}
+                      </a>
+                      <a href="javascript:void(0);" routerLink="/forgot-password"
+                        class="forgot-password-link pull-right" tabindex="4">
+                        {{'Forgot Password?' | translate}}
+                      </a>
+                    </div>
+                    <div class="form-group">
+                      <!-- <recaptcha formControlName="myRecaptcha" tabindex="5"></recaptcha>
+                      <div *ngIf="submitted" class="error-message">
+                        <div *ngIf="!loginForm.value.myRecaptcha">
+                          {{'Security Code is required.' | translate}}
+                        </div>
+                      </div> -->
+                      <div id="captcha"></div>
+                      <div (click)="createCaptcha()" class="pointer">
+                        <i class="glyphicon glyphicon-refresh"></i>
+                        {{'Generate a new captcha'| translate }}</div>
+                      <!-- <input type="text" formControlName="myRecaptcha" placeholder="Captcha" id="cpatchaTextBox"/>
+                      <div *ngIf="submitted" class="error-message">
+                        <div *ngIf="!loginForm.value.myRecaptcha">
+                          {{'Security Code is required.' | translate}}
+                        </div>
+                      </div> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="myRecaptcha" class="control-label">{{'Captcha' | translate}}<sup
+                          class="custom-required">*</sup></label>
+                      <div class="has-feedback">
+                        <input type="text" class="form-control" placeholder="{{'Captcha' | translate}}"
+                          formControlName="myRecaptcha" placeholder="Captcha" tabindex="3" id="cpatchaTextBox"
+                          autocomplete="off" />
+                      </div>
+                      <div *ngIf="submitted && loginF.myRecaptcha.errors" class="error-message">
+                        <div *ngIf="loginF.myRecaptcha.errors.required">
+                          {{'Captcha is required.' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-default btn-submit" tabindex="6">{{'Login' |
+                      translate}}</button>
+                    <p class="help-block mar-b15">
+                      {{'New User?' | translate}}
+                      <a href="javascript:void(0);" routerLink="/register" class="register-link" tabindex="7">
+                        {{'Click Here to Register' | translate}}
+                      </a>
+                    </p>
+                    <p class="help-block">
+                      {{'Grievance officers login?' | translate}}
+                      <a href="javascript:void(0);" routerLink="/admin-login" class="register-link" tabindex="8">
+                        {{'Click Here to Login' | translate}}
+                      </a>
+                    </p>
+
+                    <p class="help-block my-1">
+
+                      <a href="javascript:void(0);" routerLink="/beneficary-instruction" class="register-link my-2"
+                        tabindex="8">
+                        {{'How it works For Beneficiary?' | translate}}
+                      </a>
+                    </p>
+
+
+                  </form>
+                </div>
+              </tab>
+              <!-- First Tab Content Ends -->
+
+              <!-- Second Tab Content Starts -->
+              <tab heading="{{ 'Login via OTP' | translate }}">
+                <div class="states-list-wrapper accepted-grievance-wrapper">
+                  <form class="custom-form" [formGroup]="loginOTPForm" (ngSubmit)="loginViaOTP(loginOTPForm)">
+                    <div class="form-group" [ngClass]="getMobileOTP ? 'hide' : 'show' ">
+                      <label for="email" class="control-label">
+                        {{'Mobile Number' | translate}}<sup class="custom-required">*</sup>
+                        <a href="javascript:void(0);" class="custom-tooltip text-blue"
+                          tooltip="{{'Mobile Number can be used.' | translate}}">
+                          <i class="fa fa-question-circle"></i>
+                        </a>
+                      </label>
+                      <div class="has-feedback">
+                        <input type="text" class="form-control" numberOnly maxlength="10" formControlName="mobileNo"
+                          placeholder="{{'10 Digit Mobile Number' | translate}}" tabindex="9" />
+                        <i class="fa fa-mobile form-control-feedback"></i>
+                      </div>
+                      <div *ngIf="submittedL && loginVOTPF.mobileNo.errors" class="error-message">
+                        <div *ngIf="loginVOTPF.mobileNo.errors.required">
+                          {{'Mobile Number is required.' | translate}}
+                        </div>
+                        <div *ngIf="mobileNo.errors?.pattern">
+                          {{'Please provide a valid mobile number.' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                    <button type="button"
+                      [disabled]="loginOTPForm.value.mobileNo == '' || loginOTPForm.value.mobileNo.length < 10"
+                      class="btn btn-block btn-default btn-submit" tabindex="6"
+                      (click)="getOTP(loginOTPForm.value.mobileNo)"
+                      [ngClass]="getMobileOTP ? 'hide' : 'show' ">{{'Send OTP' | translate}}</button>
+
+                    <div class="form-group" [ngClass]="getMobileOTP ? 'show' : 'hide' ">
+                      <label for="number" class="control-label">
+                        {{'OTP' | translate}}<sup class="custom-required">*</sup>
+                        <a href="javascript:void(0);" class="custom-tooltip text-blue"
+                          tooltip="{{'OTP can be used.' | translate}}">
+                          <i class="fa fa-question-circle"></i>
+                        </a>
+                      </label>
+                      <div class="has-feedback">
+                        <input type="text" class="form-control" numberOnly maxlength="6" formControlName="mobileOTP"
+                          placeholder="{{'6 Digit OTP' | translate}}" tabindex="9" />
+                        <i class="fa fa-lock form-control-feedback"></i>
+                      </div>
+                      <div *ngIf="submittedL && loginVOTPF.mobileOTP.errors" class="error-message">
+                        <div *ngIf="loginVOTPF.mobileOTP.errors.required">
+                          {{'OTP is required.' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="custom-section" [ngClass]="getMobileOTP ? 'show' : 'hide' ">
+                      <p class="help-block mar-b15 otp-txt clearfix">
+                        <button type="button" class="btn btn-link" [class.disable]="timer.sec !== '00'"
+                          (click)="resendOTP($event)" class="forgot-password-link pull-left" tabindex="19"
+                          [disabled]="timer.sec !== '00' ">
+                          {{"Didn't Recieve OTP?" | translate}}
+                        </button>
+                      </p>
+                      <div class="custom-timer clearfix">
+                        <div class="box1">
+                          <p>{{ timer.min }}</p>
+                        </div>
+                        <span>:</span>
+                        <div class="box2">
+                          <p>{{ timer.sec }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-default btn-submit"
+                      [ngClass]="getMobileOTP ? 'show' : 'hide' " tabindex="6"
+                      [disabled]="loginOTPForm.value.mobileOTP == '' || loginOTPForm.value.mobileOTP.length < 6">{{'Login'
+                      | translate}}</button>
+
+                    <p class="help-block mar-b15">
+                      {{'New User?' | translate}}
+                      <a href="javascript:void(0);" routerLink="/register" class="register-link" tabindex="7">
+                        {{'Click Here to Register' | translate}}
+                      </a>
+                    </p>
+                    <p class="help-block">
+                      {{'Grievance officers login?' | translate}}
+                      <a href="javascript:void(0);" routerLink="/admin-login" class="register-link" tabindex="8">
+                        {{'Click Here to Login' | translate}}
+                      </a>
+                    </p>
+                  </form>
+                </div>
+              </tab>
+              <!-- Second Tab Content Ends -->
+
+            </tabset>
+          </div>
+
+
+        </div>
+        <!--  Login Wrapper Ends  -->
+
+
+        <!--  Landing Description Wrapper Starts  -->
+        <div class="landing-description-wrapper">
+          <h2>{{"Welcome To Health Department Grievance Redressal Portal" | translate}}</h2>
+          <!-- <h3 class="page-title">Lorem Ipsum is simply dummy text of the printing and typesetting industry</h3> -->
+          <p class="help-text">
+            {{"Grievance Redressal Portal is a web based platform that enables the citizens to submit grievances from
+            anywhere and
+            anytime (24x7). The redressal mechanism of all Grievances, are through proper hierarchical channels,
+            addressed through
+            related Departments, Ministries, Agencies or Organizations." | translate}}
+          </p>
+          <p class="help-text">
+            {{"Individuals can track their Grievances online through the portal and also know the status of the same."
+            |
+            translate}}
+          </p>
+
+          <!-- <div class="row">
+            <div class="col-sm-6">
+              <h3 class="page-title">Tailored Business Risk Intelligence</h3>
+              <p class="help-text">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+                to make a type specimen book.
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <h3 class="page-title">Dark Web Search</h3>
+              <p class="help-text">
+                When unknown printer took a gallery of type and scrambled it to make a type
+                specimen book
+              </p>
+            </div>
+          </div> -->
+          <div class="tile-main-wrapper">
+            <h2>{{'Grievance statistics for the year 2019' | translate}}</h2>
+            <div class="tile-row">
+              <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                  <div class="tile-wrapper tile-blue">
+                    <div class="tile-header-wrapper">
+                      <h3 class="tile-title">{{'Receipts' | translate}}</h3>
+                    </div>
+                    <div class="tile-content-wrapper">
+                      <p class="tile-count"><i class="fa fa-list-ul tile-icon"></i>{{ receipts }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                  <div class="tile-wrapper tile-green">
+                    <div class="tile-header-wrapper">
+                      <h3 class="tile-title">{{'Disposals' | translate}}</h3>
+                    </div>
+                    <div class="tile-content-wrapper">
+                      <p class="tile-count"><i class="fa fa-check-circle-o tile-icon"></i>{{ disposals }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  Landing Description Wrapper Ends  -->
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  Login Wrapper Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

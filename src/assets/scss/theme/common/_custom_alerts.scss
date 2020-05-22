@@ -1,0 +1,89 @@
+/*
+================================================================================
+**********************  Common Alert Styles For The Site  **********************
+================================================================================
+*/ 
+.alert{
+    .alert-danger{
+        padding-left: 50px !important;
+        .fa-exclamation-triangle{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    }
+    .alert-success{
+        padding-left: 50px !important;
+        .fa-info-circle{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    }
+}
+#toasty{
+    &.toasty-position-top-right{
+        top: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+    }
+     .toast{
+         &.toasty-theme-default{
+             .close-button{
+                top: 23px;
+                opacity: 1 !important;  
+                display: inline-block;
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                &:after{
+                    font-size: $font-size-large !important;
+                    content: "\f00d" !important;
+                }
+            }
+            &.toasty-type-success{
+                background-color: $base-green !important;
+                font-family: $roboto-regular !important;
+                font-size: ($font-size-base);
+                line-height: ($line-height-computed * 0.9);
+                font-weight: bold;
+                width: 100% !important;
+                text-align: center !important;
+                text-transform: none;
+                opacity: 1;
+            }
+            &.toasty-type-error{
+                background-color: $red !important;
+                font-family: $roboto-regular !important;
+                font-size: ($font-size-base);
+                line-height: ($line-height-computed * 0.9);
+                font-weight: bold;
+                width: 100% !important;
+                text-align: center !important;
+                text-transform: none;
+                opacity: 1;
+            }
+        }
+     }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+ 
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

@@ -1,0 +1,193 @@
+<!--  Designation Wrapper Starts  -->
+<app-header></app-header>
+
+<div class="container designation-wrapper">
+  <div class="custom-table-caption">
+    <h3 class="page-title">{{'Designations' | translate}}</h3>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-wrapper basic">
+          <form class="custom-form">
+            <div class="form-group clearfix">
+              <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+              <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event)" bindLabel="name" placeholder="{{'Select State' | translate}}"
+                name="selectedState" [(ngModel)]="selectedState" tabindex="1" autofocus="true" [tabindex]="-1">
+              </ng-select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-4 text-right">
+        <button href="javascript:void(0);" [disabled]="!isStateExists" class="btn btn-blue" (click)="addDesignationModal(addDesignationModalTemplate)">
+          {{'Create Designation' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="custom-datatable-wrapper">
+    <table id="dataTable1" class="table table-condensed table-bordered custom-col-three-action row-border hover">
+      <thead>
+        <tr>
+          <th class="custom-header-col hidden">{{'Designation Id' | translate}}</th>
+          <th class="custom-header-col">{{'Name' | translate}}</th>
+          <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+          <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let designation of designations">
+          <td class="custom-body-col hidden">{{designation.designationsId}}</td>
+          <td class="custom-body-col">{{designation.name}}</td>
+          <td class="custom-body-col status-col">
+            <span *ngIf="designation.status === 'active'" class="badge badge-active">{{designation.status}}</span>
+            <span *ngIf="designation.status === 'inactive'" class="badge badge-inactive">{{designation.status}}</span>
+          </td>
+          <td class="custom-body-col action-col">
+            <a href="javascript:void(0);" (click)="editDesignationModal(editDesignationModalTemplate, designation)" class="btn btn-edit">
+              <i class="fa fa-pencil custom-icon"></i>
+              {{'Edit' | translate}}
+            </a>
+            <a href="javascript:void(0);" *ngIf="designation.status === 'active'" (click)="designationStatus(designation)" class="btn btn-inactive">
+              <i class="fa fa-ban custom-icon"></i>
+                {{'Inactivate' | translate}}
+              </a>
+            <a href="javascript:void(0);" *ngIf="designation.status === 'inactive'" (click)="designationStatus(designation)" class="btn btn-active">
+              <i class="fa fa-check custom-icon"></i>
+                {{'Activate' | translate}}
+              </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--  Designation Wrapper Ends -->
+
+<!-- Create New Designation Modal Starts  -->
+<ng-template #addDesignationModalTemplate class="custom-modal">
+
+  <!--  Create Designation Form Starts  -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="addDesignationForm" (ngSubmit)='addDesgination()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Create Designation' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup>
+          </label>
+          <ng-select [clearable]="false" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}" name="selectedState" formControlName="addDesignationSelectedState" tabindex="2" autofocus="true" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label for="designationName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" id="designationName" class="form-control" formControlName="addDesignationName" placeholder="{{'Name' | translate}}"
+          tabindex="3"/>
+          <div *ngIf="submitted && addDesginationF.addDesignationName.errors" class="error-message">
+            <div *ngIf="addDesginationF.addDesignationName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="addDesginationF.addDesignationName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="designationDescription" class="control-label">{{'Description' | translate}}</label>
+          <textarea rows="3" id="designationDescription" class="form-control" formControlName="addDesignationDescription" placeholder="{{'Description' | translate}}" tabindex="4"></textarea>
+          <div *ngIf="submitted && addDesginationF.addDesignationDescription.errors" class="error-message">
+            <div *ngIf="addDesginationF.addDesignationDescription.errors.maxlength">
+              {{'Description should not exceed 250 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='addDesignationStatus' class="radio-text" type="radio" [value]="true" tabindex="5">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='addDesignationStatus' class="radio-text" type="radio" [value]="false" tabindex="6">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-submit" tabindex="6">{{'Create Designation' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!--  Create New Designation Form Ends  -->
+
+</ng-template>
+<!--  Create New Designation Modal Ends  -->
+
+<!--  Edit Designation Modal Starts  -->
+<ng-template #editDesignationModalTemplate class="custom-modal">
+
+  <!-- Edit Designation Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="editDesignationForm" (ngSubmit)="updateDesignation()">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Edit Designation' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup>
+          </label>
+          <ng-select [clearable]="false" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}" name="selectedState" formControlName="editDesignationSelectedState" autofocus="true" tabindex="7" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label for="designationName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup>
+          </label>
+          <input type="text" class="form-control" name="designationName" placeholder="{{'Name' | translate}}" formControlName="editDesignationName"
+          tabindex="8"/>
+          <div *ngIf="submitted && editDesginationF.editDesignationName.errors" class="error-message">
+            <div *ngIf="editDesginationF.editDesignationName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="editDesginationF.editDesignationName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="designationDescription" class="control-label">{{'Description' | translate}}</label>
+          <textarea rows="3" class="form-control" formControlName="editDesignationDescription" placeholder="{{'Description' | translate}}" tabindex="9"></textarea>
+          <div *ngIf="submitted && editDesginationF.editDesignationDescription.errors" class="error-message">
+            <div *ngIf="editDesginationF.editDesignationDescription.errors.maxlength">
+              {{'Description should not exceed 250 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='editDesignationStatus' class="radio-text" type="radio" [value]="true" tabindex="10">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='editDesignationStatus' class="radio-text" type="radio" [value]="false" tabindex="11">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-submit" tabindex="12">{{'Update Designation' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!--  Edit Designation Form Ends  -->
+
+</ng-template>
+<!--  Edit State Modal Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

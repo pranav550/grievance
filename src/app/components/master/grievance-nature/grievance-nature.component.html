@@ -1,0 +1,230 @@
+<app-header></app-header>
+
+
+<!--  Grievance Nature Wrapper Starts  -->
+<div class="grievance-nature-wrapper">
+
+  <!-- States List Wrapper Starts -->
+  <div class="container grievance-nature-list-wrapper">
+    <div class="custom-table-caption">
+      <h3 class="page-title">{{'Grievance Natures' | translate}}</h3>
+      <div class="row">
+        <div class="col-sm-8 col-md-9">
+          <div class="form-wrapper basic">
+            <form class="custom-form">
+              <div class="form-group clearfix">
+                <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event,'default')" bindLabel="name" placeholder="{{'Select State' | translate}}"
+                  name="selectedState" [(ngModel)]="selectedState" tabindex="1" autofocus="true" [tabindex]="-1">
+                </ng-select>
+                <label for="stateName" class="control-label">{{'Select Grievance Type' | translate}}</label>
+                <ng-select [clearable]="false" [items]="categoryData" (change)="onGTypeChange($event)"  bindLabel="name" placeholder="{{'Select Grievance Type' | translate}}" name="selectedCategory"
+                  [(ngModel)]="selectedCategory" tabindex="2" [tabindex]="-1">
+                </ng-select>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-3 text-right">
+          <button href="javascript:void(0);" [disabled]="!isStateExists || !categoryDataExists" class="btn btn-blue" (click)="addGrievanceNatureModal(addCategoryModalTemplate)">
+            {{'Create Grievance Nature' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="custom-datatable-wrapper">
+      <table id="dataTable1" class="table table-condensed table-bordered custom-col-five-action row-border hover">
+        <thead>
+          <tr>
+            <th class="custom-header-col hidden">{{'Grievance Type Id' | translate}}</th>
+            <th class="custom-header-col">{{'Name' | translate}}</th>
+            <th class="custom-header-col">{{'Description' | translate}}</th>
+            <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+            <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let grievanceData of categoriesNature">
+            <td class="custom-body-col hidden">{{grievanceData.grievanceNatureId}}</td>
+            <td class="custom-body-col">{{grievanceData.grievanceNatureName}}</td>
+            <td class="custom-body-col">{{grievanceData.description}}</td>
+            <td class="custom-body-col status-col">
+              <span *ngIf="grievanceData.status === 'active'" class="badge badge-active">{{grievanceData.status}}</span>
+              <span *ngIf="grievanceData.status === 'inactive'" class="badge badge-inactive">{{grievanceData.status}}</span>
+            </td>
+            <td class="custom-body-col action-col">
+              <a href="javascript:void(0);" (click)="editGrievanceNatureModal(grievanceData,editCategoreisNatureModalTemplate)" class="btn btn-edit">
+                <i class="fa fa-pencil custom-icon"></i>
+                {{'Edit' | translate}}
+              </a>
+              <a href="javascript:void(0);" *ngIf="grievanceData.status === 'active'" (click)="categoreisStatusValue(grievanceData)" class="btn btn-inactive">
+                <i class="fa fa-ban custom-icon"></i>
+                {{'Inactivate' | translate}}
+              </a>
+              <a href="javascript:void(0);" *ngIf="grievanceData.status === 'inactive'" (click)="categoreisStatusValue(grievanceData)" class="btn btn-active">
+                <i class="fa fa-check custom-icon"></i>
+                {{'Activate' | translate}}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- States List Wrapper Starts -->
+
+</div>
+<!--  Grievance Nature Wrapper Ends  -->
+
+<!-- Create New State Modal Starts -->
+<ng-template #addCategoryModalTemplate class="custom-modal">
+
+  <!-- Create States Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="categoryNatureForm" (ngSubmit)='addCategoryNature()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Create Grievance Nature' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" (change)="onStateChange($event,'addChange')" formControlName="addGrievanceSelectState" [items]="statesData"
+            bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="3" autofocus="true" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <p>{{addCategorySelectGrievanceType }}</p>
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select Grievance Type' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" formControlName="addCategorySelectGrievanceType" [items]="categoryData" bindLabel="name" placeholder="{{'Select Grievance Type' | translate}}" tabindex="4" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted" class="error-message">
+            <div *ngIf="categoryNatureForm.value.addCategorySelectGrievanceType == ''">
+              {{'Grievance Type is required' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Name" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" formControlName="addCategoryNatureName" placeholder="{{'Name' | translate}}" tabindex="5">
+          <div *ngIf="submitted && addCategoryNF.addCategoryNatureName.errors" class="error-message">
+            <div *ngIf="addCategoryNF.addCategoryNatureName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="addCategoryNF.addCategoryNatureName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Description" class="control-label">{{'Description' | translate}}</label>
+          <textarea rows="3" class="form-control" formControlName="addCategoryNatureDescription" placeholder="{{'Description' | translate}}" tabindex="6"></textarea>
+          <div *ngIf="submitted && addCategoryNF.addCategoryNatureDescription.errors" class="error-message">
+            <div *ngIf="addCategoryNF.addCategoryNatureDescription.errors.required">
+              {{'Description is required.' | translate}}
+            </div>
+            <div *ngIf="addCategoryNF.addCategoryNatureDescription.errors.maxlength">
+            {{'Description should not exceed 150 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='addCategoryNatureStatus' class="radio-text" type="radio" [value]="true" tabindex="7">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='addCategoryNatureStatus' class="radio-text" type="radio" [value]="false" tabindex="8">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-submit" tabindex="9">{{'Create Grievance Nature' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Create States Form Ends -->
+
+</ng-template>
+<!-- Create New State Modal Ends -->
+
+<!-- Edit New State Modal Starts -->
+<ng-template #editCategoreisNatureModalTemplate class="custom-modal">
+
+  <!-- Create States Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="editCategoryNatureForm" (ngSubmit)='updateGrevianceNature()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Edit Grievance Nature' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" (change)="onStateChange($event,'editChange')" formControlName="editCategorySelectState" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}"  tabindex="10" autofocus="true" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select Grievance Type' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" formControlName="editCategorySelectGrievanceType" [items]="categoryData" bindLabel="name"
+            placeholder="{{'Select Grievance Type' | translate}"  tabindex="11" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted" class="error-message">
+            <div *ngIf="editCategoryNatureForm.value.editCategorySelectGrievanceType == ''">
+              {{'Grievance Type is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" formControlName="editGrevianceName" placeholder="{{'Name' | translate}}" tabindex="12">
+          <div *ngIf="submitted && editGrevianceF.editGrevianceName.errors" class="error-message">
+            <div *ngIf="editGrevianceF.editGrevianceName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="editGrevianceF.editGrevianceName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalDescription" class="control-label">{{'Description' | translate}}</label>
+          <textarea rows="3" class="form-control" formControlName="editGrievanceDescription" placeholder="{{'Description' | translate}}" tabindex="13"></textarea>
+          <div *ngIf="submitted && editGrevianceF.editGrievanceDescription.errors" class="error-message">
+            <div *ngIf="editGrevianceF.editGrievanceDescription.errors.required">
+              {{'Description is required.' | translate}}
+            </div>
+            <div *ngIf="editGrevianceF.editGrievanceDescription.errors.maxlength">
+              {{'Description should not exceed 150 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='editGrevianceStatus' class="radio-text" type="radio" [value]="true" tabindex="14">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='editGrevianceStatus' class="radio-text" type="radio" [value]="false" tabindex="15">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-submit" tabindex="16">{{'Update Grievance Nature' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Create States Form Ends -->
+
+</ng-template>
+<!-- Edit New State Modal Ends -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

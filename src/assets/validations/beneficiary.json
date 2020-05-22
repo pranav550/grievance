@@ -1,0 +1,21 @@
+[
+    {
+        "complainantName": "",
+        "fatherOrHusbandName": "",
+        "complainantMobileNum": "",
+        "complainantDesignationId": "",
+        "grievanceTypeId": "",
+        "grievanceNatureId": "",
+        "description": "",
+        "details": "",
+        "grievanceInstitutionId": "",
+        "grievanceStateId": "",
+        "grievanceDistrictId": "",
+        "areaType": "",
+        "against": "",
+        "defendantDesignationId": "",
+        "grievanceTalukaId": "",
+        "grievanceVillageId": "",
+        "referenceDate": ""
+    }
+]

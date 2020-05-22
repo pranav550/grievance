@@ -1,0 +1,66 @@
+/*==============================================================================
+*****************        Districts Wrapper Styles For The Site    **************
+==============================================================================*/
+.districts-wrapper{
+
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+.districts-wrapper{
+    .custom-table-caption{
+        .form-wrapper{
+            .custom-form{
+                .form-group{
+                    .ng-select {
+                        width: 180px;
+                    }
+                }
+            }
+        }
+    }
+ }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .districts-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 170px;
+                        }
+                    }
+                }
+            }
+        }
+    
+        .custom-datatable-wrapper{
+            .table{
+                &.custom-col-six-action{
+                    min-width: 920px !important;
+                    thead{
+                        tr{
+                            .custom-header-col{
+                                &.action-col {
+                                    width: 20% !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+   
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

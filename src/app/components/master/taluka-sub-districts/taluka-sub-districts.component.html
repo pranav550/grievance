@@ -1,0 +1,307 @@
+
+<app-header></app-header>
+
+<!-- Talukas Wrapper Starts -->
+<div class="talukas-wrapper">
+
+  <!-- Talukas List Wrapper Starts -->
+  <div class="container talukas-list-wrapper">
+    <div class="custom-table-caption">
+      <h3 class="page-title">{{'Talukas (Sub Districts)' | translate }}</h3>
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="form-wrapper basic">
+            <form class="custom-form">
+              <div class="form-group clearfix">
+                <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                <ng-select [clearable]="false" (change)="onStateEventChange($event ,'defaultFilter')" [items]="statesData" bindLabel="name"
+                  placeholder="{{'Select State' | translate}}" name="selectedStateEvent" [(ngModel)]="selectedStateEvent" tabindex="1" autofocus="true" [tabindex]="-1">
+                </ng-select>
+                <label for="stateName" class="control-label">{{'Select District' | translate}}</label>
+                <ng-select [clearable]="false" (change)="onDistrictEventChange($event)" [items]="districtsData" bindLabel="name" placeholder="{{'Select District' | translate}}"
+                  name="selectedDistrictEvent" [(ngModel)]="selectedDistrictEvent" tabindex="2" [tabindex]="-1">
+                </ng-select>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-3 text-right">
+          <button href="javascript:void(0);" class="btn btn-edit" [disabled]="!isTalukaDataExists" (click)="openModal(talukaSubDistricts)">
+            {{'Create Taluka' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="custom-datatable-wrapper">
+      <table id="dataTable1" class="table table-condensed table-bordered custom-col-six-action row-border hover">
+        <thead>
+          <tr>
+            <th class="custom-header-col">{{'Name' | translate}}</th>
+            <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+            <th class="custom-header-col">{{'Display Name' | translate}}</th>
+            <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+            <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+            <th class="custom-header-col delete-col">{{'Delete' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let taluka of talukaData">
+            <td class="custom-body-col">{{ taluka.name }}</td>
+            <td class="custom-body-col id-col">{{ taluka.code }}</td>
+            <td class="custom-body-col">{{ taluka.displayName }}</td>
+            <td class="custom-body-col status-col">
+              <span *ngIf="taluka.status === 'active'" class="badge badge-active">{{ taluka.status }}</span>
+              <span *ngIf="taluka.status === 'inactive'" class="badge badge-inactive">{{ taluka.status }}</span>
+            </td>
+            <td sorting="false" class="custom-body-col action-col">
+              <a href="javascript:void(0);" (click)="editTalukaModal(taluka,editTaluka)" class="btn btn-edit">
+                <i class="fa fa-pencil custom-icon"></i>
+                {{'Edit' | translate}}
+              </a>
+              <a href="javascript:void(0);" *ngIf="taluka.status === 'active'" (click)="talukaStatusValue(taluka, districtName)" class="btn btn-inactive">
+                <i class="fa fa-ban custom-icon"></i>
+                  {{'Inactivate' | translate}}
+                </a>
+              <a href="javascript:void(0);" *ngIf="taluka.status === 'inactive'" (click)="talukaStatusValue(taluka, districtName)" class="btn btn-active">
+                <i class="fa fa-check custom-icon"></i>
+                  {{'Activate' | translate}}
+                </a>
+            </td>
+            <td class="custom-body-col delete-col">
+              <a href="javascript:void(0);" (click)="deleteTalukaModal(taluka,deleteTalukaConfirmModalpopup)" class="btn btn-delete">
+                <i class="fa fa-trash-o custom-icon"></i>
+                {{'Delete' | translate}}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Talukas List Wrapper Starts -->
+
+</div>
+<!-- Talukas Wrapper Ends -->
+
+<!-- Create New Taluka Modal Starts -->
+<ng-template #talukaSubDistricts class="custom-modal">
+
+  <!-- Create States Form Starts -->
+  <div class="form-wrapper">
+    <form [formGroup]="addTalukaForm" class="custom-form" (ngSubmit)="addTaluka()">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Create Taluka' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" (change)="onStateEventChange($event,'addFilter')" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}"
+            name="selectedState" formControlName="addTalukaSelectedState" autofocus="true" tabindex="3" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted && addTalukaF.addTalukaSelectedState.errors" class="error-message">
+            <div *ngIf="addTalukaF.addTalukaSelectedState.errors.required">{{'State is required.' | translate}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Select District' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" [items]="districtsData" bindLabel="name" [ngStyle]="{'opacity': addTalukaForm.value.addTalukaSelectedDistrict === 'Select District' ? '0.5' : '1' } "
+            placeholder="{{'Select District' | translate}}" name="selectedDistrict" formControlName="addTalukaSelectedDistrict" tabindex="4" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted && addTalukaF.addTalukaSelectedDistrict.errors" class="error-message">
+            <div *ngIf="addTalukaF.addTalukaSelectedDistrict.errors.required">{{'District is required.' | translate}}</div>
+          </div>
+          <div *ngIf="submitted" class="error-message">
+            <div *ngIf="addTalukaForm.value.addTalukaSelectedDistrict === 'Select District'">Select District is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" id="talukaName" (ngModelChange)="talukaNameEnter($event)" placeholder="{{'Name' | translate}}"
+            [ngClass]="{ 'is-invalid': submitted && addTalukaF.addTalukaTalukaName.errors }" formControlName="addTalukaTalukaName" tabindex="5" />
+          <div *ngIf="submitted && addTalukaF.addTalukaTalukaName.errors" class="error-message">
+            <div *ngIf="addTalukaF.addTalukaTalukaName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="addTalukaF.addTalukaTalukaName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'ID' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" id="talukaValue" placeholder="{{'ID' | translate}}" formControlName="addTalukaTalukaValue" name="talukaValue" tabindex="6"
+            required>
+          <div *ngIf="submitted && addTalukaF.addTalukaTalukaValue.errors" class="error-message">
+            <div *ngIf="addTalukaF.addTalukaTalukaValue.errors.required">
+              {{'Id is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Display Name' | translate}}</label>
+          <input type="text" class="form-control" id="displayName" placeholder="{{'Display Name' | translate}}" formControlName="addTalukaDisplayName"
+            name="displayName" tabindex="7">
+          <div *ngIf="submitted && addTalukaF.addTalukaDisplayName.errors" class="error-message">
+            <div *ngIf="addTalukaF.addTalukaDisplayName.errors.maxlength">
+              {{'Display Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">{{'Description' | translate}}</label>
+          <textarea placeholder="{{'Description' | translate}}" type="text" formControlName="addTalukaDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted && addTalukaF.addTalukaDescription.errors }" tabindex="8"></textarea>
+          <div *ngIf="submitted && addTalukaF.addTalukaDescription.errors" class="error-message">
+            <div *ngIf="addTalukaF.addTalukaDescription.errors.maxlength">
+              {{'Description should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input class="radio-text" type="radio" [value]="true" formControlName="addTalukaStatus" tabindex="9">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input class="radio-text" type="radio" [value]="false" formControlName="addTalukaStatus" tabindex="10">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="loading" class="btn btn-block btn-default btn-submit" tabindex="11">{{'Create Taluka' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Create Taluka Form Ends -->
+
+</ng-template>
+<!-- Create New Taluka Modal Ends -->
+
+<!-- Edit Taluka Modal Starts -->
+<ng-template #editTaluka class="custom-modal">
+
+  <!-- Create States Form Starts -->
+  <div class="form-wrapper">
+    <form [formGroup]="editTalukaForm" class="custom-form" (ngSubmit)="talukaUpdate()">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Edit Taluka' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" (change)="onStateEventChange($event,'editFilter')" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}"
+            name="editTalukaSelectedState" formControlName="editTalukaSelectedState" tabindex="12" autofocus="true" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select District' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" [items]="districtsData" bindLabel="name" [ngStyle]="{'opacity': editTalukaForm.value.editTalukaSelectedDistrict == 'Select District' ? '0.5' : '1' } "
+            placeholder="{{'Select District' | translate}}" name="editTalukaSelectedDistrict" formControlName="editTalukaSelectedDistrict" tabindex="13" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted" class="error-message">
+            <div *ngIf="districtsData.length == 0">
+              {{'District is required.' | translate}}              
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" placeholder="{{'Name' | translate}}" name="editTalukaDisplayName" formControlName="editTalukaTalukaName"
+            (ngModelChange)="talukaEditEnter($event)" name="editDistrictName" tabindex="14" />
+          <div *ngIf="submitted && editTalukaF.editTalukaTalukaName.errors" class="error-message">
+            <div *ngIf="editTalukaF.editTalukaTalukaName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="editTalukaF.editTalukaTalukaName.errors.maxlength">
+              {{'Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'ID' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" placeholder="{{'ID' | translate}}" formControlName="editTalukaTalukaId" tabindex="15">
+          <div *ngIf="submitted && editTalukaF.editTalukaTalukaId.errors" class="error-message">
+            <div *ngIf="editTalukaF.editTalukaTalukaId.errors.required">
+              {{'Id is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="displayName" class="control-label">{{'Display Name' | translate}}</label>
+          <input type="text" class="form-control" formControlName="editTalukaDisplayName" placeholder="{{'Display Name' | translate}}" tabindex="16">
+          <div *ngIf="submitted && editTalukaF.editTalukaDisplayName.errors" class="error-message">
+            <div *ngIf="editTalukaF.editTalukaDisplayName.errors.maxlength">
+              {{'Display Name should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="displayName" class="control-label">{{'Description' | translate}}</label>
+          <textarea class="form-control" rows="3" formControlName="editTalukaDescription" placeholder="{{'Description' | translate}}" tabindex="17"></textarea>
+          <div *ngIf="submitted && editTalukaF.editTalukaDescription.errors" class="error-message">
+            <div *ngIf="editTalukaF.editTalukaDescription.errors.maxlength">
+              {{'Description should not exceed 100 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input class="radio-text" type="radio" [value]="true" formControlName="editTalukaStatus" tabindex="18">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input class="radio-text" type="radio" [value]="false" formControlName="editTalukaStatus" tabindex="19">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-default btn-submit" tabindex="20">{{'Update Taluka' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Create Taluka Form Ends -->
+
+</ng-template>
+<!-- Edit Taluka Modal Ends -->
+
+<!--  Delete Taluka Modal Starts   -->
+<ng-template #deleteTalukaConfirmModalpopup class="custom-modal">
+  <!-- Delete Taluka Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" #editStateForm="ngForm">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Delete Taluka' | translate}}(<strong>{{deleteId.name}}</strong>)</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center btn-confirm-wrapper">
+          <div class="confirm-message">
+            {{'Are you sure you want to delete the taluka?' | translate}}              
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center btn-confirm-wrapper">
+          <button type="button" class="btn btn-sm btn-red" (click)="deleteTaluka(true)">{{'Yes' | translate}}</button>
+          <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal" (click)="deleteTaluka(false)">{{'No' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Delete Taluka Form Ends -->
+
+</ng-template>
+<!--  Delete Taluka Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

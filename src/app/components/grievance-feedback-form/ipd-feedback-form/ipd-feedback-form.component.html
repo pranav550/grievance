@@ -1,0 +1,157 @@
+<!--   IPD Feedback Form Wrapper Starts  -->
+<app-header></app-header>
+<div class="feedback-wrapper ipd-feedback-wrapper">
+    <!--  IPD Form Wrapper Starts  -->
+    <div class="container">
+        <div class="custom-table-caption">
+            <h3 class="page-title">{{'IPD Form' | translate}}</h3>
+            <div class="form-wrapper basic">
+                <form class="custom-form grid-form">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group clearfix">
+                                <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                                <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event)" bindLabel="name" placeholder="{{'Select State' | translate}}" name="selectedState" [(ngModel)]="selectedState" tabindex="1" autofocus="true" [tabindex]="-1" [disabled]="true">
+                                </ng-select>
+                                <label for="districtName" class="control-label">{{'Select District' | translate}}</label>
+                                <ng-select [clearable]="false" [items]="districtsData" bindLabel="name" placeholder="{{'Select District' | translate}}" name="selectedDistrict" [(ngModel)]="selectedDistrict" tabindex="2" [tabindex]="-1">
+                                </ng-select>
+                                <label for="hospitalName" class="control-label">{{'Select Hospital' | translate}}</label>
+                                <ng-select [clearable]="false" [items]="hospitalData" bindLabel="name" placeholder="{{'Select Hospital' | translate}}" [(ngModel)]="selectedHospital" name="selectedHospital" tabindex="3" [tabindex]="-1">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 text-right">
+                            <button type="submit" (click)="submitReport()" [disabled]="!isHospitalDataExists || !isDistrictDataExists" class="btn btn-blue">
+                {{'Submit' | translate}}
+              </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- IPD Form Wrapper Ends  -->
+        <div class="feedback-form-wrapper" *ngIf="ipd">
+            <div class="form-wrapper feedback-form-wrapper">
+                <form class="custom-form" [formGroup]="ipdForm">
+                    <div class="row">
+                        <div class="col-md-6" *ngFor="let d of IpdData;let i = index">
+                            <div class="form-group feedback-form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label for="dob" class="control-label">
+                      {{d.question | translate}}<sup class="custom-required">*</sup>
+                    </label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="feedback-form-inner-wrapper">
+                                            <div *ngIf="d.options == 'radio'" class="clearfix">
+                                                <label class="radio-inline custom-radio">
+                          <input class="radio-text" type="radio" (change)="emptyDisable($event,'radio')"
+                            formControlName="ratingForm_{{d.id}}" value="poor" />
+                          <span class="radio-text">{{ 'Poor' | translate}}</span>
+                        </label>
+                                                <label class="radio-inline custom-radio">
+                          <input class="radio-text" type="radio" (change)="emptyDisable($event,'radio')"
+                            formControlName="ratingForm_{{d.id}}" value="fair" />
+                          <span class="radio-text">{{ 'Fair' | translate}}</span>
+                        </label>
+                                                <label class="radio-inline custom-radio">
+                          <input class="radio-text" type="radio" (change)="emptyDisable($event,'radio')"
+                            formControlName="ratingForm_{{d.id}}" value="Good" />
+                          <span class="radio-text">{{ 'Good' | translate}}</span>
+                        </label>
+                                                <label class="radio-inline custom-radio">
+                          <input class="radio-text" type="radio" (change)="emptyDisable($event,'radio')"
+                            formControlName="ratingForm_{{d.id}}" value="VeryGood" />
+                          <span class="radio-text">{{ 'Very Good' | translate}}</span>
+                        </label>
+                                                <label class="radio-inline custom-radio">
+                          <input class="radio-text" type="radio" (change)="emptyDisable($event,'radio')"
+                            formControlName="ratingForm_{{d.id}}" value="Excellent" />
+                          <span class="radio-text">{{ 'Excellent' | translate}}</span>
+                        </label>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12" *ngIf="d.options == 'dropdown'">
+                                                    <ng-select [clearable]="false" [items]="genderData" formControlName="ratingForm_{{d.id}}" bindLabel="name" placeholder="{{'Select Gender' | translate}}" tabindex="5" [tabindex]="-1">
+                                                    </ng-select>
+                                                </div>
+                                                <div class="col-sm-12" *ngIf="d.options == 'calendar'">
+                                                    <div class="has-feedback custom-date-picker">
+                                                        <input class="form-control" [maxDate]="maxDateJoin" #dpYMD="bsDatepicker" formControlName="ratingForm_{{d.id}}" placeholder="{{'Select Date' | translate}}" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" tabindex="19" autocomplete="new-password"
+                                                        />
+                                                        <i class="fa fa-calendar-times-o form-control-feedback"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12" *ngIf="d.options == 'text'">
+                                                    <textarea rows="3" placeholder="{{'Comments' | translate}}" (keyup)="emptyDisable($event , 'textarea',d.id)" formControlName="ratingForm_{{d.id}}" type="text" class="form-control" tabindex="14"> </textarea>
+                                                    <div *ngIf="submitted">
+                                                        <div *ngIf="d.textAreaVal" class="error-message">
+                                                            Text should not exceed 255 characters
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12" *ngIf="d.options == 'text-box'">
+                                                    <textarea rows="3" placeholder="{{'Comments' | translate}}" (keyup)="emptyDisable($event , 'textarea',d.id)" formControlName="ratingForm_{{d.id}}" type="text" class="form-control" tabindex="14"> </textarea>
+                                                </div>
+                                                <div class="col-sm-12" *ngIf="d.options == 'input'">
+                                                    <input class="form-control" placeholder="{{d.question | translate}}" (keyup)="emptyDisable($event , 'textarea',d.id)" type="text" numberOnly formControlName="ratingForm_{{d.id}}" value="poor" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <a routerLink="/dashboard" class="btn btn-red pull-left" tabindex="19">
+              {{'back' | translate}}
+            </a>
+                        <button type="button" class="btn btn-block btn-submit pull-right" (click)="confirmIPDFeedbackModal(deletGrievanceModalpopup)" tabindex="20">
+              {{'Submit' | translate}}
+            </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Feedback Form Wrapper Ends -->
+</div>
+<!--   IPD Feedback Form Wrapper Ends  -->
+
+<ng-template #deletGrievanceModalpopup class="custom-modal">
+    <div class="form-wrapper">
+        <form class="custom-form">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ 'IPD Feedback' | translate}} </h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{ 'Are you sure want to submit IPD Form feedback?' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red" (click)="ipdFeedback()">
+              {{'Yes' | translate}}
+            </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal" (click)="modalRef.hide()">
+              {{'No' | translate}}
+            </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

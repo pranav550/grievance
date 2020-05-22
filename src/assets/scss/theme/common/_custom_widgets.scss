@@ -1,0 +1,170 @@
+
+/*==============================================================================
+*********************  Custom Widgets Styles For The Site  *********************
+==============================================================================*/
+
+/*--  Gridster Styles  --*/
+.gridster{
+    ul{
+        li{
+            overflow: hidden;
+            &.gridster-item{
+                background-color: $cello1;
+                color: $westar;
+                &:hover,&:focus{
+                    border: 0;
+                }
+            }
+        }  
+    }
+}
+
+/*--  Widget Header Styles  --*/
+.widget-header{
+    @include size(100%,30px);
+    @include padding(8px 10px 8px 28px);
+    background-color: $dark-grey1;
+    color: $dark-grey8;  
+    font-family: $roboto-bold;
+    line-height: ($line-height-computed * .7);
+    cursor: move;
+    position: relative;
+    border-bottom: 1px solid $fiord1;
+    .icon-widget{
+        @include translateY(-50%);
+        position: absolute;
+        left: 10px;  
+        top: 50%;
+    }
+    .dropdown-toggle{
+    	@extend .text-center;
+    	@include padding(6px 15px);
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 9;
+        .ellipsis{
+            font-size: $font-size-large;       
+            color: $light-grey1;
+        }
+    }
+    .filter-menu{
+    	@include margin(0);
+    	@include padding(0);
+        @include border-radius(0);
+        background-color: $tangaroa;
+        cursor: pointer;
+        position: absolute;
+        top: 30px;
+        right: 0;
+        left: auto;
+        border: 0;
+        li{
+            display: inline-block;
+            a{
+                @include padding(5px 20px);
+                @include margin(0);
+                color: #337ab7;
+                border-right: 1px solid $black;
+                &:hover,&:focus{
+                	background-color: transparent;
+                    color: $white;
+                }
+            }
+            &:last-of-type{
+                a{
+                    border-right: 0;            	
+                }
+            }
+        }
+    }
+}
+
+/*--  Widget Content Styles  --*/
+.widget-content{    
+    color: $white;
+    font-size: $font-size-small;
+    height: 90%;
+    overflow: hidden;
+    &:hover{
+        color: $white;
+        overflow: auto;
+    }    
+    &.widget-top-location{
+    	height: 100%;
+    }
+    h4{
+        color: $pumpkin;
+    }
+    h4{
+        color: $lochmara;
+    }
+    .custom-media-object{     
+            img{
+            	 @include margin(0 auto);
+                 @include border-radius(50%);
+                 display: block;
+                 width: 45px;
+                 border: 4px solid $dark-grey3;
+            }       
+        	 p{
+                @extend .text-center;
+                @include margin(5px 0);
+            	color : $westar;
+                font-family : $roboto-medium;
+                font-size: ($font-size-small - 2);
+                white-space: nowrap;
+			    text-overflow: ellipsis;
+			    overflow: hidden;
+                width: 80px;                
+            } 
+    }  
+    .icon-eye{
+        color: $fiord;
+        font-size: ($font-size-base + 2);
+    }
+}  
+.gridster-loaded{
+	 .gridster-item{
+	 	.dataTables_filter{
+		 	 label{
+			    color: $bali-hai10;
+			    font-weight: normal;
+			}
+	 	}
+	 }
+}
+
+.custom-widget-content{
+    height: 100%;
+    overflow: hidden !important;
+}
+.custom-enrich-add{
+    display: block;
+    position: relative;
+    .fa-plus-circle{
+        @include translateY(-50%);
+        position: absolute;
+        right: 0;
+        top: 50%;
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

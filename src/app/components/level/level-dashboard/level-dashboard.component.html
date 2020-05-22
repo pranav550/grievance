@@ -1,0 +1,837 @@
+<!-- Admin Dashboard Wrapper Starts -->
+<app-header></app-header>
+<section class="dashboard-wrapper level-dashboard-wrapper">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Tile Main Wrapper Starts -->
+                <div class="tile-main-wrapper">
+                    <div class="tile-row">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-light-blue">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Grievance Registered'| translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="islevelGrievanceCountExist">
+                                        <p class="tile-count"><i
+                                                class="fa fa-list-ul tile-icon"></i>{{allGRegisteredPerMonth}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievance registered this month.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!islevelGrievanceCountExist">
+                                        <p class="tile-count"><i class="fa fa-list-ul tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievance registered this month.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-green">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Grievance Resolved' | translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="islevelGrievanceCountExist">
+                                        <p class="tile-count"><i
+                                                class="fa fa-check-circle-o tile-icon"></i>{{allGResolvedPerMonth}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievance resolved this month.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!islevelGrievanceCountExist">
+                                        <p class="tile-count"><i class="fa fa-check-circle-o tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievance resolved this month.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-light-blue1">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'OPD Feedback' | translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="isTotalOPDCountExist">
+                                        <p class="tile-count"><i
+                                                class="fa fa-pencil-square-o tile-icon"></i>{{totalOPDCount}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows total OPD Feedback submitted for the current month.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!isTotalOPDCountExist">
+                                        <p class="tile-count"><i class="fa fa-pencil-square-o tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows total OPD Feedback submitted for the current month.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-blue">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'IPD Feedback' | translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="isTotalIPDCountExist">
+                                        <p class="tile-count"><i
+                                                class="fa fa-pencil-square-o tile-icon"></i>{{totalIPDCount}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows total IPD Feedback submitted for the current month.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!isTotalIPDCountExist">
+                                        <p class="tile-count"><i class="fa fa-pencil-square-o tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows total IPD Feedback submitted for the current month.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tile Main Wrapper Ends -->
+
+            </div>
+        </div>
+
+        <!--  Custom Table Caption Starts  -->
+        <div class="custom-table-caption">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="page-title">{{ 'dashboard' | translate }}</h3>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-wrapper basic">
+                        <form [formGroup]="adminDashBoardForm" class="custom-form">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group clearfix">
+
+                                        <label for="grievanceId" class="control-label">
+                                            {{'Grievance Id' | translate}}
+                                        </label>
+                                        <input type="text" id="grievanceId" class="form-control custom-input"
+                                            placeholder="{{'Grievance Id' | translate}}" tabindex="1" />
+
+
+                                        <label for="stateName" class="control-label">
+                                            {{'Select District' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="districtsData" bindLabel="name"
+                                            placeholder="{{'Select District' | translate}}" name="selectedState"
+                                            formControlName="selectedDistrict" tabindex="2" autofocus="true"
+                                            [(ngModel)]="multipleDistrict" (change)="changeDistrict(multipleDistrict)"
+                                            [tabindex]="-1">
+                                        </ng-select>
+
+
+
+                                        <label for="block" class="control-label">{{'Select Block' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="true" multiple="true" [(ngModel)]="multipleTalukas"
+                                            [items]="talukasData" bindLabel="name"
+                                            placeholder="{{'Select Block' | translate}}" [selectableGroup]="true"
+                                            [selectableGroupAsModel]="false" formControlName="addUserBlockLocation"
+                                            tabindex="29" [tabindex]="-1" name="selectedBlockLocation"
+                                            [closeOnSelect]="false" groupBy="gender"
+                                            (change)="changeTalukas(multipleTalukas)" tabindex="22">
+                                            <ng-template ng-optgroup-tmp let-item="item" let-item$="item$"
+                                                let-index="index">
+
+                                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                                    [ngModelOptions]="{standalone: true}" />{{item.gender | uppercase}}{{item.name| uppercase}}
+                                            </ng-template>
+                                            <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                let-index="index">
+                                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                                                    [ngModelOptions]="{standalone: true}" /> {{item.name}}
+                                            </ng-template>
+
+                                        </ng-select>
+
+
+                                        <label for="districtName" class="control-label">
+                                            {{'Grievance Type' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="categoryData" bindLabel="name"
+                                            placeholder="{{'Grievance Type' | translate}}"
+                                            formControlName="selectedGrievanceType" tabindex="3" [tabindex]="-1">
+                                        </ng-select>
+                                        <label for="districtName" class="control-label">
+                                            {{'Status' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="beneficaryStatusDetails"
+                                            bindLabel="dpname" placeholder="{{'Status' | translate}}"
+                                            formControlName="selectedStatus" tabindex="4" [tabindex]="-1">
+                                        </ng-select>
+                                        <label for="talukaName"
+                                            class="control-label">{{'Start Date & Time' | translate}}<sup
+                                                class="custom-required">*</sup></label>
+                                        <div class="custom-date-picker">
+                                            <input class="form-control"
+                                                placeholder="{{'Start Date & Time' | translate}}"
+                                                formControlName="startDateTime" [(ngModel)]="startDateTime"
+                                                (click)="onTogglePicker('startDT')" tabindex="5" />
+                                            <i class="fa fa-calendar-times-o form-control-feedback"
+                                                aria-hidden="true"></i>
+                                            <datetime-popup class="custom-datetime-popup" [value]="startDateTime"
+                                                [maxDate]="maxDate" (valueChange)="onValueChange($event,'startDT')"
+                                                [(showPopup)]="showPickerStart" [showDate]="showDateStart"
+                                                [showTime]="showTimeStart" [closeButton]="closeButtonStart">
+                                            </datetime-popup>
+                                        </div>
+                                        <label for="talukaName"
+                                            class="control-label">{{'End Date & Time' | translate}}<sup
+                                                class="custom-required">*</sup></label>
+                                        <div class="custom-date-picker">
+                                            <input class="form-control" placeholder="{{'End Date & Time' | translate}}"
+                                                formControlName="endDateTime" [(ngModel)]="endDateTime"
+                                                (click)="onTogglePicker('endDT')" tabindex="6" />
+                                            <i class="fa fa-calendar-times-o form-control-feedback"
+                                                aria-hidden="true"></i>
+                                            <datetime-popup class="custom-datetime-popup" [value]="endDateTime"
+                                                [maxDate]="maxDate" (valueChange)="onValueChange($event,'endDT')"
+                                                [(showPopup)]="showPickerEnd" [showDate]="showDateEnd"
+                                                [showTime]="showTimeEnd" [closeButton]="closeButtonEnd">
+                                            </datetime-popup>
+                                            <div class="error-message" *ngIf="isDate">
+                                                {{'End Date should always be greater than Start Date' | translate}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="submit" (click)="submitReport()" class="btn btn-blue">
+                                        {{'Submit' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Custom Table Caption Ends  -->
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- States List Wrapper Starts -->
+                <div class="states-list-wrapper">
+                    <div class="tabs-wrapper">
+                        <tabset #staticTabs>
+
+                            <!-- First Tab Content Starts -->
+                            <tab heading="{{ 'New Grievances' | translate }}" (select)="onSelect($event)">
+                                <div class="states-list-wrapper new-grievance-wrapper">
+                                    <div class="custom-datatable-wrapper">
+                                        <table id="dataTable2"
+                                            class="table table-condensed table-bordered custom-col-ten-action row-border hover">
+                                            <thead>
+                                                <tr [ngClass]="{'tableNull': newgrievanceData?.length==0}">
+                                                    <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                                                    <th class="custom-header-col date-col">
+                                                        {{'Grievance Date' | translate}}</th>
+                                                    <th class="custom-header-col date-col">
+                                                        {{'FeedbackScore' | translate}}</th>
+                                                    <th class="custom-header-col type-col">{{'Type' | translate}}</th>
+                                                    <th class="custom-header-col description-col">
+                                                        {{'Details of Grievance' | translate}}</th>
+                                                    <th class="custom-header-col description-col">
+                                                        {{'Subject of Grievance' | translate}}</th>
+                                                    <th class="custom-header-col status-col">{{'District' | translate}}
+                                                    </th>
+                                                    <th class="custom-header-col status-col">{{'Block' | translate}}
+                                                    </th>
+                                                    <th class="custom-header-col status-col">{{'Village' | translate}}
+                                                    </th>
+                                                    <!-- <th class="custom-header-col action-col">{{'Action' | translate}}
+                                                    </th>
+                                                    <th class="custom-header-col delete-col">{{'Reject' | translate}}
+                                                    </th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let newGriData of newgrievanceData">
+                                                    <td class="custom-body-col id-col">
+                                                        <a (click)="grievanceDetailsModal(newGriData.id)"
+                                                            href="javascript:void(0);">
+                                                            {{ newGriData.grievance_id }}
+                                                        </a></td>
+                                                    <td class="custom-body-col date-col">
+                                                        {{ newGriData.created_at.date | date:'MM/dd/yyyy, h:mm a' }}
+                                                    </td>
+                                                    <td class="custom-body-col date-col">
+                                                        {{ newGriData.avg_feedback | feedbackRating }}
+                                                    </td>
+                                                    <td class="custom-body-col description-col">
+                                                        <p class="description-text">
+                                                            {{ newGriData.grievanceTypes.name ? newGriData.grievanceTypes.name : '-' }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="custom-body-col description-col">
+                                                        <p class="description-text">{{ newGriData.details }}</p>
+                                                    </td>
+                                                    <td class="custom-body-col status-col">
+                                                        <p class="description-text">{{ newGriData.description }}</p>
+                                                    </td>
+                                                    <td class="custom-body-col status-col">
+                                                        <p class="description-text">{{ newGriData.districts.name }}</p>
+                                                    </td>
+                                                    <td class="custom-body-col status-col">
+                                                        <p class="description-text">
+                                                            {{ newGriData.talukas.name ? newGriData.talukas.name : '-' }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="custom-body-col status-col">
+                                                        <p class="description-text">
+                                                            {{ newGriData.villages.name ? newGriData.villages.name : '-' }}
+                                                        </p>
+                                                    </td>
+                                                    <!-- <td class="custom-body-col action-col">
+                                                        <a class="table-link" href="javascript:void(0);"
+                                                            (click)="deletGrievanceModal(deletGrievanceModalpopup,newGriData.id,'accept',newGriData.grievance_id)"
+                                                            class="btn btn-green">
+                                                            <i class="fa fa-check custom-icon"></i>
+                                                            {{'Accept' | translate}}
+                                                        </a>
+                                                        <a href="javascript:void(0);"
+                                                            (click)="editGrievance(newGriData);" class="btn btn-edit">
+                                                            <i class="fa fa-pencil custom-icon"></i>
+                                                            {{'Edit' | translate}}
+                                                        </a>
+                                                        <a href="javascript:void(0);"
+                                                            (click)="viewTimeLineGrievance(newGriData.id)"
+                                                            href="javascript:void(0);" class="btn btn-view">
+                                                            <i class="fa fa-eye custom-icon"></i> {{'View' | translate}}
+                                                        </a>
+                                                    </td>
+                                                    <td class="custom-body-col delete-col">
+                                                        <a href="javascript:void(0);"
+                                                            (click)="deletGrievanceModal(deletGrievanceModalpopup,newGriData.id,'reject',newGriData.grievance_id)"
+                                                            class="btn btn-delete">
+                                                            <i class="fa fa-ban custom-icon"></i>
+                                                            {{'Reject' | translate}}
+                                                        </a>
+                                                    </td> -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </tab>
+
+
+                            <tab heading="{{ 'Accepted Grievances' | translate }}" (select)="onSelect($event)">
+                                <div class="states-list-wrapper accepted-grievance-wrapper">
+                                    <div class="custom-datatable-wrapper">
+                                        <table id="dataTable1"
+                                            class="table table-condensed table-bordered custom-col-four-action row-border hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                                                    <th class="custom-header-col date-col">
+                                                        {{'Grievance Date' | translate}}</th>
+                                                    <th class="custom-header-col description-col">
+                                                        {{'Brief' | translate}}</th>
+                                                    <th class="custom-header-col status-col">{{'Status' | translate}}
+                                                    </th>
+                                                    <th class="custom-header-col action-col">{{'Action' | translate}}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let levelData of levelGrievanceData">
+                                                    <td class="custom-body-col id-col">
+                                                        <a class="table-link" (click)="grievanceDetailsModal(levelData)"
+                                                            href="javascript:void(0);">
+                                                            {{ levelData.grievance_id }}
+                                                        </a>
+                                                    </td>
+                                                    <td class="custom-body-col date-col">
+                                                        {{ levelData.grievance_reg_date | date:'MM/dd/yyyy hh:mm a'}}
+                                                    </td>
+                                                    <td class="custom-body-col description-col">
+                                                        <p class="description-text">
+                                                            {{ levelData.description }}
+                                                        </p>
+                                                    </td>
+                                                    <td class="custom-body-col status-col">
+                                                        <span class="badge badge-red"
+                                                            *ngIf="levelData.status == 'rejected'">{{
+                          levelData.status }}</span>
+                                                        <span class="badge badge-active"
+                                                            *ngIf="levelData.status == 'accepted'">{{
+                          levelData.status }}</span>
+                                                        <span class="badge badge-orange"
+                                                            *ngIf="levelData.status == 'pending'">{{
+                          levelData.status }}</span>
+                                                        <span class="badge badge-active"
+                                                            *ngIf="levelData.status == 'closed'">{{
+                          levelData.status }}</span>
+                                                        <span class="badge badge-reopen"
+                                                            *ngIf="levelData.status == 'reopened'">{{
+                                            levelData.status  | translate}}
+                                                        </span>
+                                                    </td>
+                                                    <td class="custom-body-col action-col">
+                                                        <a class="btn btn-edit"
+                                                            *ngIf="levelData.status == 'pending' || levelData.status == 'accepted' || levelData.status == 'reopened'"
+                                                            (click)="grievanceActionModal(grievanceAction,levelData)"
+                                                            href="javascript:void(0);">
+                                                            {{ 'More Details' | translate }}
+                                                        </a>
+                                                        <a href="javascript:void(0);"
+                                                            (click)="viewTimeLineGrievance(levelData.id)"
+                                                            href="javascript:void(0);" href="javascript:void(0);"
+                                                            class="btn btn-view">
+                                                            <i class="fa fa-eye custom-icon"></i>
+                                                            {{'View' | translate}}</a>
+                                                        <a href="javascript:void(0);"
+                                                            *ngIf="levelData.status == 'pending' || levelData.status == 'accepted'"
+                                                            (click)="forwardGrievanceModal(forwardGrievanceModalpopup,levelData.id,levelData.grievance_id)"
+                                                            class="btn btn-light-blue">
+                                                            <i class="fa fa-forward custom-icon"></i>
+                                                            {{'Forward' | translate}}
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+                <!--  States List Wrapper Ends  -->
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Admin Dashboard Wrapper Ends -->
+
+<!-- User Description Modal Ends -->
+
+<!-- User Description Modal Starts -->
+<ng-template #grievanceAction class="modal custom-modal grievance-modal-wrapper" id="myModal" role="dialog">
+    <!-- Modal content Starts Here-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left"> {{ 'Grievance Details' | translate}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" style="overflow-y: auto;
+        max-height: calc(100vh - 200px);
+        line-height: 20px;">
+            <div class="panel panel-default custom-details-panel">
+                <div class="panel-body">
+                    <div class="details-wrapper">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <ul class="list-unstyled description-list">
+                                    <li>
+                                        <strong>{{'Grievance Id' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.grievance_id}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Grievance Reg. Date' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.grievance_reg_date | date: 'MM/dd/yyyy hh:mm a'}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Grievance Type' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.grievance_type}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'District' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.grievance_district}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Block' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.grievance_taluka}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Village' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.grievance_village}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Nature of Grievance' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.grievance_nature}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Against Institution' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.grievance_institution}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Designation' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.defendant_designation}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Grievance Against Whom' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.against}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Subject Of Grievance' | translate}}</strong>
+                                        <span>{{levelGrievanceActionData.description}}</span>
+                                    </li>
+                                    <li>
+                                        <strong>{{'Grievance Summary' | translate}}</strong>
+                                        <span class="summary-text">{{levelGrievanceActionData.details}}</span>
+                                    </li>
+                                    <!-- <li>
+                        <strong>{{'Action Taken By' | translate}}</strong>
+                        <span>-</span>
+                      </li>
+                      <li>
+                        <strong>{{'Action Remarks' | translate}}</strong>
+                        <span>-</span>
+                      </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-xs-12">
+                                <div class="form-wrapper basic">
+                                    <form class="custom-form" [formGroup]="levelGrievanceActionForm">
+                                        <div class="form-group clearfix" *ngIf="actionTakenData.length > 0">
+                                            <label class="control-label" for="detailsOfGrievance">
+                                                <strong>{{'Actions' | translate}}</strong>
+                                                <sup class="custom-required">*</sup>
+                                            </label>
+                                            <!-- Modal Wrapper Table Starts -->
+                                            <div class="custom-datatable-wrapper">
+                                                <table id="dataTable1"
+                                                    class="table table-condensed table-bordered custom-col-seven-action row-border hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="custom-header-col id-col">{{'S.No' | translate}}
+                                                            </th>
+                                                            <th class="custom-header-col date-col">
+                                                                {{'Action Date' | translate}}</th>
+                                                            <th class="custom-header-col description-col">
+                                                                {{'Action Taken' | translate}}</th>
+                                                            <th class="custom-header-col officer-id-col">
+                                                                {{'Officer ID' | translate}}</th>
+                                                            <th class="custom-header-col status-col">
+                                                                {{'Status' | translate}}</th>
+                                                            <th class="custom-header-col status-col">
+                                                                {{'Redressed' | translate}}</th>
+                                                            <th class="custom-header-col action-col">
+                                                                {{'File' | translate}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let actionData of actionTakenData let i = index">
+                                                            <td class="custom-body-col id-col">
+                                                                <p clas="sno-col">
+                                                                    {{i + 1}}
+                                                                </p>
+                                                            </td>
+                                                            <td class="custom-body-col date-col">
+                                                                <p>{{actionData.actionTakenDate| date: 'MM/dd/yyyy hh:mm a'}}
+                                                                </p>
+                                                            </td>
+                                                            <td class="custom-body-col description-col">
+                                                                <p class="action-text">
+                                                                    {{actionData.redressedComment}}
+                                                                </p>
+                                                            </td>
+                                                            <td class="custom-body-col officer-id-col">
+                                                                <p class="officer-id-text">
+                                                                    {{actionData.name}}({{actionData.roleName}})
+                                                                </p>
+                                                            </td>
+                                                            <td class="custom-body-col status-col">
+                                                                <p class="status-text">
+                                                                    {{actionData.redressedStatus}}
+                                                                </p>
+                                                            </td>
+                                                            <td class="custom-body-col status-col redressed-col">
+                                                                <p class="redressed-text">
+                                                                    {{actionData.isGrievanceRedressedVal}}
+                                                                </p>
+                                                            </td>
+                                                            <td class="custom-body-col status-col file-col">
+                                                                <p *ngIf="actionData.fileName != null"
+                                                                    class="file-section">
+                                                                    <img src="{{actionData.fileName}}" alt="file">
+                                                                </p>
+                                                                <p *ngIf="actionData.fileName == null"
+                                                                    class="file-section">
+                                                                    -
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- Modal Wrapper Table Ends -->
+                                            <!-- <div *ngIf="submitted && addlevelGrievanceF.comment.errors" class="error-message">
+                        <div *ngIf="addlevelGrievanceF.comment.errors.required">
+                          {{'Comment is required.' | translate}}
+                        </div>
+                      </div> -->
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label class="control-label" for="detailsOfGrievance">
+                                                <strong>{{'Comment' | translate}}</strong>
+                                                <sup class="custom-required">*</sup>
+                                            </label>
+                                            <div class="has-feedback">
+                                                <textarea class="form-control" formControlName="comment" rows="4"
+                                                    tabindex="17"
+                                                    placeholder="{{'Details of Grievance' | translate}}"></textarea>
+                                                <div *ngIf="submitted && addlevelGrievanceF['comment']errors"
+                                                    class="error-message">
+                                                    <div *ngIf="addlevelGrievanceF['comment']['errors']required">
+                                                        {{'Comment is required.' | translate}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label class="control-label" for="exampleInputFile">
+                                                <strong>{{'Upload a file' | translate}}</strong>
+                                            </label>
+                                            <input required #uploader1Input type="file" ng2FileSelect
+                                                [uploader]="uploader"
+                                                accept="image/png,image/jpg,image/jpeg,image/gif,application/pdf,application/word,application/excel"
+                                                name="photoid" multiple />
+                                        </div>
+                                        <div class="form-group clearfix custom-preview-image-wrapper">
+                                            <div class="clearfix preview-wrapper image">
+                                                <div class="preview-img pull-left"
+                                                    *ngFor="let item of uploader.queue ; let i = index">
+                                                    <img src mediaPreview *ngIf="item?._file.type.startsWith('image')"
+                                                        [media]="item?._file" class="media-object img-responsive" />
+                                                    <!-- PDF -->
+                                                    <img *ngIf="item?._file.type === 'application/pdf'"
+                                                        src="assets/images/pdf.svg" mediaPreview [media]="item._file"
+                                                        class="image-pdf img-responsive">
+                                                    <button type="button" class="btn btn-red" data-toggle="modal"
+                                                        data-target="#removeDocumentModal" data-backdrop="false"
+                                                        (click)="removePhotoId(i)">
+                                                        <span class="fa fa-times"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label class="control-label" for="detailsOfGrievance">
+                                                <strong>{{'Do you think the grievance is redressed?' | translate}}</strong>
+                                            </label>
+                                            <div class="form-group radio-redressed-form">
+                                                <label class="radio-inline custom-radio">
+                                                    <input (change)="checkRedressal('1')" class="radio-text"
+                                                        type="radio" formControlName="isGrievanceRedressed" value="1">
+                                                    <span _ngcontent-c7=""
+                                                        class="radio-text">{{'Yes' | translate}}</span>
+                                                </label>
+                                                <label class="radio-inline custom-radio">
+                                                    <input (change)="checkRedressal('0')" class="radio-text"
+                                                        type="radio" formControlName="isGrievanceRedressed" value="0">
+                                                    <span class="radio-text">{{'No' | translate}}</span>
+                                                </label>
+                                            </div>
+                                            <div *ngIf="isStatus" class="form-wrapper">
+                                                <div class="form-group clearfix mb-30">
+                                                    <label for="level" class="control-label">
+                                                        <strong>{{'Redressed Status' | translate}}</strong>
+                                                        <sup class="custom-required">*</sup>
+                                                    </label>
+                                                    <ng-select [clearable]="false" [items]="redressedStatusData"
+                                                        bindLabel="name"
+                                                        placeholder="{{'Redressed Status' | translate}}"
+                                                        formControlName="redressedStatus" tabindex="23" [tabindex]="-1">
+                                                    </ng-select>
+                                                    <div *ngIf="submitted && addlevelGrievanceF['redressedStatus']errors"
+                                                        class="error-message">
+                                                        <div
+                                                            *ngIf="addlevelGrievanceF['redressedStatus']['errors']required">
+                                                            {{'Redressed Status is required.' | translate}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group clearfix">
+                                                    <label class="control-label" for="detailsOfGrievance">
+                                                        <strong>{{'Comment' | translate}}</strong>
+                                                    </label>
+                                                    <textarea class="form-control" formControlName="redressedComment"
+                                                        rows="4" tabindex="17"
+                                                        placeholder="{{'Comment' | translate}}"></textarea>
+                                                </div>
+                                            </div>
+                                            <!-- <label for="level" class="control-label">Assigned Level</label>
+                      <ng-select [clearable]="false" [items]="levelData" bindLabel="name" placeholder="Assigned Level"
+                        formControlName="assignedLevelId" tabindex="23" [tabindex]="-1">
+                      </ng-select> -->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-xs-12 text-center">
+                <button type="submit" class="btn btn-red" (click)="addLevelGrievanceAction()">
+                    {{'Submit' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal content Starts Here-->
+</ng-template>
+<!-- User Description Modal Ends -->
+
+<!--  Forward Grievance Modal Starts   -->
+<ng-template #forwardGrievanceModalpopup class="custom-modal">
+    <div class="form-row">
+        <div class="form-wrapper">
+
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ 'Forward Grievance' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form" [formGroup]="forwardGrievanceActionForm">
+                    <div class="form-group clearfix">
+                        <label for="stateName" class="control-label">
+                            {{'Level' | translate}}<sup class="custom-required">*</sup>
+                        </label>
+                        <ng-select [clearable]="false" [items]="levelsData" formControlName="level" name="selectedLevel"
+                            [(ngModel)]="selectedLevel" bindLabel="name" placeholder="{{'Select Level' | translate}}"
+                            autofocus="true" tabindex="1" [tabindex]="-1">
+                        </ng-select>
+                    </div>
+                    <div class="form-group clearfix mar-b0">
+                        <label class="control-label" for="detailsOfGrievance">
+                            <strong>{{'Comment' | translate}}</strong>
+                            <sup class="custom-required">*</sup>
+                        </label>
+                        <textarea class="form-control" formControlName="levelfeedback" rows="4" tabindex="17"
+                            placeholder="{{'Write your comment here' | translate}}"
+                            (keyup)="emptyDisable($event)"></textarea>
+                        <div *ngIf="errorCheck" class="error-message">
+                            {{'Maximum 250 characters allow' | translate}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <!-- <button type="button" class="btn btn-sm btn-red" [disabled]="errorCheck && (forwardGrievanceActionForm.value.levelfeedback == null || forwardGrievanceActionForm.value.levelfeedback == '') "
+            (click)="forwardGrivance()">
+            {{'Forward' | translate}}
+          </button> -->
+
+                    <button type="button" class="btn btn-sm btn-red"
+                        [disabled]="errorCheck || (forwardGrievanceActionForm.value.levelfeedback == null || forwardGrievanceActionForm.value.levelfeedback == '') "
+                        (click)="forwardCnfGrievanceModal(CnfForwardGrievanceModalpopup)">
+                        {{'Forward' | translate}}
+                    </button>
+
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal"
+                        (click)="modalRef.hide()">
+                        {{'Cancel' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- Forward Grievance Modal Ends -->
+
+<!--  Confirm Forward Grievance Modal Starts   -->
+<ng-template #CnfForwardGrievanceModalpopup class="custom-modal">
+    <div class="form-wrapper">
+        <form class="custom-form">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ 'Forward Grievance' | translate}} ({{ gLId }})</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{ 'Are you sure you want to forward the grievance to next level ?' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red" (click)="forwardGrivance()">
+                        {{'Yes' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal"
+                        (click)="modalRef.hide();">
+                        {{'No' | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<!-- Confirm Forward Grievance Modal Ends -->
+
+<!--  Rejet Grievance Modal Starts   -->
+<ng-template #deletGrievanceModalpopup class="custom-modal">
+    <div class="form-wrapper">
+        <form class="custom-form">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ delUndoGrievnceHeading | translate}} ({{ griId }})</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{ popUpCnfMessage | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red"
+                        (click)="grievanceStatus(delUndoGrievnceData,gStatus,true,'hidePopup')">
+                        {{'Yes' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal"
+                        (click)="grievanceStatus(id,gStatus,false,'')">
+                        {{'No' | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<!-- Rejet Grievance Modal Ends -->
+
+
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Starts  -->
+
+<div *ngIf="modalBool">
+    <app-grievance-details-popup [grieveanceDetailsData]="grieveanceDetailsData" [actionTakenData]="actionTakenData">
+    </app-grievance-details-popup>
+</div>
+
+<!-- Modal View Pop-->
+<div *ngIf="modalView">
+    <app-grievance-time-line-details [grievanceHistoryData]="grievanceHistoryData"></app-grievance-time-line-details>
+</div>

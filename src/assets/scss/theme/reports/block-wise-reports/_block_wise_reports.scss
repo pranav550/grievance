@@ -1,0 +1,38 @@
+/*==============================================================================
+****************  Block Wise Reports Wrapper Styles For The Site  **************
+==============================================================================*/
+.block-wise-reports-wrapper{
+
+}
+
+  
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+.blockwise-reports-wrapper{
+  .states-list-wrapper{
+    .reports-wrapper{
+        .custom-datatable-wrapper{
+            .dataTables_wrapper{
+                .dataTables_filter{
+                    margin-right: 0 !important;
+                }
+            }
+        }
+    } 
+   }
+  }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

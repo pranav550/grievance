@@ -1,0 +1,509 @@
+<app-nav-bar></app-nav-bar>
+<!--  Register Wrapper Starts  -->
+<div class="container" *ngIf="!isOTPForm">
+    <div class="form-wrapper register-wrapper">
+        <form class="custom-form" [formGroup]="registerForm" (ngSubmit)="registerFunction()">
+            <h3 class="form-title">{{'Register' | translate}}
+                <span class="help-text">
+                    <sup class="required-icon">'*'</sup>
+                    {{'Fields are required.' | translate}}
+                </span>
+            </h3>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Account Information' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name" class="control-label">
+                                {{'Username' | translate}}
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" (ngModelChange)="userNameEnter($event)" class="form-control"
+                                    placeholder="{{'Username' | translate}}" formControlName="registerUserName"
+                                    tabindex="1" autofocus="true" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div class="help-link" *ngIf="isUserAvailabityShown">
+                                <a href="javascript:void(0);" (click)="checkUserNameAvailabilty()" tabindex="2">
+                                    {{'Check availability' | translate}}
+                                </a>
+                            </div>
+                            <div *ngIf="isUserNameShow">
+                                <div *ngIf="isUserNameExists" class="text-light-green">
+                                    {{ValidationsMessage | translate}}</div>
+                                <div *ngIf="!isUserNameExists" class="error-message">{{ValidationsMessage | translate}}
+                                </div>
+                            </div>
+                            <div *ngIf="submitted && registerF.registerUserName.errors" class="error-message">
+                                <div *ngIf="registerF.registerUserName.errors.required">
+                                    {{'Username is required.' | translate}}
+                                </div>
+                                <div *ngIf="registerF.registerUserName.errors.maxlength">
+                                    {{'Username should not exceed 150 characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="password" class="control-label">
+                                {{'Password' | translate}}
+                                <a href="javascript:void(0);" class="custom-tooltip text-blue"
+                                    tooltip="{{'Password should be minimum 8 digits with 1 Uppercase, 1 Lowercase, 1 Special Character and 1 numeric character.' | translate}}"
+                                    tabindex="-1">
+                                    <i class="fa fa-question-circle"></i>
+                                </a>
+                            </label>
+                            <div class="input-group">
+                                <input type="{{showPassword}}" class="form-control"
+                                    placeholder="{{'Password' | translate}}" formControlName="registerFormPassword"
+                                    tabindex="3" />
+                                <span class="input-group-addon">
+                                    <div *ngIf="showPassword ==='password'" class="fa fa-eye-slash"
+                                        (click)="passwordShow('show')"></div>
+                                    <div *ngIf="showPassword ==='text'" class="fa fa-eye"
+                                        (click)="passwordShow('hide')"></div>
+                                </span>
+                            </div>
+                            <div *ngIf="submitted && registerF.registerFormPassword.errors" class="error-message">
+                                <div *ngIf="registerF.registerFormPassword.errors.required">
+                                    {{'Password is required.' | translate}}
+                                </div>
+                                <div *ngIf="registerF.registerFormPassword.errors?.pattern">
+                                    {{'Password should be minimum 8 digits with 1 Uppercase, 1 Lowercase, 1 Special Character and 1 numeric character.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="confirmPassword" class="control-label">
+                                {{'Confirm Password' | translate}}
+                            </label>
+                            <div class="has-feedback">
+                                <input type="password" class="form-control"
+                                    placeholder="{{'Confirm Password' | translate}}"
+                                    formControlName="registerFormConfirmPassword" tabindex="4" />
+                                <i class="fa fa-lock form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && !registerForm.value.registerFormPassword && registerF.registerFormConfirmPassword.errors"
+                                class="error-message">
+                                <div *ngIf="registerF.registerFormConfirmPassword.errors.required">
+                                    {{'Confirm Password is required.' | translate}}
+                                </div>
+                            </div>
+                            <div *ngIf="submitted && registerForm.value.registerFormPassword" class="error-message">
+                                <div
+                                    *ngIf="registerForm.value.registerFormConfirmPassword !== registerForm.value.registerFormPassword">
+                                    {{'Password mismatch.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Personal Information' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name" class="control-label">
+                                {{'Name' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" placeholder="Name"
+                                    formControlName="registerName" tabindex="5" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && registerF.registerName.errors" class="error-message">
+                                <div *ngIf="registerF.registerName.errors.required">
+                                    {{'Name is required.' | translate}}
+                                </div>
+                                <div *ngIf="registerName.errors?.pattern">
+                                    {{'Name is not valid.' | translate}}
+                                </div>
+                                <div *ngIf="registerName.errors.maxlength">
+                                    {{'Name should not exceed 150 characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name" class="control-label">{{'Email Id' | translate}}</label>
+                            <div class="has-feedback">
+                                <input type="email" class="form-control" placeholder="{{'Email Id' | translate}}"
+                                    formControlName="registerFormEmail" tabindex="6" />
+                                <i class="fa fa-envelope-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && registerF.registerFormEmail.errors" class="error-message">
+                                <!-- <div *ngIf="registerF.registerFormEmail.errors.required">
+                                    {{'Email is required.' | translate}}
+                                </div> -->
+                                <div *ngIf="registerF.registerFormEmail.errors?.pattern">
+                                    {{'Email must be a valid email id.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="gender" class="control-label">
+                                {{'Gender' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [searchable]="false" bindLabel="name" [items]="genderData"
+                                formControlName="registerGender" placeholder="{{'Gender' | translate}}" tabindex="7"
+                                [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerForm.value.registerGender == ''">
+                                    {{'Gender is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name" class="control-label">{{'Phone Number' | translate}}</label>
+                            <div class="has-feedback">
+                                <input maxlength="15" type="text" numberOnly class="form-control"
+                                    formControlName="registerFormPhoneNumber"
+                                    placeholder="{{'Phone Number with STD Code' | translate}}" tabindex="8" />
+                                <i class="fa fa-phone form-control-feedback"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name" class="control-label">
+                                {{'Mobile Number' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" numberOnly maxlength="10"
+                                    formControlName="registerFormMobileNumber"
+                                    placeholder="{{'10 Digit Mobile Number' | translate}}" tabindex="9" />
+                                <i class="fa fa-mobile form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && registerF.registerFormMobileNumber.errors" class="error-message">
+                                <div *ngIf="registerF.registerFormMobileNumber.errors.required">
+                                    {{'Mobile Number is required.' | translate}}
+                                </div>
+                                <div *ngIf="registerFormMobileNumber.errors?.pattern">
+                                    {{'Please provide a valid mobile number.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="ComplainantName" class="control-label">
+                                {{'FatherName/HusbandName' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" formControlName="rgComplainantFatherName" id="ComplainantName"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && registerF.rgComplainantFatherName.errors }"
+                                    placeholder="{{'FatherName/HusbandName' | translate}}" tabindex="8" />
+                                <i class="fa fa-user-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && registerF.rgComplainantFatherName.errors" class="error-message">
+                                <div *ngIf="registerF.rgComplainantFatherName.errors.required">
+                                    {{'Father Name is required.' | translate}}
+                                </div>
+                                <div *ngIf="registerF.rgComplainantFatherName.errors.maxlength">
+                                    {{'Father Name should not exceed 150 characters.' | translate}}
+                                </div>
+                                <div *ngIf="registerF.rgComplainantFatherName.errors?.pattern">
+                                    {{'Name should not contain special characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="talukaName" class="control-label">
+                                {{'Relation' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [searchable]="false" formControlName="filterRelationName"
+                                [items]="relationStatusData" bindLabel="name"
+                                placeholder="{{'Father/Husband' | translate}}" tabindex="6" [tabindex]="-1">
+                            </ng-select>
+
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerForm.value.filterRelationName == ''">
+                                    {{'Father/Husband is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="dob" class="control-label">
+                                {{'Date of Birth' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" placeholder="{{'Date of Birth' | translate}}"
+                                    bsDatepicker placement="bottom" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                    (ngModelChange)="getAge($event)" formControlName="registerDateOfBirth"
+                                    value="{{this.dob| date: 'dd-MM-yyyy'}}" tabindex="5" />
+                                <i class="fa fa-calendar-o form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && registerF.registerDateOfBirth.errors" class="error-message">
+                                <div *ngIf="registerF.registerDateOfBirth.errors.required">
+                                    {{'Date of Birth is required.' | translate}}
+                                </div>
+                                <div *ngIf="registerDateOfBirth.errors?.pattern">
+                                    {{'Date of Birth is not valid.' | translate}}
+                                </div>
+                                <div *ngIf="registerDateOfBirth.errors.maxlength">
+                                    {{'Date of Birth should not exceed 150 characters.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="dob" class="control-label">
+                                {{'Age' | translate}}
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" value="{{age}}"
+                                    placeholder="{{'Age'| translate}}" tabindex="5" (ngModelChange)="getDOB($event)"
+                                    formControlName="registerFormAge" />
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="address" class="control-label">
+                                {{'Address' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <div class="has-feedback">
+                                <textarea rows="3" class="form-control" formControlName="registerFormAddress"
+                                    placeholder="{{'Address' | translate}}" tabindex="10"></textarea>
+                                <i class="fa fa-map-marker form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && registerF.registerFormAddress.errors" class="error-message">
+                                <div *ngIf="registerF.registerFormAddress.errors.required">
+                                    {{'Address is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </fieldset>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">{{'Location' | translate}}</legend>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="country" class="control-label">
+                                {{'Country' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [searchable]="false" [items]="countries" bindLabel="name"
+                                placeholder="{{'Select Country' | translate}}" formControlName="registerFormCountry"
+                                tabindex="11" [tabindex]="-1">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="state" class="control-label">
+                                {{'State' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" (change)="onStateChange($event)" [items]="statesData"
+                                bindLabel="name" placeholder="{{'Select State' | translate}}"
+                                formControlName="registerFormState" tabindex="12" [tabindex]="-1"
+                                [(ngModel)]="defaultStateValue">
+                            </ng-select>
+                            <div *ngIf="submitted && registerF.registerFormState.errors" class="error-message">
+                                <div *ngIf="registerF.registerFormState.errors.required">
+                                    {{'State is required.' | translate}}
+                                </div>
+                            </div>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerForm.value.registerFormState === ''">
+                                    {{'State is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="district" class="control-label">
+                                {{'District' | translate}}<sup class="custom-required">*</sup>
+                            </label>
+                            <ng-select [clearable]="false" [items]="districtsData" bindLabel="name"
+                                placeholder="{{'Select District' | translate}}" formControlName="registerFormDistrict"
+                                tabindex="13" [tabindex]="-1">
+                            </ng-select>
+                            <div *ngIf="submitted && registerF.registerFormDistrict.errors" class="error-message">
+                                <div *ngIf="registerF.registerFormDistrict.errors.required">
+                                    {{'District is required.' | translate}}
+                                </div>
+                            </div>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="registerForm.value.registerFormDistrict === ''">
+                                    {{'District is required.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="pincode" class="control-label">
+                                {{'Pincode' | translate}}
+                            </label>
+                            <div class="has-feedback">
+                                <input type="text" numberOnly maxlength="6" class="form-control"
+                                    formControlName="registerFormPincode" placeholder="{{'Pincode' | translate}}"
+                                    tabindex="14" />
+                                <i class="fa fa-map-pin form-control-feedback"></i>
+                            </div>
+                            <div *ngIf="submitted && registerF.registerFormPincode.errors" class="error-message">
+                                <div *ngIf="registerF.registerFormPincode.errors.required">
+                                    {{'Pincode is required.' | translate}}
+                                </div>
+                                <div *ngIf="registerFormPincode.errors?.pattern">
+                                    {{'Pincode is not valid.' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-4">
+            <div class="form-group">
+              <label for="name" class="control-label">
+                {{'Security Code' | translate}}<sup class="custom-required">*</sup>
+              </label>
+              <recaptcha formControlName="myRecaptcha" tabindex="15" [tabindex]="-1"></recaptcha>
+              <div *ngIf="submitted" class="error-message">
+                <div *ngIf="!registerForm.value.myRecaptcha">
+                  {{'Security Code is required.' | translate}}
+                </div>
+              </div>
+            </div>
+          </div> -->
+                    <div class="col-sm-4 captcha-box">
+                        <div class="form-group">
+                            <!-- <recaptcha formControlName="myRecaptcha" tabindex="5"></recaptcha>
+                <div *ngIf="submitted" class="error-message">
+                  <div *ngIf="!loginForm.value.myRecaptcha">
+                    {{'Security Code is required.' | translate}}
+                  </div>
+                </div> -->
+                            <div id="captcha"></div>
+                            <div (click)="createCaptcha()" class="pointer">
+                                <i class="glyphicon glyphicon-refresh"></i> {{'Generate a new captcha' | translate}}
+                            </div>
+                            <!-- <input type="text" formControlName="myRecaptcha" placeholder="Captcha" id="cpatchaTextBox"/>
+                <div *ngIf="submitted" class="error-message">
+                  <div *ngIf="!loginForm.value.myRecaptcha">
+                    {{'Security Code is required.' | translate}}
+                  </div>
+                </div> -->
+                            <!-- <div class="form-group"> -->
+                            <label for="myRecaptcha" class="control-label">{{'Captcha' | translate}}<sup
+                                    class="custom-required">*</sup></label>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" placeholder="{{'Captcha' | translate}}"
+                                    formControlName="myRecaptcha" placeholder="Captcha" tabindex="15"
+                                    id="cpatchaTextBox" autocomplete="off" />
+                            </div>
+                            <div *ngIf="submitted" class="error-message">
+                                <div *ngIf="!registerForm.value.myRecaptcha">
+                                    {{'Captcha is required.' | translate}}
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="clearfix">
+                <a [routerLink]="'/dashboard'" class="btn btn-red pull-left" tabindex="19">{{'back' | translate}}</a>
+                <button type="submit" class="btn btn-default btn-submit pull-right"
+                    tabindex="16">{{'Submit' | translate}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--  Register Wrapper Ends  -->
+
+<!--  OTP Form Starts  -->
+<div class="form-wrapper" *ngIf="isOTPForm">
+    <form class="custom-form" [formGroup]="verifyOtpForm" (ngSubmit)="otpSubmit()">
+        <h3 class="form-title">{{'Verify OTP' | translate}}</h3>
+        <div class="form-group">
+            <label for="email1" class="control-label">{{'Mobile Number' | translate}}<sup
+                    class="custom-required">*</sup></label>
+            <div class="has-feedback">
+                <input type="text" class="form-control" formControlName="otpPageForMobileNumber"
+                    placeholder="{{'Mobile Number' | translate}}" readonly tabindex="17" />
+                <i class="fa fa-mobile form-control-feedback"></i>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email1" class="control-label">{{'Mobile OTP' | translate}}<sup
+                    class="custom-required">*</sup></label>
+            <div class="has-feedback">
+                <input type="text" class="form-control" numberOnly maxlength="6" formControlName="mobileOTP"
+                    placeholder="{{'Mobile OTP' | translate}}" tabindex="18" />
+                <i class="fa fa-lock form-control-feedback"></i>
+            </div>
+            <div *ngIf="otpSubmitted && OTPNewF.mobileOTP.errors" class="error-message">
+                <div *ngIf="OTPNewF.mobileOTP.errors.required">
+                    {{'OTP is required.' | translate}}
+                </div>
+                <div *ngIf="OTPNewF.mobileOTP.errors?.pattern">
+                    {{'Please provide a valid OTP.' | translate}}
+                </div>
+            </div>
+        </div>
+        <p class="help-block mar-b15 clearfix">
+            <a href="javascript:void(0);" (click)="resendOTP()" class="forgot-password-link pull-left" tabindex="19">
+                {{"Didn't Recieve OTP?" | translate}}
+            </a>
+        </p>
+        <button type="submit" class="btn btn-block btn-default btn-submit" tabindex="20">{{'Send' | translate}}</button>
+        <p class="help-block">
+            <a href="javascript:void(0);" routerLink="/login" class="register-link" tabindex="21">
+                {{'Back to Login' | translate}}
+            </a>
+        </p>
+    </form>
+</div>
+<!--  OTP Form Ends  -->
+
+<!-- Spinner Ends  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>

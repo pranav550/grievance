@@ -1,0 +1,259 @@
+<app-header></app-header>
+
+
+<!--  Institution Wrapper Starts -->
+<div class="container institution-wrapper">
+  <div class="custom-table-caption">
+    <h3 class="page-title">{{'Institutions' | translate}}</h3>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-wrapper basic">
+          <form class="custom-form">
+            <div class="form-group clearfix">
+              <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+              <ng-select [clearable]="false" [items]="statesData" (change)="onStateChange($event,'defaultFilter')" bindLabel="name" placeholder="{{'Select State' | translate}}"
+                name="selectedState" [(ngModel)]="selectedState" tabindex="1" autofocus="true" [tabindex]="-1">
+              </ng-select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-4 text-right">
+        <button href="javascript:void(0);" [disabled]="!isStateExists" class="btn btn-blue" (click)="addInstitutionModal(addInstitutionModalTemplate)">
+          {{'Create Institution' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="custom-datatable-wrapper">
+    <table id="dataTable1" class="table table-condensed table-bordered custom-col-five-action row-border hover">
+      <thead>
+        <tr>
+          <th class="custom-header-col hidden">{{'Institution Id' | translate}}</th>
+          <th class="custom-body-col hidden">{{'Talukas' | translate}}</th>
+          <th class="custom-body-col hidden">{{'Districts' | translate}}</th>
+          <th class="custom-header-col">{{'Name' | translate}}</th>
+          <th class="custom-header-col address-col">{{'Institution Address' | translate}}</th>
+          <th class="custom-header-col contact-number-col">{{'Primary Contact Number' | translate}}</th>
+          <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+          <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let institution of institutionData">
+          <td class="custom-body-col hidden">{{institution.institutionId}}</td>
+          <td class="custom-body-col hidden">{{institution.talukas}}</td>
+          <td class="custom-body-col hidden">{{institution.districts}}</td>
+          <td class="custom-body-col">{{institution.name}}</td>
+          <td class="custom-body-col address-col">{{institution.address}}</td>
+          <td class="custom-body-col contact-number-col">{{institution.primaryContactNumber}}</td>
+          <td class="custom-body-col status-col">
+            <span *ngIf="institution.status === 'active'" class="badge badge-active">{{institution.status}}</span>
+            <span *ngIf="institution.status === 'inactive'" class="badge badge-inactive">{{institution.status}}</span>
+          </td>
+          <td class="custom-body-col action-col">
+            <a href="javascript:void(0);" (click)="openEditInstitutionModal(institution,editInstitutionModalTemplate)" class="btn btn-edit">
+              <i class="fa fa-pencil custom-icon"></i>
+              {{'Edit' | translate}}
+            </a>
+            <a href="javascript:void(0);" *ngIf="institution.status === 'active'" (click)="institutionStatusValue(institution)" class="btn btn-inactive">
+              <i class="fa fa-ban custom-icon"></i>
+              {{'Inactivate' | translate}}
+            </a>
+            <a href="javascript:void(0);" *ngIf="institution.status === 'inactive'" (click)="institutionStatusValue(institution)" class="btn btn-active">
+              <i class="fa fa-check custom-icon"></i>
+              {{'Activate' | translate}}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Institution Wrapper Ends -->
+
+<!-- Create New Institution Modal Starts -->
+<ng-template #addInstitutionModalTemplate class="custom-modal">
+
+  <!-- Create States Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="addInstitutionForm" (ngSubmit)='addInstitution()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Create Institution' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" (change)="onStateChange($event,'addFilter')" formControlName="addInstitutionSelectState" [items]="statesData"
+            bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="2" autofocus="true" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label for="districtName" class="control-label">{{'Select District' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" (change)="onDistrictChange($event,'addFilter')" formControlName="addInstitutionSelectDistrict"
+            [items]="districtsData" bindLabel="name" placeholder="{{'Select District' | translate}}" tabindex="3" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted" class="error-message">
+            <div *ngIf="addInstitutionForm.value.addInstitutionSelectDistrict == ''">
+              {{'District is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="talukaName" class="control-label">{{'Select Taluka' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" formControlName="addInstitutionSelectTaluka" [items]="talukasData" bindLabel="name" placeholder="{{'Select Taluka' | translate}}" tabindex="4" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted" class="error-message">
+            <div *ngIf="addInstitutionForm.value.addInstitutionSelectTaluka == ''">
+              {{'Taluka is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" class="form-control" formControlName="addInstitutionName" placeholder="{{'Name' | translate}}" tabindex="5">
+          <div *ngIf="submitted && addInstitutionF.addInstitutionName.errors" class="error-message">
+            <div *ngIf="addInstitutionF.addInstitutionName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="addInstitutionF.addInstitutionName.errors.maxlength">
+              {{'Name should not exceed 150 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalId" class="control-label">{{'Address' | translate}}</label>
+          <textarea rows="3" class="form-control" formControlName="addInstitutionAddress" placeholder="{{'Address' | translate}}" tabindex="6"></textarea>
+          <div *ngIf="submitted && addInstitutionF.addInstitutionAddress.errors" class="error-message">
+            <div *ngIf="addInstitutionF.addInstitutionAddress.errors.maxlength">
+              {{'Address should not exceed 200 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalId" class="control-label">{{'Primary Contact Number' | translate}}</label>
+          <input type="text" maxlength="15" numberOnly class="form-control" placeholder="{{'Primary Contact Number' | translate}}" formControlName="addInstitutionContactNo" tabindex="7">
+          <div *ngIf="submitted && addInstitutionF.addInstitutionContactNo.errors" class="error-message">
+            <div *ngIf="addInstitutionF.addInstitutionContactNo.errors?.pattern">
+              {{'Contact Number is not valid.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='addInstitutionStatus' class="radio-text" type="radio" [value]="true" tabindex="8">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='addInstitutionStatus' class="radio-text" type="radio" [value]="false" tabindex="9">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-default btn-submit" tabindex="10">{{'Create Institution' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Create States Form Ends -->
+
+</ng-template>
+<!-- Create New State Modal Ends -->
+
+<!-- Edit institution Modal Starts -->
+<ng-template #editInstitutionModalTemplate class="custom-modal">
+
+  <!-- Edit Institution Form Starts -->
+  <div class="form-wrapper">
+    <form class="custom-form" [formGroup]="editInstitutionForm" (ngSubmit)='editInstitution()'>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Edit Institution' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="stateName" class="control-label">{{'Select State' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" (change)="onStateChange($event,'editFilter')" formControlName="editInstitutionSelectState"
+            [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}" tabindex="11" autofocus="true" [tabindex]="-1">
+          </ng-select>
+        </div>
+        <div class="form-group">
+          <label for="districtName" class="control-label">{{'Select District' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" (change)="onDistrictChange($event,'editFilter')" formControlName="editInstitutionSelectDistrict"
+            [items]="districtsData" bindLabel="name" placeholder="{{'Select District' | translate}}" tabindex="12" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted" class="error-message">
+            <div *ngIf="editInstitutionForm.value.editInstitutionSelectDistrict == ''">
+              {{'District is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="talukaName" class="control-label">{{'Select Taluka' | translate}}<sup class="custom-required">*</sup></label>
+          <ng-select [clearable]="false" formControlName="editInstitutionSelectTaluka" [items]="talukasData" bindLabel="name" placeholder="{{'Select Taluka' | translate}}" tabindex="13" [tabindex]="-1">
+          </ng-select>
+          <div *ngIf="submitted" class="error-message">
+            <div *ngIf="editInstitutionForm.value.editInstitutionSelectTaluka == ''">
+              {{'Taluka is required.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+          <input type="text" rows="3" class="form-control" formControlName="editInstitutionName" placeholder="{{'Name' | translate}}" tabindex="14">
+          <div *ngIf="submitted && editInstitutionF.editInstitutionName.errors" class="error-message">
+            <div *ngIf="editInstitutionF.editInstitutionName.errors.required">
+              {{'Name is required.' | translate}}
+            </div>
+            <div *ngIf="editInstitutionF.editInstitutionName.errors.maxlength">
+              {{'Name should not exceed 150 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalId" class="control-label">{{'Address' | translate}}</label>
+          <textarea rows="3" class="form-control" formControlName="editInstitutionAddress" placeholder="Institution Address" tabindex="15"></textarea>
+          <div *ngIf="submitted && editInstitutionF.editInstitutionAddress.errors" class="error-message">
+            <div *ngIf="editInstitutionF.editInstitutionAddress.errors.maxlength">
+              {{'Address should not exceed 200 characters.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="hospitalId" class="control-label">{{'Primary Contact Number' | translate}}</label>
+          <input type="text" maxlength="15" numberOnly class="form-control" placeholder="Primary Contact Number" formControlName="editInstitutionContactNo" tabindex="16">
+          <div *ngIf="submitted && editInstitutionF.editInstitutionContactNo.errors" class="error-message">
+            <div *ngIf="editInstitutionF.editInstitutionContactNo.errors?.pattern">
+              {{'Contact Number is not valid.' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="radio-inline custom-radio">
+            <input formControlName='editInstitutionStatus' class="radio-text" type="radio" [value]="true" tabindex="17">
+            <span class="radio-text">{{'Active' | translate}}</span>
+          </label>
+          <label class="radio-inline custom-radio">
+            <input formControlName='editInstitutionStatus' class="radio-text" type="radio" [value]="false" tabindex="18">
+            <span class="radio-text">{{'Inactive' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-default btn-submit" tabindex="18">{{'Update Institution' | translate}}</button>
+      </div>
+    </form>
+  </div>
+  <!-- Edit institution Form Ends -->
+
+</ng-template>
+<!-- Edit institution Modal Ends -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

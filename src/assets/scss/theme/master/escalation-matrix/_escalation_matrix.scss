@@ -1,0 +1,170 @@
+/*==============================================================================
+*****************    Grievance Nature Wrapper Styles For The Site    ***********
+==============================================================================*/
+.escalation-matrix-wrapper{
+    .custom-datatable-wrapper{
+        .table{
+            thead{
+                tr{
+                    .custom-header-col{
+                        width: 15% !important;                     
+                        &.status-col{
+                            width: 5% !important;
+                        }
+                        &.action-col{
+                            width: 25% !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+    .escalation-matrix-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 190px;
+                        }
+                    }
+                } 
+            } 
+        } 
+    }
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .escalation-matrix-wrapper{       
+        .custom-table-caption{
+                .form-wrapper{
+                    .custom-form{
+                        .form-group {                           
+                            @include margin(0);
+                            .control-label{
+                                @include padding(11px 0);
+                                width: 30%;
+                                &.time-label{
+                                    width: 30%;
+                                }
+                            }
+                            .ng-select,
+                            .custom-select,
+                            .custom-input,
+                            .custom-date-picker,
+                            .custom-timepicker{
+                                @include margin(0 0 15px);
+                                width: 70%;
+                            }
+                        }
+                    }
+                }
+            } 
+    } 
+  }
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .escalation-matrix-wrapper{
+       .custom-table-caption{
+        .form-wrapper{
+            .custom-form{
+                .form-group {
+                    .control-label{
+                        width: 40%;
+                        &.time-label{
+                            width: 40%;
+                        }
+                    }
+                    .ng-select,
+                    .custom-select,
+                    .custom-input,
+                    .custom-date-picker,
+                    .custom-timepicker{
+                            @include margin(0 0 15px);
+                            width: 60%;
+                            min-height: 40px;
+                    }
+                }
+            }
+        }
+    } 
+        .custom-datatable-wrapper{
+            .table{
+                min-width: 860px !important;
+                thead{
+                    tr{
+                        .custom-header-col{
+                            width: 15% !important;                     
+                            &.status-col{
+                                width: 5% !important;
+                            }
+                            &.action-col{
+                                width: 25% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .escalation-matrix-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group {
+                        .control-label{
+                            width: 50%;
+                            &.time-label{
+                                    width: 40%;
+                                    min-height: 40px;
+                            }
+                        }
+                        .ng-select,
+                        .custom-select,
+                        .custom-input,
+                        .custom-date-picker,
+                        .custom-timepicker{                            
+                                @include margin(0 0 15px);
+                                width: 50%;
+                                min-height: 40px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+   .escalation-matrix-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group {
+                        .control-label{
+                            @include margin(0 0 5px);
+                            width: 100%;
+                            &.time-label{
+                                @include margin(0 0 5px);
+                                width: 100%;
+                            }
+                        }
+                        .ng-select,
+                        .custom-select,
+                        .custom-input,
+                        .custom-date-picker,
+                        .custom-timepicker{
+                            @include margin(0 0 15px 0);
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

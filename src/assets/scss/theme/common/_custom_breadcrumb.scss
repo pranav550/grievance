@@ -1,0 +1,51 @@
+
+/*==============================================================================
+******************  Breadcrumb Wrapper Styles For The Site  ********************
+==============================================================================*/
+
+/*--  Breadcrumb Wrapper Styles  --*/
+.breadcrumb-wrapper{
+    @include margin(0 0 10px);    
+    @include padding(5px 0);
+    @include border-radius(0);
+    border-bottom: 2px solid $dark-grey6;
+    li{
+        + li{
+            &:before{
+                content: "\f105";
+                font-family: "fontawesome";
+            }
+        }
+        a{
+            @include transition(all 0.3s ease-in-out);
+            color: $dark-grey5;
+            font-family: $roboto-regular;
+        }
+        &:not(:last-of-type){
+            a{
+                &:hover{
+                    color: $light-red;
+                }
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

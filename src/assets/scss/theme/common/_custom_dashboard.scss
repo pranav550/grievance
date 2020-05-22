@@ -1,0 +1,1509 @@
+
+/*==============================================================================
+***********************  Wrapper Styles For The Site  **************************
+==============================================================================*/
+.dashboard-wrapper{
+   @include padding(0);
+
+   .custom-table-caption{
+         .form-wrapper{  
+            .custom-form{
+               .form-group{
+                  @include margin(0 -15px);
+                  .control-label{
+                        @include margin(0 0 15px);
+                        @include padding(11px 15px);
+                        width: 16%;
+                        min-height: 40px;
+                        line-height: 1.3;
+                  }                
+                  .ng-select,
+                  .custom-select,
+                  .custom-input,
+                  .custom-date-picker,
+                  .custom-timepicker{
+                       @include margin(0 0 15px);
+                       width: 17.33%;
+                       min-height: 40px;
+                  }
+               }
+            }
+         }
+      }
+
+   /*--  Admin Dashboard Wrapper Styles  --*/
+   &.admin-dashboard-wrapper{
+      .tile-main-wrapper{
+         .tile-row{
+            .tile-wrapper{ 
+               .tile-content-wrapper{
+                min-height: 160px;
+               }
+            }
+         }
+      }      
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-five-action{
+               thead{
+                  tr{  
+                     .custom-header-col{
+                        width: 11% !important;
+                        &.description-col{
+                           width: 20% !important;
+                        }
+                        &.id-col{
+                           width: 10% !important;
+                        }
+                        &.date-col{
+                           width: 10% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 13% !important;
+                           .btn{
+                              @include margin(0 5px);
+                           }
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }
+                     }                            
+                  }
+               }
+                tbody{
+                  tr{
+                     .custom-body-col{
+                        &.action-col{
+                           text-align: left;
+                           .btn{
+                              @include margin(0 5px);
+                           }
+                        } 
+                     }
+                  }
+               }                           
+            }
+         }
+      }
+   }
+
+   /*--  Beneficiary Dashboard Wrapper Styles  --*/
+   &.beneficiary-dashboard-wrapper{
+      .custom-table-caption{
+         .form-wrapper{
+            .custom-form{
+               .form-group{
+                  .ng-select{
+                     @include margin(0 0 15px 0);
+                  }
+               }
+            }
+         }
+      }
+      .tile-main-wrapper{
+         .tile-row{
+            .tile-wrapper{ 
+               .tile-content-wrapper{
+                min-height: 140px;
+               }
+               &.tile-red{
+                  height: auto;
+               }
+               &.tile-orange{
+                  height: auto;
+               }
+               &.tile-green{
+                  height: auto;
+               }
+            }
+         }
+      }
+      
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-five-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 15% !important;
+                        &.description-col{
+                           width: 20% !important;
+                        }
+                        &.id-col{
+                           width: 10% !important;
+                        }
+                        &.date-col{
+                           width: 10% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 15% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }                        
+                     }                            
+                  }
+               }  
+                tbody{
+                  tr{
+                     .custom-body-col{
+                        &.action-col{
+                           text-align: left;
+                           .btn{
+                              @include margin(0 5px);
+                           }
+                        }
+                     }
+                  }
+               }                      
+            }  
+         }
+      }
+   }
+
+   /*--  Supervisor Dashboard Wrapper Styles  --*/
+   &.supervisor-dashboard-wrapper{   
+      .tile-main-wrapper{
+         .tile-row{
+            .tile-wrapper{
+               .tile-content-wrapper{
+                  min-height: 160px;
+               }
+            }
+         }
+      }
+      .tabs-wrapper{
+         .tab-container{
+            .tab-content{
+               .states-list-wrapper{
+                  &.new-grievance-wrapper{
+                     .custom-datatable-wrapper{
+                        .table{
+                          &.custom-col-ten-action{
+                             min-width: 1800px !important;
+                              thead{
+                                 tr{
+                                    .custom-header-col{
+                                       width: 10% !important;
+                                       &.description-col{
+                                          width: 10% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.date-col{
+                                          width: 10% !important;
+                                       }
+                                       &.status-col{
+                                          width: 8% !important;
+                                       }
+                                       &.action-col{
+                                          width: 20% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }
+                                    }
+                                    &.tableNull{
+                                       .custom-header-col.action-col {
+                                          width: 12% !important;
+                                      }
+
+                                    }                            
+                                 }
+                              }
+                              tbody{
+                                 tr{
+                                    .custom-body-col{
+                                       &.action-col{
+                                          text-align: center;
+                                          .btn{
+                                             @include margin(0 5px);
+                                          }
+                                       }
+                                       &:nth-of-type(1){
+                                          a{
+                                             &:hover{
+                                                text-decoration: underline !important;
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                          }
+                        }
+                     }
+                  }
+                  &.accepted-grievance-wrapper{
+                     .custom-datatable-wrapper{                        
+                        .table{
+                           &.custom-col-ten-action{
+                              min-width: 1600px !important;
+                              thead{
+                                 tr{
+                                    .custom-header-col{
+                                       width: 12% !important;
+                                       &.description-col{
+                                          width: 10% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.date-col{
+                                          width: 12% !important;
+                                           &.common-width{
+                                             width: 9% !important;
+                                          }
+                                       }
+                                        &.type-col{
+                                            &.common-width{
+                                             width: 9% !important;
+                                          }
+                                             
+                                          }
+                                       &.status-col{
+                                          width: 7% !important;
+                                       }
+                                       &.action-col{
+                                          width: 15% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }
+                                       
+                                    }                            
+                                 }
+                              } 
+                              tbody{
+                                 tr{
+                                    .custom-body-col{
+                                       &.action-col{
+                                       text-align: center;
+                                          .btn{
+                                             @include margin(0 5px);
+                                          }
+                                       }
+                                    }
+                                 }
+                              }                              
+                           }
+                        }
+                     }
+                  }
+                  &.rejected-grievance-wrapper{
+                     .custom-datatable-wrapper{
+                        table{
+                           &.custom-col-ten-action{
+                              min-width: 1500px !important;
+                           thead{
+                              tr{
+                                 .custom-header-col{
+                                    &.rejected-col{
+                                       width: 12% !important;
+                                    }
+                                       width: 15% !important;
+                                       &.description-col{
+                                          width: 12% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.date-col{
+                                          &.common-width{
+                                             width: 9% !important;
+                                          }
+                                          width: 15% !important;
+                                       }
+                                       &.type-col{
+                                          &.common-width{
+                                             width: 9% !important;
+                                          }
+                                          
+                                       }
+
+                                       
+                                       &.status-col{
+                                          width: 5% !important;
+                                       }
+                                       &.action-col{
+                                          width: 14% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }                                    
+                                 }                            
+                              }
+                           } 
+                           tbody{
+                              tr{
+                                 .custom-body-col{
+                                    &.action-col{
+                                    text-align: center;
+                                       .btn{
+                                         @include margin(0 5px);
+                                       }
+                                    }
+                                 }
+                           }
+                        }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+     }
+   /*--  Level Dashboard Wrapper Styles  --*/
+   &.level-dashboard-wrapper{
+   .tile-main-wrapper{
+      .tile-row{
+         .tile-wrapper{
+            .tile-content-wrapper{
+               min-height: 160px;
+            }
+         }  
+      }
+   }    
+   .custom-datatable-wrapper{                        
+      .table{
+         &.custom-col-four-action{
+            thead{
+               tr{
+                  .custom-header-col{
+                     width: 10% !important;
+                     &.description-col{
+                        width: 20% !important;
+                     }
+                     &.id-col{
+                        width: 10% !important;
+                     }
+                     &.status-col{
+                        width: 5% !important;
+                     }
+                     &.action-col{
+                        width: 15% !important;
+                     }
+                     &.delete-col{
+                        width: 5% !important;
+                     }                     
+                  }                            
+               }
+            }   
+            tbody{
+               tr{
+                  .custom-body-col{
+                     &.action-col{
+                        text-align: left;
+                        .btn{
+                          @include margin(0 1px);
+                        }
+                     }
+                  }
+               }
+            }                            
+         }
+      }
+   }
+   .states-list-wrapper{
+      &.new-grievance-wrapper{
+         .custom-datatable-wrapper {
+            .table{
+               &.custom-col-ten-action{
+                  min-width: 1800px !important;
+                  thead{
+                     tr{
+                        .custom-header-col{
+                           width: 10% !important;
+                           &.description-col{
+                              width: 10% !important;
+                           }
+                           &.id-col{
+                              width: 10% !important;
+                           }
+                           &.date-col{
+                              width: 10% !important;
+                           }
+                           &.status-col{
+                              width: 8% !important;
+                           }
+                           &.action-col{
+                              width: 20% !important;
+                           }
+                           &.delete-col{
+                              width: 5% !important;
+                           }
+                        }
+                        &.tableNull{
+                           .custom-header-col.action-col {
+                              width: 12% !important;
+                          }
+
+                        }                            
+                     }
+                  }
+                  tbody{
+                     tr{
+                        .custom-body-col{
+                           &.action-col{
+                              text-align: center;
+                              .btn{
+                                 @include margin(0 5px);
+                              }
+                           }
+                           &:nth-of-type(1){
+                              a{
+                                 &:hover{
+                                    text-decoration: underline !important;
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+   } 
+ }
+  
+   /*--  Real Time Dashboard Wrapper Styles  --*/
+   &.real-time-dashboard-wrapper{
+   .tile-main-wrapper{
+      .tile-row{
+         .tile-wrapper{
+            .tile-content-wrapper{
+               min-height: 160px;
+            }
+         }  
+      }
+   }    
+   .custom-datatable-wrapper{                        
+      .table{
+         &.custom-col-four-action{
+            thead{
+               tr{
+                  .custom-header-col{
+                     width: 10% !important;
+                     &.description-col{
+                        width: 30% !important;
+                     }
+                     &.id-col{
+                        width: 10% !important;
+                     }
+                     &.date-col{
+                        width: 10% !important;
+                     }
+                     &.status-col{
+                        width: 5% !important;
+                     }
+                     &.action-col{
+                        width: 5% !important;
+                     }
+                     &.delete-col{
+                        width: 5% !important;
+                     }
+                     
+                  }                            
+               }
+            }   
+            tbody{
+               tr{
+                  .custom-body-col{
+                     &.action-col{
+                        text-align: center;
+                        .btn{
+                          @include margin(0 5px);
+                        }
+                     }
+                  }
+               }
+            }                            
+         }
+      }
+   }
+ }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+   .dashboard-wrapper{      
+      .custom-table-caption{
+         .form-wrapper{
+            .custom-form{
+               .form-group{
+                  .control-label{
+                        width: 20%;
+                        &.time-label{
+                           width: 20%;
+                        }
+                  }
+                  .ng-select,
+                  .custom-select,
+                  .custom-input,
+                  .custom-date-picker,
+                  .custom-timepicker{
+                     @include margin(0 0 15px 0);
+                     width: 30%;
+                  }
+               }
+            }
+         }
+      }
+
+      /*--  Admin Dashboard Wrapper Styles  --*/
+      &.admin-dashboard-wrapper{         
+         .custom-datatable-wrapper{                        
+            .table{
+               &.custom-col-five-action{
+                  thead{
+                     tr{
+                        .custom-header-col{
+                           width: 15% !important;
+                           &.description-col{
+                              width: 15% !important;
+                           }
+                           &.id-col{
+                              width: 10% !important;
+                           }
+                           &.date-col{
+                              width: 10% !important;
+                           }
+                           &.status-col{
+                              width: 5% !important;
+                           }
+                           &.action-col{
+                              width: 13% !important;
+                              .btn{
+                                 @include margin(0 5px);
+                              }
+                           }
+                           &.delete-col{
+                              width: 5% !important;
+                           }
+                        }                            
+                     }
+                  }                          
+               }
+            }
+         }          
+      }
+
+      /*--  Beneficiary Dashboard Wrapper Styles  --*/
+      &.beneficiary-dashboard-wrapper{       
+            .custom-datatable-wrapper{                        
+            .table{
+               &.custom-col-five-action{
+                  thead{
+                     tr{
+                        .custom-header-col{
+                           width: 15% !important;
+                           &.description-col{
+                              width: 10% !important;
+                           }
+                           &.id-col{
+                              width: 10% !important;
+                           }
+                           &.date-col{
+                              width: 10% !important;
+                           }
+                           &.status-col{
+                              width: 5% !important;
+                           }
+                           &.action-col{
+                              width: 15% !important;
+                           }
+                           &.delete-col{
+                              width: 5% !important;
+                           }                        
+                        }                            
+                     }
+                  }                        
+               }  
+            }
+         }
+      }
+            
+      /*--  Supervisor Dashboard Wrapper Styles  --*/
+      &.supervisor-dashboard-wrapper{
+            .tile-main-wrapper{
+               .tile-row{
+                  .tile-wrapper{
+                     .tile-content-wrapper{
+                        min-height: 150px;
+                     }
+                  } 
+               }
+            } 
+            .tabs-wrapper{
+               .tab-container{
+                  .tab-content{
+                     .states-list-wrapper{
+                        &.new-grievance-wrapper{
+                           .custom-datatable-wrapper{
+                              .table{
+                              &.custom-col-five-action{
+                                    thead{
+                                       tr{
+                                          .custom-header-col{
+                                             width: 10% !important;
+                                             &.description-col{
+                                                width: 10% !important;
+                                             }
+                                             &.id-col{
+                                                width: 10% !important;
+                                             }
+                                             &.date-col{
+                                                width: 10% !important;
+                                             }
+                                             &.status-col{
+                                                width: 5% !important;
+                                             }
+                                             &.action-col{
+                                                width: 14% !important;
+                                             }
+                                             &.delete-col{
+                                                width: 5% !important;
+                                             }
+                                          }                            
+                                       }
+                                    }
+                              }
+                              }
+                           }
+                        }
+                        &.accepted-grievance-wrapper{
+                           .custom-datatable-wrapper{                        
+                              .table{
+                                 &.custom-col-nine-action{
+                                    thead{
+                                       tr{
+                                          .custom-header-col{
+                                             width: 15% !important;
+                                             &.description-col{
+                                                width: 24% !important;
+                                             }
+                                             &.id-col{
+                                                width: 10% !important;
+                                             }
+                                             &.date-col{
+                                                width: 10% !important;
+                                             }
+                                             &.status-col{
+                                                width: 10% !important;
+                                             }
+                                             &.action-col{
+                                                width: 14% !important;
+                                             }
+                                             &.delete-col{
+                                                width: 5% !important;
+                                             }
+                                             
+                                          }                            
+                                       }
+                                    }                               
+                                 }
+                              }
+                           }
+                        }
+                        &.rejected-grievance-wrapper{
+                           .custom-datatable-wrapper{
+                              table{
+                               &.custom-col-nine-action{
+                                    thead{
+                                    tr{
+                                       .custom-header-col{
+                                             width: 15% !important;
+                                             &.description-col{
+                                                width: 24% !important;
+                                             }
+                                             &.id-col{
+                                                width: 10% !important;
+                                             }
+                                             &.date-col{
+                                                width: 10% !important;
+                                             }
+                                             &.status-col{
+                                                width: 5% !important;
+                                             }
+                                             &.action-col{
+                                                width: 14% !important;
+                                             }
+                                             &.delete-col{
+                                                width: 5% !important;
+                                             }                                    
+                                       }                            
+                                    }
+                                 } 
+                                 tbody{
+                                    tr{
+                                       .custom-body-col{
+                                          &.action-col{
+                                          text-align: left;
+                                             .btn{
+                                             @include margin(0 5px);
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                               }
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+
+                 
+      /*--  Level Dashboard Wrapper Styles  --*/
+      &.level-dashboard-wrapper{    
+            .custom-datatable-wrapper{                        
+               .table{
+                  &.custom-col-four-action{
+                     thead{
+                        tr{
+                           .custom-header-col{
+                              width: 10% !important;
+                              &.description-col{
+                                 width: 12% !important;
+                              }
+                              &.id-col{
+                                 width: 10% !important;
+                              }
+                              &.status-col{
+                                 width: 5% !important;
+                              }
+                              &.action-col{
+                                 width: 18% !important;
+                              }
+                              &.delete-col{
+                                 width: 5% !important;
+                              }
+                              
+                           }                            
+                        }
+                     }   
+                     tbody{
+                        tr{
+                           .custom-body-col{
+                              &.action-col{
+                                 text-align: left;
+                                 .btn{
+                                 @include margin(0 5px);
+                                 }
+                              }
+                           }
+                        }
+                     }                            
+                  }
+               }
+            }
+         }
+                 
+            /*--  Real Time Dashboard Wrapper Styles  --*/
+            &.real-time-dashboard-wrapper{    
+            .custom-datatable-wrapper{                        
+               .table{
+                  &.custom-col-four-action{
+                     thead{
+                        tr{
+                           .custom-header-col{
+                              width: 10% !important;
+                              &.description-col{
+                                 width: 30% !important;
+                              }
+                              &.id-col{
+                                 width: 10% !important;
+                              }
+                              &.date-col{
+                                 width: 10% !important;
+                              }
+                              &.status-col{
+                                 width: 5% !important;
+                              }
+                              &.action-col{
+                                 width: 5% !important;
+                              }
+                              &.delete-col{
+                                 width: 5% !important;
+                              }
+                              
+                           }                            
+                        }
+                     }                              
+                  }
+               }
+            }
+         }
+      }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+ .dashboard-wrapper{
+    .custom-table-caption{   
+      .form-wrapper{
+         .custom-form{
+            .form-group {
+               @include margin(0);
+               .control-label{
+                     @include padding(11px 0);
+                     width: 30%;
+                     &.time-label{
+                        width: 30%;
+                     }
+               }
+               .ng-select,
+               .custom-select,
+               .custom-input,
+               .custom-date-picker,
+               .custom-timepicker{
+                  width: 70%;
+               }
+            }
+         }
+      }
+   }
+
+   /*--  Admin Dashboard Wrapper Styles  --*/
+   &.admin-dashboard-wrapper{      
+         .custom-datatable-wrapper{                        
+            .table{
+               &.custom-col-five-action{
+                  thead{
+                     tr{
+                        .custom-header-col{
+                           width: 15% !important;
+                           &.description-col{
+                              width: 15% !important;
+                           }
+                           &.id-col{
+                              width: 10% !important;
+                           }
+                           &.date-col{
+                              width: 10% !important;
+                           }
+                           &.status-col{
+                              width: 5% !important;
+                           }
+                           &.action-col{
+                              width: 13% !important;
+                              .btn{
+                                 @include margin(0 5px);
+                              }
+                           }
+                           &.delete-col{
+                              width: 5% !important;
+                           }
+                        }                            
+                     }
+                  }                          
+               }
+            }
+         } 
+         .tile-main-wrapper{
+            .tile-row{
+               .tile-wrapper{
+                  .tile-content-wrapper{
+                     min-height: 165px;
+                  }
+               } 
+            } 
+         }            
+   }
+
+   /*--  Beneficiary Dashboard Wrapper Styles  --*/
+   &.beneficiary-dashboard-wrapper{
+      .tile-main-wrapper{
+         .tile-row{
+            .tile-wrapper{ 
+               .tile-content-wrapper{
+                min-height: 160px;
+               }
+            }
+         }
+      }
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-five-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 15% !important;
+                        &.description-col{
+                           width: 15% !important;
+                        }
+                        &.id-col{
+                           width: 10% !important;
+                        }
+                        &.date-col{
+                           width: 10% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 15% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }                        
+                     }                            
+                  }
+               }  
+                tbody{
+                  tr{
+                     .custom-body-col{
+                        &.action-col{
+                           text-align: left;
+                           .btn{
+                              @include margin(0 5px);
+                           }
+                        }
+                     }
+                  }
+               }                      
+            }  
+         }
+      }
+   }
+            
+      /*--  Supervisor Dashboard Wrapper Styles  --*/
+      &.supervisor-dashboard-wrapper{
+            .tile-main-wrapper{
+               .tile-row{
+                  .tile-wrapper{
+                     .tile-content-wrapper{
+                        min-height: 140px;
+                     }
+                  } 
+               }
+         }
+         .tabs-wrapper{
+         .tab-container{
+            .tab-content{
+               .states-list-wrapper{
+                  &.new-grievance-wrapper{
+                     .custom-datatable-wrapper{
+                        .table{
+                          &.custom-col-five-action{
+                              thead{
+                                 tr{
+                                    .custom-header-col{
+                                       width: 15% !important;
+                                       &.description-col{
+                                          width: 10% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.type-col{
+                                          width: 5% !important;
+                                       }
+                                       &.date-col{
+                                          width: 10% !important;
+                                       }
+                                       &.status-col{
+                                          width: 5% !important;
+                                       }
+                                       &.action-col{
+                                          width: 14% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }
+                                    }                            
+                                 }
+                              }
+                          }
+                        }
+                     }
+                  }
+                  &.accepted-grievance-wrapper{
+                     .custom-datatable-wrapper{                        
+                        .table{
+                           &.custom-col-four-action{
+                              thead{
+                                 tr{
+                                    .custom-header-col{
+                                       width: 15% !important;
+                                       &.description-col{
+                                          width: 20% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.date-col{
+                                          width: 10% !important;
+                                       }
+                                       &.status-col{
+                                          width: 5% !important;
+                                       }
+                                       &.action-col{
+                                          width: 14% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }
+                                       
+                                    }                            
+                                 }
+                              }                               
+                           }
+                        }
+                     }
+                  }
+                  &.rejected-grievance-wrapper{
+                     .custom-datatable-wrapper{
+                        table{
+                           thead{
+                              tr{
+                                 .custom-header-col{
+                                       width: 15% !important;
+                                       &.description-col{
+                                          width: 24% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.date-col{
+                                          width: 10% !important;
+                                       }
+                                       &.status-col{
+                                          width: 5% !important;
+                                       }
+                                       &.action-col{
+                                          width: 14% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }                                    
+                                 }                            
+                              }
+                           } 
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+      }
+        
+      /*--  Level Dashboard Wrapper Styles  --*/
+      &.level-dashboard-wrapper{    
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-four-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 10% !important;
+                        &.description-col{
+                           width: 18% !important;
+                        }
+                        &.id-col{
+                           width: 10% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 18% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }
+                        
+                     }                            
+                  }
+               }                               
+            }
+         }
+      }
+   }
+        
+      /*--  Real Time Dashboard Wrapper Styles  --*/
+      &.real-time-dashboard-wrapper{    
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-four-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 10% !important;
+                        &.description-col{
+                           width: 35% !important;
+                        }
+                        &.id-col{
+                           width: 10% !important;
+                        }
+                        &.date-col{
+                           width: 10% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 5% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }
+                        
+                     }                            
+                  }
+               }                               
+            }
+         }
+      }
+   }
+   }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+   .dashboard-wrapper{
+         .custom-table-caption{
+            .form-wrapper{
+               .custom-form{
+                  .form-group{
+                     @include margin(0);
+                     .control-label{
+                           @include padding(11px 0);
+                           width: 30%;
+                           &.time-label{
+                              width: 30%;
+                           }
+                     }
+                     .ng-select,
+                     .custom-select,
+                     .custom-input,
+                     .custom-date-picker,
+                     .custom-timepicker{
+                        width: 70%;
+                     }
+                  }
+               }
+            }
+         }   
+      
+       /*--  Admin Dashboard Wrapper Styles  --*/
+      &.admin-dashboard-wrapper{
+         .tile-main-wrapper{
+            .tile-row{
+               .tile-wrapper{ 
+                  .tile-content-wrapper{
+                     min-height: 100%;
+                  }
+               }
+            }
+         }      
+         .custom-datatable-wrapper{                        
+            .table{
+               &.custom-col-five-action{
+                  thead{
+                     tr{
+                        .custom-header-col{
+                           width: 15% !important;
+                           &.description-col{
+                              width: 15% !important;
+                           }
+                           &.id-col{
+                              width: 10% !important;
+                           }
+                           &.date-col{
+                              width: 10% !important;
+                           }
+                           &.status-col{
+                              width: 5% !important;
+                           }
+                           &.action-col{
+                              width: 13% !important;
+                              .btn{
+                                 @include margin(0 5px);
+                              }
+                           }
+                           &.delete-col{
+                              width: 5% !important;
+                           }
+                        }                            
+                     }
+                  }                          
+               }
+            }
+         }
+      }
+       /*--  Beneficiary Dashboard Wrapper Styles  --*/
+      &.beneficiary-dashboard-wrapper{
+         .tile-main-wrapper{
+            .tile-row{
+               .tile-wrapper{ 
+                  .tile-content-wrapper{
+                     min-height: 100%;
+                  }
+               }
+            }
+         }       
+         .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-five-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 15% !important;
+                        &.description-col{
+                           width: 15% !important;
+                        }
+                        &.id-col{
+                           width: 10% !important;
+                        }
+                        &.date-col{
+                           width: 10% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 15% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }                        
+                     }                            
+                  }
+               }                        
+            }  
+         }
+      }
+
+      }
+      /*--  Supervisor Dashboard Wrapper Styles  --*/
+      &.supervisor-dashboard-wrapper{
+         .tile-main-wrapper{
+            .tile-row{
+               .tile-wrapper{ 
+                  .tile-content-wrapper{
+                     min-height: 100%;
+                  }
+               }
+            }
+         }  
+               .tabs-wrapper{
+         .tab-container{
+            .tab-content{
+               .states-list-wrapper{
+                  &.new-grievance-wrapper{
+                     .custom-datatable-wrapper{
+                        .table{
+                          &.custom-col-five-action{
+                              thead{
+                                 tr{
+                                    .custom-header-col{
+                                       width: 15% !important;
+                                       &.description-col{
+                                          width: 10% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.date-col{
+                                          width: 10% !important;
+                                       }
+                                       &.status-col{
+                                          width: 5% !important;
+                                       }
+                                       &.action-col{
+                                          width: 14% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }
+                                    }                            
+                                 }
+                              }
+                          }
+                        }
+                     }
+                  }
+                  &.accepted-grievance-wrapper{
+                     .custom-datatable-wrapper{                        
+                        .table{
+                           &.custom-col-four-action{
+                              thead{
+                                 tr{
+                                    .custom-header-col{
+                                       width: 15% !important;
+                                       &.description-col{
+                                          width: 24% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.date-col{
+                                          width: 10% !important;
+                                       }
+                                       &.status-col{
+                                          width: 5% !important;
+                                       }
+                                       &.action-col{
+                                          width: 14% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }
+                                       
+                                    }                            
+                                 }
+                              }                              
+                           }
+                        }
+                     }
+                  }
+                  &.rejected-grievance-wrapper{
+                     .custom-datatable-wrapper{
+                        table{
+                           thead{
+                              tr{
+                                 .custom-header-col{
+                                       width: 15% !important;
+                                       &.description-col{
+                                          width: 24% !important;
+                                       }
+                                       &.id-col{
+                                          width: 10% !important;
+                                       }
+                                       &.date-col{
+                                          width: 10% !important;
+                                       }
+                                       &.status-col{
+                                          width: 5% !important;
+                                       }
+                                       &.action-col{
+                                          width: 14% !important;
+                                       }
+                                       &.delete-col{
+                                          width: 5% !important;
+                                       }                                    
+                                 }                            
+                              }
+                           } 
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }       
+      }
+              
+      /*--  Level Dashboard Wrapper Styles  --*/
+      &.level-dashboard-wrapper{    
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-four-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 10% !important;
+                        &.description-col{
+                           width: 18% !important;
+                        }
+                        &.id-col{
+                          width: 10% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 18% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }
+                        
+                     }                            
+                  }
+               }                            
+            }
+         }
+      }
+   }
+              
+      /*--  Real Time Dashboard Wrapper Styles  --*/
+      &.real-time-dashboard-wrapper{    
+      .custom-datatable-wrapper{                        
+         .table{
+            &.custom-col-four-action{
+               thead{
+                  tr{
+                     .custom-header-col{
+                        width: 10% !important;
+                        &.description-col{
+                           width: 35% !important;
+                        }
+                        &.id-col{
+                           width: 10% !important;
+                        }
+                        &.date-col{
+                           width: 10% !important;
+                        }
+                        &.status-col{
+                           width: 5% !important;
+                        }
+                        &.action-col{
+                           width: 5% !important;
+                        }
+                        &.delete-col{
+                           width: 5% !important;
+                        }                        
+                     }                            
+                  }
+               }                            
+            }
+         }
+      }
+   }
+   }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+   .dashboard-wrapper{
+      .custom-table-caption{
+         .form-wrapper{
+            .custom-form{
+               .form-group{
+                     @include margin(0);
+                     .control-label{
+                        @include padding(0);
+                        min-height: 100%;
+                        &.time-label{
+                           width: 100%;
+                        }
+                  }
+                  .ng-select,
+                  .custom-select,
+                  .custom-input,
+                  .custom-date-picker,
+                  .custom-timepicker{
+                     width: 100%;
+                  }
+               }
+            }
+         }
+      }
+   }
+}
+

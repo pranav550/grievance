@@ -1,0 +1,277 @@
+
+/*==============================================================================
+***********************  Custom Btn Styles For The Site  ***********************
+==============================================================================*/
+.btn{
+    @include margin(0);
+    @include padding(9px 15px);
+    @include transition(all 0.3s ease-in-out);
+    @include border-radius(0);
+    font-family: $roboto-regular;
+    line-height: ($line-height-computed * .9);
+    text-transform: capitalize;
+    display: inline-block;
+    .custom-icon{
+        @include margin(0 10px 0 0);
+    }
+
+    /*--  Red Button Styles  --*/
+    &.btn-red{
+        background-color: $base-red;
+        color: $white;
+        border: 1px solid $base-red;
+        &:hover{
+            background-color: $white;
+            color: $base-red;
+            border: 1px solid $base-red;
+        }
+        &:focus{
+            background-color: darken($base-red, 10%);
+            color: $white;
+            border: 1px solid darken($base-red, 10%);
+        }
+        &[disabled]{
+            &:hover,&:focus{
+                background-color: $base-red;
+                color: $white;
+                border: 1px solid $base-red;
+            }
+        }
+    } 
+    
+    &.btn-outline-red{
+        background-color: $white;
+        color: $base-red;
+        border: 1px solid $base-red;
+        &:hover{
+            background-color: $base-red;
+            color: $white;
+            border: 1px solid $base-red;
+        }
+        &:focus{
+            background-color: darken($base-red, 10%);
+            color: $white;
+            border: 1px solid darken($base-red, 10%);
+        }
+        &[disabled]{
+            &:hover,&:focus{
+                background-color: $base-red;
+                color: $white;
+                border: 1px solid $base-red;
+            }
+        }
+    }
+
+    /*--  Green Button Styles  --*/
+    &.btn-green{
+        background-color: $base-green;
+        color: $white;
+        border: 1px solid $base-green;
+        &:hover{
+            background-color: $white;
+            color: $base-green;
+            border: 1px solid $base-green;
+        }
+        &:focus{
+            background-color: $base-green;
+            color: $white;
+            border: 1px solid $base-green;
+        }
+        &[disabled]{
+            &:hover,&:focus{
+                background-color: $base-green;
+                color: $white;
+                border: 1px solid $base-green;
+            }
+        }
+    }
+
+    /*--  Blue Button Styles  --*/
+    &.btn-blue{
+        background-color: $base-blue;
+        color: $white;
+        border: 1px solid $base-blue;
+        &:hover{
+            background-color: $white;
+            color: $base-blue;
+            border: 1px solid $base-blue;
+        }
+        &:focus{
+            background-color: $base-blue;
+            color: $white;
+            border: 1px solid $base-blue;
+        }
+        &[disabled]{
+            &:hover,&:focus{
+                background-color: $base-blue;
+                color: $white;
+                border: 1px solid $base-blue;
+            }
+        }
+    }
+
+    /*--  Light Blue Button Styles  --*/
+    &.btn-light-blue{
+        background-color: $color-light-blue;
+        color: $white;
+        border: 1px solid $color-light-blue;
+        &:hover{
+            background-color: $white;
+            color: $color-light-blue;
+            border: 1px solid $color-light-blue;
+        }
+        &:focus{
+            background-color: darken($color-light-blue, 10%);
+            color: $white;
+            border: 1px solid darken($color-light-blue, 10%);
+        }
+        &[disabled]{
+            &:hover,&:focus{
+                background-color: $color-light-blue;
+                color: $white;
+                border: 1px solid $color-light-blue;
+            }
+        }
+    }
+     /*-- View Button Styles  --*/
+    &.btn-view{
+        background-color: $base-orange;
+        color: $white;
+        border: 1px solid $base-orange;
+        &:hover{
+            background-color: $white;
+            color: $base-orange ;
+            border: 1px solid $base-orange;
+        }
+        &:focus{
+            background-color: $base-orange;
+            color: $white;
+            border: 1px solid $base-orange;
+        }
+        &[disabled]{
+            &:hover,&:focus{
+            background-color: $base-orange;
+            color: $white;
+            border: 1px solid $base-orange;
+            }
+        }
+    }
+    /*--  Edit Button Styles  --*/
+    &.btn-edit{
+        background-color: $base-blue;
+        color: $white;
+        border: 1px solid $base-blue;
+        &:hover{
+            background-color: $white;
+            color: $base-blue;
+            border: 1px solid $base-blue;
+        }
+        &:focus{
+            background-color: $base-blue;
+            color: $white;
+            border: 1px solid $base-blue;
+        }
+        &[disabled]{
+            &:hover,&:focus{
+                background-color: $base-blue;
+                color: $white;
+                border: 1px solid $base-blue;
+            }
+        }
+    }
+
+    /*--  Delete Button Styles  --*/
+    &.btn-delete{
+        background-color: $red;
+        color: $white;
+        border: 1px solid $red;
+        &:hover{
+            background-color: $white;
+            color: $red;
+            border: 1px solid $red;
+        }
+        &:focus{
+            background-color: $dark-red4;
+            color: $white;
+            border: 1px solid $dark-red4;
+        }
+        &[disabled]{
+            &:hover,&:focus{
+                background-color: $base-red;
+                color: $white;
+                border: 1px solid $base-red;
+            }
+        }
+    }
+
+    /*--  Active Button Styles  --*/
+    &.btn-active{
+        background-color: $base-green;
+        color: $white;
+        border: 1px solid $base-green;
+        &:hover{
+            background-color: $white;
+            color: $base-green;
+            border: 1px solid $base-green;
+        }
+        &:focus{
+            background-color: $base-green;
+            color: $white;
+            border: 1px solid $base-green;
+        }
+        &[disabled]{
+            &:hover,&:focus{
+                background-color: $base-green;
+                color: $white;
+                border: 1px solid $base-green;
+            }
+        }
+    }
+    &.btn-inactive{
+        background-color: $base-grey;
+        color: $light-black;
+        border: 1px solid $base-grey;
+        &:hover{
+            background-color: $white;
+            color: $light-black;
+            border: 1px solid $base-grey;
+        }
+        &:focus{
+            background-color: $base-grey;
+            color: $light-black;
+            border: 1px solid $base-grey;
+        }
+        &[disabled]{
+            &:hover,&:focus{
+            background-color: $base-grey;
+            color: $light-black;
+            border: 1px solid $base-grey;
+            }
+        }
+    }
+   
+    &.btn-block{
+        display: block;
+        width: 100%;
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}
+

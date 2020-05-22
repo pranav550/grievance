@@ -1,0 +1,245 @@
+<!--  Beneficiary Dashboard Wrapper Starts -->
+
+<app-header></app-header>
+
+<section class="dashboard-wrapper beneficiary-dashboard-wrapper">
+    <div class="container">
+
+        <!--  Custom Table Caption Starts  -->
+        <div class="custom-table-caption">
+            <div class="row">
+                <div class="col-xs-4">
+                    <h3 class="page-title dashboard-page-title">{{ 'dashboard' | translate }}</h3>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <a href="javascript:void(0);" routerLink="/grievance-register" class="btn btn-edit">
+                        {{'New Grievance' | translate}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--  Custom Table Caption Ends  -->
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Tile Main Wrapper Starts -->
+                <div class="tile-main-wrapper">
+                    <div class="tile-row">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="tile-wrapper tile-light-blue">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Grievance registered'| translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="allCountExist">
+                                        <p class="tile-count"><i class="fa fa-list-ul tile-icon"></i>{{allRGriCount}}
+                                        </p>
+                                        <p class="tile-text">
+                                            {{'This number shows total grievances registered on this platform.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!allCountExist">
+                                        <p class="tile-count"><i class="fa fa-list-ul tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows total grievances registered on this platform.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="tile-wrapper tile-orange">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Grievance pending' | translate}}
+                                        </h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="allCountExist">
+                                        <p class="tile-count"><i class="fa fa-clock-o tile-icon"></i>{{allPGriCount}}
+                                        </p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that is currently being redressed.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!allCountExist">
+                                        <p class="tile-count"><i class="fa fa-clock-o tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that is currently being redressed.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="tile-wrapper tile-green">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Grievance closed' | translate}}
+                                        </h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="allCountExist">
+                                        <p class="tile-count"><i
+                                                class="fa fa-check-circle-o tile-icon"></i>{{allCGriCount}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that has been closed successfully.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!allCountExist">
+                                        <p class="tile-count"><i class="fa fa-check-circle-o tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that has been closed successfully.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tile Main Wrapper Ends -->
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- States List Wrapper Starts -->
+                <div class="states-list-wrapper">
+                    <div class="custom-datatable-wrapper">
+                        <table id="dataTable1"
+                            class="table table-condensed table-bordered custom-col-five-action row-border hover">
+                            <thead>
+                                <tr>
+                                    <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                                    <th class="custom-header-col date-col">{{'Grievance Date' | translate}}</th>
+                                    <th class="custom-header-col date-col">{{'Feedback Score' | translate}}</th>
+                                    <th class="custom-header-col description-col">{{'Brief' | translate}}</th>
+                                    <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+                                    <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let beneficiaryGrievances of registerGrievancesData">
+                                    <td class="custom-body-col id-col">
+                                        <a class="table-link" (click)="grievanceDetailsModal(beneficiaryGrievances.id)"
+                                            href="javascript:void(0);">
+                                            {{ beneficiaryGrievances.grievance_id }}
+                                        </a></td>
+                                    <td class="custom-body-col date-col">
+                                        {{ beneficiaryGrievances.created_at | date:'MM/dd/yyyy, h:mm a' }}
+                                    </td>
+
+                                    <td class="custom-body-col date-col">
+                                        {{ beneficiaryGrievances.avg_feedback | feedbackRating }}
+                                    </td>
+
+                                    <td class="custom-body-col description-col">
+                                        <p class="description-text">
+                                            {{ beneficiaryGrievances.description }}
+                                        </p>
+                                    </td>
+                                    <td class="custom-body-col status-col">
+                                        <span class="badge badge-red"
+                                            *ngIf="beneficiaryGrievances.status == 'rejected'">{{ 'Rejected'| translate }}
+                                        </span>
+                                        <span class="badge badge-active"
+                                            *ngIf="beneficiaryGrievances.status == 'accepted'">{{ 'Accepted'| translate }}
+                                        </span>
+                                        <span class="badge badge-orange"
+                                            *ngIf="beneficiaryGrievances.status == 'pending'">{{ 'Pending' | translate }}
+                                        </span>
+                                        <span class="badge badge-active"
+                                            *ngIf="beneficiaryGrievances.status == 'closed'">{{ 'Closed'| translate }}
+                                        </span>
+                                        <span class="badge badge-reopen"
+                                            *ngIf="beneficiaryGrievances.status == 'reopened'">{{ 'Reopened'| translate }}
+                                        </span>
+                                    </td>
+                                    <td class="custom-body-col action-col">
+                                        <a href="javascript:void(0);"
+                                            (click)="viewTimeLineGrievance(beneficiaryGrievances.id)"
+                                            href="javascript:void(0);" class="btn btn-view">
+                                            <i class="fa fa-eye custom-icon"></i> {{'View' | translate}}
+                                        </a>
+                                        <a *ngIf="beneficiaryGrievances.status == 'closed' && beneficiaryGrievances.isFeedbackSubmitted == false"
+                                            href="javascript:void(0);"
+                                            (click)="grievanceUserFeedBackModal(feedbackModal,beneficiaryGrievances.id)"
+                                            class="btn btn-edit">
+                                            <i class="fa fa-pencil-square-o custom-icon"></i> {{'FeedBack' | translate}}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- States List Wrapper Ends -->
+            </div>
+        </div>
+    </div>
+</section>
+<!--  Beneficiary Dashboard Wrapper Ends -->
+
+<!-- User Description Modal Starts -->
+<ng-template #feedbackModal class="modal custom-modal" id="myModal" role="dialog">
+    <!-- Create States Form Starts -->
+    <div class="form-wrapper">
+        <form class="custom-form" [formGroup]="userFeedBackForm">
+            <!-- Modal content Starts Here-->
+            <div class="modal-content grievance-supervisor-modal-wrapper">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left"> {{ 'Grievance FeedBack' | translate}}</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="stateName" class="control-label">{{'Feedback' | translate}}<sup
+                                class="custom-required">*</sup></label>
+                        <label class="radio-inline custom-radio">
+                            <input formControlName='feedbackStatus' class="radio-text" selected type="radio"
+                                [value]="true" tabindex="1">
+                            <span class="radio-text">{{'Satisfied' | translate}}</span>
+                        </label>
+                        <label class="radio-inline custom-radio">
+                            <input formControlName='feedbackStatus' class="radio-text" type="radio" [value]="false"
+                                tabindex="2">
+                            <span class="radio-text">{{'Unsatisfied' | translate}}</span>
+                        </label>
+                    </div>
+                    <div class="form-group  mar-b0">
+                        <label for="feedbackComment" class="control-label">{{'Comment' | translate}}</label>
+                        <textarea rows="3" class="form-control" formControlName="feedbackComment"
+                            placeholder="{{'Comment' | translate}}" tabindex="3"
+                            (keyup)="emptyDisable($event)"></textarea>
+                        <div *ngIf="errorCheck" class="error-message">
+                            {{'Maximum 250 characters allow' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center btn-confirm-wrapper">
+                        <button type="button" [disabled]="errorCheck" class="btn btn-default btn-submit" tabindex="3"
+                            (click)="submitUserFeedback()">
+                            {{'Submit' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-blue" data-dismiss="modal" (click)="modalRef.hide()"
+                            tabindex="4">
+                            {{'Cancel' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Modal content Starts Here-->
+</ng-template>
+<!-- User Description Modal Ends -->
+
+<!--  Spinner Starts -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends -->
+<div *ngIf="modalBool">
+    <app-grievance-details-popup [grieveanceDetailsData]="grieveanceDetailsData" [actionTakenData]="actionTakenData">
+    </app-grievance-details-popup>
+</div>
+<!-- Modal View Pop-->
+<div *ngIf="modalView">
+    <app-grievance-time-line-details [grievanceHistoryData]="grievanceHistoryData"></app-grievance-time-line-details>
+</div>

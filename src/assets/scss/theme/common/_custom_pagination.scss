@@ -1,0 +1,50 @@
+
+/*==============================================================================
+******************  Custom Pagination Styles For The Site  *********************
+==============================================================================*/
+.pagination{
+  li{
+  	 > a{
+	    background-color: $pag-link-bg;
+	    color: $pag-link-color;
+	    border: 0;
+	    &:hover,&:focus{  
+    		background-color: $pag-link-bg-success;
+    		color: $pag-link-color-success;
+	    	border: 0;
+	    }
+	  } 
+	  &.disabled{
+	  	 > a{
+		    background-color: $pag-link-bg-disabled;
+		    color: $pag-link-color-disabled;
+		    border: 0;
+		    &:hover,&:focus{
+	    		background-color: $pag-link-bg-disabled;
+		   		color: $pag-link-color-disabled;
+		    	border: 0;
+		    }
+		  }
+	  }
+  } 
+}
+
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+ 
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

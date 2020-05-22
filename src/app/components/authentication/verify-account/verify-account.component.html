@@ -1,0 +1,49 @@
+<app-nav-bar></app-nav-bar>
+
+<!--  Verify Account Wrapper Starts  -->
+<div *ngIf="accountExists">
+  <div class="form-wrapper verify-account-wrapper">
+    <form [formGroup]="registeringUserForm" class="custom-form" (ngSubmit)="registerDetails()">
+      <h3 class="form-title">Create Account</h3>
+      <div class="form-group">
+        <label for="username" class="control-label">Username</label>
+        <div class="has-feedback">
+          <input type="text" class="form-control" (ngModelChange)="checkUserNameExists($event)" formControlName="createUserName"
+            id="username" placeholder="Username" />
+          <div *ngIf="responseMessage" class="fa fa-check custom-feedback-success form-control-feedback"></div>
+          <div *ngIf="defaultValue" class="fa fa-envelope-o form-control-feedback"></div>
+          <div *ngIf="responseNewMessage" class="fa fa-times form-control-feedback"></div>
+        </div>
+        <div *ngIf="submitted && userRegisterF.createUserName.errors" class="error-message">
+          <div *ngIf="userRegisterF.createUserName.errors.required">Username is required.</div>
+        </div>
+        <div *ngIf="submitted">
+          <div class="error-message" *ngIf="responseMessage === false">Username already Exists.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="username" class="control-label">Password</label>
+        <div class="has-feedback">
+          <input type="password" class="form-control" formControlName="createPassword" id="Password" placeholder="Password" />
+          <i class="fa fa-lock  form-control-feedback"></i>
+        </div>
+        <div *ngIf="submitted && userRegisterF.createPassword.errors" class="error-message">
+          <div *ngIf="userRegisterF.createPassword.errors.required">Password is required.</div>
+          <div *ngIf="userRegisterF.createPassword.errors?.pattern">Password should be 8 characters with one upper case
+            and
+            alpha numeric digits."</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name" class="control-label">Security Code<sup class="custom-required">*</sup></label>
+        <recaptcha formControlName="myRecaptcha"></recaptcha>
+        <div *ngIf="submitted" class="error-message">
+          <div *ngIf="!registeringUserForm.value.myRecaptcha">Captcha is required.</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-block btn-default btn-submit">Login</button>
+    </form>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#934d4d" type="ball-8bits"></ngx-spinner>
+<!--  Verify Account Wrapper Ends  -->

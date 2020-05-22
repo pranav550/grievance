@@ -1,0 +1,157 @@
+<div *ngIf="!isConfirmPasswordExists">
+  <form class="custom-form" [formGroup]="forgotPasswordForm" (ngSubmit)="forgotPassword()">
+    <h3 class="form-title">{{heading}}</h3>
+    <!-- <div class="form-group" *ngIf="emailAddress">
+      <label for="email1" class="control-label">{{'Email Id' | translate}}</label>
+      <div class="has-feedback">
+        <input type="email" class="form-control" formControlName="forgotEmail" placeholder="{{'Email Id' | translate}}"
+          tabindex="1" autofocus="true" />
+        <i class="fa fa-envelope-o form-control-feedback"></i>
+      </div>
+      <div *ngIf="submitted && forgotPasswordF.forgotEmail.errors" class="error-message">
+        <div *ngIf="forgotPasswordF.forgotEmail.errors?.pattern">
+          {{'Email must be a valid email Id.' | translate}}
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="form-group" *ngIf="userName">
+      <label for="email1" class="control-label">{{'Username' | translate}}<sup class="custom-required">*</sup></label>
+      <div class="has-feedback">
+        <input type="text" class="form-control" formControlName="username" placeholder="{{'Username' | translate}}"
+          tabindex="2" />
+        <i class="fa fa-user-o form-control-feedback"></i>
+      </div>
+      <div *ngIf="submitted && forgotPasswordF.username.errors" class="error-message">
+        <div *ngIf="forgotPasswordF.username.errors.required">
+          {{'Username is required.' | translate}}
+        </div>
+        <div *ngIf="forgotPasswordF.username.errors?.pattern">
+          {{'Username is invalid.' | translate}}
+        </div>
+      </div>
+    </div> -->
+    <div class="form-group" *ngIf="mobileNumber">
+      <label for="email1" class="control-label">{{'Mobile Number' | translate}}<sup
+          class="custom-required">*</sup></label>
+      <div class="has-feedback">
+        <input type="text" numberOnly class="form-control" maxlength="10" formControlName="mobileNumber"
+          placeholder="{{'10 Digit Mobile Number' | translate}}" tabindex="3" />
+        <i class="fa fa-mobile form-control-feedback"></i>
+      </div>
+      <div *ngIf="submitted && forgotPasswordF.mobileNumber.errors" class="error-message">
+        <div *ngIf="forgotPasswordF.mobileNumber.errors.required">
+          {{'Mobile Number is required.' | translate}}
+        </div>
+        <div *ngIf="forgotPasswordF.mobileNumber.errors?.pattern">
+          {{'Mobile Number is not valid.' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="isCaptchaRequired">
+      <!-- <label for="name" class="control-label">{{'Security Code' | translate}}<sup class="custom-required">*</sup></label>
+      <recaptcha formControlName="myRecaptcha" tabindex="4"></recaptcha>
+      <div *ngIf="submitted" class="error-message">
+        <div *ngIf="!forgotPasswordForm.value.myRecaptcha">
+          {{'Security Code is required.' | translate}}
+        </div>
+      </div> -->
+      <div id="captcha"></div>
+      <div (click)="createCaptcha()" class="pointer">
+        <i class="glyphicon glyphicon-refresh"></i>
+        {{'Generate a new captcha'| translate }}</div>
+    </div>
+    <div class="form-group">
+      <label for="myRecaptcha" class="control-label">{{'Captcha' | translate}}<sup
+          class="custom-required">*</sup></label>
+      <div class="has-feedback">
+        <input type="text" class="form-control" placeholder="{{'Captcha' | translate}}" formControlName="myRecaptcha"
+          placeholder="Captcha" tabindex="3" id="cpatchaTextBox" autocomplete="off" />
+      </div>
+      <div *ngIf="submitted" class="error-message">
+        <div *ngIf="!forgotPasswordForm.value.myRecaptcha">
+          {{'Captcha is required.' | translate}}
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-block btn-default btn-submit" tabindex="5">{{'Send' | translate}}</button>
+    <p class="help-block">
+      <a href="javascript:void(0);" routerLink="/login" class="register-link" tabindex="6">
+        {{'Back to Login' | translate}}
+      </a>
+    </p>
+  </form>
+</div>
+
+<div *ngIf="isConfirmPasswordExists">
+  <form class="custom-form" [formGroup]="confirmForgotPasswordForm" (ngSubmit)="passwordConfirmation()">
+    <h3 class="form-title">{{'Password' | translate}}</h3>
+    <!-- <div class="form-group">
+      <label for="email1" class="control-label">{{'Username' | translate}}</label>
+      <div class="has-feedback">
+        <input type="text" class="form-control" formControlName="confirmPasswordusername" placeholder="{{'Username' | translate}}"
+          readonly tabindex="1" autofocus="true" />
+        <i class="fa fa-user-o form-control-feedback"></i>
+      </div>
+    </div> -->
+    <div class="form-group">
+      <label for="email1" class="control-label">{{'OTP' | translate}}<sup class="custom-required">*</sup></label>
+      <div class="has-feedback">
+        <input type="text" numberOnly maxlength="6" class="form-control" formControlName="forgotPasswordOTP"
+          placeholder="{{'Mobile OTP' | translate}}" tabindex="2" />
+        <i class="fa fa-lock form-control-feedback"></i>
+      </div>
+      <div *ngIf="confirmPwdSubmitted && forgotPasswordNewF.forgotPasswordOTP.errors" class="error-message">
+        <div *ngIf="forgotPasswordNewF.forgotPasswordOTP.errors.required">
+          {{'OTP is required.' | translate}}
+        </div>
+        <div *ngIf="forgotPasswordNewF.forgotPasswordOTP.errors?.pattern">
+          {{'OTP is invalid.' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email1" class="control-label">{{'New Password' | translate}}<sup
+          class="custom-required">*</sup></label>
+      <div class="input-group">
+        <input type="{{showPassword}}" class="form-control" formControlName="newPassword"
+          placeholder="{{'New Password' | translate}}" tabindex="3" />
+        <span class="input-group-addon">
+          <div *ngIf="showPassword ==='password'" class="fa fa-eye-slash" (click)="passwordShow('show')"></div>
+          <div *ngIf="showPassword ==='text'" class="fa fa-eye" (click)="passwordShow('hide')"></div>
+        </span>
+      </div>
+      <div *ngIf="confirmPwdSubmitted && forgotPasswordNewF.newPassword.errors" class="error-message">
+        <div *ngIf="forgotPasswordNewF.newPassword.errors.required">
+          {{'Password is required.' | translate}}
+        </div>
+        <div *ngIf="forgotPasswordNewF.newPassword.errors?.pattern">
+          {{'Password should be minimum 8 digits with 1 Uppercase, 1 Lowercase, 1 Special Character and 1 numeric
+          character.' | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email1" class="control-label">{{'Confirm Password' | translate}}<sup
+          class="custom-required">*</sup></label>
+      <div class="has-feedback">
+        <input type="password" class="form-control" formControlName="confirmPassword"
+          placeholder="{{'Confirm Password' | translate}}" tabindex="4" />
+        <i class="fa fa-key form-control-feedback"></i>
+      </div>
+      <div
+        *ngIf="confirmPwdSubmitted && !confirmForgotPasswordForm.value.newPassword && forgotPasswordNewF.confirmPassword.errors"
+        class="error-message">
+        <div *ngIf="forgotPasswordNewF.confirmPassword.errors.required">
+          {{'Confirm Password is required.' | translate}}
+        </div>
+      </div>
+      <div *ngIf="confirmPwdSubmitted && confirmForgotPasswordForm.value.newPassword" class="error-message">
+        <div *ngIf="confirmForgotPasswordForm.value.confirmPassword !== confirmForgotPasswordForm.value.newPassword">
+          {{'Password mismatch.' | translate}}
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-block btn-default btn-submit" tabindex="5">{{'Send' | translate}}</button>
+  </form>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>

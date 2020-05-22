@@ -1,0 +1,138 @@
+<!-- Admin Dashboard Wrapper Starts -->
+<app-header></app-header>
+<section class="dashboard-wrapper real-time-dashboard-wrapper">
+  <div class="container">
+
+    <!--  Custom Table Caption Starts  -->
+    <div class="custom-table-caption">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3 class="page-title">{{ 'dashboard' | translate }}</h3>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-wrapper basic">
+            <form [formGroup]="adminDashBoardForm" class="custom-form">
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="form-group clearfix">
+                    <label for="stateName" class="control-label">
+                      {{'Select District' | translate}}
+                    </label>
+                    <ng-select [clearable]="false" [items]="districtsData" bindLabel="name" placeholder="{{'Select District' | translate}}"
+                      name="selectedState" formControlName="selectedDistrict" tabindex="1" autofocus="true" [tabindex]="-1">
+                    </ng-select>
+                    <label for="districtName" class="control-label">
+                      {{'Grievance Id' | translate}}
+                    </label>
+                    <input type="text" id= "grievanceId" class="form-control custom-input" placeholder="{{'Grievance Id' | translate}}"
+                      tabindex="2" />
+                    <label for="districtName" class="control-label">
+                      {{'Grievance Type' | translate}}
+                    </label>
+                    <ng-select [clearable]="false" [items]="categoryData"
+                      bindLabel="name" placeholder="{{'Grievance Type' | translate}}" formControlName="selectedGrievanceType"
+                      tabindex="3" [tabindex]="-1">
+                    </ng-select>
+                    <label for="districtName" class="control-label">
+                      {{'Status' | translate}}
+                    </label>
+                    <ng-select [clearable]="false" [items]="beneficaryStatusDetails"
+                      bindLabel="dpname" placeholder="{{'Status' | translate}}" formControlName="selectedStatus" tabindex="4"
+                      [tabindex]="-1">
+                    </ng-select>
+                    <label for="talukaName" class="control-label">{{'Start Date & Time' | translate}}<sup class="custom-required">*</sup></label>
+                    <div class="custom-date-picker">
+                      <input class="form-control" placeholder="{{'Start Date & Time' | translate}}" formControlName="startDateTime"
+                        [(ngModel)]="startDateTime" (click)="onTogglePicker('startDT')" tabindex="3" />
+                      <i class="fa fa-calendar-times-o form-control-feedback" aria-hidden="true"></i>
+                      <datetime-popup class="custom-datetime-popup" [value]="startDateTime" [maxDate]="maxDate"
+                        (valueChange)="onValueChange($event,'startDT')" [(showPopup)]="showPickerStart" [showDate]="showDateStart"
+                        [showTime]="showTimeStart" [closeButton]="closeButtonStart"></datetime-popup>
+                    </div>
+                    <label for="talukaName" class="control-label">{{'End Date & Time' | translate}}<sup class="custom-required">*</sup></label>
+                    <div class="custom-date-picker">
+                      <input class="form-control" placeholder="{{'End Date & Time' | translate}}" formControlName="endDateTime"
+                        [(ngModel)]="endDateTime" (click)="onTogglePicker('endDT')" tabindex="4" />
+                      <i class="fa fa-calendar-times-o form-control-feedback" aria-hidden="true"></i>
+                      <datetime-popup class="custom-datetime-popup" [value]="endDateTime" [maxDate]="maxDate"
+                        (valueChange)="onValueChange($event,'endDT')" [(showPopup)]="showPickerEnd" [showDate]="showDateEnd"
+                        [showTime]="showTimeEnd" [closeButton]="closeButtonEnd"></datetime-popup>
+                      <div class="error-message" *ngIf="submitted">
+                        {{'End Date should always be greater than Start Date' | translate}}
+                      </div>
+                      </div>
+
+                  </div>
+                </div>
+                <div class="col-md-2 text-right">
+                  <button type="submit" (click)="submitReport()" class="btn btn-blue">
+                    {{'Submit' | translate}}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  Custom Table Caption Ends  -->
+
+    <div class="row">
+      <div class="col-sm-12">
+
+        <!-- States List Wrapper Starts -->
+        <div class="states-list-wrapper">
+          <div class="custom-datatable-wrapper">
+            <table id="dataTable1" class="table table-condensed table-bordered custom-col-four-action row-border hover">
+              <thead>
+                <tr>
+                  <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                  <th class="custom-header-col date-col">{{'Grievance Date' | translate}}</th>
+                  <th class="custom-header-col description-col">{{'Brief' | translate}}</th>
+                  <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let realData of realTimeData">
+                  <td class="custom-body-col id-col">
+                    <a class="table-link" (click)="grievanceDetailsModal(realData.id)" href="javascript:void(0);">
+                      {{ realData.grievance_id }}
+                    </a>
+                  </td>
+                  <td class="custom-body-col date-col">{{ realData.created_at | date:'MM/dd/yyyy hh:mm a'}}
+                  </td>
+                  <td class="custom-body-col description-col">
+                    <p class="description-text">
+                      {{ realData.description }}
+                    </p>
+                  </td>
+                  <td class="custom-body-col action-col">
+                    <a href="javascript:void(0);" (click)="viewTimeLineGrievance(realData.id)" href="javascript:void(0);" class="btn btn-view">
+                      <i class="fa fa-eye custom-icon"></i>
+                      {{'View' | translate}}</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!--  States List Wrapper Ends  -->
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Admin Dashboard Wrapper Ends -->
+
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Starts  -->
+<div *ngIf="modalBool">
+    <app-grievance-details-popup [grieveanceDetailsData]="grieveanceDetailsData" [actionTakenData]="actionTakenData"></app-grievance-details-popup>
+</div>
+
+<!-- Modal View Pop-->
+<div *ngIf="modalView">
+    <app-grievance-time-line-details [grievanceHistoryData]= "grievanceHistoryData"></app-grievance-time-line-details>
+  </div>

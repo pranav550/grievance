@@ -1,0 +1,104 @@
+/*==============================================================================
+*************  Grievance Redressal Wrapper Styles For The Site    **************
+==============================================================================*/
+.grievance-redressal-wrapper{
+    @include padding(50px 0);
+     .custom-details-panel{
+         border-radius: 0;
+         border: none;
+          .panel-heading{
+            @include padding(17px);
+            background: $base-blue;
+            border-radius: 0;
+              h3{
+                  color: $white;
+                  font-family: $roboto-regular;
+                  font-size: $font-size-large;
+              }
+          }
+          .panel-body{
+            .details-wrapper{
+                ul{
+                    li{
+                        @include margin(0 0 20px 0);
+                        font-size: $font-size-base;
+                        font-family: $roboto-regular;
+                        strong{
+                            font-size: $font-size-base;
+                            font-family: $roboto-regular;
+                            width: 30%;
+                            color: $color-black;
+                        }
+                        span{
+                            width: 70%;
+                            font-size: $font-size-base;
+                            color: $color-black;
+                        }
+                    }
+                }
+                .form-row{
+                    .form-wrapper{
+                        .custom-form{
+                            .form-group{ 
+                                .control-label{
+                                    width: 30%;
+                                    display: inline-block;
+                                    font-size: $font-size-base;
+                                    color: $color-black;
+                                    font-family: $roboto-regular;
+                                    vertical-align: middle;
+                                    margin-bottom: 0;
+                                }
+                                .has-feedback{
+                                    width: 70%;
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                }
+                                input{
+                                    width: 70%;
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                }
+                                input[type=radio]{
+                                    visibility: hidden;
+                                  &.radio-text{
+                                    font-size: $font-size-base;
+                                    color: $color-black;
+                                  }
+                                }
+                                .radio-redressed-form{
+                                    width: 70%;
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    margin-bottom: 0;
+                                }
+                                .radio-inline{
+                                    width: 100px;
+                                }            
+                            }
+                        }
+                    }
+                }
+            }
+        }
+     }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

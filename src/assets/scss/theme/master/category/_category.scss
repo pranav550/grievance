@@ -1,0 +1,124 @@
+/*==============================================================================
+**************  Grievance Category Wrapper Styles For The Site    **************
+==============================================================================*/
+.grievance-category-wrapper{
+    .custom-datatable-wrapper{
+         .table{
+             thead{
+                 tr{
+                     .custom-header-col{
+                        width: 35% !important;                     
+                        &.status-col,
+                        &.delete-col{
+                            width: 5% !important;
+                        }
+                        &.action-col{
+                             width: 15% !important;
+                        }
+                     }
+                 }
+             }
+         }
+    }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .grievance-category-wrapper{
+        .custom-table-caption{
+            .form-wrapper {
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 170px;
+                        }
+                    } 
+                } 
+            }
+        }
+        .custom-datatable-wrapper{
+            .table{
+                min-width: 680px !important;
+                thead{
+                    tr{
+                        .custom-header-col{
+                            width: 40% !important;                     
+                            &.status-col,
+                            &.delete-col{
+                                width: 10% !important;
+                            }
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .grievance-category-wrapper{
+        .custom-table-caption{
+            .form-wrapper {
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 170px;
+                        }
+                    } 
+                } 
+            }
+        }
+        .custom-datatable-wrapper{
+            .table{
+                min-width: 680px !important;
+                thead{
+                    tr{
+                        .custom-header-col{
+                            width: 30% !important;                     
+                            &.status-col,
+                            &.delete-col{
+                                width: 10% !important;
+                            }
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .grievance-category-wrapper{
+        .custom-datatable-wrapper{
+            .table{
+                min-width: 680px !important;
+                thead{
+                    tr{
+                        .custom-header-col{
+                            width: 40% !important;                     
+                            &.status-col,
+                            &.delete-col{
+                                width: 10% !important;
+                            }
+                            &.action-col{
+                                width: 30% !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

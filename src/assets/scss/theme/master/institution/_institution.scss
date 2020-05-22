@@ -1,0 +1,107 @@
+/*==============================================================================
+*****************      Institution Wrapper Styles For The Site    **************
+==============================================================================*/
+.institution-wrapper{
+    .custom-datatable-wrapper{
+         .table{
+             thead{
+                 tr{
+                     .custom-header-col{
+                        width: 15% !important;
+                        &.address-col{
+                            width: 24% !important;                            
+                        }
+                        &.contact-number-col{
+                            width: 18% !important;
+                        }
+                        &.status-col{
+                            width: 10% !important;
+                        }
+                        &.action-col{
+                             width: 28% !important;
+                        }
+                     }
+                 }
+             }
+         }
+    }
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+    .institution-wrapper{
+        .custom-datatable-wrapper{
+            .table{
+                min-width: 980px !important;
+                thead{
+                    tr{
+                        .custom-header-col.action-col {
+                            width: 22% !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .institution-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 170px;
+                        }
+                    }
+                }
+            }
+        }
+        .custom-datatable-wrapper{
+            .table{
+                min-width: 980px !important;
+                thead{
+                    tr{
+                        .custom-header-col.action-col {
+                            width: 25% !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .institution-wrapper{
+        .custom-table-caption{
+            .form-wrapper{
+                .custom-form{
+                    .form-group{
+                        .ng-select {
+                            width: 180px;
+                        }
+                    }
+                }
+            }
+        }
+        .custom-datatable-wrapper{
+            .table {
+                min-width: 980px !important;
+            }
+        }
+    }    
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .institution-wrapper{
+        .custom-datatable-wrapper{
+            .table {
+                min-width: 980px !important;
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

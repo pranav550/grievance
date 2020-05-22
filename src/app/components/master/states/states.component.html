@@ -1,0 +1,258 @@
+<app-header></app-header>
+
+
+<!-- States Wrapper Starts -->
+<div class="states-wrapper">
+
+    <!-- States List Wrapper Starts -->
+    <div class="container states-list-wrapper">
+
+        <!--  Custom Table Caption Starts  -->
+        <div class="custom-table-caption">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3 class="page-title state-page-title">{{'Tenant' | translate}}</h3>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a href="javascript:void(0);" class="btn btn-edit" (click)="openModal(addState)">
+                       {{'Create Tenant' | translate}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--  Custom Table Caption Ends  -->
+
+        <div class="custom-datatable-wrapper">
+            <table id="dataTable1" class="table table-condensed table-bordered custom-col-six-action row-border hover">
+                <thead>
+                    <tr>
+                        <th class="custom-header-col">{{'Name' | translate}}</th>
+                        <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                        <th class="custom-header-col">{{'Display Name' | translate}}</th>
+                        <th class="custom-header-col status-col">{{'Status' | translate}}</th>
+                        <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                        <th class="custom-header-col delete-col">{{'Delete' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let state of statesData">
+                        <td class="custom-body-col">{{ state.name }}</td>
+                        <td class="custom-body-col id-col">{{ state.code }}</td>
+                        <td class="custom-body-col">{{ state.displayName }}</td>
+                        <td class="custom-body-col status-col">
+                            <span *ngIf="state.status === 'active'" class="badge badge-active">{{ state.status }}</span>
+                            <span *ngIf="state.status === 'inactive'" class="badge badge-inactive">{{ state.status }}</span>
+                        </td>
+                        <td class="custom-body-col action-col">
+                            <a href="javascript:void(0);" (click)="editStateModal(state,editState)" class="btn btn-edit">
+                                <i class="fa fa-pencil custom-icon"></i>{{'Edit' | translate}}
+                            </a>
+                            <a href="javascript:void(0);" *ngIf="state.status === 'active'" (click)="stateStatusValue(state)" class="btn btn-inactive">
+                                <i class="fa fa-ban custom-icon"></i>{{'Inactivate' | translate}}
+                            </a>
+                            <a href="javascript:void(0);" *ngIf="state.status === 'inactive'" (click)="stateStatusValue(state)" class="btn btn-active">
+                                <i class="fa fa-check custom-icon"></i>{{'Activate' | translate}}
+                            </a>
+                        </td>
+                        <td class="custom-body-col delete-col">
+                            <a href="javascript:void(0);" (click)="deleteStateModalPopup(stateEditConfirmModalpopup,state)" class="btn btn-delete">
+                                <i class="fa fa-trash-o custom-icon"></i>{{'Delete' | translate}}
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- States List Wrapper Starts -->
+
+</div>
+<!-- States Wrapper Ends -->
+
+<!-- Add New State Modal Starts -->
+<ng-template #addState class="custom-modal">
+
+    <!-- Add States Form Starts -->
+    <div class="form-wrapper">
+        <form [formGroup]="addStateForm" class="custom-form" (ngSubmit)='createState()'>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Create Tenant' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+                    <input (ngModelChange)="stateEnter($event)" type="text" formControlName="addStateName" class="form-control" [ngClass]="{ 'is-invalid': submitted && addStateF.addStateName.errors }"
+                        placeholder="{{'Name' | translate}}" tabindex="1" appAutofocus />
+                    <div *ngIf="submitted && addStateF.addStateName.errors" class="error-message">
+                        <div *ngIf="addStateF.addStateName.errors.required">
+                            {{'Name is required.' | translate}}
+                        </div>
+                        <div *ngIf="addStateF.addStateName.errors.maxlength">
+                            {{'Name should not exceed 100 characters.' | translate}}.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{'ID' | translate}}<sup class="custom-required">*</sup></label>
+                    <input type="text" formControlName="addStateId" class="form-control" [ngClass]="{ 'is-invalid': submitted && addStateF.addStateId.errors }"
+                        placeholder="{{'ID' | translate}}" tabindex="2"/>
+                    <div *ngIf="submitted && addStateF.addStateId.errors" class="error-message">
+                        <div *ngIf="addStateF.addStateId.errors.required">
+                            {{'Id is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{'Display Name' | translate}}</label>
+                    <input type="text" formControlName="addStateDisplayName" class="form-control" [ngClass]="{ 'is-invalid': submitted && addStateF.addStateDisplayName.errors }"
+                        placeholder="{{'Display Name' | translate}}" tabindex="3"/>
+                    <div *ngIf="submitted && addStateF.addStateDisplayName.errors" class="error-message">
+                        <div *ngIf="addStateF.addStateDisplayName.errors.maxlength">
+                            {{'Display Name should not exceed 100 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{'Description' | translate}}</label>
+                    <textarea formControlName="addStateDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted && addStateF.addStateDescription.errors }"
+                        placeholder="{{'Description' | translate}}" tabindex="4"></textarea>
+                    <div *ngIf="submitted && addStateF.addStateDescription.errors" class="error-message">
+                        <div *ngIf="addStateF.addStateDescription.errors.maxlength">
+                            {{'Description should not exceed 100 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='addStateStatusMode' class="radio-text" type="radio" [value]="true" tabindex="5">
+                        <span class="radio-text">{{'Active' | translate}}</span>
+                    </label>
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='addStateStatusMode' class="radio-text" type="radio" [value]="false" tabindex="6">
+                        <span class="radio-text">{{'Inactive' | translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="loading" class="btn btn-block btn-default btn-submit" tabindex="7">{{'Create Tenant' | translate}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- Create States Form Ends -->
+
+</ng-template>
+<!-- Create New State Modal Ends -->
+
+<!-- Edit New State Modal Starts -->
+<ng-template #editState class="custom-modal">
+
+    <!-- Edit States Form Starts -->
+    <div class="form-wrapper">
+        <form [formGroup]="editStateForm" class="custom-form" (ngSubmit)='editStateDetails()'>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Edit Tenant' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="stateName" class="control-label">{{'Name' | translate}}<sup class="custom-required">*</sup></label>
+                    <input type="text" class="form-control" formControlName="editStateName" (ngModelChange)="stateEditEnter($event)" name="stateName"
+                        placeholder="{{'Name' | translate}}" appAutofocus tabindex="8">
+                    <div *ngIf="submitted && editStateF.editStateName.errors" class="error-message">
+                        <div *ngIf="editStateF.editStateName.errors.required">
+                            {{'Name is required.' | translate}}
+                        </div>
+                        <div *ngIf="editStateF.editStateName.errors.maxlength">
+                            {{'Name should not exceed 100 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{'ID' | translate}}<sup class="custom-required">*</sup></label>
+                    <input type="text" class="form-control" placeholder="{{'ID' | translate}}" formControlName="editStateId" tabindex="9"/>
+                    <div *ngIf="submitted && editStateF.editStateId.errors" class="error-message">
+                        <div *ngIf="editStateF.editStateId.errors.required">
+                            {{'Id is required.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{'Display Name' | translate}}</label>
+                    <input type="text" placeholder="{{'Display Name' | translate}}" formControlName="editStateDisplayName" class="form-control" tabindex="10"/>
+                    <div *ngIf="submitted && editStateF.editStateDisplayName.errors" class="error-message">
+                        <div *ngIf="editStateF.editStateDisplayName.errors.maxlength">
+                            {{'Display Name should not exceed 100 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">{{'Description' | translate}}</label>
+                    <textarea placeholder="{{'Description' | translate}}" type="text" formControlName="editStateDescription" class="form-control" tabindex="11"></textarea>
+                    <div *ngIf="submitted && editStateF.editStateDescription.errors" class="error-message">
+                        <div *ngIf="editStateF.editStateDescription.errors.maxlength">
+                            {{'Description should not exceed 100 characters.' | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='editStateStatus' class="radio-text" type="radio" [value]="true" tabindex="12">
+                        <span class="radio-text">{{'Active' | translate}}</span>
+                    </label>
+                    <label class="radio-inline custom-radio">
+                        <input formControlName='editStateStatus' class="radio-text" type="radio" [value]="false" tabindex="13">
+                        <span class="radio-text">{{'Inactive' | translate}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-block btn-default btn-submit" tabindex="14">{{'Update Tenant' | translate}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- Edit States Form Ends -->
+
+</ng-template>
+<!-- Edit New State Modal Ends -->
+
+
+<!--  Password Modal Starts  -->
+<ng-template #stateEditConfirmModalpopup class="custom-modal">
+
+    <!-- Password State Form Starts -->
+    <div class="form-wrapper">
+        <form class="custom-form">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{'Delete Tenant' | translate}}(<strong>{{editStateData.name}}</strong>)</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{'Are you sure you want to delete the tenant?' | translate}}                         
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red" (click)="deleteState(true)">{{'Yes' | translate}}</button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal" (click)="deleteState(false)">{{'No' | translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Password State Form Ends -->
+
+</ng-template>
+<!--  Password Modal Ends  -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Ends  -->

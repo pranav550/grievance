@@ -1,0 +1,117 @@
+
+/*==============================================================================
+****************  Custom List Group Styles For The Site  ***********************
+==============================================================================*/
+
+/*--  Custom Select Styles  --*/
+.custom-select{
+    @include margin(0 15px 0 0);
+    @include padding(5px 5px 8px);
+	@include box-shadow(none);
+    @include border-radius(0);
+    background-color: $white;
+    color: $select-color;
+    display: inline-block;
+    width: 100px; 
+    border: 1px solid $dark-grey4;
+    option{
+        background-color: $white;
+        color: $select-option-color;  
+        border: 0;
+	    &:disabled{
+	      cursor: no-drop;
+	      color: $select-option-disabled-color;
+	    }      
+    }
+    &:hover,&:focus{
+	    @include box-shadow(none);
+    }
+}  
+
+/*--  Custom Input Styles  --*/ 
+.custom-input{  
+    @include size(100% , 30px);
+    @include border-radius(0);
+    @include box-shadow(none);
+    @include padding(5px 15px);
+    background: transparent;
+    color: $nav-form-input;
+    border: 0;
+    border-bottom: 1px solid $nav-form-input-border;
+    &:focus{
+        @include box-shadow(none);
+        border-bottom: 1px solid $nav-form-input-border;
+    }
+}
+
+/*--  Custom Text Area Styles  --*/
+.custom-text-area{
+    @include size(100% , auto);
+    @include border-radius(0);
+    @include box-shadow(none);
+    @include padding(5px 25px);
+    background: transparent;
+    color: $nav-form-input;
+    resize : none;
+    border : 1px solid $nav-form-input-border;
+    &:focus{
+        @include box-shadow(none);
+        border: 1px solid $nav-form-input-border;
+    }
+}
+
+/*--  Custom Input Styles  --*/
+.custom-input-group{
+    @include margin(0 0 15px);
+    .input-group-addon{  
+        @include rotate(90deg);
+        @include margin(0);
+        @include padding(0);
+        @include border-radius(5px);
+        background-color: transparent;
+        font-size: $font-size-large;  
+        border: 0;   
+        position: absolute;
+        top: 0;
+        left: 7px;
+        &:hover,&:focus{
+            color: $white;
+            background-color: transparent;
+            border: 0;
+        }
+    }
+    input{
+        @include border-radius(0);
+        @include box-shadow(none);
+        @include padding(5px 25px);
+        background: transparent;
+        color: $nav-form-input;
+        width: 300px;
+        height: 30px;
+        border: 0;
+        border-bottom: 1px solid $nav-form-input-border;
+        &:focus{
+            @include box-shadow(none);
+            border-bottom: 1px solid $nav-form-input-border;
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

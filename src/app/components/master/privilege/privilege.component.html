@@ -1,0 +1,170 @@
+<!--  Privilege Nature Wrapper Starts  -->
+<app-header></app-header>
+
+<div class="ext-wrapper container privilege-wrapper">
+    <div class="custom-table-caption">
+        <h3 class="page-title">{{'Privilege' | translate}}</h3>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="form-wrapper basic">
+                    <form class="custom-form">
+                        <div class="form-group clearfix">
+                            <label for="stateName" class="control-label">{{'Select State' | translate}}</label>
+                            <ng-select [clearable]="false" (change)="onStateEventChange($event ,'defaultFilter')" [items]="statesData" bindLabel="name" placeholder="{{'Select State' | translate}}" name="selectedStateEvent" [(ngModel)]="selectedStateEvent" tabindex="1" autofocus="true"
+                                [tabindex]="-1" [disabled]="true">
+                            </ng-select>
+                            <label for="stateName" class="control-label">{{'Select Role' | translate}}</label>
+                            <ng-select [clearable]="false" (change)="onRoleEventChange($event)" [items]="rolesData" bindLabel="roleName" placeholder="Select Role" name="selectedRoleEvent" [(ngModel)]="selectedRoleEvent" tabindex="2" [tabindex]="-1">
+                            </ng-select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4 text-right">
+                <button href="javascript:void(0);" class="btn btn-blue" (click)="updatePrivilegeModal()" [disabled]="updateStateBool || updateRoleBool ">
+          {{'Update Privilege' | translate}}  
+        </button>
+            </div>
+        </div>
+    </div>
+    <div class="custom-datatable-wrapper" *ngIf="showContent;else second">
+        <table id="dataTable1" class="table table-condensed table-bordered custom-col-five-action row-border hover">
+            <thead>
+                <tr>
+                    <th class="custom-header-col">{{'Name' | translate}} </th>
+                    <!-- <th class="custom-header-privilege-col assign-col">
+                        <ng-container *ngIf="showContent;else second">
+                            <label class="checkbox-inline custom-checkbox"> {{ 'Select All' | translate }}
+                      <input [checked]="checkbox" (change)="selectAll($event)" type="checkbox"/>
+                    <span class="checkbox-text"></span>
+                  </label>
+                        </ng-container>
+                        <ng-template #second>
+                            <ng-container>
+                                {{'Assign' | translate}}
+                            </ng-container>
+                        </ng-template>
+                    </th> -->
+
+                    <!-- <th class="custom-header-col">{{'Name' | translate}} </th> -->
+                    <th class="custom-header-privilege-col assign-col">
+                        <ng-container *ngIf="showContent;else second">
+                            <label class="checkbox-inline custom-checkbox"> {{ 'View' | translate }}
+                                
+                      <!-- <input [(ngModel)]="allAction" [checked]="checkbox" (change)="selectAllView($event,allAction)" type="checkbox"/> -->
+                    <span class="checkbox-text"></span>
+                  </label>
+                        </ng-container>
+                        <ng-template #second>
+                            <ng-container>
+                                {{'Assign' | translate}}
+                            </ng-container>
+                        </ng-template>
+                    </th>
+
+
+                    <th class="custom-header-privilege-col assign-col">
+                        <ng-container *ngIf="showContent;else second">
+                            <label class="checkbox-inline custom-checkbox"> {{ 'Add' | translate }}
+                      <!-- <input  [(ngModel)]="allAction" [checked]="checkbox"  (change)="selectAllAdd($event, allAction)" type="checkbox"/> -->
+                    <span class="checkbox-text"></span>
+                  </label>
+                        </ng-container>
+                        <ng-template #second>
+                            <ng-container>
+                                {{'Assign' | translate}}
+                            </ng-container>
+                        </ng-template>
+                    </th>
+
+
+                    <th class="custom-header-privilege-col assign-col">
+                        <ng-container *ngIf="showContent;else second">
+                            <label class="checkbox-inline custom-checkbox"> {{ 'Edit' | translate }}
+                      <!-- <input  [(ngModel)]="allAction" [checked]="checkbox" (change)="selectAllEdit($event, allAction)" type="checkbox"/> -->
+                    <span class="checkbox-text"></span>
+                  </label>
+                        </ng-container>
+                        <ng-template #second>
+                            <ng-container>
+                                {{'Assign' | translate}}
+                            </ng-container>
+                        </ng-template>
+                    </th>
+
+
+                    <th class="custom-header-privilege-col assign-col">
+                        <ng-container *ngIf="showContent;else second">
+                            <label class="checkbox-inline custom-checkbox"> {{ 'Delete' | translate }}
+                      <!-- <input  [(ngModel)]="allAction" [checked]="checkbox"  (change)="selectAllDelete($event,allAction)" type="checkbox"/> -->
+                    <span class="checkbox-text"></span>
+                  </label>
+                        </ng-container>
+                        <ng-template #second>
+                            <ng-container>
+                                {{'Assign' | translate}}
+                            </ng-container>
+                        </ng-template>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let action of actionPermissionData; let i = index">
+                    <td class="custom-body-col">{{action.name}}</td>
+                    <!-- <td class="custom-body-col assign-col">
+                        <label class="checkbox-inline custom-checkbox">
+                <input [(ngModel)]="action.assigned" [checked]="checkbox" [value]="action.id" (change)="actionCheck($event,action,actionPermissionData,i)" type="checkbox"/>
+              <span class="checkbox-text"></span>
+            </label>
+                    </td> -->
+
+
+                    <!-- <td class="custom-body-col">{{action.name}}</td> -->
+                    <td class="custom-body-col assign-col">
+                        <label class="checkbox-inline custom-checkbox">
+                <input [(ngModel)]="action.view"  [checked]="checkbox" name="view" [value]="action.id" (change)="actionCheck($event,action,actionPermissionData,i)" type="checkbox"/>
+              <span class="checkbox-text"></span>
+            </label>
+                    </td>
+
+
+                    <td class="custom-body-col assign-col">
+                        <label class="checkbox-inline custom-checkbox">
+                <input [(ngModel)]="action.add" [disabled]="!action.assigned" [checked]="checkbox" name="add" [value]="action.id" (change)="actionCheck($event,action,actionPermissionData,i)" type="checkbox"/>
+              <span class="checkbox-text"></span>
+            </label>
+                    </td>
+
+
+
+                    <td class="custom-body-col assign-col">
+                        <label class="checkbox-inline custom-checkbox">
+                <input [(ngModel)]="action.edit" [disabled]="!action.assigned" [checked]="checkbox" name="edit" [value]="action.id" (change)="actionCheck($event,action,actionPermissionData,i)" type="checkbox"/>
+              <span class="checkbox-text"></span>
+            </label>
+                    </td>
+
+
+                    <td class="custom-body-col assign-col">
+                        <label class="checkbox-inline custom-checkbox">
+                <input [(ngModel)]="action.delete" [disabled]="!action.assigned" [checked]="checkbox" name="delete" [value]="action.id" (change)="actionCheck($event,action,actionPermissionData,i)" type="checkbox"/>
+              <span class="checkbox-text"></span>
+            </label>
+                    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+
+
+
+
+</div>
+<!--  Privilege Nature Wrapper Ends  -->

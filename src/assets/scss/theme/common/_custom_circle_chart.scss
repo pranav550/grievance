@@ -1,0 +1,745 @@
+/*==============================================================================
+****************  Custom Circle Chart  Styles For The Site  ********************
+==============================================================================*/
+.rect-auto{
+    clip: rect(auto, auto, auto, auto);
+}
+.c100{
+    &.p51 .slice, &.p52 .slice, &.p53 .slice, &.p54 .slice, &.p55 .slice, &.p56 .slice, &.p57 .slice, &.p58 .slice, 
+    &.p59 .slice, &.p60 .slice, &.p61 .slice, &.p62 .slice, &.p63 .slice, &.p64 .slice, &.p65 .slice, &.p66 .slice, 
+    &.p67 .slice, &.p68 .slice, &.p69 .slice, &.p70 .slice, &.p71 .slice, &.p72 .slice, &.p73 .slice, &.p74 .slice,
+    &.p75 .slice, &.p76 .slice, &.p77 .slice, &.p78 .slice, &.p79 .slice, &.p80 .slice, &.p81 .slice, &.p82 .slice,
+    &.p83 .slice, &.p84 .slice, &.p85 .slice, &.p86 .slice, &.p87 .slice, &.p88 .slice, &.p89 .slice, &.p90 .slice,
+    &.p91 .slice, &.p92 .slice, &.p93 .slice, &.p94 .slice, &.p95 .slice, &.p96 .slice, &.p97 .slice, &.p98 .slice, 
+    &.p99 .slice, &.p100 .slice{
+        clip: rect(auto, auto, auto, auto);
+    }
+}
+.pie{
+    @include square(0.68em);
+    @include rotate(0deg);
+    @include border-radius(50%);
+    position: absolute;
+    border: 0.16em solid $curious-blue1;
+    clip: rect(0em, 0.5em, 1em, 0em);
+}
+
+.c100 {
+    .bar, &.p51 .fill, &.p52 .fill, &.p53 .fill, &.p54 .fill, &.p55 .fill, &.p56 .fill, &.p57 .fill, &.p58 .fill, 
+    &.p59 .fill, &.p60 .fill, &.p61 .fill, &.p62 .fill, &.p63 .fill, &.p64 .fill, &.p65 .fill, &.p66 .fill,
+    &.p67 .fill, &.p68 .fill, &.p69 .fill, &.p70 .fill, &.p71 .fill, &.p72 .fill, &.p73 .fill, &.p74 .fill, 
+    &.p75 .fill, &.p76 .fill, &.p77 .fill, &.p78 .fill, &.p79 .fill, &.p80 .fill, &.p81 .fill, &.p82 .fill,
+    &.p83 .fill, &.p84 .fill, &.p85 .fill, &.p86 .fill, &.p87 .fill, &.p88 .fill, &.p89 .fill, &.p90 .fill,
+    &.p91 .fill, &.p92 .fill, &.p93 .fill, &.p94 .fill, &.p95 .fill, &.p96 .fill, &.p97 .fill, &.p98 .fill,
+    &.p99 .fill, &.p100 .fill{
+        @include square(0.68em);
+        @include rotate(0deg);
+        @include border-radius(50%);
+        position: absolute;
+        border: 0.16em solid $curious-blue1;
+        clip: rect(0em, 0.5em, 1em, 0em);
+    }
+}
+.pie-fill{
+    @include rotate(180deg);
+}
+.c100{
+    @extend .pull-left;
+    @include square(1em);
+    @include margin(0 0.1em 0.1em 0);
+    @include border-radius(50%);
+    position: relative;
+    font-size: ($font-size-small * 10);
+    background-color: $pale-sky2;
+    &.p51{
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p52{
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p53 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p54 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p55 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p56 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p57 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p58 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p59 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p60 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p61 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p62 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p63 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p64 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p65 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p66 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p67 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p68 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p69 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p70 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p71 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p72 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p73 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p74 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p75 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p76 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p77 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p78 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p79 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p80 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p81 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p82 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p83 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p84 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p85 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p86 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p87 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p88 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p89 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p90 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p91 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p92 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p93 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p94 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p95 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p96 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p97 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p98 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p99 {
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+    &.p100{
+        .bar:after, .fill{
+            @include rotate(180deg);
+        }
+    }
+
+    *{
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        &:before, &:after {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+    }
+    &.center{
+        @include margin(0 auto);
+        float: none;
+    }
+    &.big{
+        font-size: ($font-size-small * 20);
+    }
+    &.small{
+        font-size: ($font-size-small * 6.5);
+    }
+    > span{
+        @include transition(all .3s ease-in-out);
+        font-size: 0.4em;
+        line-height: 2.6em;
+        color: $nav-form-input;
+        text-align: center;
+        white-space: nowrap;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 2.4em;
+        z-index: 1;
+    }
+    &:after {
+        @include square(0.7em);
+        @include transition(all .3s ease-in-out);
+        @include border-radius(50%);
+        position: absolute;
+        top: 0.15em;
+        left: 0.15em;
+        display: block;
+        content: " ";
+        background-color: $cello1;
+    }
+    .slice {
+        @include square(1em);
+        position: absolute;
+        clip: rect(0em, 1em, 1em, 0.5em);
+    }
+    &.p1 .bar{
+        @include rotate(3.6deg);
+    }
+    &.p2 .bar{
+        @include rotate(7.2deg);
+    }
+    &.p3 .bar{
+        @include rotate(10.8deg);
+    }
+    &.p4 .bar{
+        @include rotate(14.4deg);
+    }
+    &.p5 .bar{
+        @include rotate(18deg);
+    }
+    &.p6 .bar{
+        @include rotate(21.6deg);
+    }
+    &.p7 .bar{
+        @include rotate(25.2deg);
+    }
+    &.p8 .bar{
+        @include rotate(28.8deg);
+    }
+    &.p9 .bar{
+        @include rotate(32.4deg);
+    }
+    &.p10 .bar{
+        @include rotate(36deg);
+    }
+    &.p11 .bar{
+        @include rotate(39.6deg);
+    }
+    &.p12 .bar{
+        @include rotate(43.2deg);
+    }
+    &.p13 .bar{
+        @include rotate(46.8deg);
+    }
+    &.p14 .bar{
+        @include rotate(50.4deg);
+    }
+    &.p15 .bar{
+        @include rotate(54deg);
+    }
+    &.p16 .bar{
+        @include rotate(57.6deg);
+    }
+    &.p17 .bar{
+        @include rotate(61.2deg);
+    }
+    &.p18 .bar{
+        @include rotate(64.8deg);
+    }
+    &.p19 .bar{
+        @include rotate(68.4deg);
+    }
+    &.p20 .bar{
+        @include rotate(72deg);
+    }
+    &.p21 .bar{
+        @include rotate(75.6deg);
+    }
+    &.p22 .bar{
+        @include rotate(79.2deg);
+    }
+    &.p23 .bar{
+        @include rotate(82.8deg);
+    }
+    &.p24 .bar{
+        @include rotate(86.4deg);
+    }
+    &.p25 .bar{
+        @include rotate(90deg);
+    }
+    &.p26 .bar{
+        @include rotate(93.6deg);
+    }
+    &.p27 .bar{
+        @include rotate(97.2deg);
+    }
+    &.p28 .bar{
+        @include rotate(100.8deg);
+    }
+    &.p29 .bar{
+        @include rotate(104.4deg);
+    }
+    &.p30 .bar{
+        @include rotate(108deg);
+    }
+    &.p31 .bar{
+        @include rotate(111.6deg);
+    }
+    &.p32 .bar{
+        @include rotate(115.2deg);
+    }
+    &.p33 .bar{
+        @include rotate(118.8deg);
+    }
+    &.p34 .bar{
+        @include rotate(122.4deg);
+    }
+    &.p35 .bar{
+        @include rotate(126deg);
+    }
+    &.p36 .bar{
+        @include rotate(129.6deg);
+    }
+    &.p37 .bar{
+        @include rotate(133.2deg);
+    }
+    &.p38 .bar{
+        @include rotate(136.8deg);
+    }
+    &.p39 .bar{
+        @include rotate(140.4deg);
+    }
+    &.p40 .bar{
+        @include rotate(144deg);
+    }
+    &.p41 .bar{
+        @include rotate(147.6deg);
+    }
+    &.p42 .bar{
+        @include rotate(151.2deg);
+    }
+    &.p43 .bar{
+        @include rotate(154.8deg);
+    }
+    &.p44 .bar{
+        @include rotate(158.4deg);
+    }
+    &.p45 .bar{
+        @include rotate(162deg);
+    }
+    &.p46 .bar{
+        @include rotate(165.6deg);
+    }
+    &.p47 .bar{
+        @include rotate(169.2deg);
+    }
+    &.p48 .bar{
+        @include rotate(172.8deg);
+    }
+    &.p49 .bar{
+        @include rotate(176.4deg);
+    }
+    &.p50 .bar{
+        @include rotate(180deg);
+    }
+    &.p51 .bar{
+        @include rotate(183.6deg);
+    }
+    &.p52 .bar{
+        @include rotate(187.2deg);
+    }
+    &.p53 .bar{
+        @include rotate(190.8deg);
+    }
+    &.p54 .bar{
+        @include rotate(194.4deg);
+    }
+    &.p55 .bar{
+        @include rotate(198deg);
+    }
+    &.p56 .bar{
+        @include rotate(201.6deg);
+    }
+    &.p57 .bar{
+        @include rotate(205.2deg);
+    }
+    &.p58 .bar{
+        @include rotate(208.8deg);
+    }
+    &.p59 .bar{
+        @include rotate(212.4deg);
+    }
+    &.p60 .bar{
+        @include rotate(216deg);
+    }
+    &.p61 .bar{
+        @include rotate(219.6deg);
+    }
+    &.p62 .bar{
+        @include rotate(223.2deg);
+    }
+    &.p63 .bar{
+        @include rotate(226.8deg);
+    }
+    &.p64 .bar{
+        @include rotate(230.4deg);
+    }
+    &.p65 .bar{
+        @include rotate(234deg);
+    }
+    &.p66 .bar{
+        @include rotate(237.6deg);
+    }
+    &.p67 .bar{
+        @include rotate(241.2deg);
+    }
+    &.p68 .bar{
+        @include rotate(244.8deg);
+    }
+    &.p69 .bar{
+        @include rotate(248.4deg);
+    }
+    &.p70 .bar{
+        @include rotate(252deg);
+    }
+    &.p71 .bar{
+        @include rotate(255.6deg);
+    }
+    &.p72 .bar{
+        @include rotate(259.2deg);
+    }
+    &.p73 .bar{
+        @include rotate(262.8deg);
+    }
+    &.p74 .bar{
+        @include rotate(266.4deg);
+    }
+    &.p75 .bar{
+        @include rotate(270deg);
+    }
+    &.p76 .bar{
+        @include rotate(273.6deg);
+    }
+    &.p77 .bar{
+        @include rotate(277.2deg);
+    }
+    &.p78 .bar{
+        @include rotate(280.8deg);
+    }
+    &.p79 .bar{
+        @include rotate(284.4deg);
+    }
+    &.p80 .bar{
+        @include rotate(288deg);
+    }
+    &.p81 .bar{
+        @include rotate(291.6deg);
+    }
+    &.p82 .bar{
+        @include rotate(295.2deg);
+    }
+    &.p83 .bar{
+        @include rotate(298.8deg);
+    }
+    &.p84 .bar{
+        @include rotate(302.4deg);
+    }
+    &.p85 .bar{
+        @include rotate(306deg);
+    }
+    &.p86 .bar{
+        @include rotate(309.6deg);
+    }
+    &.p87 .bar{
+        @include rotate(313.2deg);
+    }
+    &.p88 .bar{
+        @include rotate(316.8deg);
+    }
+    &.p89 .bar{
+        @include rotate(320.4deg);
+    }
+    &.p90 .bar{
+        @include rotate(324deg);
+    }
+    &.p91 .bar{
+        @include rotate(327.6deg);
+    }
+    &.p92 .bar{
+        @include rotate(331.2deg);
+    }
+    &.p93 .bar{
+        @include rotate(334.8deg);
+    }
+    &.p94 .bar{
+        @include rotate(338.4deg);
+    }
+    &.p95 .bar{
+        @include rotate(342deg);
+    }
+    &.p96 .bar{
+        @include rotate(345.6deg);
+    }
+    &.p97 .bar{
+        @include rotate(349.2deg);
+    }
+    &.p98 .bar{
+        @include rotate(352.8deg);
+    }
+    &.p99 .bar{
+        @include rotate(356.4deg);
+    }
+    &.p100 .bar{
+        @include rotate(360deg);
+    }
+    &:hover{
+        cursor: default;
+        > span{
+            width: 1.9em;
+            line-height: 2.1em;
+            font-size: .5em;
+            color: $curious-blue1;
+        }
+        &:after{
+            @include square(0.92em);
+            top: 0.04em;
+            left: 0.04em;
+        }
+    }
+    &.dark {
+        background-color: $grey;
+        .bar, .fill{
+            border-color: $electric-lime !important;
+        }
+        > span{
+            color: $grey;
+        }
+        &:after {
+            background-color: $dim-grey;
+        }
+        &:hover > span{
+            color: $electric-lime;
+        }
+    }
+    &.green {
+        .bar, .fill{
+            border-color: $apple !important;
+        }
+        &:hover > span{
+            color: $apple;
+        }
+        &.dark {
+            .bar, .fill{
+                border-color: $kelly-green !important;
+            }
+            &:hover > span{
+                color: $kelly-green;
+            }
+        }
+    }
+    &.orange {
+        .bar, .fill{
+            border-color: $buttercup !important;
+        }
+        &:hover > span{
+            color: $buttercup;
+        }
+        &.dark {
+            .bar, .fill{
+                border-color: $west-side !important;
+            }
+            &:hover > span{
+                color: $west-side;
+            }
+        }
+    }
+    &.pink{
+        .bar, .fill{
+            border-color: $cranberry !important;
+        }
+        &:hover > span{
+            color: $nav-form-input;
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}
+
+

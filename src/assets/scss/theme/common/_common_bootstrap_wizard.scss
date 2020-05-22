@@ -1,0 +1,174 @@
+
+/*==============================================================================
+**************  Bootstrap Wizard Wrapper Styles For The Site  ******************
+==============================================================================*/
+
+/*--  Bootstrap Wizard Styles  --*/
+.bootstrap-wizard-wrapper{
+    @include margin(40px 35px 0);
+    @include padding(50px 0);
+    overflow:hidden;
+    border:1px solid $b-wizard-border;         
+    .form-wizard{
+        @include margin(0);
+        @include padding(0);
+        display: block;  
+        width: 100%;        
+        position: relative;    
+        >li{
+            @extend .pull-left;
+            @extend .text-center;  
+            @include padding(0);
+            position: relative;  
+            display: block;      
+            width: 25%;
+            >a{
+                @include margin(0);
+                @include padding(0 5px);
+                @include box-shadow(none);
+                display: inline-block;
+                font-family: $roboto-medium;
+                &:hover, &:active, &:focus {
+                	@include box-shadow(none);
+                    text-decoration: none;
+                }
+            }
+            &.open{  
+             	>a{
+                	@include box-shadow(none);             	
+             	}
+             }
+            &:before{
+            	@include translate(-50%,-50%);
+                font-size: 0;
+                display: block;
+                width: 100%;
+                position: absolute;
+                content: "";
+                top: 20px;
+                right: 0;
+                z-index: 1;
+                overflow: hidden;
+                border-top: 3px solid $b-wizard-setp-border;
+            }
+            &:first-child{
+            	&:before{
+	                left: 50%;
+	            }
+            }
+            &.complete{
+            	.step{
+	                @include padding(3px 6px);
+	                background-color: $b-wizard-step-bg-complete;
+	                border: 3px solid $b-wizard-setp-border;
+	            }
+            }
+            .step{
+                @extend .text-center;
+                @include square(40px);
+                @include padding(3px 13px);
+                @include transition(all .1s linear 0s);
+                @include border-radius(50%);
+                background-color: $b-wizard-step-bg;
+                color: $white;
+                font-size: ($font-size-base + 1);
+                font-weight: normal;
+                line-height: 40px;
+                display: inline-block;
+                position: relative;
+                z-index: 2;
+                i{
+                    font-size: ($font-size-large + 2);
+                    line-height: ($line-height-computed * 1.7);
+                    font-weight: 400;
+                    position: relative;
+                }
+            }
+            .title{
+                color: $b-wizard-title-color;
+                font-family: $roboto-medium;
+                font-size: 13px;
+                line-height: 15px;
+                display: block;  
+                max-width: 100%;
+                word-wrap: break-word;  
+                position: relative;
+                table-layout: fixed;
+                text-align: center;
+                top: 10px;
+                z-index: 104;
+            }
+            &.active,&.complete{
+                .step{
+                    @include padding(3px 10px);
+                    @include border-radius(100%);
+                    background-color: $b-wizard-step-bg-success;
+                    color: $white;
+                    font-size: ($font-size-base + 1);
+                    font-weight: 700;
+                }
+                .title{
+                    color: $b-wizard-title-color;
+                }
+            }
+
+            .dropdown-menu{
+                @extend .text-left;
+                @include margin(0 0 0 9px);
+                @include padding(5px);
+                @include transition(all 0.3s ease-in-out);
+                @include border-radius(0);
+                background-color: $tangaroa;
+                top: 70px;
+                font-size: ($font-size-base - 1);
+                z-index: 9999;
+                border: 0;
+                >li{
+                    margin: 0;
+                    display: block;
+                    width: 100%;
+                    &:nth-child(1){
+                        @include margin(0);
+                    }
+                    &:nth-child(2){
+                        @include margin(0);
+                    }
+                    >a{
+                        @include margin(0);
+                        @include padding(0 5px);
+                        background-color: transparent;
+                        color: $bahama-blue1;
+                        font-family: $roboto-medium;
+                        font-size: $font-size-base;
+                        display: block;
+                        width: 100%;
+                        &:hover,&:focus{                        
+	                        background-color: transparent;
+	                        color: $bahama-blue1;
+                        }
+                    }
+                }
+            }     
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}
+

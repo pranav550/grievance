@@ -1,0 +1,42 @@
+<div class="modal fade custom-modal" tabindex="-1" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm grievance-modal-wrapper">
+        <!-- Modal content Starts Here-->
+        <div class="modal-content grievance-supervisor-modal-wrapper">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left"></h4>
+                <!-- <button type="button" class="close pull-right" aria-label="Close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+            <div class="modal-body">
+                <div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="page-title grievance-dashboard-page-title">Do You Want To Give Feedback?</h3>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="redirect()" class="btn btn-secondary" id="close"
+                        data-dismiss="modal">No</button>
+                    <button type="button" (click)="isDisplay=true" class="btn btn-primary">Yes</button>
+                </div>
+                <div *ngIf="isDisplay">
+                    <h3>Select The Feedback Form Type?</h3>
+                    <div class="checkbox">
+                        <label><input type="radio" name="select" (change)="selectForm1()">Select IPD</label>
+                        <label><input type="radio" name="select" (change)="selectForm2()">Select OPD</label>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal content Starts Here-->
+</div>

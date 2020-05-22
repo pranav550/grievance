@@ -1,0 +1,199 @@
+
+/*==============================================================================
+****************  Timeline Wrapper Styles For The Site  ************************
+==============================================================================*/
+/*--  The Actual Timeline (the vertical ruler)  ---*/
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    &::after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        background-color: $dark-grey4;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+    }
+
+    /*--  Container Around Content  --*/
+    .timeline-container {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -10px;
+            background-color: $white;
+            border: 4px solid $base-red;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        &.left {
+                left: 0;
+                &:before {
+                    content: " ";
+                    height: 0;
+                    position: absolute;
+                    top: 19px;
+                    width: 0;
+                    z-index: 2;
+                    right: 32px;
+                    border: medium solid $white;
+                    border-width: 10px 0 10px 10px;
+                    border-color: transparent transparent transparent $white;
+            }
+            .content{
+                &:after{                    
+                    content: " ";
+                    height: 0;
+                    position: absolute;
+                    top: 8px;
+                    width: 0;
+                    z-index: 1;
+                    right: -10px;
+                    border: medium solid $dark-grey4;
+                    border-width: 10px 0 10px 10px;
+                    border-color: transparent transparent transparent $dark-grey4;
+                }
+            }
+        }
+
+        /*--  Place the container to the right  --*/
+        &.right {
+            left: 50%;
+            @include padding(10px 35px);
+            &:before {
+                position: absolute;
+                content: " ";
+                top: 19px;
+                left: 27px;
+                width: 0;
+                height: 0;
+                z-index: 2;
+                border: medium solid $white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent $white transparent transparent;
+            }
+            &:after {
+                left: -16px;
+            }            
+            .content{
+                &:before{                    
+                    position: absolute;
+                    content: " ";
+                    top: 8px;
+                    left: -10px;
+                    width: 0;
+                    height: 0;
+                    z-index: 1;
+                    border: medium solid $dark-grey4;
+                    border-width: 10px 10px 10px 0;
+                    border-color: transparent $dark-grey4 transparent transparent;
+                }
+            }
+        }
+        /*--  The Actual Content  --*/
+        .content{
+            padding: 20px 30px;
+            background-color: $white;
+            position: relative;
+            border-radius: 0;
+            border: 1px solid $dark-grey4;
+            h2{
+                color: $light-black;
+                white-space: normal;
+                word-break: break-all;
+            }
+            p{
+                color: $light-black;
+                white-space: normal;
+                word-break: break-all;
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .timeline{
+        .timeline-container{
+            .content{
+                h2{
+                    font-size: $font-size-large;
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .timeline{
+        .timeline-container{
+            .content{
+                h2{
+                    font-size: ($font-size-base + 2);
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .timeline{
+        .timeline-container{
+            .content{
+                h2{
+                    font-size: ($font-size-base + 1);
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+    /*--  Place the timelime to the left  --*/
+    .timeline{
+        &:after {
+        left: 31px;
+        }
+        /*--  Full-width containers  --*/
+        .timeline-container {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+            .content{
+                h2{
+                    font-size: $font-size-base;
+                }
+                p{
+                    font-size: $font-size-small;
+                }
+            }
+            &::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+            &.left::after {
+                left: 15px;
+            }
+            &.right {
+                left: 0%;
+                &::after {
+                    left: 15px;
+                }
+            }
+        }        
+    }
+}

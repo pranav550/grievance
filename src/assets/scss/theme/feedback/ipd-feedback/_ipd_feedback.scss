@@ -1,0 +1,83 @@
+/*==============================================================================
+***************  IPD feedback Form Wrapper Styles For The Site    ***********
+==============================================================================*/
+.feedback-form-wrapper{
+    .custom-radio{
+        input[type="radio"]{
+        + .radio-text{
+                @include padding(0 10px 0 25px);
+                line-height: 1.5; 
+            }   
+        }
+    }
+   .feedback-form-inner-wrapper{
+       .custom-radio{
+               width: 20%;
+                float: left;
+                margin: 0 !important;
+       }
+   } 
+}
+
+/*==============================================================================
+**********************        Media Styles For The Site    *********************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .ipd-feedback-wrapper{
+        .form-wrapper{
+            .custom-form{
+                .form-group{
+                    .control-label{
+                        white-space: normal;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .ipd-feedback-wrapper{
+        .form-wrapper{
+            .custom-form{
+                .form-group{
+                    .control-label{
+                        white-space: normal;
+                    }
+                }
+            }
+        }
+        .feedback-form-wrapper{
+            .custom-form{
+                .btn-submit{
+                    width: 100px;
+                }
+            }
+        }
+    }  
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+    .ipd-feedback-wrapper{
+        .form-wrapper{
+            .custom-form{
+                .form-group{
+                    .control-label{
+                        white-space: normal;
+                    }
+                }
+            }
+        }
+        .feedback-form-wrapper{
+            .custom-form{
+                .btn-submit{
+                    width: 70px;
+                }
+            }
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

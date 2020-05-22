@@ -1,0 +1,616 @@
+<!-- Admin Dashboard Wrapper Starts -->
+<app-header></app-header>
+<section class="dashboard-wrapper supervisor-dashboard-wrapper">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- Tile Main Wrapper Starts -->
+                <div class="tile-main-wrapper">
+                    <div class="tile-row">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-light-blue">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'New Grievances'| translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="isnewGrievanceCountExists">
+                                        <p class="tile-count"><i
+                                                class="fa fa-list-ul tile-icon"></i>{{newGrievanceCount}}</p>
+                                        <p class="tile-text">
+                                            {{'This number shows new grievances that has been added successfully.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!isnewGrievanceCountExists">
+                                        <p class="tile-count"><i class="fa fa-list-ul tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows new grievances that has been added successfully.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-green">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Accepted Grievances' | translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="isacceptedGrievanceCountExists">
+                                        <p class="tile-count"><i
+                                                class="fa fa-check-circle-o tile-icon"></i>{{acceptedGrievanceCount}}
+                                        </p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that has been accepted.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!isacceptedGrievanceCountExists">
+                                        <p class="tile-count"><i class="fa fa-check-circle-o tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that has been accepted.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-red">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Rejected Grievances' | translate}}</h3>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="isrejectedGrievanceCountExists">
+                                        <p class="tile-count"><i
+                                                class="fa fa-exclamation-triangle tile-icon"></i>{{rejectedGrievanceCount}}
+                                        </p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that has been rejected.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper" *ngIf="!isrejectedGrievanceCountExists">
+                                        <p class="tile-count"><i class="fa fa-exclamation-triangle tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows grievances that has been rejected.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="tile-wrapper tile-blue">
+                                    <div class="tile-header-wrapper">
+                                        <h3 class="tile-title">{{'Total Grievances' | translate}} </h3>
+                                    </div>
+                                    <div class="tile-content-wrapper"
+                                        *ngIf="isnewGrievanceCountExists || isacceptedGrievanceCountExists || isrejectedGrievanceCountExists">
+                                        <p class="tile-count"><i
+                                                class="fa fa-list-ul tile-icon"></i>{{ newGrievanceCount + acceptedGrievanceCount + rejectedGrievanceCount }}
+                                        </p>
+                                        <p class="tile-text">
+                                            {{'This number shows total grievances.' | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="tile-content-wrapper"
+                                        *ngIf="!isnewGrievanceCountExists && !isacceptedGrievanceCountExists && !isrejectedGrievanceCountExists">
+                                        <p class="tile-count"><i class="fa fa-list-ul tile-icon"></i>0</p>
+                                        <p class="tile-text">
+                                            {{'This number shows total grievances.' | translate}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tile Main Wrapper Ends -->
+            </div>
+        </div>
+
+        <!--  Custom Table Caption Starts  -->
+        <div class="custom-table-caption">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="page-title">{{ 'dashboard' | translate }}</h3>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-wrapper basic">
+                        <form class="custom-form" [formGroup]="supervisorDashBoardForm">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group clearfix">
+                                        <label for="stateName" class="control-label">
+                                            {{'Select District' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="districtsData" bindLabel="name"
+                                            placeholder="{{'Select District' | translate}}" name="selectedState"
+                                            formControlName="selectedDistrict" tabindex="1" autofocus="true"
+                                            [tabindex]="-1">
+                                        </ng-select>
+
+
+
+                                        <label for="districtName" class="control-label">
+                                            {{'Grievance Id' | translate}}
+                                        </label>
+                                        <input type="text" id="grievanceId" class="form-control custom-input"
+                                            placeholder="{{'Grievance Id' | translate}}" tabindex="2" />
+                                        <label for="districtName" class="control-label">
+                                            {{'Grievance Type' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="categoryData" bindLabel="name"
+                                            placeholder="{{'Grievance Type' | translate}}" tabindex="3" [tabindex]="-1"
+                                            (change)="onAddCategoryChange($event,'default')"
+                                            formControlName="selectedGrievanceType">
+                                        </ng-select>
+
+                                        <label class="control-label">{{'Grievance Nature' | translate}}</label>
+                                        <ng-select [clearable]="false" [items]="categoriesNature1"
+                                            (change)="onNatureChange(selectedNature)" [(ngModel)]="selectedNature"
+                                            bindLabel="name" placeholder="{{'Grievance Nature' | translate}}"
+                                            formControlName="filterGrievanceNature" tabindex="13" [tabindex]="-1"
+                                            name="selectedNature">
+                                        </ng-select>
+
+
+                                        <label for="districtName" class="control-label">
+                                            {{'Status' | translate}}
+                                        </label>
+                                        <ng-select [clearable]="false" [items]="beneficaryStatusDetails"
+                                            bindLabel="dpname" formControlName="selectedStatus"
+                                            placeholder="{{'Status' | translate}}" tabindex="4" [tabindex]="-1">
+                                        </ng-select>
+                                        <label for="talukaName"
+                                            class="control-label">{{'Start Date & Time' | translate}}<sup
+                                                class="custom-required">*</sup></label>
+                                        <div class="custom-date-picker">
+                                            <input class="form-control"
+                                                placeholder="{{'Start Date & Time' | translate}}"
+                                                formControlName="startDateTime" [(ngModel)]="startDateTime"
+                                                (click)="onTogglePicker('startDT')" tabindex="3" />
+                                            <i class="fa fa-calendar-times-o form-control-feedback"
+                                                aria-hidden="true"></i>
+                                            <datetime-popup class="custom-datetime-popup" [value]="startDateTime"
+                                                [maxDate]="maxDate" (valueChange)="onValueChange($event,'startDT')"
+                                                [(showPopup)]="showPickerStart" [showDate]="showDateStart"
+                                                [showTime]="showTimeStart" [closeButton]="closeButtonStart">
+                                            </datetime-popup>
+                                        </div>
+                                        <label for="talukaName"
+                                            class="control-label">{{'End Date & Time' | translate}}<sup
+                                                class="custom-required">*</sup></label>
+                                        <div class="custom-date-picker">
+                                            <input class="form-control" placeholder="{{'End Date & Time' | translate}}"
+                                                formControlName="endDateTime" [(ngModel)]="endDateTime"
+                                                (click)="onTogglePicker('endDT')" tabindex="4" />
+                                            <i class="fa fa-calendar-times-o form-control-feedback"
+                                                aria-hidden="true"></i>
+                                            <datetime-popup class="custom-datetime-popup" [value]="endDateTime"
+                                                [maxDate]="maxDate" (valueChange)="onValueChange($event,'endDT')"
+                                                [(showPopup)]="showPickerEnd" [showDate]="showDateEnd"
+                                                [showTime]="showTimeEnd" [closeButton]="closeButtonEnd">
+                                            </datetime-popup>
+                                            <div class="error-message" *ngIf="submitted">
+                                                {{'End Date should always be greater than Start Date' | translate}}
+                                            </div>
+                                        </div>
+                                        <label for="levelName" class="control-label">{{'Level' | translate}}</label>
+                                        <ng-select [clearable]="false" [items]="levelsData" bindLabel="name"
+                                            placeholder="{{'Level Type' | translate}}" formControlName="levelType"
+                                            tabindex="7" [tabindex]="-1">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="submit" (click)="submitReport()" class="btn btn-blue">
+                                        {{'Submit' | translate}}
+                                    </button>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="reset" (submit)="supervisorDashBoardForm.reset()" class="btn btn-red">
+                                        {{'Reset' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Custom Table Caption Ends  -->
+
+        <div>
+            <div class="tabs-wrapper">
+                <tabset #staticTabs>
+
+                    <!-- First Tab Content Starts -->
+                    <tab heading="{{ 'New Grievances' | translate }}" (select)="onSelect($event)">
+                        <div class="states-list-wrapper new-grievance-wrapper">
+                            <div class="custom-datatable-wrapper">
+                                <table id="dataTable1"
+                                    class="table table-condensed table-bordered custom-col-ten-action row-border hover">
+                                    <thead>
+                                        <tr [ngClass]="{'tableNull': newgrievanceData?.length==0}">
+                                            <th class="custom-header-col id-col">{{'ID' | translate}}</th>
+                                            <th class="custom-header-col date-col">{{'Grievance Date' | translate}}</th>
+                                            <th class="custom-header-col date-col">{{'FeedbackScore' | translate}}</th>
+                                            <th class="custom-header-col type-col">{{'Type' | translate}}</th>
+                                            <th class="custom-header-col description-col">
+                                                {{'Details of Grievance' | translate}}</th>
+                                            <th class="custom-header-col description-col">
+                                                {{'Subject of Grievance' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'District' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'Block' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'Village' | translate}}</th>
+                                            <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                                            <th class="custom-header-col delete-col">{{'Reject' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let newGriData of newgrievanceData">
+                                            <td class="custom-body-col id-col">
+                                                <a (click)="grievanceDetailsModal(newGriData.id)"
+                                                    href="javascript:void(0);">
+                                                    {{ newGriData.grievance_id }}
+                                                </a></td>
+                                            <td class="custom-body-col date-col">
+                                                {{ newGriData.created_at.date | date:'MM/dd/yyyy, h:mm a' }}
+                                            </td>
+                                            <td class="custom-body-col date-col">
+                                                {{ newGriData.avg_feedback | feedbackRating }}
+                                            </td>
+                                            <td class="custom-body-col description-col">
+                                                <p class="description-text">
+                                                    {{ newGriData.grievanceTypes.name ? newGriData.grievanceTypes.name : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="custom-body-col description-col">
+                                                <p class="description-text">{{ newGriData.details }}</p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">{{ newGriData.description }}</p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">{{ newGriData.districts.name }}</p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">
+                                                    {{ newGriData.talukas.name ? newGriData.talukas.name : '-' }}</p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">
+                                                    {{ newGriData.villages.name ? newGriData.villages.name : '-' }}</p>
+                                            </td>
+                                            <td class="custom-body-col action-col">
+                                                <a class="table-link" href="javascript:void(0);"
+                                                    (click)="deletGrievanceModal(deletGrievanceModalpopup,newGriData.id,'accept',newGriData.grievance_id)"
+                                                    class="btn btn-green">
+                                                    <i class="fa fa-check custom-icon"></i> {{'Accept' | translate}}
+                                                </a>
+                                                <a href="javascript:void(0);" (click)="editGrievance(newGriData);"
+                                                    class="btn btn-edit">
+                                                    <i class="fa fa-pencil custom-icon"></i> {{'Edit' | translate}}
+                                                </a>
+                                                <a href="javascript:void(0);"
+                                                    (click)="viewTimeLineGrievance(newGriData.id)"
+                                                    href="javascript:void(0);" class="btn btn-view">
+                                                    <i class="fa fa-eye custom-icon"></i> {{'View' | translate}}
+                                                </a>
+                                            </td>
+                                            <td class="custom-body-col delete-col">
+                                                <a href="javascript:void(0);"
+                                                    (click)="deletGrievanceModal(deletGrievanceModalpopup,newGriData.id,'reject',newGriData.grievance_id)"
+                                                    class="btn btn-delete">
+                                                    <i class="fa fa-ban custom-icon"></i> {{'Reject' | translate}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- First Tab Content Ends -->
+
+                    <!-- Second Tab Content Starts -->
+                    <tab heading="{{ 'Accepted Grievances' | translate }}" (select)="onSelect($event)">
+                        <div class="states-list-wrapper accepted-grievance-wrapper">
+                            <div class="custom-datatable-wrapper">
+                                <table id="dataTable2"
+                                    class="table table-condensed table-bordered custom-col-ten-action row-border hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="custom-header-col">{{'ID' | translate}}</th>
+                                            <th class="custom-header-col date-col">{{'Grievance Date' | translate}}</th>
+                                            <th class="custom-header-col date-col common-width">
+                                                {{'FeedbackScore' | translate}}</th>
+                                            <th class="custom-header-col type-col common-width">{{'Type' | translate}}
+                                            </th>
+                                            <th class="custom-header-col type-col">
+                                                {{'Details of Grievance' | translate}}</th>
+                                            <th class="custom-header-col">{{'Subject of Grievance' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'District' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'Block' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'Village' | translate}}</th>
+                                            <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let acceptedGriData of acceptedGrievanceData">
+                                            <td class="custom-body-col">
+                                                <a class="table-link"
+                                                    (click)="grievanceDetailsModal(acceptedGriData.id)"
+                                                    href="javascript:void(0);">
+                                                    {{ acceptedGriData.grievance_id }}
+                                                </a></td>
+                                            <td class="custom-body-col date-col">
+                                                {{ acceptedGriData.created_at.date | date:'MM/dd/yyyy, h:mm a' }}
+                                            </td>
+                                            <td class="custom-body-col date-col">
+                                                {{ acceptedGriData.avg_feedback | feedbackRating }}
+                                            </td>
+                                            <td class="custom-body-col description-col">
+                                                <p class="description-text">
+                                                    {{ acceptedGriData.grievanceTypes.name ? acceptedGriData.grievanceTypes.name :'-' }}
+                                                </p>
+                                            </td>
+                                            <td class="custom-body-col description-col">
+                                                <p class="description-text">{{ acceptedGriData.details }}</p>
+                                            </td>
+                                            <td class="custom-body-col description-col">
+                                                <p class="description-text">{{ acceptedGriData.description }}</p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">{{ acceptedGriData.districts.name }}</p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">
+                                                    {{ acceptedGriData.talukas.name ? acceptedGriData.talukas.name : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">
+                                                    {{ acceptedGriData.villages.name ? acceptedGriData.villages.name : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="custom-body-col action-col">
+                                                <a href="javascript:void(0);"
+                                                    (click)="viewTimeLineGrievance(acceptedGriData.id)"
+                                                    href="javascript:void(0);" class="btn btn-view">
+                                                    <i class="fa fa-eye custom-icon"></i> {{'View' | translate}}
+                                                </a>
+                                                <a href="javascript:void(0);"
+                                                    (click)="forwardGrievanceModal(forwardGrievanceModalpopup,acceptedGriData.id, acceptedGriData.grievance_id)"
+                                                    class="btn btn-light-blue">
+                                                    <i class="fa fa-forward custom-icon"></i> {{'Forward' | translate}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </tab>
+                    <!-- Second Tab Content Ends -->
+
+                    <!-- Third Tab Content Starts -->
+                    <tab heading="{{ 'Rejected Grievances' | translate }}" (select)="onSelect($event)">
+                        <div class="states-list-wrapper rejected-grievance-wrapper">
+                            <div class="custom-datatable-wrapper">
+                                <table id="dataTable3"
+                                    class="table table-condensed table-bordered custom-col-ten-action row-border hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="custom-header-col rejected-col">{{'ID' | translate}}</th>
+                                            <th class="custom-header-col date-col">{{'Grievance Date' | translate}}</th>
+                                            <th class="custom-header-col date-col common-width">
+                                                {{'FeedbackScore' | translate}}</th>
+                                            <th class="custom-header-col type-col common-width">{{'Type' | translate}}
+                                            </th>
+                                            <th class="custom-header-col type-col">
+                                                {{'Details of Grievance' | translate}}</th>
+                                            <th class="custom-header-col description-col">
+                                                {{'Subject of Grievance' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'District' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'Block' | translate}}</th>
+                                            <th class="custom-header-col status-col">{{'Village' | translate}}</th>
+                                            <th class="custom-header-col action-col">{{'Action' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let rejectedGrieData of rejectedGrievanceData">
+                                            <td class="custom-body-col">
+                                                <a class="table-link"
+                                                    (click)="grievanceDetailsModal(rejectedGrieData.id)"
+                                                    href="javascript:void(0);" href="javascript:void(0);">
+                                                    {{ rejectedGrieData.grievance_id }}
+                                                </a></td>
+                                            <td class="custom-body-col date-col">
+                                                {{ rejectedGrieData.created_at.date | date:'MM/dd/yyyy, h:mm a' }}
+                                            </td>
+                                            <td class="custom-body-col date-col">
+                                                {{ rejectedGrieData.avg_feedback | feedbackRating }}
+                                            </td>
+                                            <td class="custom-body-col description-col">
+                                                <p class="description-text">
+                                                    {{ rejectedGrieData.grievanceTypes.name ? rejectedGrieData.grievanceTypes.name : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="custom-body-col description-col">
+                                                <p class="description-text">{{ rejectedGrieData.details }}</p>
+                                            </td>
+                                            <td class="custom-body-col description-col">
+                                                <p class="description-text">{{ rejectedGrieData.description }}</p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">{{ rejectedGrieData.districts.name }}</p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">
+                                                    {{ rejectedGrieData.talukas.name ? rejectedGrieData.talukas.name : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="custom-body-col status-col">
+                                                <p class="description-text">
+                                                    {{ rejectedGrieData.villages.name ? rejectedGrieData.villages.name : '-' }}
+                                                </p>
+                                            </td>
+                                            <td class="custom-body-col action-col">
+                                                <a href="javascript:void(0);"
+                                                    (click)="deletGrievanceModal(deletGrievanceModalpopup,rejectedGrieData.id,'undo',rejectedGrieData.grievance_id)"
+                                                    class="btn btn-edit">
+                                                    <i class="fa fa-undo custom-icon"></i> {{'Undo' | translate}}
+                                                </a>
+                                                <a href="javascript:void(0);"
+                                                    (click)="viewTimeLineGrievance(rejectedGrieData.id)"
+                                                    href="javascript:void(0);" class="btn btn-view">
+                                                    <i class="fa fa-eye custom-icon"></i> {{'View' | translate}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </tab>
+                    <!--  Third Tab Content Ends  -->
+                </tabset>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Admin Dashboard Wrapper Ends -->
+
+<!--  Rejet Grievance Modal Starts   -->
+<ng-template #deletGrievanceModalpopup class="custom-modal">
+    <div class="form-wrapper">
+        <form class="custom-form">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ delUndoGrievnceHeading | translate}} ({{ griId }})</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{ popUpCnfMessage | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red"
+                        (click)="grievanceStatus(delUndoGrievnceData,gStatus,true,'hidePopup')">
+                        {{'Yes' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal"
+                        (click)="grievanceStatus(id,gStatus,false,'')">
+                        {{'No' | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<!-- Rejet Grievance Modal Ends -->
+
+<!--  Forward Grievance Modal Starts   -->
+<ng-template #forwardGrievanceModalpopup class="custom-modal">
+    <div class="form-row">
+        <div class="form-wrapper">
+
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ 'Forward Grievance' | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form" [formGroup]="forwardGrievanceActionForm">
+                    <div class="form-group clearfix">
+                        <label for="stateName" class="control-label">
+                            {{'Level' | translate}}<sup class="custom-required">*</sup>
+                        </label>
+                        <ng-select [clearable]="false" [items]="levelsData" formControlName="level" name="selectedLevel"
+                            [(ngModel)]="selectedLevel" bindLabel="name" placeholder="{{'Select Level' | translate}}"
+                            autofocus="true" tabindex="1" [tabindex]="-1">
+                        </ng-select>
+                    </div>
+                    <div class="form-group clearfix mar-b0">
+                        <label class="control-label" for="detailsOfGrievance">
+                            <strong>{{'Comment' | translate}}</strong>
+                            <sup class="custom-required">*</sup>
+                        </label>
+                        <div class="has-feedback">
+                            <textarea class="form-control" formControlName="levelfeedback" rows="4" tabindex="17"
+                                placeholder="{{'Write your comment here' | translate}}"
+                                (keyup)="emptyDisable($event)"></textarea>
+                            <i class="fa fa-file-text-o form-control-feedback"></i>
+                        </div>
+                        <div *ngIf="errorCheck" class="error-message">
+                            {{'Maximum 250 characters allow' | translate}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red"
+                        [disabled]="errorCheck || (forwardGrievanceActionForm.value.levelfeedback == null || forwardGrievanceActionForm.value.levelfeedback == '') "
+                        (click)="forwardCnfGrievanceModal(CnfForwardGrievanceModalpopup)">
+                        {{'Forward' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal"
+                        (click)="modalRef.hide()">
+                        {{'Cancel' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- Forward Grievance Modal Ends -->
+
+
+<!--  Confirm Forward Grievance Modal Starts   -->
+<ng-template #CnfForwardGrievanceModalpopup class="custom-modal">
+    <div class="form-wrapper">
+        <form class="custom-form">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{ 'Forward Grievance' | translate}} ({{ gLId }})</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center btn-confirm-wrapper">
+                    <div class="confirm-message">
+                        {{ 'Are you sure you want to forward the grievance to next level ?' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center btn-confirm-wrapper">
+                    <button type="button" class="btn btn-sm btn-red" (click)="forwardGrivance()">
+                        {{'Yes' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-blue" id="cancelProcessRequest2" data-dismiss="modal"
+                        (click)="modalRef.hide();">
+                        {{'No' | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<!-- Rejet Grievance Modal Ends -->
+
+<!--  Spinner Starts  -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#234d20" type="line-scale"></ngx-spinner>
+<!--  Spinner Starts  -->
+
+<div *ngIf="modalBool">
+    <app-grievance-details-popup [grieveanceDetailsData]="grieveanceDetailsData" [actionTakenData]="actionTakenData">
+    </app-grievance-details-popup>
+</div>
+
+<!-- Modal View Pop-->
+<div *ngIf="modalView">
+    <app-grievance-time-line-details [grievanceHistoryData]="grievanceHistoryData"></app-grievance-time-line-details>
+</div>

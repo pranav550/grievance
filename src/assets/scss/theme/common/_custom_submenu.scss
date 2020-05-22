@@ -1,0 +1,460 @@
+
+/*==============================================================================
+********************  Custom Submenu Styles For The Site  **********************
+==============================================================================*/
+[class|=wheelnav-actMainMenu-slice-basic], [class|=wheelnav-actSubMenu0-slice-basic], [class|=wheelnav-actSubMenu1-slice-basic], [class|=wheelnav-actSubMenu2-slice-basic], [class|=wheelnav-actSubMenu3-slice-basic], [class|=wheelnav-actSubMenu4-slice-basic], [class|=wheelnav-actSubMenu5-slice-basic] {
+  fill: #435862;
+  stroke: none;
+}
+
+[class|=wheelnav-actMainMenu-slice-selected], [class|=wheelnav-actSubMenu0-slice-selected], [class|=wheelnav-actSubMenu1-slice-selected], [class|=wheelnav-actSubMenu2-slice-selected], [class|=wheelnav-actSubMenu3-slice-selected], [class|=wheelnav-actSubMenu4-slice-selected], [class|=wheelnav-actSubMenu5-slice-selected] {
+  fill: #4A626D;
+  stroke: none;
+}
+
+[class|=wheelnav-actMainMenu-slice-hover], [class|=wheelnav-actSubMenu0-slice-hover], [class|=wheelnav-actSubMenu1-slice-hover], [class|=wheelnav-actSubMenu2-slice-hover], [class|=wheelnav-actSubMenu3-slice-hover], [class|=wheelnav-actSubMenu4-slice-hover], [class|=wheelnav-actSubMenu5-slice-hover] {
+  fill: #4A626D;
+  stroke: none;
+  fill-opacity: 0.9;
+  cursor: pointer;
+}
+
+[class|=wheelnav-actMainMenu-title-basic], [class|=wheelnav-actSubMenu0-title-basic], [class|=wheelnav-actSubMenu1-title-basic], [class|=wheelnav-actSubMenu2-title-basic], [class|=wheelnav-actSubMenu3-title-basic], [class|=wheelnav-actSubMenu4-title-basic], [class|=wheelnav-actSubMenu5-title-basic] {
+  fill: #333;
+  stroke: none;
+}
+
+[class|=wheelnav-actMainMenu-title-selected], [class|=wheelnav-actSubMenu0-title-selected], [class|=wheelnav-actSubMenu1-title-selected], [class|=wheelnav-actSubMenu2-title-selected], [class|=wheelnav-actSubMenu3-title-selected], [class|=wheelnav-actSubMenu4-title-selected], [class|=wheelnav-actSubMenu5-title-selected] {
+  fill: #fff;
+  stroke: none;
+}
+
+[class|=wheelnav-actMainMenu-title-hover], [class|=wheelnav-actSubMenu0-title-hover], [class|=wheelnav-actSubMenu1-title-hover], [class|=wheelnav-actSubMenu2-title-hover], [class|=wheelnav-actSubMenu3-title-hover], [class|=wheelnav-actSubMenu4-title-hover], [class|=wheelnav-actSubMenu5-title-hover] {
+  fill: #222;
+  stroke: none;
+  cursor: pointer;
+}
+
+[class|=wheelnav-actMainMenu-title] > tspan, [class|=wheelnav-actSubMenu0-title] > tspan, [class|=wheelnav-actSubMenu1-title] > tspan, [class|=wheelnav-actSubMenu2-title] > tspan, [class|=wheelnav-actSubMenu3-title] > tspan, [class|=wheelnav-actSubMenu4-title] > tspan, [class|=wheelnav-actSubMenu5-title] > tspan {
+  font-family: 'Roboto Medium';
+  font-size: 24px;
+}
+
+.wheelnav-actMainMenu-spreader-in, .wheelnav-actMainMenu-spreader-out {
+  fill: #73C9DE;
+  stroke: #90D5E6;
+  stroke-width: 5;
+  cursor: pointer;
+  fill-opacity: 0.8;
+  transform: none;
+}
+
+.wheelnav-actMainMenu-spreadertitle-in, .wheelnav-actMainMenu-spreadertitle-out {
+  fill: #eee;
+  stroke: #444;
+  cursor: pointer;
+}
+
+[class|=wheelnav-enrichMainMenu-slice-basic], [class|=wheelnav-enrichSubMenu0-slice-basic], [class|=wheelnav-enrichSubMenu1-slice-basic], [class|=wheelnav-enrichSubMenu2-slice-basic], [class|=wheelnav-enrichSubMenu3-slice-basic], [class|=wheelnav-enrichSubMenu4-slice-basic], [class|=wheelnav-enrichSubMenu5-slice-basic] {
+  fill: #435862;
+  stroke: none;
+}
+
+[class|=wheelnav-enrichMainMenu-slice-selected], [class|=wheelnav-enrichSubMenu0-slice-selected], [class|=wheelnav-enrichSubMenu1-slice-selected], [class|=wheelnav-enrichSubMenu2-slice-selected], [class|=wheelnav-enrichSubMenu3-slice-selected], [class|=wheelnav-enrichSubMenu4-slice-selected], [class|=wheelnav-enrichSubMenu5-slice-selected] {
+  fill: #4A626D;
+  stroke: none;
+}
+
+[class|=wheelnav-enrichMainMenu-slice-hover], [class|=wheelnav-enrichSubMenu0-slice-hover], [class|=wheelnav-enrichSubMenu1-slice-hover], [class|=wheelnav-enrichSubMenu2-slice-hover], [class|=wheelnav-enrichSubMenu3-slice-hover], [class|=wheelnav-enrichSubMenu4-slice-hover], [class|=wheelnav-enrichSubMenu5-slice-hover] {
+  fill: #4A626D;
+  stroke: none;
+  fill-opacity: 0.9;
+  cursor: pointer;
+}
+
+[class|=wheelnav-enrichMainMenu-title-basic], [class|=wheelnav-enrichSubMenu0-title-basic], [class|=wheelnav-enrichSubMenu1-title-basic], [class|=wheelnav-enrichSubMenu2-title-basic], [class|=wheelnav-enrichSubMenu3-title-basic], [class|=wheelnav-enrichSubMenu4-title-basic], [class|=wheelnav-enrichSubMenu5-title-basic] {
+  fill: #333;
+  stroke: none;
+}
+
+[class|=wheelnav-enrichMainMenu-title-selected], [class|=wheelnav-enrichSubMenu0-title-selected], [class|=wheelnav-enrichSubMenu1-title-selected], [class|=wheelnav-enrichSubMenu2-title-selected], [class|=wheelnav-enrichSubMenu3-title-selected], [class|=wheelnav-enrichSubMenu4-title-selected], [class|=wheelnav-enrichSubMenu5-title-selected] {
+  fill: #fff;
+  stroke: none;
+}
+
+[class|=wheelnav-enrichMainMenu-title-hover], [class|=wheelnav-enrichSubMenu0-title-hover], [class|=wheelnav-enrichSubMenu1-title-hover], [class|=wheelnav-enrichSubMenu2-title-hover], [class|=wheelnav-enrichSubMenu3-title-hover], [class|=wheelnav-enrichSubMenu4-title-hover], [class|=wheelnav-enrichSubMenu5-title-hover] {
+  fill: #222;
+  stroke: none;
+  cursor: pointer;
+}
+
+[class|=wheelnav-enrichMainMenu-title] > tspan, [class|=wheelnav-enrichSubMenu0-title] > tspan, [class|=wheelnav-enrichSubMenu1-title] > tspan, [class|=wheelnav-enrichSubMenu2-title] > tspan, [class|=wheelnav-enrichSubMenu3-title] > tspan, [class|=wheelnav-enrichSubMenu4-title] > tspan, [class|=wheelnav-enrichSubMenu5-title] > tspan {
+  font-family: 'Roboto Medium';
+  font-size: 24px;
+}
+
+.wheelnav-enrichMainMenu-spreader-in, .wheelnav-enrichMainMenu-spreader-out {
+  fill: #73C9DE;
+  stroke: #90D5E6;
+  stroke-width: 5;
+  cursor: pointer;
+  fill-opacity: 0.8;
+  transform: none;
+}
+
+.wheelnav-enrichMainMenu-spreadertitle-in, .wheelnav-enrichMainMenu-spreadertitle-out {
+  fill: #eee;
+  stroke: #444;
+  cursor: pointer;
+}
+
+[class|=wheelnav-discoverMainMenu-slice-basic], [class|=wheelnav-discoverSubMenu0-slice-basic], [class|=wheelnav-discoverSubMenu1-slice-basic], [class|=wheelnav-discoverSubMenu2-slice-basic], [class|=wheelnav-discoverSubMenu3-slice-basic], [class|=wheelnav-discoverSubMenu4-slice-basic], [class|=wheelnav-discoverSubMenu5-slice-basic] {
+  fill: #435862;
+  stroke: none;
+}
+
+[class|=wheelnav-discoverMainMenu-slice-selected], [class|=wheelnav-discoverSubMenu0-slice-selected], [class|=wheelnav-discoverSubMenu1-slice-selected], [class|=wheelnav-discoverSubMenu2-slice-selected], [class|=wheelnav-discoverSubMenu3-slice-selected], [class|=wheelnav-discoverSubMenu4-slice-selected], [class|=wheelnav-discoverSubMenu5-slice-selected] {
+  fill: #4A626D;
+  stroke: none;
+}
+
+[class|=wheelnav-discoverMainMenu-slice-hover], [class|=wheelnav-discoverSubMenu0-slice-hover], [class|=wheelnav-discoverSubMenu1-slice-hover], [class|=wheelnav-discoverSubMenu2-slice-hover], [class|=wheelnav-discoverSubMenu3-slice-hover], [class|=wheelnav-discoverSubMenu4-slice-hover], [class|=wheelnav-discoverSubMenu5-slice-ho1ver] {
+  fill: #4A626D;
+  stroke: none;
+  fill-opacity: 0.9;
+  cursor: pointer;
+}
+
+[class|=wheelnav-discoverMainMenu-title-basic], [class|=wheelnav-discoverSubMenu0-title-basic], [class|=wheelnav-discoverSubMenu1-title-basic], [class|=wheelnav-discoverSubMenu2-title-basic], [class|=wheelnav-discoverSubMenu3-title-basic], [class|=wheelnav-discoverSubMenu4-title-basic], [class|=wheelnav-discoverSubMenu5-title-basic] {
+  fill: #333;
+  stroke: none;
+}
+
+[class|=wheelnav-discoverMainMenu-title-selected], [class|=wheelnav-discoverSubMenu0-title-selected], [class|=wheelnav-discoverSubMenu1-title-selected], [class|=wheelnav-discoverSubMenu2-title-selected], [class|=wheelnav-discoverSubMenu3-title-selected], [class|=wheelnav-discoverSubMenu4-title-selected], [class|=wheelnav-discoverSubMenu5-title-selected] {
+  fill: #fff;
+  stroke: none;
+}
+
+[class|=wheelnav-discoverMainMenu-title-hover], [class|=wheelnav-discoverSubMenu0-title-hover], [class|=wheelnav-discoverSubMenu1-title-hover], [class|=wheelnav-discoverSubMenu2-title-hover], [class|=wheelnav-discoverSubMenu3-title-hover], [class|=wheelnav-discoverSubMenu4-title-hover], [class|=wheelnav-discoverSubMenu5-title-hover] {
+  fill: #222;
+  stroke: none;
+  cursor: pointer;
+}
+
+[class|=wheelnav-discoverMainMenu-title] > tspan, [class|=wheelnav-discoverSubMenu0-title] > tspan, [class|=wheelnav-discoverSubMenu1-title] > tspan, [class|=wheelnav-discoverSubMenu2-title] > tspan, [class|=wheelnav-discoverSubMenu3-title] > tspan, [class|=wheelnav-discoverSubMenu4-title] > tspan, [class|=wheelnav-discoverSubMenu5-title] > tspan {
+  font-family: 'Roboto Medium';
+  font-size: 24px;
+}
+
+.wheelnav-discoverMainMenu-spreader-in, .wheelnav-discoverMainMenu-spreader-out {
+  fill: #73C9DE;
+  stroke: #90D5E6;
+  stroke-width: 5;
+  cursor: pointer;
+  fill-opacity: 0.8;
+  transform: none;
+}
+
+.wheelnav-discoverMainMenu-spreadertitle-in, .wheelnav-discoverMainMenu-spreadertitle-out {
+  fill: #eee;
+  stroke: #444;
+  cursor: pointer;
+}
+
+[class|=wheelnav-manageDashboardMenu-slice-basic], [class|=wheelnav-manageDashboardSubMenu0-slice-basic], [class|=wheelnav-manageDashboardSubMenu1-slice-basic], [class|=wheelnav-manageDashboardSubMenu2-slice-basic], [class|=wheelnav-manageDashboardSubMenu3-slice-basic], [class|=wheelnav-manageDashboardSubMenu4-slice-basic], [class|=wheelnav-manageDashboardSubMenu5-slice-basic] {
+  fill: #435862;
+  stroke: none;
+}
+
+[class|=wheelnav-manageDashboardMenu-slice-selected], [class|=wheelnav-manageDashboardSubMenu0-slice-selected], [class|=wheelnav-manageDashboardSubMenu1-slice-selected], [class|=wheelnav-manageDashboardSubMenu2-slice-selected], [class|=wheelnav-manageDashboardSubMenu3-slice-selected], [class|=wheelnav-manageDashboardSubMenu4-slice-selected], [class|=wheelnav-manageDashboardSubMenu5-slice-selected] {
+  fill: #4A626D;
+  stroke: none;
+}
+
+[class|=wheelnav-manageDashboardMenu-slice-hover], [class|=wheelnav-manageDashboardSubMenu0-slice-hover], [class|=wheelnav-manageDashboardSubMenu1-slice-hover], [class|=wheelnav-manageDashboardSubMenu2-slice-hover], [class|=wheelnav-manageDashboardSubMenu3-slice-hover], [class|=wheelnav-manageDashboardSubMenu4-slice-hover], [class|=wheelnav-manageDashboardSubMenu5-slice-hover] {
+  fill: #4A626D;
+  stroke: none;
+  fill-opacity: 0.9;
+  cursor: pointer;
+}
+
+[class|=wheelnav-manageDashboardMenu-title-basic], [class|=wheelnav-manageDashboardSubMenu0-title-basic], [class|=wheelnav-manageDashboardSubMenu1-title-basic], [class|=wheelnav-manageDashboardSubMenu2-title-basic], [class|=wheelnav-manageDashboardSubMenu3-title-basic], [class|=wheelnav-manageDashboardSubMenu4-title-basic], [class|=wheelnav-manageDashboardSubMenu5-title-basic] {
+  fill: #333;
+  stroke: none;
+}
+
+[class|=wheelnav-manageDashboardMenu-title-selected], [class|=wheelnav-manageDashboardSubMenu0-title-selected], [class|=wheelnav-manageDashboardSubMenu1-title-selected], [class|=wheelnav-manageDashboardSubMenu2-title-selected], [class|=wheelnav-manageDashboardSubMenu3-title-selected], [class|=wheelnav-manageDashboardSubMenu4-title-selected], [class|=wheelnav-manageDashboardSubMenu5-title-selected] {
+  fill: #fff;
+  stroke: none;
+}
+
+[class|=wheelnav-manageDashboardMenu-title-hover], [class|=wheelnav-manageDashboardSubMenu0-title-hover], [class|=wheelnav-manageDashboardSubMenu1-title-hover], [class|=wheelnav-manageDashboardSubMenu2-title-hover], [class|=wheelnav-manageDashboardSubMenu3-title-hover], [class|=wheelnav-manageDashboardSubMenu4-title-hover], [class|=wheelnav-manageDashboardSubMenu5-title-hover] {
+  fill: #222;
+  stroke: none;
+  cursor: pointer;
+}
+
+[class|=wheelnav-manageDashboardMenu-title] > tspan, [class|=wheelnav-manageDashboardSubMenu0-title] > tspan, [class|=wheelnav-manageDashboardSubMenu1-title] > tspan, [class|=wheelnav-manageDashboardSubMenu2-title] > tspan, [class|=wheelnav-manageDashboardSubMenu3-title] > tspan, [class|=wheelnav-manageDashboardSubMenu4-title] > tspan, [class|=wheelnav-manageDashboardSubMenu5-title] > tspan {
+  font-family: 'Roboto Medium';
+  font-size: 24px;
+}
+
+.wheelnav-manageDashboardMenu-spreader-in, .wheelnav-manageDashboardMenu-spreader-out {
+  fill: #73C9DE;
+  stroke: #90D5E6;
+  stroke-width: 5;
+  cursor: pointer;
+  fill-opacity: 0.8;
+  transform: none;
+}
+
+.wheelnav-manageDashboardMenu-spreadertitle-in, .wheelnav-manageDashboardMenu-spreadertitle-out {
+  fill: #eee;
+  stroke: #444;
+  cursor: pointer;
+}
+
+[class|=wheelnav-sourceMenu-slice-basic] {
+  fill: #435862;
+  stroke: none;
+}
+
+[class|=wheelnav-sourceMenu-slice-selected] {
+  fill: #4A626D;
+  stroke: none;
+}
+
+[class|=wheelnav-sourceMenu-slice-hover] {
+  fill: #4A626D;
+  stroke: none;
+  fill-opacity: 0.77;
+  cursor: pointer;
+}
+
+[class|=wheelnav-sourceMenu-title-basic] {
+  fill: #333;
+  stroke: none;
+}
+
+[class|=wheelnav-sourceMenu-title-selected] {
+  fill: #fff;
+  stroke: none;
+}
+
+[class|=wheelnav-sourceMenu-title-hover] {
+  fill: #222;
+  stroke: none;
+  cursor: pointer;
+}
+
+[class|=wheelnav-sourceMenu-title] > tspan {
+  font-family: 'Roboto Medium';
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.wheelnav-sourceMenu-spreader-in, .wheelnav-sourceMenu-spreader-out {
+  fill: #73C9DE;
+  stroke: #90D5E6;
+  stroke-width: 5;
+  cursor: pointer;
+  fill-opacity: 0.8;
+  transform: none;
+}
+
+.wheelnav-sourceMenu-spreadertitle-in, .wheelnav-sourceMenu-spreadertitle-out {
+  fill: #eee;
+  stroke: #444;
+  cursor: pointer;
+}
+
+.custom-menu {
+  z-index: 3000;
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: sans-serif;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+
+
+/*--  Source Menu Styles Starts  --*/
+.source-menu-wrapper{
+  position: relative;
+  min-height: 400px;
+}
+#sourceMenu{
+	@include center-position();
+}
+
+.source-menu-wrapper{
+  .center {
+  	@include square(110px);
+	@include center-position();
+    z-index: 9;
+    .title {
+      @extend .text-center;
+      @extend .text-uppercase;
+      @include margin(10px 0 5px);
+      font-family: $roboto-regular;
+      font-size: $font-size-small;
+      line-height: ($line-height-computed * .8);
+      color: #598fb5;
+      font-weight: normal;
+      position: relative;
+      cursor: pointer;
+      strong {
+        display: block;
+      }
+    }
+    ul{
+    	 li {
+	      @extend .text-center;
+	      @extend .text-uppercase;
+	      @include margin(0 0 5px);
+	      font-family: $roboto-regular;
+      	  font-size: ($font-size-small - 2);
+	      color: #647680;
+	      font-weight: normal;
+	      position: relative;
+	      cursor: pointer;
+	      display: block;
+	    }
+    }
+  }
+  [class|=wheelnav-sourceMenu-slice-basic] {
+    fill: #3B4D57;
+    stroke: #2e3f49;
+    text-transform: uppercase;
+  }
+  [class|=wheelnav-sourceMenu-title-basic], [class|=wheelnav-sourceMenu-title] > tspan, [class|=wheelnav-sourceMenu-title-selected] > tspan {
+    fill: #647680;
+    font-family: "Roboto Regular", Helvetica, Arial, sans-serif;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    position: relative;
+    cursor: pointer;
+    display: block;
+    margin: 0 0 5px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  [class|=wheelnav-sourceMenu-slice-hover], [class|=wheelnav-sourceMenu0-slice-hover], [class|=wheelnav-sourceMenu1-slice-hover], [class|=wheelnav-sourceMenu2-slice-hover], [class|=wheelnav-sourceMenu3-slice-hover], [class|=wheelnav-sourceMenu4-slice-hover], [class|=wheelnav-sourceMenu5-slice-hover] {
+    fill: #3B4D57;
+    stroke: #2e3f49;
+    cursor: pointer;
+  }
+  path.active {
+    fill: #374852;
+    stroke: #2e3f49;
+    cursor: pointer;
+  }
+  .active ~ text tspan {
+    fill: #598fb5 !important;
+  }
+  [class|=wheelnav-sourceMenu-slice-selected] {
+    fill: #3B4D57;
+    stroke: #2e3f49;
+  }
+  [class|=wheelnav-sourceMenu-title-hover] > tspan, [class|=wheelnav-sourceMenu-title-selected] > tspan {
+    fill: #598fb5;
+  }
+  .wheelnav-sourceMenu-marker {
+    fill: #598fb5 !important;
+    stroke: #598fb5 !important;
+  }
+}
+.source-menu-form-wrapper{
+  position: relative;
+  min-height: 400px;
+  .source-option-list li a {
+  	@include transition(all 0.3s ease-in-out);
+    font-family: $roboto-regular;
+    font-size: $font-size-small;
+    color: #647680;
+    font-weight: normal;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      color: #598fb5;
+    }
+  }
+}
+#sourceMenuForm{
+  @include padding(0 15px 0 35px);
+  @include center-position();
+  width: 100%;
+  .form-group {
+    position: relative;
+    margin: 0 -15px 5px !important;
+    .pieInputCheck {
+      position: absolute;
+      opacity: 0;
+    }
+    label {
+      @include padding(0 0 0 25px);
+      @include transition(all 0.3s ease-in-out);
+      font-family: $roboto-regular;
+      font-size: $font-size-small;
+      color: #647680;
+      font-weight: normal;
+      position: relative;
+      cursor: pointer;
+      &:before {
+      	@include square(15px);
+        @include transition(all 0.3s ease-in-out);
+        @include border-radius(50%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: text-top;
+        background: transparent;
+        border: 2px solid #3b4d57;
+      }
+    }
+    .pieInputCheck {
+      &:checked ~ label:before {
+        background-color: #598fb5;
+        border: 2px solid #3b4d57;
+      }
+      &:disabled ~ label {
+        color: #b8b8b8;
+        cursor: auto;
+        &:before {
+          box-shadow: none;
+          background-color: #ddd;
+          border: 2px solid #ddd;
+        }
+      }
+      &:checked ~ label {
+        color: #598fb5;
+      }
+    }
+  }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+ 
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}

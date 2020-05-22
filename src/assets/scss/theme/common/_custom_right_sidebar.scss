@@ -1,0 +1,143 @@
+
+/*==============================================================================
+********************  Right Sidebar Styles For The Site  ***********************
+==============================================================================*/
+/*--  Sidebar Styles  --*/
+.right-sidebar{
+    @include padding(25px 20px);
+    background-color: $tangaroa1;
+    img{
+        @include margin(0 auto);
+        display: block;
+    }
+    .sidebar-panel{
+        @include margin(0 0 40px);
+        .sidebar-panel-title{
+            @extend .text-uppercase;
+            @include margin(0 0 15px);
+            color: $picton-blue2;
+            font-size: $font-size-large;
+            font-family: $roboto-medium;
+            letter-spacing: 1px;
+            &.subtitle{
+                font-size: $font-size-small;
+            }
+        }
+    }
+    .trend{
+        @extend .text-uppercase;
+        font-family: $roboto-medium;
+        .time{
+            font-size: $font-size-base;
+        }
+        .price{
+            @include margin(0 0 20px);
+            font-size: $font-size-small;
+        }
+        .usd{
+            font-size: ($font-size-small * 2);
+            small{
+                font-size: $font-size-base;
+            }
+            .green{
+                @include margin(0 0 0 20px);
+                color: $kelly-green1;
+            }
+            small:last-of-type{
+                @include margin(0 0 0 5px);
+            }
+        }
+        .hrs{
+       		@include margin(0 0 20px);
+            color: $regent-grey1;
+            font-size: $font-size-small;
+        }
+    }
+    .reviews{
+        .rate{
+            @extend .text-uppercase;
+            @include margin(0 0 5px);
+            font-family: $roboto-medium;
+            font-size: $font-size-base;
+            .rating{
+                @include margin(0 0 0 10px);
+            }
+        }
+        .record{
+            @extend .text-uppercase;
+            @include margin(0 0 25px);
+            font-size: $font-size-small;
+            font-family: $roboto-medium;
+        }
+        p{
+            color: $bermuda-grey3;
+            font-size: $font-size-small;
+            font-style: italic;
+            &:last-of-type{
+               @include margin(0 0 20px);
+            }
+            span{
+                @extend .text-uppercase;
+                font-style: normal;
+                font-family: $roboto-medium;
+            }
+        }
+    }
+    .trust{
+	     .media-left{
+	     	img{
+		        @include square(60px);
+		        @include border-radius(60px);
+		        border: 3px solid $casal;
+		    }
+	     }
+    }
+    .activity-level{
+        h4{
+            @extend .text-uppercase;
+            @include margin(0 0 10px);
+            font-size: ($font-size-base + 2);
+            font-family: $roboto-medium;
+            letter-spacing: 1px;
+        }
+        .profile{
+            @extend .text-uppercase;
+            @include margin(0 0 5px);
+            font-size: $font-size-base;
+            &:last-of-type{
+                @include margin(0 0 25px);
+            }
+        }
+    }
+}
+
+/*==============================================================================
+**************************  Media Styles For The Site  *************************
+==============================================================================*/
+@media (min-width:$screen-lg){
+
+}
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .right-sidebar .trend .usd{
+        font-size: $font-size-large;
+        .green{
+           @include margin(0 0 0 10px);
+        }
+    }
+    .right-sidebar .trend .usd{
+        font-size: $font-size-large;
+        .green{
+           @include margin(0 0 0 10px);
+        }
+    }
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs-max) {
+
+}
+@media (min-width: $screen-xxs) and (max-width: $screen-xs) {
+
+}
+
