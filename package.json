@@ -45,7 +45,7 @@
     "ngx-bootstrap-datetime-popup": "^3.2.6",
     "ngx-international-phone-number": "^0.1.3",
     "ngx-spinner": "^6.1.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.3.3",
     "save": "^2.3.3",
